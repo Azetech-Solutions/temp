@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<ComIf type="paramconfig" ref="ComIf">
+  <Config>
+    <Name>ComIf Config</Name>
+    <Channels>
+      <Channel>
+        <Name>Boot</Name>
+        <TransmitFunction>Boot_Transmit_FUN</TransmitFunction>
+        <DataTransferMethod>String</DataTransferMethod>
+        <TransmitBufferSize>256</TransmitBufferSize>
+        <ErrorNotification>Boot_Error_Notification</ErrorNotification>
+        <EnableDynamicDataLength>True</EnableDynamicDataLength>
+        <MaxDynamicDataLength>255</MaxDynamicDataLength>
+        <EnableAggregation>False</EnableAggregation>
+        <TxMessages>
+          <TxMessage>
+            <Name>Boot_Response</Name>
+            <ID>181</ID>
+            <Length>1</Length>
+            <ChecksumLength>1</ChecksumLength>
+            <EnableAggregation>False</EnableAggregation>
+          </TxMessage>
+        </TxMessages>
+        <RxMessages>
+          <RxMessage>
+            <Name>Boot_Req_Data</Name>
+            <ID>179</ID>
+            <Length>21</Length>
+            <RxCallback>Boot_Req_Data_RxCbk</RxCallback>
+            <ChecksumLength>1</ChecksumLength>
+          </RxMessage>
+        </RxMessages>
+      </Channel>
+    </Channels>
+  </Config>
+  <General>
+    <Name>Com General</Name>
+    <InputMethod>Polling</InputMethod>
+    <TxMainFunctionTimePeriod>10</TxMainFunctionTimePeriod>
+    <RxMainFunctionTimePeriod>10</RxMainFunctionTimePeriod>
+  </General>
+</ComIf>
