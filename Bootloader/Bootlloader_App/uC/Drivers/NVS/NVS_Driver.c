@@ -6,16 +6,16 @@
 NVS_READ_DATA_ST  Nvs_Blk_Read[NVS_TOTAL_BLOCKS];
 
 uint8_t IsRead_Allow = FALSE; 
-
 static uint8_t nvsblkData_lenth=0;
 
-void Nvs_Init(void)
-{
-	Nvs_Scan_Block();
-//	NVS_Block_Write(1);
-}
 
-void Nvs_Scan_Block(void)
+/***************************************************************************************/
+void NVS_Init(void)
+{
+	NVS_Scan_Block();
+}
+/***************************************************************************************/
+void NVS_Scan_Block(void)
 {
 	uint8_t Blk_No;
 	
@@ -25,14 +25,13 @@ void Nvs_Scan_Block(void)
 		IsRead_Allow = TRUE;
 		if(Current_Block->Sts_flg.Flag == TRUE)
 		{
-			Nvs_Block_Read((NVS_START_ADDRESS|Current_Block->Start_Address),Blk_No);
+			NVS_Block_Read((NVS_START_ADDRESS|Current_Block->Start_Address),Blk_No);
 		}
 	
 	}
 }
-
-
-void Nvs_Block_Read(uint32_t Address,uint32_t Blk_no)
+/***************************************************************************************/
+void NVS_Block_Read(uint32_t Address,uint32_t Blk_no)
 {
 	NVS_DATA_CONFIG_ST *NSRead = &Nvs_Block_data[Blk_no];
 		
@@ -48,11 +47,7 @@ void Nvs_Block_Read(uint32_t Address,uint32_t Blk_no)
 		IsRead_Allow = FALSE;
 	}
 }
-uint32_t Nvs_Single_word_Read(const uint32_t Address)
-{
-	return *(uint32_t*)Address;
-}
-
+/***************************************************************************************/
 void NVS_Block_Data_Read(uint8_t Block_Inx, uint32_t **Data)
 {
 	NVS_DATA_CONFIG_ST *NSRead = &Nvs_Block_data[Block_Inx];
@@ -63,7 +58,7 @@ void NVS_Block_Data_Read(uint8_t Block_Inx, uint32_t **Data)
 			*Data = NSRead->Data;
 	}
 }	
-
+/***************************************************************************************/
 uint8_t IS_NVS_BlockValid(uint8_t Block_Inx)
 {
 	uint8_t retval = 0;
@@ -87,6 +82,7 @@ uint8_t IS_NVS_BlockValid(uint8_t Block_Inx)
 	
 	return retval;
 }
+/***************************************************************************************/
 /* This Function only gives the sum of the Data, because we want to add the id and length, 
 	 after add it to convert the 2's complement */
 uint32_t NVS_data_ChkSum(uint32_t Add,uint8_t Size)
@@ -108,43 +104,4 @@ uint32_t NVS_data_ChkSum(uint32_t Add,uint8_t Size)
 	
 	return sum;
 }
-
-//void NVS_Block_Write(uint8_t Block_Inx)
-//{
-//	/* id->len->chksum->data*/
-//	if((Block_Inx < NVS_TOTAL_BLOCKS) && (Block_Inx >= 0))
-//	{
-//		NVS_DATA_CONFIG *Chk_Blk = &Nvs_Block_data[Block_Inx];
-//	
-//		/* Data write */
-//		
-////		if(NVS_ValidBlockRead(Block_Inx)== TRUE) // I want add another check
-////		{
-//			NVS_Multi_Word_write((Chk_Blk->Start_Address | NVS_START_ADDRESS),&Nvs_Block_data[Block_Inx].Block_Index,Chk_Blk->Block_Size);
-////		}
-//		
-//	}
-//}
-
-//uint32_t NVS_Multi_Word_write(uint32_t Address,uint32_t *Data,uint32_t Size)
-//{
-//	volatile uint32_t End_Flash_Add =0,i=0;
-//	__disable_irq();
-//	FLASH_Unlock();
-//	
-//	while(i<Size)
-//	{
-//		FLASH_Write(Address,(*Data++));
-//		Address +=4U;
-//		End_Flash_Add = Address;
-//		i++;
-//	}
-//	
-//	FLASH_Lock();
-//	__enable_irq();
-//	
-//	if(End_Flash_Add != 0U)
-//		return End_Flash_Add;
-//	else
-//		return FALSE;
-//}
+/***************************************************************************************/

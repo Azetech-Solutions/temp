@@ -14,9 +14,6 @@
 #define BOOT_STATUS_OK 					0x00
 #define BOOT_STATUS_NOT_OK			0x01
 
-#define APP1_START_ADDRESS			0x08006000
-#define APP2_START_ADDRESS			0x08014000
-
 #define Boot_Res_Status()  Boot_Response_status()
 
 typedef struct __Flash_data

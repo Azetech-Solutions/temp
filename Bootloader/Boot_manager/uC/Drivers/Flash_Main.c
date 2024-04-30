@@ -1,7 +1,7 @@
 
 #include "Flash_Main.h"
 
-
+/************************************************************/
 void FLASH_init(void)
 {
 	/* PWR Voltage Scalling */
@@ -10,6 +10,7 @@ void FLASH_init(void)
 	SET_BIT(FLASH->ACR,FLASH_ACR_WRHIGHFREQ_0); 
 	FLASH->ACR |= FLASH_ACR_LATENCY_3WS;
 }
+/************************************************************/
 /* Flash UnLock Function */
 void FLASH_Unlock(void)
 {
@@ -26,7 +27,7 @@ void FLASH_Unlock(void)
     }
   }
 }
-
+/************************************************************/
 /* Flash Lock Function */
 void FLASH_Lock(void)
 {
@@ -38,7 +39,7 @@ void FLASH_Lock(void)
 		//Do Nothing
   }
 }
-
+/************************************************************/
 /* Flash Read Function */
 uint32_t Flash_Read(const uint32_t Address)
 {
@@ -46,7 +47,7 @@ uint32_t Flash_Read(const uint32_t Address)
 	Data = *(uint32_t*)Address;
 	return Data;
 }
-
+/************************************************************/
 /* Program Write Function */
 void FLASH_Write(uint32_t Address, uint32_t Data)
 {
@@ -57,7 +58,7 @@ void FLASH_Write(uint32_t Address, uint32_t Data)
 	
 	CLEAR_BIT(FLASH->NSCR,FLASH_CR_PG); // Porgramming is Disabled
 }
-
+/************************************************************/
 uint32_t Multi_Word_write(uint32_t Address,uint32_t *Data)
 {
 	volatile uint32_t End_Flash_Add =0,i=0;
@@ -84,6 +85,7 @@ uint32_t Multi_Word_write(uint32_t Address,uint32_t *Data)
 	else
 		return FALSE;
 }
+/************************************************************/
 /* This is used for check the error during flash programming or erasing */
 uint8_t Flash_Error_Check()
 {
@@ -104,7 +106,7 @@ uint8_t Flash_Error_Check()
 	
 	return retval;
 }	
-
+/************************************************************/
 /* Sector Erase Function */
 uint8_t FLASH_Sector_Erase(uint8_t Sec,uint8_t Bnk)
 {
@@ -132,7 +134,7 @@ uint8_t FLASH_Sector_Erase(uint8_t Sec,uint8_t Bnk)
 	CLEAR_REG(FLASH->NSCR);
 	return retval;
 }
-
+/************************************************************/
 uint8_t Flash_SingleSec_Erase(uint8_t Sec,uint8_t Bnk)
 {
 	uint8_t retval = FALSE;
@@ -149,13 +151,14 @@ uint8_t Flash_SingleSec_Erase(uint8_t Sec,uint8_t Bnk)
 	
 	return retval;
 }
+/************************************************************/
 uint8_t FLASH_Erase_NoofSectors(uint8_t Bnk)
 {
 	uint8_t retval = FALSE;
 	FLASH_Unlock();
 	Flash_Error_Check();
 	
-	if(Bnk == Bank1)
+	if(Bnk == BANK_1)
 	{
 		uint8_t Sec;
 		for(Sec =3; Sec <= 7; Sec++)
@@ -164,7 +167,7 @@ uint8_t FLASH_Erase_NoofSectors(uint8_t Bnk)
 		}
 		retval = TRUE;
 	}
-	else if(Bnk == Bank2)
+	else if(Bnk == BANK_2)
 	{
 		uint8_t Sec;
 		for(Sec=10;Sec<=15;Sec++)
@@ -179,7 +182,7 @@ uint8_t FLASH_Erase_NoofSectors(uint8_t Bnk)
 	
 	return retval;
 }
-
+/************************************************************/
 /*Verify_page_Erase Function,it used to verify the memory Erase*/
 uint32_t Verify_SingleSec_Erase(uint32_t Address)
 {

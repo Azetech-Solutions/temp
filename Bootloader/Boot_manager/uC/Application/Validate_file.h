@@ -19,13 +19,21 @@ typedef struct _CHECK_HEADER
 	
 }Check_App_Header_ST;
 
+/* To check the APP - 1 is valid or not */
 extern uint8_t IsApp1_valid(void);
+
+/* To check the APP - 2 is valid or not */
 extern uint8_t IsApp2_valid(void);
+
+/* To check the Bootloader is valid or not */
 extern uint8_t IsBoot_valid(void);
 
+/* To read the APP 1&2 Header */
 extern void Read_Apps_Header(void);
 
+/* This Function is used to find the total checksum of the app 1 or 2, bootloader image  */
 extern uint32_t App_Image_Chksum_calculation(uint32_t Add);
+
 extern Check_App_Header_ST Ck_Hdr[];
 
 #endif

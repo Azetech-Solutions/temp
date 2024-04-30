@@ -274,9 +274,9 @@ extern "C" {
 #if defined(FDCAN2)
 #define GPIO_AF9_FDCAN2        ((uint8_t)0x09)  /* FDCAN2 Alternate Function mapping                         */
 #endif /* FDCAN2 */
-#if defined(FMC_BANK1)
+#if defined(FMC_BANK_1)
 #define GPIO_AF9_FMC           ((uint8_t)0x09)  /* FMC Alternate Function mapping                            */
-#endif /* FMC_BANK1 */
+#endif /* FMC_BANK_1 */
 #if defined(OCTOSPI1)
 #define GPIO_AF9_OCTOSPI1      ((uint8_t)0x09)  /* OCTOSPI1 Alternate Function mapping                       */
 #endif /* OCTOSPI1 */
@@ -303,9 +303,9 @@ extern "C" {
 #define GPIO_AF10_I3C2         ((uint8_t)0x0A)  /* I3C2 Alternate Function mapping                           */
 #define GPIO_AF10_SPI3         ((uint8_t)0x0A)  /* SPI3 Alternate Function mapping                           */
 #endif /* STM32H503xx */
-#if defined(FMC_BANK1)
+#if defined(FMC_BANK_1)
 #define GPIO_AF10_FMC          ((uint8_t)0x0A)  /* FMC Alternate Function mapping                            */
-#endif /* FMC_BANK1 */
+#endif /* FMC_BANK_1 */
 #if defined(OCTOSPI1)
 #define GPIO_AF10_OCTOSPI1     ((uint8_t)0x0A)  /* OCTOSPI1 Alternate Function mapping                       */
 #endif /* OCTOSPI1 */
@@ -326,9 +326,9 @@ extern "C" {
 #if defined(ETH)
 #define GPIO_AF11_ETH          ((uint8_t)0x0B)  /* ETH Alternate Function mapping                            */
 #endif /* ETH */
-#if defined(FMC_BANK1)
+#if defined(FMC_BANK_1)
 #define GPIO_AF11_FMC          ((uint8_t)0x0B)  /* FMC Alternate Function mapping                            */
-#endif /* FMC_BANK1 */
+#endif /* FMC_BANK_1 */
 #if defined(OCTOSPI1)
 #define GPIO_AF11_OCTOSPI1     ((uint8_t)0x0B)  /* OCTOSPI1 Alternate Function mapping                       */
 #endif /* OCTOSPI1 */
@@ -354,9 +354,9 @@ extern "C" {
 /**
   * @brief   AF 12 selection
   */
-#if defined(FMC_BANK1)
+#if defined(FMC_BANK_1)
 #define GPIO_AF12_FMC          ((uint8_t)0x0C)  /* FMC Alternate Function mapping                            */
-#endif /* FMC_BANK1 */
+#endif /* FMC_BANK_1 */
 #if defined(SDMMC1)
 #define GPIO_AF12_SDMMC1       ((uint8_t)0x0C)  /* SDMMC1 Alternate Function mapping                         */
 #endif /* SDMMC1 */
@@ -372,9 +372,9 @@ extern "C" {
 #define GPIO_AF13_DCMI         ((uint8_t)0x0D)  /* DCMI Alternate Function mapping                           */
 #define GPIO_AF13_PSSI         ((uint8_t)0x0D)  /* PSSI Alternate Function mapping                           */
 #endif /* DCMI */
-#if defined(FMC_BANK1)
+#if defined(FMC_BANK_1)
 #define GPIO_AF13_FMC          ((uint8_t)0x0D)  /* FMC Alternate Function mapping                            */
-#endif /* FMC_BANK1 */
+#endif /* FMC_BANK_1 */
 #if defined(LPTIM5)
 #define GPIO_AF13_LPTIM5       ((uint8_t)0x0D)  /* LPTIM5 Alternate Function mapping                         */
 #endif /* LPTIM5 */

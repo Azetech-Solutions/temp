@@ -45,7 +45,7 @@ void Init(void)
 	Total_NVM_Block_No = Chk_NVMTotal_Block();
 	GpioClockEnable();
 	Uart3_Init();
-	Nvs_Init();
+	NVS_Init();
 	NVM_Init();
 	Read_Apps_Header();
 }

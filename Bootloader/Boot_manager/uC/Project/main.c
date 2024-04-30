@@ -110,7 +110,7 @@ void Init(void)
 {
 	bkSRAM_Init();
 	val= Chk_NVMTotal_Block();
-	Nvs_Init();
+	NVS_Init();
 	NVM_Init();
 	Read_Apps_Header();
 //	Gpio_init();

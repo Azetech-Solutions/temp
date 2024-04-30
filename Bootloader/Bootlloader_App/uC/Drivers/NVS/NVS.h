@@ -5,8 +5,11 @@
 #include "NVS_Driver.h"
 
 #define NVS_TOTAL_BLOCKS						2
+
 #define NVS_START_ADDRESS  	0x08010000
 #define NVS_END_ADDRESS  		0x08011FFC
+
+#define NVS_BLOCK_SECTOR		0
 
 
 /* to NVS force read

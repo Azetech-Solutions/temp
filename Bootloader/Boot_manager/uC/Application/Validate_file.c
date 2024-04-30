@@ -24,11 +24,11 @@ Check_App_Header_ST Ck_Hdr[TOTAL_APP_HEADER]={
 	},
 	
 };
-
+/******************************************************************************************/
 /* To check the APP - 1 is valid or not */
 uint8_t IsApp1_valid(void)
 {
-	NVS_DATA_CONFIG_ST *ckapp1 = &Nvs_Block_data[Block_3];
+	NVS_DATA_CONFIG_ST *ckapp1 = &Nvs_Block_data[NVS_Block_3];
 	uint8_t retval=0;
 	if(ckapp1->Block_Checksum == App_Image_Chksum_calculation((uint32_t)ckapp1->Data))
 	{
@@ -37,10 +37,11 @@ uint8_t IsApp1_valid(void)
 	
 	return retval;
 }
+/******************************************************************************************/
 /* To check the APP - 2 is valid or not */
 uint8_t IsApp2_valid(void)
 {
-	NVS_DATA_CONFIG_ST *ckapp2 = &Nvs_Block_data[Block_4];
+	NVS_DATA_CONFIG_ST *ckapp2 = &Nvs_Block_data[NVS_Block_4];
 	uint8_t retval=0;
 	if(ckapp2->Block_Checksum == App_Image_Chksum_calculation((uint32_t)ckapp2->Data))
 	{
@@ -48,10 +49,11 @@ uint8_t IsApp2_valid(void)
 	}
 	return retval;
 }
+/******************************************************************************************/
 /* To check the Bootloader is valid or not */
 uint8_t IsBoot_valid(void)
 {
-	NVS_DATA_CONFIG_ST *ckapp1 = &Nvs_Block_data[Block_2];
+	NVS_DATA_CONFIG_ST *ckapp1 = &Nvs_Block_data[NVS_Block_2];
 	uint8_t retval=0;
 	uint16_t chk_Id =0,len=0;
 	uint32_t Blk_add =0,data_chk=0;
@@ -70,7 +72,7 @@ uint8_t IsBoot_valid(void)
 	}
 	return retval;
 }
-
+/******************************************************************************************/
 /* This Function is used to find the total app 1/2, bootloader image check sum */
 uint32_t App_Image_Chksum_calculation(uint32_t Add)  // this api not used anywhere
 {
@@ -85,7 +87,7 @@ uint32_t App_Image_Chksum_calculation(uint32_t Add)  // this api not used anywhe
 	
 	return (((~ck)+1)&0xFFFFFFFF);
 }
-
+/******************************************************************************************/
 void Read_Apps_Header(void)
 {
 	uint8_t i;
@@ -105,3 +107,4 @@ void Read_Apps_Header(void)
 		Ck->Ck_cksum = Flash_Read((Ck->Header_start_Add+16U));
 	}
 }
+/******************************************************************************************/

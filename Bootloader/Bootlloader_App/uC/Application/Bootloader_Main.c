@@ -95,7 +95,7 @@ void Boot_Main()
 					// flg for the flash write in NVs block or App1 or App2
 					if(*(uint32_t*)(NVS_START_ADDRESS) != 0xFFFFFFFF || *(uint32_t*)(NVS_START_ADDRESS) == 0xFFFFFFFF )
 					{
-						Flash_SingleSec_Erase(1,0); // For Erasing NVS Block
+						Flash_SingleSec_Erase(NVS_BLOCK_SECTOR,BANK_2); // For Erasing NVS Block
 						
 						Tx->Boot_Status = BOOT_STATUS_OK;
 						ISNVS_Flag = TRUE;
@@ -264,16 +264,16 @@ void Boot_Main()
 											((ULONG)Rx->Flash_Add_3_byte << 8) |
 											((ULONG)Rx->Flash_Add_4_byte);
 					
-					if(Flash_Erase_Add == APP1_START_ADDRESS)
+					if(Flash_Erase_Add == APP_1_BASE_ADDRESS)
 					{
-						Bank = Bank1;
+						Bank = BANK_1;
 					}
-					else if(Flash_Erase_Add == APP2_START_ADDRESS)
+					else if(Flash_Erase_Add == APP_2_BASE_ADDRESS)
 					{
-						Bank = Bank2;
+						Bank = BANK_2;
 					}
 					
-					if((Flash_Erase_Add == APP1_START_ADDRESS && Flash_Erase_Add != 0U) || (Flash_Erase_Add == APP2_START_ADDRESS && Flash_Erase_Add != 0U))
+					if((Flash_Erase_Add == APP_1_BASE_ADDRESS && Flash_Erase_Add != 0U) || (Flash_Erase_Add == APP_2_BASE_ADDRESS && Flash_Erase_Add != 0U))
 					{
 						if(FLASH_Erase_NoofSectors(Bank)) // verify to erase memory
 						{

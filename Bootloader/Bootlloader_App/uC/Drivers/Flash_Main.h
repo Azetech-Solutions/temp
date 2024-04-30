@@ -8,8 +8,8 @@
 #define FLASH_KEY1                 0x45670123U
 #define FLASH_KEY2                 0xCDEF89ABU
 
-#define Bank1 0
-#define Bank2 1
+#define BANK_1 0
+#define BANK_2 1
 
 extern void FLASH_init(void);
 extern void FLASH_Unlock(void);

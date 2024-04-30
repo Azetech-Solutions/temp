@@ -4,24 +4,28 @@
 #include "stm32h5xx.h"
 #include "NVS.h"
 
-#define Block_1		0
-#define Block_2		1
-#define Block_3		2
-#define Block_4		3
-#define Block_5		4
+#define NVS_Block_1		0   	/* Admin Data */
+#define NVS_Block_2		1		/* Bootloader Data */
+#define NVS_Block_3		2		/* App1 Data */
+#define NVS_Block_4		3		/* App2 Data */
+#define NVS_Block_5		4		/* IoT Data */
 
-extern void Nvs_Init(void);
-extern void Nvs_Scan_Block(void);
-extern void Nvs_Block_Read(uint32_t Address,uint32_t Blk_no);
-extern uint32_t Nvs_Single_word_Read(const uint32_t Address);
+/* NVS Init */
+extern void NVS_Init(void);
 
+/* Scan the last NVS Block & Read it and store the RAM Memory */
+extern void NVS_Scan_Block(void);
+
+/* Read the data from the last NVS Blocks */
+extern void NVS_Block_Read(uint32_t Address,uint32_t Blk_no);
+
+/* Read the Particular NVS Block Data's */
 extern void NVS_Block_Data_Read(uint8_t Block_Inx, uint32_t **Data);
 
+/* To check the Last NVM Block is valid or Not */
 extern uint8_t IS_NVS_BlockValid(uint8_t Block_Inx);
 
+/* To find the Sum of the NVM Block Data's */
 extern uint32_t NVS_data_ChkSum(uint32_t Add,uint8_t Size);
 
-/* no need now */
-extern void NVS_Block_Write(uint8_t Block_Inx);
-extern uint32_t NVS_Multi_Word_write(uint32_t Address,uint32_t *Data,uint32_t Size);
 #endif

@@ -13,7 +13,7 @@ NVM_Data_Config_ST NVM_Block = {
 			/* NVM Length */	0,
 		},
 		{
-			/* Flag App Varsion */0,
+			/* Flag NVM Varsion */0,
 			/* Flag Res2 */	0,
 			/* Flag Res3 */ 0,
 			/* Flag Res4 */ 0,			
@@ -25,7 +25,7 @@ NVM_Data_Config_ST NVM_Block = {
 Check_App_Header_ST Ck_Hdr[TOTAL_APP_HEADER]={
 
 	{
-		/* Starting address */App1_BaseAdd,
+		/* Starting address */APP_1_BASE_ADDRESS,
 		/* Header */0,
 		/* Program Starting address */0,
 		/* Program End address */0,
@@ -33,7 +33,7 @@ Check_App_Header_ST Ck_Hdr[TOTAL_APP_HEADER]={
 		/* App1 - Cksum */0,
 	},
 	{
-		/* Starting address */App2_BaseAdd,
+		/* Starting address */APP_2_BASE_ADDRESS,
 		/* Header */0,
 		/* Program Starting address */0,
 		/* Program End address */0,

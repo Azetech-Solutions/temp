@@ -5,8 +5,10 @@
 #include "stm32h5xx.h"
 #include "Flash_Main.h"
 /*******************Application Part*************************/
-#define App1_BaseAdd										0x08006000U
-#define App2_BaseAdd										0x08016000U
+#define APP_1_BASE_ADDRESS										0x08006000U
+#define APP_1_END_ADDRESS											0x08010000U
+#define APP_2_BASE_ADDRESS										0x08016000U
+#define APP_2_END_ADDRESS											0x08020000U
 #define TOTAL_APP_HEADER					2
 #define HEADER_APP_1							0
 #define HEADER_APP_2							1
@@ -14,10 +16,16 @@
 /************************************************************/
 
 /***************************NVM Part*************************/
-#define NVM_START_ADDRESS						0x08012000
-#define NVM_END_ADDRESS							0x08015FFC
+/* NVM Sector 1 */
+#define NVM_SECTOR_ONE_START_ADDRESS						0x08012000
+#define NVM_SECTOR_ONE_END_ADDRESS							0x08013FFC
+/* NVM Sector 2 */
+#define NVM_SECTOR_TWO_START_ADDRESS						0x08014000
+#define NVM_SECTOR_TWO_END_ADDRESS							0x08015FFC
+/* NVM Sectors */
+#define NVM_SECTOR_ONE							1
+#define NVM_SECTOR_TWO							2
 
-#define TOTAL_NVM_BLOCK						1
 #define NVM_DATA_BLOCK_SIZE				4
 #define NVM_ONE_BLOCK_SIZE 				8
 

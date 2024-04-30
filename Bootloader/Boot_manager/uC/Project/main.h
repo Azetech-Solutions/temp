@@ -45,11 +45,13 @@
 #define APB3_FORCE_RESET()           WRITE_REG(RCC->APB3RSTR, 0x001008E0U)
 #define APB3_RELEASE_RESET()         WRITE_REG(RCC->APB3RSTR, 0x00000000U)
 																							 
-#define BKRAM_JUMP_VERIFY_ADD					0x40036400
+#define BKRAM_JUMP_VERIFY_ADD						0x40036400
 #define BKRAM_JUMP_UpdateApp_ADD				0x40036404
-#define BKRAM_JUMP_VALIDATE_FLAG			0x40036408
-#define ISJUMP_APP_WRITE_VALUE				0x0A0A0A0A
-#define ISJUMP_BOOT_WRITE_VALUE				0x0B0B0B0B
+#define BKRAM_JUMP_VALIDATE_FLAG				0x40036408
+																							 
+#define ISJUMP_APP_WRITE_VALUE					0x0A0A0A0A
+#define ISJUMP_BOOT_WRITE_VALUE					0x0B0B0B0B
+
 /* Function Declaration */
 extern void Gpio_init(void);
 extern void Init(void);

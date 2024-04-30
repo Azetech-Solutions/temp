@@ -17,4 +17,4 @@
   ..\Base\Buffer\api\Buffer.h ..\Drivers\..\Gen\Buffer_Config.h \
   ..\Gen\..\Base\Platform_Types.h ..\Base\ComIf\api\ComIf.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h \
-  ..\Drivers\Backup_ram.h
+  ..\Drivers\Backup_ram.h ..\Drivers\NVM\NVM.h

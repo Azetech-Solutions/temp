@@ -1,7 +1,7 @@
 
 #include "Flash_Main.h"
 #include "Bootloader_Main.h"
-
+#include "NVM.h"
 void FLASH_init(void)
 {
 	/* PWR Voltage Scalling */
@@ -121,7 +121,7 @@ uint8_t FLASH_Sector_Erase(uint8_t Sec,uint8_t Bnk)
 	}
 	else
 	{
-		FLASH->NSCR &=~FLASH_CR_SNB;
+		FLASH->NSCR &=~(FLASH_CR_SNB |FLASH_CR_BKSEL);
 		
 		FLASH->NSCR |= (FLASH_CR_SER | FLASH_CR_BKSEL); // Sector Erase request
 		FLASH->NSCR |= (Sec << FLASH_CR_SNB_Pos); // Select the Sector
@@ -155,7 +155,7 @@ uint8_t FLASH_Erase_NoofSectors(uint8_t Bnk)
 	FLASH_Unlock();
 	Flash_Error_Check();
 	
-	if(Bnk == Bank1)
+	if(Bnk == BANK_1)
 	{
 		uint8_t Sec;
 		for(Sec =3; Sec <= 7; Sec++)
@@ -163,20 +163,20 @@ uint8_t FLASH_Erase_NoofSectors(uint8_t Bnk)
 			FLASH_Sector_Erase(Sec,Bnk);
 		}
 		
-		if(Verify_Sectors_Erase(APP1_START_ADDRESS))
+		if(Verify_Sectors_Erase(APP_1_BASE_ADDRESS))
 		{
 			retval = TRUE;
 		}	
 	}
-	else if(Bnk == Bank2)
+	else if(Bnk == BANK_2)
 	{
 		uint8_t Sec;
-		for(Sec=10;Sec<=15;Sec++)
+		for(Sec=3;Sec<=7;Sec++)
 		{
 			FLASH_Sector_Erase(Sec,Bnk);
 		}
 		
-		if(Verify_Sectors_Erase(APP2_START_ADDRESS))
+		if(Verify_Sectors_Erase(APP_2_BASE_ADDRESS))
 		{
 			retval = TRUE;
 		}	
@@ -191,7 +191,7 @@ uint8_t FLASH_Erase_NoofSectors(uint8_t Bnk)
 /*Verify_page_Erase Function,it used to verify the memory Erase*/
 uint32_t Verify_Sectors_Erase(uint32_t Address)
 {
-	if(Address == APP1_START_ADDRESS)
+	if(Address == APP_1_BASE_ADDRESS)
 	{
 			uint32_t *ptr =(uint32_t*)Address;
 			uint32_t End_Address =(Address+0xA000);
@@ -205,10 +205,10 @@ uint32_t Verify_Sectors_Erase(uint32_t Address)
 				ptr++;
 			}
 	}
-	else if( Address == APP2_START_ADDRESS)
+	else if( Address == APP_2_BASE_ADDRESS)
 	{
 			uint32_t *ptr =(uint32_t*)Address;
-			uint32_t End_Address =(Address+0xC000);
+			uint32_t End_Address =(Address+0xA000);
 	
 			while((uint32_t)ptr<End_Address)
 			{
@@ -221,3 +221,19 @@ uint32_t Verify_Sectors_Erase(uint32_t Address)
 	}	
 	return 1;
 }
+//uint8_t Verify_SingleSec_Erase(uint32_t Address)
+//{
+//	uint32_t *ptr =(uint32_t*)Address;
+//		uint32_t End_Address =(Address+0x1FFC);
+
+//		while((uint32_t)ptr<End_Address)
+//		{
+//			if(*ptr != 0xFFFFFFFF)
+//			{
+//				return 0;
+//			}
+//			ptr++;
+//		}	
+//		
+//	return 1;
+//}
