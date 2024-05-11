@@ -107,7 +107,7 @@ void Boot_Main()
 				else if(Rx->Boot_command == 0xFB)
 				{
 					Tx->Boot_Status = BOOT_STATUS_OK;
-					Boot_State_Control = Boot_Wating_for_next_command;
+					Boot_State_Control = Boot_Start;
 					Boot_Res_Status();
 				}
 				else

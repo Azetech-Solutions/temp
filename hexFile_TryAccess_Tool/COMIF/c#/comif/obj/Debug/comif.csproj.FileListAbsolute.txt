@@ -1,0 +1,6 @@
+D:\Mohan\Class\VS\File_TryAccess_Tool\COMIF\c#\comif\bin\Debug\comif.dll
+D:\Mohan\Class\VS\File_TryAccess_Tool\COMIF\c#\comif\bin\Debug\comif.pdb
+D:\Mohan\Class\VS\File_TryAccess_Tool\COMIF\c#\comif\obj\Debug\comif.csproj.AssemblyReference.cache
+D:\Mohan\Class\VS\File_TryAccess_Tool\COMIF\c#\comif\obj\Debug\comif.csproj.CoreCompileInputs.cache
+D:\Mohan\Class\VS\File_TryAccess_Tool\COMIF\c#\comif\obj\Debug\comif.dll
+D:\Mohan\Class\VS\File_TryAccess_Tool\COMIF\c#\comif\obj\Debug\comif.pdb
