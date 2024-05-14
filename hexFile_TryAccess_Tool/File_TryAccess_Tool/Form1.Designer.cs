@@ -131,9 +131,9 @@
             this.LMryAddress.AutoSize = true;
             this.LMryAddress.Location = new System.Drawing.Point(401, 174);
             this.LMryAddress.Name = "LMryAddress";
-            this.LMryAddress.Size = new System.Drawing.Size(128, 20);
+            this.LMryAddress.Size = new System.Drawing.Size(171, 20);
             this.LMryAddress.TabIndex = 6;
-            this.LMryAddress.Text = "Memory Address";
+            this.LMryAddress.Text = "Flash Memory Address";
             // 
             // groupBox1
             // 
@@ -250,8 +250,11 @@
             this.CboxBaudRate.FormattingEnabled = true;
             this.CboxBaudRate.Items.AddRange(new object[] {
             "2400",
+            "4800",
             "9600",
+            "19200",
             "38400",
+            "57600",
             "115200"});
             this.CboxBaudRate.Location = new System.Drawing.Point(152, 77);
             this.CboxBaudRate.Name = "CboxBaudRate";
