@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Configuration;
-using System.Drawing.Text;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
 using System.Windows.Forms;
 using ComIf;
 
@@ -13,20 +10,23 @@ namespace File_TryAccess_Tool
 {
     public partial class Form1 : Form
     {
-        //DateTime dt = DateTime.Now;
-        //string dtn = dt.ToLongTimeString();
-
+        //obj creation
         TakeHexdata Hexval = new TakeHexdata();
+        TakeHexdata.ResponceData resData = new TakeHexdata.ResponceData();
 
+        // Channel Creation Tx & Rx
+        Channel Trns_MCU = new Channel("Trasmit_MCU", ChannelType.String, TransmitToMCU, TransmitToMCU_Error_nofi);
+        TxMessage Trns_MCU_id = new TxMessage(0xB3, 1);
+        RxMessage Rcve_MCU = new RxMessage(0xB5, 1, Responce_Rxcbk);
+
+        // flag creations
         bool IsFileVaild = false;
-
+        
+        // properties creation
         private string FilePath = null, flashBaseAddress = null, RxMessageDataIN = null, FlashEraseMry = null;
         private string Fileline = null, hexOffset = null, hexDatelength = null, HexData = null,hexRecordType = null; // these variables are used to store the Hexfile data's
-
         private uint CKsum = 0; // used to find the checksum
 
-        //Channel TxRX = new Channel("Trasmit_MCU", ChannelType.String,TransmitToMCU,TransmitToMCU_Error_nofi);
-        //TxMessage TxRX_id = new TxMessage(0xB5,1);
         public Form1()
         {
             InitializeComponent();
@@ -42,6 +42,34 @@ namespace File_TryAccess_Tool
             chkBoxNVSMode.Checked = false;
         }
 
+        private static void TransmitToMCU_Error_nofi(uint Debug0, uint Debug1)
+        {
+            
+        }
+
+        private void TransmitToMCU(ushort Length, byte[] Data)
+        {
+            for (int i = 0;i<Length;i++)
+            {
+                serialPort1.Write(Data[i].ToString());
+            }
+        }
+
+        private static void Responce_Rxcbk(byte Length, byte[] Data)
+        {
+            for(int i = 0;i<Length;i++)
+            {
+                resData.Data[i] = Data[i];
+            }
+        }
+
+        private void TxMsgUpdate(string Txdata)
+        {
+            foreach(byte b in Txdata)
+            {
+                Trns_MCU_id.Data[b] = b;
+            }
+        }
         private void loadDefaultValues()
         {
             CBoxComPort.Text = ConfigurationManager.AppSettings["COMPort"];
@@ -54,8 +82,8 @@ namespace File_TryAccess_Tool
 
         private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            RxMessageDataIN += serialPort1.ReadExisting();
-
+            RxMessageDataIN = serialPort1.ReadExisting();
+            Trns_MCU.RxIndication(RxMessageDataIN);
             //tBoxOutData.Text = RxMessageDataIN;
         }
 
@@ -188,11 +216,13 @@ namespace File_TryAccess_Tool
                     {
                         if (Modestatus)
                         {
-                            serialPort1.Write(modeupdate + " "); // changes
+                            TxMsgUpdate(modeupdate);  // check this changes
+                            Trns_MCU.Transmit(Trns_MCU_id);
+                            //serialPort1.Write(modeupdate + " "); // changes
                             Modestatus = false;
                         }
 
-                        if (RxMessageDataIN == "00")
+                        if (resData.Data.ToString() == "00") // check this 
                         {
                             RxMessageDataIN = null;
 
@@ -472,6 +502,11 @@ namespace File_TryAccess_Tool
 
 class TakeHexdata
 {
+    public struct ResponceData
+    {
+        public byte[] Data;
+    }
+    
     public string ReadByte(string line, int index = 0)
     {
         return line.Substring(index, 2);
