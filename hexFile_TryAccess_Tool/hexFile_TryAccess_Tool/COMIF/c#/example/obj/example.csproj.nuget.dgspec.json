@@ -1,0 +1,109 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Mohan\\Class\\VS\\File_TryAccess_Tool\\COMIF\\c#\\example\\example.csproj": {}
+  },
+  "projects": {
+    "D:\\Mohan\\Class\\VS\\File_TryAccess_Tool\\COMIF\\c#\\comif\\comif.csproj": {
+      "restore": {
+        "projectUniqueName": "D:\\Mohan\\Class\\VS\\File_TryAccess_Tool\\COMIF\\c#\\comif\\comif.csproj",
+        "projectName": "comif",
+        "projectPath": "D:\\Mohan\\Class\\VS\\File_TryAccess_Tool\\COMIF\\c#\\comif\\comif.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "D:\\Mohan\\Class\\VS\\File_TryAccess_Tool\\COMIF\\c#\\example\\example.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Mohan\\Class\\VS\\File_TryAccess_Tool\\COMIF\\c#\\example\\example.csproj",
+        "projectName": "example",
+        "projectPath": "D:\\Mohan\\Class\\VS\\File_TryAccess_Tool\\COMIF\\c#\\example\\example.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\Mohan\\Class\\VS\\File_TryAccess_Tool\\COMIF\\c#\\example\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\VS Code\\VS_SDK\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\Mohan\\Class\\VS\\File_TryAccess_Tool\\COMIF\\c#\\comif\\comif.csproj": {
+                "projectPath": "D:\\Mohan\\Class\\VS\\File_TryAccess_Tool\\COMIF\\c#\\comif\\comif.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.29, 6.0.29]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[6.0.29, 6.0.29]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.29, 6.0.29]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.29, 6.0.29]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
