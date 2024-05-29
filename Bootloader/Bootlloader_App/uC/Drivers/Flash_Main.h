@@ -24,6 +24,9 @@ extern uint8_t Flash_Error_Check(); /* To used for Check the Errors */
 
 extern uint8_t FLASH_Sector_Erase(uint8_t Sec,uint8_t Bnk);	/* Proram Sector Erase Main API */
 extern uint8_t Flash_SingleSec_Erase(uint8_t Sec,uint8_t Bnk); /* Single sector erase */
+extern uint8_t Flash_DoubleSec_Erase(uint8_t Sec,uint8_t Bnk);
 extern uint8_t FLASH_Erase_NoofSectors(uint8_t Bnk);  /* To choose the bnk and do Proram Erase */
-extern uint32_t Verify_Sectors_Erase(uint32_t Address); 	/* To use verify the Proram Erase */
+extern uint32_t Verify_Sectors_Erase(uint32_t Address); 	/* To use verify the memory is not contain the valid Data */
+extern uint8_t Verify_SingleSec_Erase(uint32_t Address);
+extern uint8_t Verify_doubleSec_Erase(uint32_t Address);	/* To use verify the memory is not contain the valid Data */
 #endif

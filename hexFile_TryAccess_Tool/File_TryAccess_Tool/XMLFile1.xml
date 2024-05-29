@@ -2,13 +2,14 @@
 <settings>
 	<hexblock>
 		<bootmanager>
-			<type>Hextype</type>
-			<sector>secNo</sector>
+			<type>1</type>
+			<sector>00</sector>
 			<sectorLength>0x2000</sectorLength>
-			<bank>0</bank>
+			<bank>00</bank>
 			<startAddress>0x08000000</startAddress>
 			<endAddress>0x08002000</endAddress>
 			<DataBlock>False</DataBlock>
+			<!-- version info in not allocate memory in bootmanager -->
 			<versioninfo>
 				<majorOffset>0x08006030</majorOffset>
 				<minoroffset>0x08006034</minoroffset>
@@ -17,13 +18,14 @@
 			</versioninfo>
 		</bootmanager>
 		<bootloader>
-			<type>Hextype1</type>
-			<sector>secNo</sector>
+			<type>2</type>
+			<sector>01</sector>
 			<sectorLength>0x4000</sectorLength>
-			<bank>0</bank>
+			<bank>00</bank>
 			<startAddress>0x08002000</startAddress>
 			<endAddress>0x08006000</endAddress>
 			<DataBlock>False</DataBlock>
+			<!-- version info in not allocate memory in bootloader -->
 			<versioninfo>
 				<majorOffset>0x08006030</majorOffset>
 				<minoroffset>0x08006034</minoroffset>
@@ -32,10 +34,10 @@
 			</versioninfo>
 		</bootloader>
 		<application1>
-			<type>Hextype2</type>
-			<sector>secNo</sector>
+			<type>3</type>
+			<sector>03</sector>
 			<sectorLength>0xA000</sectorLength>
-			<bank>0</bank>
+			<bank>00</bank>
 			<startAddress>0x08006000</startAddress>
 			<endAddress>0x08010000</endAddress>
 			<DataBlock>true</DataBlock>
@@ -47,10 +49,10 @@
 			</versioninfo>
 		</application1>
 		<application2>
-			<type>Hextype3</type>
-			<sector>secNo</sector>
+			<type>4</type>
+			<sector>03</sector>
 			<sectorLength>0xA000</sectorLength>
-			<bank>0</bank>
+			<bank>01</bank>
 			<startAddress>0x08016000</startAddress>
 			<endAddress>0x08020000</endAddress>
 			<DataBlock>true</DataBlock>

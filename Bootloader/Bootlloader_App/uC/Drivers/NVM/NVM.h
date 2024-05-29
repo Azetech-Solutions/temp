@@ -6,12 +6,26 @@
 #include "Flash_Main.h"
 #include "Platform_Types.h"
 
+/******************* BootManager & BootLoader *************************/
+
+/************* BootManager *************/
+#define BOOTMANAGER_BASE_ADDRESS						0x08000000U
+#define BOOTMANAGER_END_ADDRESS							0x08002000U
+
+/************* BootLoader *************/
+#define BOOTLOADER_BASE_ADDRESS							0x08002000U
+#define BOOTLOADER_END_ADDRESS							0x08006000U
+
+/**********************************************************************/
+
 /*******************Application Part*************************/
+/************* Application 1 *************/
 #define APP_1_BASE_ADDRESS										0x08006000U
 #define APP_1_END_ADDRESS											0x08010000U
+/************* Application 2 *************/
 #define APP_2_BASE_ADDRESS										0x08016000U
 #define APP_2_END_ADDRESS											0x08020000U
-
+/************* Application Header *************/
 #define TOTAL_APP_HEADER											2U
 #define HEADER_APP_1													0U
 #define HEADER_APP_2													1U

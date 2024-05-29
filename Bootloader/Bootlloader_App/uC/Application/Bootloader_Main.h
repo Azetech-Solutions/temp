@@ -11,8 +11,18 @@
 #include "Flash_Main.h"
 #include "Backup_ram.h"
 
+/************* MUC - RESPONSE TO TOOL *************/
 #define BOOT_STATUS_OK 					0x00
 #define BOOT_STATUS_NOT_OK			0x01
+/************* BANK - 0 *************/
+#define BOOTMANAGER_SECTOR			0U
+#define	BOOTLOADER_SECTOR				1U
+#define	APP1_SECTOR							3U
+/************* BANK - 1 *************/
+#define	NVS_SECTOR							0U
+#define	NVM_SECTOR							1U
+#define	APP2_SECTOR							3U
+
 
 #define Boot_Res_Status()  Boot_Response_status()
 

@@ -149,6 +149,42 @@ uint8_t Flash_SingleSec_Erase(uint8_t Sec,uint8_t Bnk)
 	
 	return retval;
 }
+
+uint8_t Flash_DoubleSec_Erase(uint8_t Sec,uint8_t Bnk)
+{
+	uint8_t retval= FALSE;
+	FLASH_Unlock();
+	Flash_Error_Check();
+	
+	
+	if(Bnk ==  BANK_1)
+	{
+		uint8_t i;
+		uint8_t EndSec = Sec+1;;
+		for(i = Sec; i <= EndSec; i++)
+		{
+			FLASH_Sector_Erase(Sec,Bnk);
+		}
+		retval = TRUE;
+	}
+	else if(Bnk == BANK_2)
+	{
+		uint8_t i;
+		uint8_t EndSec = Sec+1;;
+		for(i = Sec; i <= EndSec; i++)
+		{
+			FLASH_Sector_Erase(Sec,Bnk);
+		}
+		retval = TRUE;
+	}
+	
+	Flash_Error_Check();
+	FLASH_Lock();
+	
+	return retval;
+	
+}
+
 uint8_t FLASH_Erase_NoofSectors(uint8_t Bnk)
 {
 	uint8_t retval = FALSE;
@@ -221,19 +257,35 @@ uint32_t Verify_Sectors_Erase(uint32_t Address)
 	}	
 	return 1;
 }
-//uint8_t Verify_SingleSec_Erase(uint32_t Address)
-//{
-//	uint32_t *ptr =(uint32_t*)Address;
-//		uint32_t End_Address =(Address+0x1FFC);
+uint8_t Verify_SingleSec_Erase(uint32_t Address)
+{
+	uint32_t *ptr =(uint32_t*)Address;
+		uint32_t End_Address =(Address+0x1FFC);
 
-//		while((uint32_t)ptr<End_Address)
-//		{
-//			if(*ptr != 0xFFFFFFFF)
-//			{
-//				return 0;
-//			}
-//			ptr++;
-//		}	
-//		
-//	return 1;
-//}
+		while((uint32_t)ptr<End_Address)
+		{
+			if(*ptr != 0xFFFFFFFF)
+			{
+				return 0;
+			}
+			ptr++;
+		}	
+		
+	return 1;
+}
+uint8_t Verify_doubleSec_Erase(uint32_t Address)
+{
+	uint32_t *ptr =(uint32_t*)Address;
+		uint32_t End_Address =(Address+0x4000);
+
+		while((uint32_t)ptr<End_Address)
+		{
+			if(*ptr != 0xFFFFFFFF)
+			{
+				return 0;
+			}
+			ptr++;
+		}	
+		
+	return 1;
+}

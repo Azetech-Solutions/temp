@@ -4,8 +4,9 @@
 #include "stm32h5xx.h"
 #include "NVS_Driver.h"
 
+/***************************NVS Part*************************/
 #define NVS_TOTAL_BLOCKS						2
-
+/*************************** NVS Address *************************/
 #define NVS_START_ADDRESS  	0x08010000
 #define NVS_END_ADDRESS  		0x08011FFC
 

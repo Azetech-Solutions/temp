@@ -31,6 +31,12 @@ Boot_state_EN Boot_State_Control = Boot_Idle;
 UBYTE Boot_Command_Variable = FALSE;
 UBYTE Flash_Write_Flag = FALSE;
 UBYTE ISNVS_Flag = FALSE;
+
+UBYTE NVM_Memory_EraseFlag = FALSE;
+UBYTE NVS_Memory_EraseFlagNotValid = FALSE;
+UBYTE Application_Memory_EraseFlag_NotValid = FALSE;
+
+UBYTE Initial_Flash_Erase_Flag = FALSE;
 UBYTE Flash_Erase_Flag = FALSE;
 
 /*COMIF data Reception Function*/
@@ -59,10 +65,14 @@ void Boot_Main()
 			{
 				if(Rx->Boot_command == 0xF5)
 				{
-					
 					Tx->Boot_Status = BOOT_STATUS_OK;
 					Boot_State_Control = Boot_Start;
 					Boot_Res_Status();
+				}
+				if(Rx->Boot_command == 0xFE)
+				{
+					Initial_Flash_Erase_Flag = TRUE;
+					Boot_State_Control = Boot_Erase_Flash;
 				}
 				else
 				{
@@ -84,31 +94,50 @@ void Boot_Main()
 			Debug_SendString("Start\n");
 			
 			if(Boot_Command_Variable == TRUE)
-			{			
+			{
 				if(Rx->Boot_command == 0xFE)
 				{
 						Flash_Erase_Flag = TRUE;
 						Boot_State_Control = Boot_Erase_Flash;
 				}
-				else if(Rx->Boot_command == 0xFA)
-				{
-					// flg for the flash write in NVs block or App1 or App2
-					if(*(uint32_t*)(NVS_START_ADDRESS) != 0xFFFFFFFF || *(uint32_t*)(NVS_START_ADDRESS) == 0xFFFFFFFF )
-					{
-						Flash_SingleSec_Erase(NVS_BLOCK_SECTOR,BANK_2); // For Erasing NVS Block
-						
-						Tx->Boot_Status = BOOT_STATUS_OK;
-						ISNVS_Flag = TRUE;
-					}
-
-					Boot_State_Control = Boot_Wating_for_next_command;
+				else if(Rx->Boot_command == 0xFA) // nvs
+				{		
+						if(NVS_Memory_EraseFlagNotValid == FALSE)
+						{
+							if(*(uint32_t*)(NVS_START_ADDRESS) != 0xFFFFFFFF || *(uint32_t*)(NVS_START_ADDRESS) == 0xFFFFFFFF )
+							{
+								if(Flash_SingleSec_Erase(NVS_BLOCK_SECTOR,BANK_2)) // For Erasing NVS Block
+								{
+									Boot_State_Control = Boot_Wating_for_next_command;
+									NVS_Memory_EraseFlagNotValid = FALSE;
+									Tx->Boot_Status = BOOT_STATUS_OK;
+									ISNVS_Flag = TRUE;
+								}
+							}
+						}
+						else
+						{
+								Boot_State_Control = Boot_Wating_for_next_command;
+								Tx->Boot_Status = BOOT_STATUS_OK;
+								ISNVS_Flag = TRUE;
+						}
+					
 					Boot_Res_Status();
 				}
-				else if(Rx->Boot_command == 0xFB)
+				else if(Rx->Boot_command == 0xFB)  // application
 				{
-					Tx->Boot_Status = BOOT_STATUS_OK;
-					Boot_State_Control = Boot_Start;
-					Boot_Res_Status();
+					if(Application_Memory_EraseFlag_NotValid == FALSE)
+					{
+						Tx->Boot_Status = BOOT_STATUS_OK;
+						Boot_State_Control = Boot_Start;
+						Boot_Res_Status();
+					}
+					else
+					{
+						Tx->Boot_Status = BOOT_STATUS_OK;
+						Boot_State_Control = Boot_Wating_for_next_command;
+						Boot_Res_Status();
+					}
 				}
 				else
 				{
@@ -124,7 +153,7 @@ void Boot_Main()
 			Debug_SendString("Wait\n");
 			if(Boot_Command_Variable == TRUE)
 			{
-				if( (Rx->Boot_command == 0xFD) && (Boot_Command_Variable == TRUE) )
+				if(Rx->Boot_command == 0xFD)
 				{
 					Boot_State_Control = Boot_Flash_Write;
 					Flash_Write_Flag = TRUE;
@@ -166,14 +195,19 @@ void Boot_Main()
 								}
 							}
 						}
-					else
-					{
-						ISNVS_Flag = FALSE;
-						Tx->Byte = BOOT_STATUS_OK;
-						Boot_Res_Status();
-						Boot_State_Control = Boot_Idle;
-					}
+						else
+						{
+							ISNVS_Flag = FALSE;
+							Tx->Byte = BOOT_STATUS_OK;
+							Boot_Res_Status();
+							Boot_State_Control = Boot_Idle;
+						}
 					
+				}
+				else if(Rx->Boot_command == 0xFE) // i wanna check this
+				{
+					Tx->Byte = BOOT_STATUS_OK; 
+					Boot_Res_Status();
 				}
 				else
 				{
@@ -223,7 +257,7 @@ void Boot_Main()
 													(ULONG)(Rx->Data_14 << 8) | (ULONG)Rx->Data_13;
 				}
 				
-				if((ISNVS_Flag == FALSE && (Flash_Add >=0x08006080)) || (ISNVS_Flag == FALSE && (Flash_Add >= 0x08014080 )))
+				if((ISNVS_Flag == FALSE && (Flash_Add >=0x08006080)) || (ISNVS_Flag == FALSE && (Flash_Add >= 0x08016080 )))
 				{
 					Verify_AppCkSum += calculateChecksum(Flash_data,sizeof(Flash_data)/sizeof(Flash_data[0]));
 					Debug_SendNumberWithDescription("CkSum",Verify_AppCkSum);
@@ -257,42 +291,201 @@ void Boot_Main()
 			ULONG Flash_Erase_Add =0;
 			uint8_t Bank=0;
 			
-				if(Flash_Erase_Flag == TRUE)
-				{
-					Flash_Erase_Add = ((ULONG)Rx->Flash_Add_1_byte << 24)|
-											((ULONG)Rx->Flash_Add_2_byte << 16)|
-											((ULONG)Rx->Flash_Add_3_byte << 8) |
-											((ULONG)Rx->Flash_Add_4_byte);
-					
-					if(Flash_Erase_Add == APP_1_BASE_ADDRESS)
+			if(Initial_Flash_Erase_Flag == TRUE)
+			{
+				if((Rx->Flash_Add_1_byte == BOOTMANAGER_SECTOR) && (Rx->Flash_Add_2_byte == BANK_1)) // single sector erase
 					{
-						Bank = BANK_1;
-					}
-					else if(Flash_Erase_Add == APP_2_BASE_ADDRESS)
-					{
-						Bank = BANK_2;
-					}
-					
-					if((Flash_Erase_Add == APP_1_BASE_ADDRESS && Flash_Erase_Add != 0U) || (Flash_Erase_Add == APP_2_BASE_ADDRESS && Flash_Erase_Add != 0U))
-					{
-						if(FLASH_Erase_NoofSectors(Bank)) // verify to erase memory
-						{
-							if( Verify_Sectors_Erase(Flash_Erase_Add))
+							if(Flash_SingleSec_Erase(Rx->Flash_Add_1_byte,Rx->Flash_Add_2_byte))
 							{
-								Flash_Erase_Flag = FALSE;
-								Tx->Byte = BOOT_STATUS_OK; // this is an a ACK for Coressponding boot start Command data is received 		
-								Boot_Res_Status();
-								Boot_State_Control = Boot_Wating_for_next_command;
-							}					
-						}
-						else
-						{
-							Tx->Byte = BOOT_STATUS_NOT_OK; // this is an a ACK for Coressponding boot start Command data is received 		
+								 if(Verify_SingleSec_Erase(BOOTMANAGER_BASE_ADDRESS))
+								 {
+									  Initial_Flash_Erase_Flag = FALSE;
+										Tx->Byte = BOOT_STATUS_OK; // this is an a ACK for Coressponding boot start Command data is received 		
+										Boot_Res_Status();
+										Boot_State_Control = Boot_Idle;
+								 }
+								 else
+								 {
+										Tx->Byte = BOOT_STATUS_NOT_OK; // this is an a ACK for Coressponding boot start Command data is received 		
+										Boot_Res_Status();
+										Boot_State_Control = Boot_Idle;
+								 }
+							}
+							else
+							{
+								Tx->Byte = BOOT_STATUS_NOT_OK; // this is an a ACK for Coressponding boot start Command data is received 		
 							Boot_Res_Status();
-							Boot_State_Control = Boot_Start;					
-						}
+							Boot_State_Control = Boot_Idle;
+							}
+					}
+					else if((Rx->Flash_Add_1_byte == BOOTLOADER_SECTOR) && (Rx->Flash_Add_2_byte == BANK_1)) // Double sector erase
+					{
+						if(Flash_DoubleSec_Erase(Rx->Flash_Add_1_byte,Rx->Flash_Add_2_byte))
+							{
+								 if(Verify_doubleSec_Erase(BOOTLOADER_BASE_ADDRESS))
+								 {
+									  Initial_Flash_Erase_Flag = FALSE;
+										Tx->Byte = BOOT_STATUS_OK; // this is an a ACK for Coressponding boot start Command data is received 		
+										Boot_Res_Status();
+										//Boot_State_Control = Boot_Wating_for_next_command;
+								 }
+								 else
+								 {
+										Tx->Byte = BOOT_STATUS_NOT_OK; // this is an a ACK for Coressponding boot start Command data is received 		
+										Boot_Res_Status();
+										Boot_State_Control = Boot_Idle;
+								 }
+							}
+							else
+							{
+								Tx->Byte = BOOT_STATUS_NOT_OK; // this is an a ACK for Coressponding boot start Command data is received 		
+							Boot_Res_Status();
+							Boot_State_Control = Boot_Idle;
+							}
+					}
+					else if((Rx->Flash_Add_1_byte == APP1_SECTOR) && (Rx->Flash_Add_2_byte == BANK_1)) // multi sector erase
+					{
+							if(FLASH_Erase_NoofSectors(Rx->Flash_Add_2_byte)) // verify to erase memory
+							{
+								if( Verify_Sectors_Erase(APP_1_BASE_ADDRESS))
+								{
+									Application_Memory_EraseFlag_NotValid = TRUE;
+									Initial_Flash_Erase_Flag = FALSE;
+									Tx->Byte = BOOT_STATUS_OK; // this is an a ACK for Coressponding boot start Command data is received 		
+									Boot_Res_Status();
+									Boot_State_Control = Boot_Idle;
+								}
+								else
+								{
+									Tx->Byte = BOOT_STATUS_NOT_OK; // this is an a ACK for Coressponding boot start Command data is received 		
+									Boot_Res_Status();
+									Boot_State_Control = Boot_Idle;
+								}
+							}
+							else
+							{
+								Tx->Byte = BOOT_STATUS_NOT_OK; // this is an a ACK for Coressponding boot start Command data is received 		
+								Boot_Res_Status();
+								Boot_State_Control = Boot_Idle;
+							}
+					}
+					else if((Rx->Flash_Add_1_byte == NVS_SECTOR) && (Rx->Flash_Add_2_byte == BANK_2))  // single sector erase
+					{
+							if(Flash_SingleSec_Erase(Rx->Flash_Add_1_byte,Rx->Flash_Add_2_byte))
+							{
+								 if(Verify_SingleSec_Erase(NVS_START_ADDRESS))
+								 {
+										NVS_Memory_EraseFlagNotValid = TRUE;
+									  Initial_Flash_Erase_Flag = FALSE;
+										Tx->Byte = BOOT_STATUS_OK; // this is an a ACK for Coressponding boot start Command data is received 		
+										Boot_Res_Status();
+										Boot_State_Control = Boot_Idle;
+								 }
+								 else
+								 {
+										Tx->Byte = BOOT_STATUS_NOT_OK; // this is an a ACK for Coressponding boot start Command data is received 		
+										Boot_Res_Status();
+										Boot_State_Control = Boot_Idle;
+								 }
+							}
+							else
+							{
+								Tx->Byte = BOOT_STATUS_NOT_OK; // this is an a ACK for Coressponding boot start Command data is received 		
+							Boot_Res_Status();
+							Boot_State_Control = Boot_Idle;
+							}
+					}
+					else if((Rx->Flash_Add_1_byte == NVM_SECTOR)&& (Rx->Flash_Add_2_byte == BANK_2))  // Double sector erase
+					{
+							if(Flash_DoubleSec_Erase(Rx->Flash_Add_1_byte,Rx->Flash_Add_2_byte))
+							{
+								 if(Verify_doubleSec_Erase(NVM_SECTOR_ONE_START_ADDRESS))
+								 {
+									  Initial_Flash_Erase_Flag = FALSE;
+										Tx->Byte = BOOT_STATUS_OK; // this is an a ACK for Coressponding boot start Command data is received 		
+										Boot_Res_Status();
+										//Boot_State_Control = Boot_Wating_for_next_command;
+								 }
+								 else
+								 {
+										Tx->Byte = BOOT_STATUS_NOT_OK; // this is an a ACK for Coressponding boot start Command data is received 		
+										Boot_Res_Status();
+										Boot_State_Control = Boot_Idle;
+								 }
+							}
+							else
+							{
+								Tx->Byte = BOOT_STATUS_NOT_OK; // this is an a ACK for Coressponding boot start Command data is received 		
+							Boot_Res_Status();
+							Boot_State_Control = Boot_Idle;
+							}
+					}
+					else if((Rx->Flash_Add_1_byte == APP2_SECTOR)&& (Rx->Flash_Add_2_byte == BANK_2))  // multi sector erase
+					{
+							if(FLASH_Erase_NoofSectors(Rx->Flash_Add_2_byte)) // verify to erase memory
+							{
+								if( Verify_Sectors_Erase(APP_2_BASE_ADDRESS))
+								{
+									Application_Memory_EraseFlag_NotValid = TRUE;
+									Initial_Flash_Erase_Flag = FALSE;
+									Tx->Byte = BOOT_STATUS_OK; // this is an a ACK for Coressponding boot start Command data is received 		
+									Boot_Res_Status();
+									Boot_State_Control = Boot_Idle;
+								}
+								else
+								{
+									Tx->Byte = BOOT_STATUS_NOT_OK; // this is an a ACK for Coressponding boot start Command data is received 		
+									Boot_Res_Status();
+									Boot_State_Control = Boot_Idle;
+								}
+							}
+							else
+							{
+								Tx->Byte = BOOT_STATUS_NOT_OK; // this is an a ACK for Coressponding boot start Command data is received 		
+								Boot_Res_Status();
+								Boot_State_Control = Boot_Idle;
+							}
+					}
+					
+					
+			}  // end Initial_Flash_Erase_Flag check
+
+			if(Flash_Erase_Flag == TRUE)
+			{
+				Flash_Erase_Add = ((ULONG)Rx->Flash_Add_1_byte << 24)|
+										((ULONG)Rx->Flash_Add_2_byte << 16)|
+										((ULONG)Rx->Flash_Add_3_byte << 8) |
+										((ULONG)Rx->Flash_Add_4_byte);					
+				
+				if(Flash_Erase_Add == APP_1_BASE_ADDRESS)
+				{
+					Bank = BANK_1;
+				}
+				else if(Flash_Erase_Add == APP_2_BASE_ADDRESS)
+				{
+					Bank = BANK_2;
+				}
+				
+				if((Flash_Erase_Add == APP_1_BASE_ADDRESS && Flash_Erase_Add != 0U) || (Flash_Erase_Add == APP_2_BASE_ADDRESS && Flash_Erase_Add != 0U))
+				{
+					if(FLASH_Erase_NoofSectors(Bank)) // verify to erase memory
+					{
+						if( Verify_Sectors_Erase(Flash_Erase_Add))
+						{
+							Flash_Erase_Flag = FALSE;
+							Tx->Byte = BOOT_STATUS_OK; // this is an a ACK for Coressponding boot start Command data is received 		
+							Boot_Res_Status();
+							Boot_State_Control = Boot_Wating_for_next_command;
+						}					
+					}
+					else
+					{
+						Tx->Byte = BOOT_STATUS_NOT_OK; // this is an a ACK for Coressponding boot start Command data is received 		
+						Boot_Res_Status();
+						Boot_State_Control = Boot_Start;					
 					}
 				}
+			}
 		break;
 		}// switch end
 	}

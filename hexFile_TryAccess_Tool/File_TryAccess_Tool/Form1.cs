@@ -1,18 +1,44 @@
 ﻿using System;
 using System.Configuration;
+using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
+using System.Runtime.Remoting.Metadata;
+using System.Threading;
 using System.Windows.Forms;
+using System.Xml;
 using System.Xml.Linq;
 using ComIf;
+using static File_TryAccess_Tool.GetHexfileValue;
 
 namespace File_TryAccess_Tool
 {
+    public enum XmlFlashtype
+    {
+        Unkown = 0,
+        BootManager = 1,
+        BootLoader = 2,
+        App1 = 3,
+        App2 = 4,
+        NVS = 5,
+        NVM = 6,
+    }
     public partial class Form1 : Form
     {
         //obj creation
-        TakeHexdata Hexval = new TakeHexdata();
+        GetHexfileValue Hexval = new GetHexfileValue();
+        XmlDocument gettingxmldoc = new XmlDocument();
+        XmlNodeList settingType;
+        XmlNodeList settingSector;
+        XmlNodeList settingSectorLength;
+        XmlNodeList settingBank;
+        XmlNodeList settingStartAddress;
+        XmlNodeList settingEndAddress;
+        XmlNodeList settingDataBlock;
+        XmlNodeList settingVerinfo;
+        XmlNodeList settingComport;
+        XmlNodeList settingComiflist;
 
         // Channel Creation Tx & Rx
         public Channel Trns_MCU;
@@ -37,7 +63,20 @@ namespace File_TryAccess_Tool
             string[] Ports = SerialPort.GetPortNames();
             CBoxComPort.Items.AddRange(Ports);
 
-			Trns_MCU = new Channel("Trasmit_MCU", ChannelType.Number, TransmitToMCU, TransmitToMCU_Error_nofi);
+            //gettingxmldoc.Load(@"D:\Mohan\Class\Bootlodaer\STM32H5_Controller\Boot_Git\28-05-24\temp\hexFile_TryAccess_Tool\File_TryAccess_Tool\XMLFile1.xml");
+
+            settingType = gettingxmldoc.GetElementsByTagName("type");
+            settingSector = gettingxmldoc.GetElementsByTagName("sector");
+            settingSectorLength = gettingxmldoc.GetElementsByTagName("sectorLength");
+            settingBank = gettingxmldoc.GetElementsByTagName("bank");
+            settingStartAddress = gettingxmldoc.GetElementsByTagName("startAddress");
+            settingEndAddress = gettingxmldoc.GetElementsByTagName("endAddress");
+            settingDataBlock = gettingxmldoc.GetElementsByTagName("DataBlock");
+            settingVerinfo = gettingxmldoc.GetElementsByTagName("versioninfo");
+            settingComport = gettingxmldoc.GetElementsByTagName("comport");
+            settingComiflist = gettingxmldoc.GetElementsByTagName("comif");
+
+            Trns_MCU = new Channel("Trasmit_MCU", ChannelType.Number, TransmitToMCU, TransmitToMCU_Error_nofi);
             Trns_MCU_Data = new TxMessage(0xB3, 21);
             Rcve_MCU = new RxMessage(0xB5, 1, Responce_Rxcbk);
             Trns_MCU.RegisterRxMessage(Rcve_MCU);
@@ -49,7 +88,7 @@ namespace File_TryAccess_Tool
 
         private void TransmitToMCU_Error_nofi(uint Debug0, uint Debug1)
         {
-            tBoxOutData.AppendText($"Error: Debug0 = {Debug0}, Debug1 = {Debug1}\r\n");
+            tboxDataOut.AppendText($"Error: Debug0 = {Debug0}, Debug1 = {Debug1}\r\n");
         }
 
         private void TransmitToMCU(ushort Length, byte[] Data)
@@ -59,7 +98,7 @@ namespace File_TryAccess_Tool
 
         private void Responce_Rxcbk(byte Length, byte[] Data)
         {
-            for(int i = 0;i<Length;i++)
+            for (int i = 0; i < Length; i++)
             {
                 RxData[i] = Data[i];
             }
@@ -75,7 +114,7 @@ namespace File_TryAccess_Tool
             }
          }
         private void loadDefaultValues()
-        {
+        { 
             CBoxComPort.Text = ConfigurationManager.AppSettings["COMPort"];
             CboxBaudRate.Text = ConfigurationManager.AppSettings["BaudRate"];
             CboxDataBits.Text = ConfigurationManager.AppSettings["DataBit"];
@@ -84,7 +123,7 @@ namespace File_TryAccess_Tool
             cBoxAppAddressSelect.Text = ConfigurationManager.AppSettings["FlhMryAds"];
         }
 
-        private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e) // thread
         {
             //int ByteSize = serialPort1.BytesToRead;
 
@@ -92,11 +131,15 @@ namespace File_TryAccess_Tool
 
             //serialPort1.Read(data, 0, data.Length);
 
-            string data = serialPort1.ReadExisting();
+            Thread thread = new Thread(t =>
+            {
+                string data = serialPort1.ReadExisting();
 
-            Trns_MCU.RxIndication(data);
-            //byte[] ReceivedMessage = new byte[ByteSize];  //create an array of the same size
-            //Array.Copy(data, ReceivedMessage, data.Length);  //copy it across
+                Trns_MCU.RxIndication(data);
+            })
+            { IsBackground = true };
+            thread.Start();
+            
 
             //for (int i = 0; i < data.Length; i++)
             //{
@@ -112,6 +155,188 @@ namespace File_TryAccess_Tool
                 chkBoxNVSMode.Checked = true;
                 chkBoxFlashMode.Checked = false;
             }
+        }
+
+        private void bootmanagerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string command = null, sec = null, bank = null, toMCU = null;
+            bool app1Flag = false;
+            try
+            {
+                if (serialPort1.IsOpen)
+                {
+                    if (Convert.ToInt16(settingType[0].InnerText) == (UInt16)XmlFlashtype.BootManager)
+                    {
+                        command = "FE";
+                        sec = settingSector[0].InnerText;  // copy sector value from xml file
+                        bank = settingBank[0].InnerText;  // copy bank value from xml file
+                        toMCU = command + sec + bank + "000000000000000000000000000000000000";
+                        app1Flag = true;
+                    }
+
+                    while (true)
+                    {
+                        if (app1Flag == true)
+                        {
+                            TxMsgUpdate(toMCU);  // check this changes
+                            Trns_MCU.Transmit(Trns_MCU_Data);
+                            app1Flag = false;
+                        }
+
+                        if (RxData[0] == 0x00)
+                        {
+                            RxData[0] = 0xFF;
+                            MessageBox.Show("Success");
+                            break;
+                        }
+                        else if (RxData[0] == 0x01)
+                        {
+                            RxData[0] = 0xFF;
+                            app1Flag = true;
+                        }
+
+                    }
+                }
+                else { MessageBox.Show("Please Connect Serial port", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+        private void bootloaderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string command = null, sec = null, bank = null, toMCU = null;
+            bool app1Flag = false;
+            
+                try
+                {
+                    if (serialPort1.IsOpen)
+                    {
+                        if (Convert.ToInt16(settingType[1].InnerText) == (UInt16)XmlFlashtype.BootLoader)
+                        {
+                            command = "FE";
+                            sec = settingSector[1].InnerText;  // copy sector value from xml file
+                            bank = settingBank[1].InnerText;  // copy bank value from xml file
+                            toMCU = command + sec + bank + "000000000000000000000000000000000000";
+                            app1Flag = true;
+                        }
+
+                        while (true)
+                        {
+                            if (app1Flag == true)
+                            {
+                                TxMsgUpdate(toMCU);  // check this changes
+                                Trns_MCU.Transmit(Trns_MCU_Data);
+                                app1Flag = false;
+                            }
+
+                            if (RxData[0] == 0x00)
+                            {
+                                RxData[0] = 0xFF;
+                                MessageBox.Show("Success");
+                                break;
+                            }
+                            else if (RxData[0] == 0x01)
+                            {
+                                RxData[0] = 0xFF;
+                                app1Flag = true;
+                            }
+
+                        }
+                    }
+                    else { MessageBox.Show("Please Connect Serial port", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+        private void application1MemoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string command = null, sec =null, bank = null, toMCU = null;
+            bool app1Flag = false;
+            try 
+            { 
+                if (serialPort1.IsOpen)
+                {
+                    if (Convert.ToInt16(settingType[2].InnerText) == (UInt16)XmlFlashtype.App1)
+                    {
+                        command = "FE";
+                        sec = settingSector[2].InnerText;  // copy sector value from xml file
+                        bank = settingBank[2].InnerText;  // copy bank value from xml file
+                        toMCU = command + sec + bank + "000000000000000000000000000000000000";
+                        app1Flag = true;
+                    }
+
+                    while (true)
+                    {
+                        if (app1Flag == true)
+                        {
+                            TxMsgUpdate(toMCU);  // check this changes
+                            Trns_MCU.Transmit(Trns_MCU_Data);
+                            app1Flag = false ;
+                        }
+
+                        if (RxData[0] == 0x00)
+                        {
+                            RxData[0] = 0xFF;
+                            MessageBox.Show("Success");
+                            break;
+                        }
+                        else if (RxData[0] == 0x01)
+                        {
+                            RxData[0] = 0xFF;
+                            app1Flag = true;
+                        }
+
+                    }
+                }
+                else { MessageBox.Show("Please Connect Serial port", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+
+        }
+
+        private void application2MemoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string command = null, sec = null, bank = null, toMCU = null;
+            bool app1Flag = false;
+            try
+            {
+                if (serialPort1.IsOpen)
+                {
+                    if (Convert.ToInt16(settingType[3].InnerText) == (UInt16)XmlFlashtype.App2)
+                    {
+                        command = "FE";
+                        sec = settingSector[3].InnerText;  // copy sector value from xml file
+                        bank = settingBank[3].InnerText;  // copy bank value from xml file
+                        toMCU = command + sec + bank + "000000000000000000000000000000000000";
+                        app1Flag = true;
+                    }
+
+                    while (true)
+                    {
+                        if (app1Flag == true)
+                        {
+                            TxMsgUpdate(toMCU);  // check this changes
+                            Trns_MCU.Transmit(Trns_MCU_Data);
+                            app1Flag = false;
+                        }
+
+                        if (RxData[0] == 0x00)
+                        {
+                            RxData[0] = 0xFF;
+                            MessageBox.Show("Success");
+                            break;
+                        }
+                        else if (RxData[0] == 0x01)
+                        {
+                            RxData[0] = 0xFF;
+                            app1Flag = true;
+                        }
+
+                    }
+                }
+                else { MessageBox.Show("Please Connect Serial port", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+
         }
 
         private void chkBoxFlashMode_CheckedChanged(object sender, EventArgs e)
@@ -132,7 +357,7 @@ namespace File_TryAccess_Tool
                 {
                     using (OpenFileDialog ofd = new OpenFileDialog())
                     {
-                        ofd.Filter = "Hex files (*.Hex)|*.Hex|All files (*.*)|*.*"; ;
+                        ofd.Filter = "Hex files (*.Hex)|*.Hex|All files (*.*)|*.*";
                         if (ofd.ShowDialog() == DialogResult.OK)
                         {
                             string checkFileValid = null;
@@ -276,12 +501,12 @@ namespace File_TryAccess_Tool
                                     if (cBoxAppAddressSelect.Text == "App1")
                                     {
                                         FlashEraseMry = "08006000";
-                                        tBoxOutData.Text = FlashEraseMry;
+                                        tboxDataOut.Text = FlashEraseMry;
                                     }
                                     else if (cBoxAppAddressSelect.Text == "App2")
                                     {
                                         FlashEraseMry = "08016000";
-                                        tBoxOutData.Text = FlashEraseMry;
+                                        tboxDataOut.Text = FlashEraseMry;
                                     }
 
                                     flashErase = "FE" + FlashEraseMry + "00000000000000000000000000000000";
@@ -316,11 +541,11 @@ namespace File_TryAccess_Tool
                                 {
                                     if (Fileline[0] == ':')
                                     {
-                                        hexDatelength = Hexval.ReadByte(Fileline, 1);
-                                        hexOffset = Hexval.Readword(Fileline, 3);
-                                        hexRecordType = Hexval.ReadByte(Fileline, 7);
+                                        hexDatelength = Hexval.HexfileReadByte(Fileline, 1);
+                                        hexOffset = Hexval.HexfileReadword(Fileline, 3);
+                                        hexRecordType = Hexval.HexfileReadByte(Fileline, 7);
                                         //tBoxOutData.Text = type;
-                                        HexData = Hexval.ReadDatas(Fileline, 9, Convert.ToUInt16(hexDatelength, 16));
+                                        HexData = Hexval.HexfileReadDatas(Fileline, 9, Convert.ToUInt16(hexDatelength, 16));
 
                                         try
                                         {
@@ -342,7 +567,7 @@ namespace File_TryAccess_Tool
                                                                 TxMsgUpdate(mryadd);  // check this changes
                                                                 Trns_MCU.Transmit(Trns_MCU_Data);
 
-                                                                CKsum += Hexval.SumOfLine(HexData);
+                                                                CKsum += Hexval.HexfileSumOfLine(HexData);
                                                             }
                                                             change = false;
                                                         }
@@ -357,7 +582,7 @@ namespace File_TryAccess_Tool
                                                                 RxData[0] = 0xFF; //RxMessageDataIN = null;
                                                                 change = true;
                                                         }
-                                                    }
+                                                    } // while end 
 
                                                 }
                                                 break;
@@ -409,12 +634,12 @@ namespace File_TryAccess_Tool
                                 if (cBoxAppAddressSelect.Text == "App1")
                                 {
                                     FlashEraseMry = "08006000";
-                                    tBoxOutData.Text = FlashEraseMry;
+                                    tboxDataOut.Text = FlashEraseMry;
                                 }
                                 else if (cBoxAppAddressSelect.Text == "App2")
                                 {
                                     FlashEraseMry = "08016000";
-                                    tBoxOutData.Text = FlashEraseMry;
+                                    tboxDataOut.Text = FlashEraseMry;
                                 }
 
                                 Flashcompleted = "FC" + FlashEraseMry + "00000000000000000000000000000000";
@@ -431,7 +656,7 @@ namespace File_TryAccess_Tool
 
                                     if (RxData[0] == 0x00)
                                     {
-                                        tBoxOutData.AppendText("\nFc Completed");
+                                        tboxDataOut.AppendText("\nFc Completed");
                                         RxData[0] = 0xFF; //RxMessageDataIN = null;
                                         break;
                                     }
@@ -519,65 +744,6 @@ namespace File_TryAccess_Tool
         }// updateAppHeader
 
 
-    }// end class
+    }// end form1 class
 
-}
-
-class TakeHexdata
-{   
-    public string ReadByte(string line, int index = 0)
-    {
-        return line.Substring(index, 2);
-    }
-
-    public string Readword(string line, int index = 0)
-    {
-        return line.Substring(index, 4);
-    }
-
-    public string ReadDatas(String line, int index = 0,int size = 0 )
-    {
-        return line.Substring(index, (size*2));
-    }
-
-    public uint SumOfLine(string hex)
-    {
-        uint[] hexval = new uint[hex.Length / 2];
-
-        // Convert hexadecimal string to byte array
-        byte[] byteArray = new byte[hex.Length / 2];
-
-        for (int i = 0; i < byteArray.Length; i++)
-        {
-            byteArray[i] = Convert.ToByte(hex.Substring(i * 2, 2), 16);
-        }
-
-        if ((byteArray.Length / 4) == 1)
-        {
-            hexval[0] = (uint)(byteArray[3] << 24 | byteArray[2] << 16 | byteArray[1] << 8 | byteArray[0]);
-        }
-        else if ((byteArray.Length / 4) == 2)
-        {
-            hexval[0] = (uint)(byteArray[3] << 24 | byteArray[2] << 16 | byteArray[1] << 8 | byteArray[0]);
-            hexval[1] = (uint)(byteArray[7] << 24 | byteArray[6] << 16 | byteArray[5] << 8 | byteArray[4]);
-        }
-        else if ((byteArray.Length / 4) == 3)
-        {
-            hexval[0] = (uint)(byteArray[3] << 24 | byteArray[2] << 16 | byteArray[1] << 8 | byteArray[0]);
-            hexval[1] = (uint)(byteArray[7] << 24 | byteArray[6] << 16 | byteArray[5] << 8 | byteArray[4]);
-            hexval[2] = (uint)(byteArray[11] << 24 | byteArray[10] << 16 | byteArray[9] << 8 | byteArray[8]);
-        }
-        else if ((byteArray.Length / 4) == 4)
-        {
-            hexval[0] = (uint)(byteArray[3] << 24 | byteArray[2] << 16 | byteArray[1] << 8 | byteArray[0]);
-            hexval[1] = (uint)(byteArray[7] << 24 | byteArray[6] << 16 | byteArray[5] << 8 | byteArray[4]);
-            hexval[2] = (uint)(byteArray[11] << 24 | byteArray[10] << 16 | byteArray[9] << 8 | byteArray[8]);
-            hexval[3] = (uint)(byteArray[15] << 24 | byteArray[14] << 16 | byteArray[13] << 8 | byteArray[12]);
-        }
-
-
-        uint sum = hexval[0] + hexval[1] + hexval[2] + hexval[3];
-
-        return sum;
-    }
 }
