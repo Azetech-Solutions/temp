@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
 using ComIf;
-using static File_TryAccess_Tool.GetHexfileValue;
 
 namespace File_TryAccess_Tool
 {
@@ -27,18 +26,18 @@ namespace File_TryAccess_Tool
     public partial class Form1 : Form
     {
         //obj creation
-        GetHexfileValue Hexval = new GetHexfileValue();
-        XmlDocument gettingxmldoc = new XmlDocument();
-        XmlNodeList settingType;
-        XmlNodeList settingSector;
-        XmlNodeList settingSectorLength;
-        XmlNodeList settingBank;
-        XmlNodeList settingStartAddress;
-        XmlNodeList settingEndAddress;
-        XmlNodeList settingDataBlock;
-        XmlNodeList settingVerinfo;
-        XmlNodeList settingComport;
-        XmlNodeList settingComiflist;
+        public GetHexfileValue Hexval = new GetHexfileValue();
+        public XmlDocument gettingxmldoc = new XmlDocument();
+        public XmlNodeList settingType;
+        public XmlNodeList settingSector;
+        public XmlNodeList settingSectorLength;
+        public XmlNodeList settingBank;
+        public XmlNodeList settingStartAddress;
+        public XmlNodeList settingEndAddress;
+        public XmlNodeList settingDataBlock;
+        public XmlNodeList settingVerinfo;
+        public XmlNodeList settingComport;
+        public XmlNodeList settingComiflist;
 
         // Channel Creation Tx & Rx
         public Channel Trns_MCU;
@@ -55,15 +54,28 @@ namespace File_TryAccess_Tool
         private uint CKsum = 0; // used to find the checksum
         public Form1()
         {
-            InitializeComponent();         
-        }
+            InitializeComponent();
 
+            Trns_MCU = new Channel("Trasmit_MCU", ChannelType.Number, TransmitToMCU, TransmitToMCU_Error_nofi);
+            Trns_MCU_Data = new TxMessage(0xB3, 21);
+            Rcve_MCU = new RxMessage(0xB5, 1, Responce_Rxcbk);
+            Trns_MCU.RegisterRxMessage(Rcve_MCU);
+        }
+        private void loadDefaultValues()
+        {
+            CBoxComPort.Text = ConfigurationManager.AppSettings["COMPort"];
+            CboxBaudRate.Text = ConfigurationManager.AppSettings["BaudRate"];
+            CboxDataBits.Text = ConfigurationManager.AppSettings["DataBit"];
+            CboxParityBit.Text = ConfigurationManager.AppSettings["ParityBit"];
+            CboxStopBit.Text = ConfigurationManager.AppSettings["StopBit"];
+            cBoxAppAddressSelect.Text = ConfigurationManager.AppSettings["FlhMryAds"];
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
             string[] Ports = SerialPort.GetPortNames();
             CBoxComPort.Items.AddRange(Ports);
 
-            //gettingxmldoc.Load(@"D:\Mohan\Class\Bootlodaer\STM32H5_Controller\Boot_Git\28-05-24\temp\hexFile_TryAccess_Tool\File_TryAccess_Tool\XMLFile1.xml");
+            gettingxmldoc.Load(@"D:\Mohan\Class\Bootlodaer\STM32H5_Controller\Boot_Git\28-05-24\temp\hexFile_TryAccess_Tool\File_TryAccess_Tool\XMLFile1.xml");
 
             settingType = gettingxmldoc.GetElementsByTagName("type");
             settingSector = gettingxmldoc.GetElementsByTagName("sector");
@@ -75,11 +87,6 @@ namespace File_TryAccess_Tool
             settingVerinfo = gettingxmldoc.GetElementsByTagName("versioninfo");
             settingComport = gettingxmldoc.GetElementsByTagName("comport");
             settingComiflist = gettingxmldoc.GetElementsByTagName("comif");
-
-            Trns_MCU = new Channel("Trasmit_MCU", ChannelType.Number, TransmitToMCU, TransmitToMCU_Error_nofi);
-            Trns_MCU_Data = new TxMessage(0xB3, 21);
-            Rcve_MCU = new RxMessage(0xB5, 1, Responce_Rxcbk);
-            Trns_MCU.RegisterRxMessage(Rcve_MCU);
 
             loadDefaultValues();
             chkBoxFlashMode.Checked = true;
@@ -93,7 +100,8 @@ namespace File_TryAccess_Tool
 
         private void TransmitToMCU(ushort Length, byte[] Data)
         {
-		     serialPort1.Write(Data , 0 , Length);
+            serialPort1.Write(Data , 0 , Length);
+            tboxDataOut.Text = "DataTransmited\r\n";
         }
 
         private void Responce_Rxcbk(byte Length, byte[] Data)
@@ -113,15 +121,7 @@ namespace File_TryAccess_Tool
                 Trns_MCU_Data.Data[i] = ((byte)loadComifData[i]);
             }
          }
-        private void loadDefaultValues()
-        { 
-            CBoxComPort.Text = ConfigurationManager.AppSettings["COMPort"];
-            CboxBaudRate.Text = ConfigurationManager.AppSettings["BaudRate"];
-            CboxDataBits.Text = ConfigurationManager.AppSettings["DataBit"];
-            CboxParityBit.Text = ConfigurationManager.AppSettings["ParityBit"];
-            CboxStopBit.Text = ConfigurationManager.AppSettings["StopBit"];
-            cBoxAppAddressSelect.Text = ConfigurationManager.AppSettings["FlhMryAds"];
-        }
+
 
         private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e) // thread
         {
@@ -139,8 +139,8 @@ namespace File_TryAccess_Tool
             })
             { IsBackground = true };
             thread.Start();
-            
 
+            tboxDataOut.Text = "DataReceived\r\n";
             //for (int i = 0; i < data.Length; i++)
             //{
             //    Trns_MCU.RxIndication(data[i]);
@@ -339,14 +339,26 @@ namespace File_TryAccess_Tool
 
         }
 
-        private void chkBoxFlashMode_CheckedChanged(object sender, EventArgs e)
+        private void nVSSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(chkBoxFlashMode.Checked)
-            {
-                chkBoxFlashMode.Checked = true;
-                chkBoxNVSMode.Checked = false;
-            }
+            NVS_Form nvs = new NVS_Form(Trns_MCU,Trns_MCU_Data,Rcve_MCU,serialPort1);            
+            nvs.ShowDialog();
         }
+
+        private void nVMSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NVM_Form nvm = new NVM_Form(Trns_MCU, Trns_MCU_Data, Rcve_MCU, serialPort1);
+            nvm.ShowDialog();
+        }
+
+        private void MStripExitApplication_Click(object sender, EventArgs e)
+        {
+            var ext = MessageBox.Show("Do you want to \"Exit\"","Exit",MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (ext == DialogResult.Yes) { Application.Exit(); }            
+        }
+
+        private void chkBoxFlashMode_CheckedChanged(object sender, EventArgs e)
+        {   if(chkBoxFlashMode.Checked) {chkBoxFlashMode.Checked = true; chkBoxNVSMode.Checked = false;}    }
         private void BtnSearch_Click(object sender, EventArgs e)
         {
             if (serialPort1.IsOpen)
@@ -389,8 +401,12 @@ namespace File_TryAccess_Tool
         {
             if (serialPort1.IsOpen)
             {
-                serialPort1.Close();
-                progressBar1.Value = 0;
+                var DS = MessageBox.Show("Do you want to Disconnect COM Port", "Alert", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (DS == DialogResult.Yes)
+                {
+                    serialPort1.Close();
+                    progressBar1.Value = 0;
+                }        
             }
         } // end port disconnected
 

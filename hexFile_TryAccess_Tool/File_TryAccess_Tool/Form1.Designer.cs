@@ -68,6 +68,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tboxDataOut = new System.Windows.Forms.RichTextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -152,6 +153,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.progressBar1);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
@@ -169,20 +171,19 @@
             this.groupBox1.Size = new System.Drawing.Size(317, 433);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "COM PORT Control";
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(19, 320);
+            this.progressBar1.Location = new System.Drawing.Point(17, 368);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(254, 18);
+            this.progressBar1.Size = new System.Drawing.Size(279, 12);
             this.progressBar1.TabIndex = 2;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(29, 249);
+            this.label5.Location = new System.Drawing.Point(29, 299);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(99, 23);
             this.label5.TabIndex = 9;
@@ -192,7 +193,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(29, 198);
+            this.label4.Location = new System.Drawing.Point(29, 248);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(88, 23);
             this.label4.TabIndex = 8;
@@ -202,7 +203,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(29, 147);
+            this.label3.Location = new System.Drawing.Point(29, 197);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(97, 23);
             this.label3.TabIndex = 7;
@@ -212,7 +213,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(25, 93);
+            this.label2.Location = new System.Drawing.Point(25, 143);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(108, 23);
             this.label2.TabIndex = 6;
@@ -222,7 +223,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(25, 46);
+            this.label1.Location = new System.Drawing.Point(25, 96);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(115, 23);
             this.label1.TabIndex = 5;
@@ -235,7 +236,7 @@
             "None",
             "Odd",
             "Even"});
-            this.CboxParityBit.Location = new System.Drawing.Point(152, 246);
+            this.CboxParityBit.Location = new System.Drawing.Point(152, 296);
             this.CboxParityBit.Name = "CboxParityBit";
             this.CboxParityBit.Size = new System.Drawing.Size(121, 31);
             this.CboxParityBit.TabIndex = 4;
@@ -246,7 +247,7 @@
             this.CboxStopBit.Items.AddRange(new object[] {
             "1",
             "2"});
-            this.CboxStopBit.Location = new System.Drawing.Point(152, 194);
+            this.CboxStopBit.Location = new System.Drawing.Point(152, 244);
             this.CboxStopBit.Name = "CboxStopBit";
             this.CboxStopBit.Size = new System.Drawing.Size(121, 31);
             this.CboxStopBit.TabIndex = 3;
@@ -258,7 +259,7 @@
             "7",
             "8",
             "9"});
-            this.CboxDataBits.Location = new System.Drawing.Point(152, 144);
+            this.CboxDataBits.Location = new System.Drawing.Point(152, 194);
             this.CboxDataBits.Name = "CboxDataBits";
             this.CboxDataBits.Size = new System.Drawing.Size(121, 31);
             this.CboxDataBits.TabIndex = 2;
@@ -274,7 +275,7 @@
             "38400",
             "57600",
             "115200"});
-            this.CboxBaudRate.Location = new System.Drawing.Point(152, 94);
+            this.CboxBaudRate.Location = new System.Drawing.Point(152, 144);
             this.CboxBaudRate.Name = "CboxBaudRate";
             this.CboxBaudRate.Size = new System.Drawing.Size(121, 31);
             this.CboxBaudRate.TabIndex = 1;
@@ -282,7 +283,7 @@
             // CBoxComPort
             // 
             this.CBoxComPort.FormattingEnabled = true;
-            this.CBoxComPort.Location = new System.Drawing.Point(152, 43);
+            this.CBoxComPort.Location = new System.Drawing.Point(152, 93);
             this.CBoxComPort.Name = "CBoxComPort";
             this.CBoxComPort.Size = new System.Drawing.Size(121, 31);
             this.CBoxComPort.TabIndex = 0;
@@ -316,6 +317,7 @@
             this.MStripExitApplication.Name = "MStripExitApplication";
             this.MStripExitApplication.Size = new System.Drawing.Size(141, 34);
             this.MStripExitApplication.Text = "Exit";
+            this.MStripExitApplication.Click += new System.EventHandler(this.MStripExitApplication_Click);
             // 
             // comportToolStripMenuItem
             // 
@@ -410,12 +412,14 @@
             this.nVSSettingsToolStripMenuItem.Name = "nVSSettingsToolStripMenuItem";
             this.nVSSettingsToolStripMenuItem.Size = new System.Drawing.Size(223, 34);
             this.nVSSettingsToolStripMenuItem.Text = "NVS Settings";
+            this.nVSSettingsToolStripMenuItem.Click += new System.EventHandler(this.nVSSettingsToolStripMenuItem_Click);
             // 
             // nVMSettingsToolStripMenuItem
             // 
             this.nVMSettingsToolStripMenuItem.Name = "nVMSettingsToolStripMenuItem";
             this.nVMSettingsToolStripMenuItem.Size = new System.Drawing.Size(223, 34);
             this.nVMSettingsToolStripMenuItem.Text = "NVM Settings";
+            this.nVMSettingsToolStripMenuItem.Click += new System.EventHandler(this.nVMSettingsToolStripMenuItem_Click);
             // 
             // BtnTransmit
             // 
@@ -463,6 +467,16 @@
             this.groupBox3.Size = new System.Drawing.Size(913, 452);
             this.groupBox3.TabIndex = 11;
             this.groupBox3.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Imprint MT Shadow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(54, 41);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(194, 21);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "COM PORT Control";
             // 
             // Form1
             // 
@@ -531,6 +545,7 @@
         private System.Windows.Forms.ToolStripMenuItem nVMSettingsToolStripMenuItem;
         private System.Windows.Forms.RichTextBox tboxDataOut;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label6;
     }
 }
 
