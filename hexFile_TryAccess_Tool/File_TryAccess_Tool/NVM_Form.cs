@@ -14,18 +14,11 @@ namespace File_TryAccess_Tool
 {
     public partial class NVM_Form : Form
     {
-        private static Channel Trns_MCU;
-        private static TxMessage Trns_MCU_Data;
-        private RxMessage Rcve_MCU;
-        private SerialPort serialport1;
-        public NVM_Form(Channel myChannel, TxMessage tx, RxMessage rx, SerialPort s)
+        private Tooltransmit toolTransmit;
+        public NVM_Form(Tooltransmit s)
         {
             InitializeComponent();
-
-            Trns_MCU = myChannel;
-            Trns_MCU_Data = tx;
-            RxMessage Rcve_MCU = rx;
-            serialport1 = s;
+            toolTransmit = s;
         }
 
     }

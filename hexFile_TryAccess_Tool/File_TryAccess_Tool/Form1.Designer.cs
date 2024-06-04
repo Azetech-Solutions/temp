@@ -32,11 +32,10 @@
             this.tBoxView = new System.Windows.Forms.TextBox();
             this.BtnSearch = new System.Windows.Forms.Button();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
-            this.chkBoxNVSMode = new System.Windows.Forms.CheckBox();
-            this.chkBoxFlashMode = new System.Windows.Forms.CheckBox();
             this.cBoxAppAddressSelect = new System.Windows.Forms.ComboBox();
             this.LMryAddress = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -68,7 +67,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tboxDataOut = new System.Windows.Forms.RichTextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -77,10 +75,11 @@
             // 
             // tBoxView
             // 
+            this.tBoxView.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tBoxView.Location = new System.Drawing.Point(12, 45);
             this.tBoxView.Multiline = true;
             this.tBoxView.Name = "tBoxView";
-            this.tBoxView.Size = new System.Drawing.Size(442, 32);
+            this.tBoxView.Size = new System.Drawing.Size(586, 32);
             this.tBoxView.TabIndex = 0;
             this.tBoxView.WordWrap = false;
             // 
@@ -90,7 +89,7 @@
             this.BtnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.BtnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnSearch.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnSearch.Location = new System.Drawing.Point(467, 45);
+            this.BtnSearch.Location = new System.Drawing.Point(619, 45);
             this.BtnSearch.Name = "BtnSearch";
             this.BtnSearch.Size = new System.Drawing.Size(92, 32);
             this.BtnSearch.TabIndex = 1;
@@ -102,41 +101,16 @@
             // 
             this.serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort1_DataReceived);
             // 
-            // chkBoxNVSMode
-            // 
-            this.chkBoxNVSMode.AutoSize = true;
-            this.chkBoxNVSMode.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chkBoxNVSMode.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxNVSMode.Location = new System.Drawing.Point(426, 127);
-            this.chkBoxNVSMode.Name = "chkBoxNVSMode";
-            this.chkBoxNVSMode.Size = new System.Drawing.Size(126, 27);
-            this.chkBoxNVSMode.TabIndex = 3;
-            this.chkBoxNVSMode.Text = "NVS Mode";
-            this.chkBoxNVSMode.UseVisualStyleBackColor = true;
-            this.chkBoxNVSMode.CheckedChanged += new System.EventHandler(this.chkBoxNVSMode_CheckedChanged);
-            // 
-            // chkBoxFlashMode
-            // 
-            this.chkBoxFlashMode.AutoSize = true;
-            this.chkBoxFlashMode.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chkBoxFlashMode.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxFlashMode.Location = new System.Drawing.Point(426, 161);
-            this.chkBoxFlashMode.Name = "chkBoxFlashMode";
-            this.chkBoxFlashMode.Size = new System.Drawing.Size(133, 27);
-            this.chkBoxFlashMode.TabIndex = 4;
-            this.chkBoxFlashMode.Text = "Flash Mode";
-            this.chkBoxFlashMode.UseVisualStyleBackColor = true;
-            this.chkBoxFlashMode.CheckedChanged += new System.EventHandler(this.chkBoxFlashMode_CheckedChanged);
-            // 
             // cBoxAppAddressSelect
             // 
             this.cBoxAppAddressSelect.Cursor = System.Windows.Forms.Cursors.Default;
+            this.cBoxAppAddressSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxAppAddressSelect.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cBoxAppAddressSelect.FormattingEnabled = true;
             this.cBoxAppAddressSelect.Items.AddRange(new object[] {
             "App1",
             "App2"});
-            this.cBoxAppAddressSelect.Location = new System.Drawing.Point(430, 256);
+            this.cBoxAppAddressSelect.Location = new System.Drawing.Point(584, 246);
             this.cBoxAppAddressSelect.Name = "cBoxAppAddressSelect";
             this.cBoxAppAddressSelect.Size = new System.Drawing.Size(127, 29);
             this.cBoxAppAddressSelect.TabIndex = 5;
@@ -145,7 +119,7 @@
             // 
             this.LMryAddress.AutoSize = true;
             this.LMryAddress.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LMryAddress.Location = new System.Drawing.Point(429, 201);
+            this.LMryAddress.Location = new System.Drawing.Point(587, 182);
             this.LMryAddress.Name = "LMryAddress";
             this.LMryAddress.Size = new System.Drawing.Size(134, 46);
             this.LMryAddress.TabIndex = 6;
@@ -171,6 +145,16 @@
             this.groupBox1.Size = new System.Drawing.Size(317, 433);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Imprint MT Shadow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(54, 41);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(194, 21);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "COM PORT Control";
             // 
             // progressBar1
             // 
@@ -299,7 +283,7 @@
             this.settingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(940, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(1094, 33);
             this.menuStrip1.TabIndex = 8;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -426,9 +410,9 @@
             this.BtnTransmit.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.BtnTransmit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnTransmit.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnTransmit.Location = new System.Drawing.Point(439, 324);
+            this.BtnTransmit.Location = new System.Drawing.Point(587, 332);
             this.BtnTransmit.Name = "BtnTransmit";
-            this.BtnTransmit.Size = new System.Drawing.Size(124, 54);
+            this.BtnTransmit.Size = new System.Drawing.Size(124, 66);
             this.BtnTransmit.TabIndex = 9;
             this.BtnTransmit.Text = "Transmit";
             this.BtnTransmit.UseVisualStyleBackColor = false;
@@ -441,20 +425,19 @@
             this.groupBox2.Controls.Add(this.BtnTransmit);
             this.groupBox2.Controls.Add(this.BtnSearch);
             this.groupBox2.Controls.Add(this.LMryAddress);
-            this.groupBox2.Controls.Add(this.chkBoxFlashMode);
             this.groupBox2.Controls.Add(this.cBoxAppAddressSelect);
-            this.groupBox2.Controls.Add(this.chkBoxNVSMode);
             this.groupBox2.Location = new System.Drawing.Point(330, 15);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(577, 431);
+            this.groupBox2.Size = new System.Drawing.Size(734, 431);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             // 
             // tboxDataOut
             // 
+            this.tboxDataOut.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tboxDataOut.Location = new System.Drawing.Point(12, 100);
             this.tboxDataOut.Name = "tboxDataOut";
-            this.tboxDataOut.Size = new System.Drawing.Size(404, 278);
+            this.tboxDataOut.Size = new System.Drawing.Size(547, 325);
             this.tboxDataOut.TabIndex = 10;
             this.tboxDataOut.Text = "";
             // 
@@ -464,26 +447,16 @@
             this.groupBox3.Controls.Add(this.groupBox1);
             this.groupBox3.Location = new System.Drawing.Point(12, 36);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(913, 452);
+            this.groupBox3.Size = new System.Drawing.Size(1070, 452);
             this.groupBox3.TabIndex = 11;
             this.groupBox3.TabStop = false;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Imprint MT Shadow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(54, 41);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(194, 21);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "COM PORT Control";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(940, 499);
+            this.ClientSize = new System.Drawing.Size(1094, 495);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
@@ -509,8 +482,6 @@
         private System.Windows.Forms.TextBox tBoxView;
         private System.Windows.Forms.Button BtnSearch;
         private System.IO.Ports.SerialPort serialPort1;
-        private System.Windows.Forms.CheckBox chkBoxNVSMode;
-        private System.Windows.Forms.CheckBox chkBoxFlashMode;
         private System.Windows.Forms.ComboBox cBoxAppAddressSelect;
         private System.Windows.Forms.Label LMryAddress;
         private System.Windows.Forms.GroupBox groupBox1;

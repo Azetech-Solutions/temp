@@ -56,6 +56,9 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GetHexfileValue.cs" />
+    <Compile Include="Hexfilehandling.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="memoryErasecontrol.cs" />
     <Compile Include="NVM_Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +73,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tooltransmit.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

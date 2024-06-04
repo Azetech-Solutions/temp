@@ -9,34 +9,19 @@ namespace File_TryAccess_Tool
 {
     public partial class NVS_Form : Form
     {
-        private static Channel Trns_MCU;
-        private static TxMessage Trns_MCU_Data;
-        private RxMessage Rcve_MCU;
-        private SerialPort serialport1;
-
+        private Tooltransmit toolTransmit;
         private List<Button> buttons = new List<Button>();
         private List<string> rtbxData = new List<string>();
-        public NVS_Form(Channel myChannel,TxMessage tx,RxMessage rx,SerialPort s)
+        public NVS_Form(Tooltransmit s)
         {
             InitializeComponent();
-
-            Trns_MCU = myChannel;
-            Trns_MCU_Data = tx;
-            RxMessage Rcve_MCU = rx;
-            serialport1 = s;
+            toolTransmit = s;
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             string s = rtbxDataOut.Text;
             char[] arr = s.ToCharArray();
-
-
-            for(int i = 0; i < arr.Length; i++)
-            {
-                Trns_MCU_Data.Data[i] = (byte)arr[i];
-            }
-            Trns_MCU.Transmit(Trns_MCU_Data);
             
         }
 

@@ -1,80 +1,80 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <settings>
-	<hexblock>
-		<bootmanager>
+	<hexblocks>
+		<hexblock>
 			<type>1</type>
 			<sector>00</sector>
-			<sectorLength>0x2000</sectorLength>
+			<sectorlength>2000</sectorlength>
 			<bank>00</bank>
-			<startAddress>0x08000000</startAddress>
-			<endAddress>0x08002000</endAddress>
-			<DataBlock>False</DataBlock>
+			<startaddress>08000000</startaddress>
+			<endaddress>08002000</endaddress>
+			<datablock>False</datablock>
 			<!-- version info in not allocate memory in bootmanager -->
 			<versioninfo>
-				<majorOffset>0x08006030</majorOffset>
-				<minoroffset>0x08006034</minoroffset>
-				<buildoffset>0x08006038</buildoffset>
-				<releaseoffset>0x0800603C</releaseoffset>
+				<majoroffset>08000000</majoroffset>
+				<minoroffset>08000000</minoroffset>
+				<buildoffset>08000000</buildoffset>
+				<releaseoffset>08000000</releaseoffset>
 			</versioninfo>
-		</bootmanager>
-		<bootloader>
+		</hexblock>
+		<hexblock>
 			<type>2</type>
 			<sector>01</sector>
-			<sectorLength>0x4000</sectorLength>
+			<sectorlength>4000</sectorlength>
 			<bank>00</bank>
-			<startAddress>0x08002000</startAddress>
-			<endAddress>0x08006000</endAddress>
-			<DataBlock>False</DataBlock>
+			<startaddress>08002000</startaddress>
+			<endaddress>08006000</endaddress>
+			<datablock>False</datablock>
 			<!-- version info in not allocate memory in bootloader -->
 			<versioninfo>
-				<majorOffset>0x08006030</majorOffset>
-				<minoroffset>0x08006034</minoroffset>
-				<buildoffset>0x08006038</buildoffset>
-				<releaseoffset>0x0800603C</releaseoffset>
+				<majoroffset>08002000</majoroffset>
+				<minoroffset>08002000</minoroffset>
+				<buildoffset>08002000</buildoffset>
+				<releaseoffset>08002000</releaseoffset>
 			</versioninfo>
-		</bootloader>
-		<application1>
+		</hexblock>
+		<hexblock>
 			<type>3</type>
 			<sector>03</sector>
-			<sectorLength>0xA000</sectorLength>
+			<sectorlength>A000</sectorlength>
 			<bank>00</bank>
-			<startAddress>0x08006000</startAddress>
-			<endAddress>0x08010000</endAddress>
-			<DataBlock>true</DataBlock>
+			<startaddress>08006000</startaddress>
+			<endaddress>08010000</endaddress>
+			<datablock>true</datablock>
 			<versioninfo>
-				<majorOffset>0x08006030</majorOffset>
-				<minoroffset>0x08006034</minoroffset>
-				<buildoffset>0x08006038</buildoffset>
-				<releaseoffset>0x0800603C</releaseoffset>
+				<majoroffset>08006030</majoroffset>
+				<minoroffset>08006034</minoroffset>
+				<buildoffset>08006038</buildoffset>
+				<releaseoffset>0800603C</releaseoffset>
 			</versioninfo>
-		</application1>
-		<application2>
+		</hexblock>
+		<hexblock>
 			<type>4</type>
 			<sector>03</sector>
-			<sectorLength>0xA000</sectorLength>
+			<sectorlength>A000</sectorlength>
 			<bank>01</bank>
-			<startAddress>0x08016000</startAddress>
-			<endAddress>0x08020000</endAddress>
-			<DataBlock>true</DataBlock>
+			<startaddress>08016000</startaddress>
+			<endaddress>08020000</endaddress>
+			<datablock>true</datablock>
 			<versioninfo>
-				<majorOffset>0x08016030</majorOffset>
-				<minoroffset>0x08016034</minoroffset>
-				<buildoffset>0x08016038</buildoffset>
-				<releaseoffset>0x0801603C</releaseoffset>
+				<majoroffset>08016030</majoroffset>
+				<minoroffset>08016034</minoroffset>
+				<buildoffset>08016038</buildoffset>
+				<releaseoffset>0801603C</releaseoffset>
 			</versioninfo>
-		</application2>
-	</hexblock>
+		</hexblock>
+</hexblocks>
 
 	<comport>
-		<baudRate>1152000</baudRate>
-		<Databit>8</Databit>
+		<baudrate>1152000</baudrate>
+		<databit>8</databit>
 		<stopbit>1</stopbit>
 		<paritybit>None</paritybit>
 	</comport>
 
 	<comif>
-		<tx_Id>0xB3</tx_Id>
-		<channelType>Number</channelType>
-		<rx_Id>0xB5</rx_Id>
+		<txid>0xB3</txid>
+		<channeltype>Number</channeltype>
+		<rxid>0xB5</rxid>
 	</comif>
 </settings>

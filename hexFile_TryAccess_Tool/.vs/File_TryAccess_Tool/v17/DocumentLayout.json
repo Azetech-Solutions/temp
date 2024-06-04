@@ -1,26 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Mohan\\Class\\Bootlodaer\\STM32H5_Controller\\Boot_Git\\28-05-24\\temp\\hexFile_TryAccess_Tool\\",
+  "WorkspaceRootPath": "D:\\Mohan\\Class\\Bootlodaer\\STM32H5_Controller\\Boot_Git\\03-06-24\\temp\\hexFile_TryAccess_Tool\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{749C5E03-C55C-44B5-958D-42968BF837DB}|File_TryAccess_Tool\\File_TryAccess_Tool.csproj|d:\\mohan\\class\\bootlodaer\\stm32h5_controller\\boot_git\\28-05-24\\temp\\hexfile_tryaccess_tool\\file_tryaccess_tool\\nvs_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{749C5E03-C55C-44B5-958D-42968BF837DB}|File_TryAccess_Tool\\File_TryAccess_Tool.csproj|solutionrelative:file_tryaccess_tool\\nvs_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{749C5E03-C55C-44B5-958D-42968BF837DB}|File_TryAccess_Tool\\File_TryAccess_Tool.csproj|d:\\mohan\\class\\bootlodaer\\stm32h5_controller\\boot_git\\28-05-24\\temp\\hexfile_tryaccess_tool\\file_tryaccess_tool\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{749C5E03-C55C-44B5-958D-42968BF837DB}|File_TryAccess_Tool\\File_TryAccess_Tool.csproj|d:\\mohan\\class\\bootlodaer\\stm32h5_controller\\boot_git\\03-06-24\\temp\\hexfile_tryaccess_tool\\file_tryaccess_tool\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{749C5E03-C55C-44B5-958D-42968BF837DB}|File_TryAccess_Tool\\File_TryAccess_Tool.csproj|solutionrelative:file_tryaccess_tool\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{749C5E03-C55C-44B5-958D-42968BF837DB}|File_TryAccess_Tool\\File_TryAccess_Tool.csproj|d:\\mohan\\class\\bootlodaer\\stm32h5_controller\\boot_git\\28-05-24\\temp\\hexfile_tryaccess_tool\\file_tryaccess_tool\\nvm_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{749C5E03-C55C-44B5-958D-42968BF837DB}|File_TryAccess_Tool\\File_TryAccess_Tool.csproj|solutionrelative:file_tryaccess_tool\\nvm_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{749C5E03-C55C-44B5-958D-42968BF837DB}|File_TryAccess_Tool\\File_TryAccess_Tool.csproj|D:\\Mohan\\Class\\Bootlodaer\\STM32H5_Controller\\Boot_Git\\03-06-24\\temp\\hexFile_TryAccess_Tool\\file_tryaccess_tool\\tooltransmit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{749C5E03-C55C-44B5-958D-42968BF837DB}|File_TryAccess_Tool\\File_TryAccess_Tool.csproj|solutionrelative:file_tryaccess_tool\\tooltransmit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{749C5E03-C55C-44B5-958D-42968BF837DB}|File_TryAccess_Tool\\File_TryAccess_Tool.csproj|d:\\mohan\\class\\bootlodaer\\stm32h5_controller\\boot_git\\28-05-24\\temp\\hexfile_tryaccess_tool\\file_tryaccess_tool\\nvm_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{749C5E03-C55C-44B5-958D-42968BF837DB}|File_TryAccess_Tool\\File_TryAccess_Tool.csproj|solutionrelative:file_tryaccess_tool\\nvm_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{749C5E03-C55C-44B5-958D-42968BF837DB}|File_TryAccess_Tool\\File_TryAccess_Tool.csproj|D:\\Mohan\\Class\\Bootlodaer\\STM32H5_Controller\\Boot_Git\\03-06-24\\temp\\hexFile_TryAccess_Tool\\file_tryaccess_tool\\hexfilehandling.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{749C5E03-C55C-44B5-958D-42968BF837DB}|File_TryAccess_Tool\\File_TryAccess_Tool.csproj|solutionrelative:file_tryaccess_tool\\hexfilehandling.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{749C5E03-C55C-44B5-958D-42968BF837DB}|File_TryAccess_Tool\\File_TryAccess_Tool.csproj|d:\\mohan\\class\\bootlodaer\\stm32h5_controller\\boot_git\\28-05-24\\temp\\hexfile_tryaccess_tool\\file_tryaccess_tool\\nvm_form.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{749C5E03-C55C-44B5-958D-42968BF837DB}|File_TryAccess_Tool\\File_TryAccess_Tool.csproj|solutionrelative:file_tryaccess_tool\\nvm_form.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{749C5E03-C55C-44B5-958D-42968BF837DB}|File_TryAccess_Tool\\File_TryAccess_Tool.csproj|D:\\Mohan\\Class\\Bootlodaer\\STM32H5_Controller\\Boot_Git\\03-06-24\\temp\\hexFile_TryAccess_Tool\\file_tryaccess_tool\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{749C5E03-C55C-44B5-958D-42968BF837DB}|File_TryAccess_Tool\\File_TryAccess_Tool.csproj|solutionrelative:file_tryaccess_tool\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,67 +34,52 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "NVS_Form.cs",
-              "DocumentMoniker": "D:\\Mohan\\Class\\Bootlodaer\\STM32H5_Controller\\Boot_Git\\28-05-24\\temp\\hexFile_TryAccess_Tool\\File_TryAccess_Tool\\NVS_Form.cs",
-              "RelativeDocumentMoniker": "File_TryAccess_Tool\\NVS_Form.cs",
-              "ToolTip": "D:\\Mohan\\Class\\Bootlodaer\\STM32H5_Controller\\Boot_Git\\28-05-24\\temp\\hexFile_TryAccess_Tool\\File_TryAccess_Tool\\NVS_Form.cs",
-              "RelativeToolTip": "File_TryAccess_Tool\\NVS_Form.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAADQAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-31T13:23:08.222Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "D:\\Mohan\\Class\\Bootlodaer\\STM32H5_Controller\\Boot_Git\\28-05-24\\temp\\hexFile_TryAccess_Tool\\File_TryAccess_Tool\\Form1.cs",
-              "RelativeDocumentMoniker": "File_TryAccess_Tool\\Form1.cs",
-              "ToolTip": "D:\\Mohan\\Class\\Bootlodaer\\STM32H5_Controller\\Boot_Git\\28-05-24\\temp\\hexFile_TryAccess_Tool\\File_TryAccess_Tool\\Form1.cs",
-              "RelativeToolTip": "File_TryAccess_Tool\\Form1.cs",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAlwC4AAAAOAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-31T13:22:18.285Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "NVM_Form.Designer.cs",
-              "DocumentMoniker": "D:\\Mohan\\Class\\Bootlodaer\\STM32H5_Controller\\Boot_Git\\28-05-24\\temp\\hexFile_TryAccess_Tool\\File_TryAccess_Tool\\NVM_Form.Designer.cs",
-              "RelativeDocumentMoniker": "File_TryAccess_Tool\\NVM_Form.Designer.cs",
-              "ToolTip": "D:\\Mohan\\Class\\Bootlodaer\\STM32H5_Controller\\Boot_Git\\28-05-24\\temp\\hexFile_TryAccess_Tool\\File_TryAccess_Tool\\NVM_Form.Designer.cs",
-              "RelativeToolTip": "File_TryAccess_Tool\\NVM_Form.Designer.cs",
-              "ViewState": "AQIAABYAAAAAAAAAAAAwwMcAAAAlAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-31T13:01:22.709Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "NVM_Form.cs",
-              "DocumentMoniker": "D:\\Mohan\\Class\\Bootlodaer\\STM32H5_Controller\\Boot_Git\\28-05-24\\temp\\hexFile_TryAccess_Tool\\File_TryAccess_Tool\\NVM_Form.cs",
-              "RelativeDocumentMoniker": "File_TryAccess_Tool\\NVM_Form.cs",
-              "ToolTip": "D:\\Mohan\\Class\\Bootlodaer\\STM32H5_Controller\\Boot_Git\\28-05-24\\temp\\hexFile_TryAccess_Tool\\File_TryAccess_Tool\\NVM_Form.cs",
-              "RelativeToolTip": "File_TryAccess_Tool\\NVM_Form.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAjwBMAAAAPAAAA",
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "D:\\Mohan\\Class\\Bootlodaer\\STM32H5_Controller\\Boot_Git\\03-06-24\\temp\\hexFile_TryAccess_Tool\\File_TryAccess_Tool\\Form1.cs",
+              "RelativeDocumentMoniker": "File_TryAccess_Tool\\Form1.cs",
+              "ToolTip": "D:\\Mohan\\Class\\Bootlodaer\\STM32H5_Controller\\Boot_Git\\03-06-24\\temp\\hexFile_TryAccess_Tool\\File_TryAccess_Tool\\Form1.cs [Design]",
+              "RelativeToolTip": "File_TryAccess_Tool\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-31T13:00:30.986Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-04T08:36:29.637Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "NVM_Form.cs [Design]",
-              "DocumentMoniker": "D:\\Mohan\\Class\\Bootlodaer\\STM32H5_Controller\\Boot_Git\\28-05-24\\temp\\hexFile_TryAccess_Tool\\File_TryAccess_Tool\\NVM_Form.cs",
-              "RelativeDocumentMoniker": "File_TryAccess_Tool\\NVM_Form.cs",
-              "ToolTip": "D:\\Mohan\\Class\\Bootlodaer\\STM32H5_Controller\\Boot_Git\\28-05-24\\temp\\hexFile_TryAccess_Tool\\File_TryAccess_Tool\\NVM_Form.cs [Design]",
-              "RelativeToolTip": "File_TryAccess_Tool\\NVM_Form.cs [Design]",
+              "Title": "Hexfilehandling.cs",
+              "DocumentMoniker": "D:\\Mohan\\Class\\Bootlodaer\\STM32H5_Controller\\Boot_Git\\03-06-24\\temp\\hexFile_TryAccess_Tool\\File_TryAccess_Tool\\Hexfilehandling.cs",
+              "RelativeDocumentMoniker": "File_TryAccess_Tool\\Hexfilehandling.cs",
+              "ToolTip": "D:\\Mohan\\Class\\Bootlodaer\\STM32H5_Controller\\Boot_Git\\03-06-24\\temp\\hexFile_TryAccess_Tool\\File_TryAccess_Tool\\Hexfilehandling.cs",
+              "RelativeToolTip": "File_TryAccess_Tool\\Hexfilehandling.cs",
+              "ViewState": "AQIAAPoAAAAAAAAAAAAswAMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-31T13:00:20.983Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2024-06-04T07:17:45.247Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Tooltransmit.cs",
+              "DocumentMoniker": "D:\\Mohan\\Class\\Bootlodaer\\STM32H5_Controller\\Boot_Git\\03-06-24\\temp\\hexFile_TryAccess_Tool\\File_TryAccess_Tool\\Tooltransmit.cs",
+              "RelativeDocumentMoniker": "File_TryAccess_Tool\\Tooltransmit.cs",
+              "ToolTip": "D:\\Mohan\\Class\\Bootlodaer\\STM32H5_Controller\\Boot_Git\\03-06-24\\temp\\hexFile_TryAccess_Tool\\File_TryAccess_Tool\\Tooltransmit.cs",
+              "RelativeToolTip": "File_TryAccess_Tool\\Tooltransmit.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAMwBoAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-03T13:26:41.575Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "D:\\Mohan\\Class\\Bootlodaer\\STM32H5_Controller\\Boot_Git\\03-06-24\\temp\\hexFile_TryAccess_Tool\\File_TryAccess_Tool\\Form1.cs",
+              "RelativeDocumentMoniker": "File_TryAccess_Tool\\Form1.cs",
+              "ToolTip": "D:\\Mohan\\Class\\Bootlodaer\\STM32H5_Controller\\Boot_Git\\03-06-24\\temp\\hexFile_TryAccess_Tool\\File_TryAccess_Tool\\Form1.cs",
+              "RelativeToolTip": "File_TryAccess_Tool\\Form1.cs",
+              "ViewState": "AQIAAMAAAAAAAAAAAAA9wOIAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-31T13:22:18.285Z",
+              "EditorCaption": ""
             }
           ]
         },
