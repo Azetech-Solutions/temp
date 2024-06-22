@@ -1,0 +1,1607 @@
+Component: Arm Compiler for Embedded 6.18 Tool: armlink [5e4cc100]
+
+==============================================================================
+
+Section Cross References
+
+    main.o(.text.main) refers to ports_init.o(.text.Init) for Init
+    main.o(.text.main) refers to main.o(.text.Gpio_init) for Gpio_init
+    main.o(.text.main) refers to nvm_driver.o(.bss.NvmRxData) for NvmRxData
+    main.o(.text.main) refers to main.o(.bss.Boot_or_App) for Boot_or_App
+    main.o(.text.main) refers to backup_ram.o(.text.bkSRAM_ReadVariable) for bkSRAM_ReadVariable
+    main.o(.text.main) refers to bootloader_main.o(.bss.Boot_Tx_Data) for Boot_Tx_Data
+    main.o(.text.main) refers to bootloader_main.o(.text.Boot_Response_status) for Boot_Response_status
+    main.o(.text.main) refers to backup_ram.o(.text.bkSRAM_WriteVariable) for bkSRAM_WriteVariable
+    main.o(.text.main) refers to ports_init.o(.text.delay) for delay
+    main.o(.text.main) refers to uart_driver.o(.text.USART3_Main) for USART3_Main
+    main.o(.text.main) refers to bootloader_main.o(.text.Boot_Main) for Boot_Main
+    main.o(.text.main) refers to debug.o(.text.Debug_MainFunction) for Debug_MainFunction
+    main.o(.ARM.exidx.text.main) refers to main.o(.text.main) for [Anonymous Symbol]
+    main.o(.text.Gpio_init) refers to stm32h5xx_hal_gpio.o(.text.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
+    main.o(.text.Gpio_init) refers to stm32h5xx_hal_gpio.o(.text.HAL_GPIO_Init) for HAL_GPIO_Init
+    main.o(.ARM.exidx.text.Gpio_init) refers to main.o(.text.Gpio_init) for [Anonymous Symbol]
+    stm32h5xx_hal_gpio.o(.ARM.exidx.text.HAL_GPIO_Init) refers to stm32h5xx_hal_gpio.o(.text.HAL_GPIO_Init) for [Anonymous Symbol]
+    stm32h5xx_hal_gpio.o(.ARM.exidx.text.HAL_GPIO_DeInit) refers to stm32h5xx_hal_gpio.o(.text.HAL_GPIO_DeInit) for [Anonymous Symbol]
+    stm32h5xx_hal_gpio.o(.ARM.exidx.text.HAL_GPIO_ReadPin) refers to stm32h5xx_hal_gpio.o(.text.HAL_GPIO_ReadPin) for [Anonymous Symbol]
+    stm32h5xx_hal_gpio.o(.ARM.exidx.text.HAL_GPIO_WritePin) refers to stm32h5xx_hal_gpio.o(.text.HAL_GPIO_WritePin) for [Anonymous Symbol]
+    stm32h5xx_hal_gpio.o(.ARM.exidx.text.HAL_GPIO_WriteMultipleStatePin) refers to stm32h5xx_hal_gpio.o(.text.HAL_GPIO_WriteMultipleStatePin) for [Anonymous Symbol]
+    stm32h5xx_hal_gpio.o(.ARM.exidx.text.HAL_GPIO_TogglePin) refers to stm32h5xx_hal_gpio.o(.text.HAL_GPIO_TogglePin) for [Anonymous Symbol]
+    stm32h5xx_hal_gpio.o(.ARM.exidx.text.HAL_GPIO_LockPin) refers to stm32h5xx_hal_gpio.o(.text.HAL_GPIO_LockPin) for [Anonymous Symbol]
+    ports_init.o(.ARM.exidx.text.delay) refers to ports_init.o(.text.delay) for [Anonymous Symbol]
+    ports_init.o(.text.Init) refers to flash_main.o(.text.FLASH_init) for FLASH_init
+    ports_init.o(.text.Init) refers to nvm_driver.o(.text.Chk_NVMLast_BlockAdd) for Chk_NVMLast_BlockAdd
+    ports_init.o(.text.Init) refers to buffer_config.o(.text.Buffer_Init) for Buffer_Init
+    ports_init.o(.text.Init) refers to backup_ram.o(.text.bkSRAM_Init) for bkSRAM_Init
+    ports_init.o(.text.Init) refers to ports_init.o(.text.GpioclockEnable) for GpioclockEnable
+    ports_init.o(.text.Init) refers to uart_driver.o(.text.Uart3_Init) for Uart3_Init
+    ports_init.o(.text.Init) refers to nvs_driver.o(.text.NVS_Init) for NVS_Init
+    ports_init.o(.text.Init) refers to nvm_driver.o(.text.NVM_Init) for NVM_Init
+    ports_init.o(.text.Init) refers to nvm_driver.o(.text.Read_Apps_Header) for Read_Apps_Header
+    ports_init.o(.ARM.exidx.text.Init) refers to ports_init.o(.text.Init) for [Anonymous Symbol]
+    ports_init.o(.text.GpioclockEnable) refers to ports_init.o(.text.Uart3_IO_init) for Uart3_IO_init
+    ports_init.o(.ARM.exidx.text.GpioclockEnable) refers to ports_init.o(.text.GpioclockEnable) for [Anonymous Symbol]
+    ports_init.o(.text.Uart3_IO_init) refers to stm32h5xx_hal_gpio.o(.text.HAL_GPIO_Init) for HAL_GPIO_Init
+    ports_init.o(.ARM.exidx.text.Uart3_IO_init) refers to ports_init.o(.text.Uart3_IO_init) for [Anonymous Symbol]
+    uart_driver.o(.text.Uart3_Init) refers to uart_driver.o(.text.__NVIC_EnableIRQ) for __NVIC_EnableIRQ
+    uart_driver.o(.text.Uart3_Init) refers to uart_driver.o(.bss.UART_Init_bit) for UART_Init_bit
+    uart_driver.o(.ARM.exidx.text.Uart3_Init) refers to uart_driver.o(.text.Uart3_Init) for [Anonymous Symbol]
+    uart_driver.o(.ARM.exidx.text.__NVIC_EnableIRQ) refers to uart_driver.o(.text.__NVIC_EnableIRQ) for [Anonymous Symbol]
+    uart_driver.o(.ARM.exidx.text.Uar3t_Tx_Byte) refers to uart_driver.o(.text.Uar3t_Tx_Byte) for [Anonymous Symbol]
+    uart_driver.o(.text.Uart3_Txstring) refers to uart_driver.o(.text.Uar3t_Tx_Byte) for Uar3t_Tx_Byte
+    uart_driver.o(.ARM.exidx.text.Uart3_Txstring) refers to uart_driver.o(.text.Uart3_Txstring) for [Anonymous Symbol]
+    uart_driver.o(.text.USART3_IRQHandler) refers to buffer.o(.text.Buffer_EnQueue) for Buffer_EnQueue
+    uart_driver.o(.ARM.exidx.text.USART3_IRQHandler) refers to uart_driver.o(.text.USART3_IRQHandler) for [Anonymous Symbol]
+    uart_driver.o(.text.USART3_Main) refers to buffer.o(.text.Buffer_Length) for Buffer_Length
+    uart_driver.o(.text.USART3_Main) refers to buffer.o(.text.Buffer_DeQueue) for Buffer_DeQueue
+    uart_driver.o(.text.USART3_Main) refers to comif_config.o(.text.ComIf_RxIndication_Boot) for ComIf_RxIndication_Boot
+    uart_driver.o(.ARM.exidx.text.USART3_Main) refers to uart_driver.o(.text.USART3_Main) for [Anonymous Symbol]
+    uart_driver.o(.text.debugMain) refers to buffer.o(.text.Buffer_Length) for Buffer_Length
+    uart_driver.o(.text.debugMain) refers to buffer.o(.text.Buffer_DeQueue) for Buffer_DeQueue
+    uart_driver.o(.text.debugMain) refers to uart_driver.o(.text.Uar3t_Tx_Byte) for Uar3t_Tx_Byte
+    uart_driver.o(.ARM.exidx.text.debugMain) refers to uart_driver.o(.text.debugMain) for [Anonymous Symbol]
+    pll_driver.o(.text.PLL_Init) refers to system_stm32h5xx.o(.text.SystemCoreClockUpdate) for SystemCoreClockUpdate
+    pll_driver.o(.ARM.exidx.text.PLL_Init) refers to pll_driver.o(.text.PLL_Init) for [Anonymous Symbol]
+    flash_main.o(.ARM.exidx.text.FLASH_init) refers to flash_main.o(.text.FLASH_init) for [Anonymous Symbol]
+    flash_main.o(.ARM.exidx.text.FLASH_Unlock) refers to flash_main.o(.text.FLASH_Unlock) for [Anonymous Symbol]
+    flash_main.o(.ARM.exidx.text.FLASH_Lock) refers to flash_main.o(.text.FLASH_Lock) for [Anonymous Symbol]
+    flash_main.o(.ARM.exidx.text.FLASH_Read) refers to flash_main.o(.text.FLASH_Read) for [Anonymous Symbol]
+    flash_main.o(.ARM.exidx.text.FLASH_Write) refers to flash_main.o(.text.FLASH_Write) for [Anonymous Symbol]
+    flash_main.o(.text.Multi_Word_write) refers to flash_main.o(.text.FLASH_Unlock) for FLASH_Unlock
+    flash_main.o(.text.Multi_Word_write) refers to flash_main.o(.text.FLASH_ErrorChk) for FLASH_ErrorChk
+    flash_main.o(.text.Multi_Word_write) refers to flash_main.o(.text.FLASH_Write) for FLASH_Write
+    flash_main.o(.text.Multi_Word_write) refers to flash_main.o(.text.FLASH_Lock) for FLASH_Lock
+    flash_main.o(.ARM.exidx.text.Multi_Word_write) refers to flash_main.o(.text.Multi_Word_write) for [Anonymous Symbol]
+    flash_main.o(.ARM.exidx.text.FLASH_ErrorChk) refers to flash_main.o(.text.FLASH_ErrorChk) for [Anonymous Symbol]
+    flash_main.o(.ARM.exidx.text.FLASH_SecErase) refers to flash_main.o(.text.FLASH_SecErase) for [Anonymous Symbol]
+    flash_main.o(.text.Flash_SingleSec_Erase) refers to flash_main.o(.text.FLASH_Unlock) for FLASH_Unlock
+    flash_main.o(.text.Flash_SingleSec_Erase) refers to flash_main.o(.text.FLASH_ErrorChk) for FLASH_ErrorChk
+    flash_main.o(.text.Flash_SingleSec_Erase) refers to flash_main.o(.text.FLASH_SecErase) for FLASH_SecErase
+    flash_main.o(.text.Flash_SingleSec_Erase) refers to flash_main.o(.text.FLASH_Lock) for FLASH_Lock
+    flash_main.o(.ARM.exidx.text.Flash_SingleSec_Erase) refers to flash_main.o(.text.Flash_SingleSec_Erase) for [Anonymous Symbol]
+    flash_main.o(.text.Flash_DoubleSec_Erase) refers to flash_main.o(.text.FLASH_Unlock) for FLASH_Unlock
+    flash_main.o(.text.Flash_DoubleSec_Erase) refers to flash_main.o(.text.FLASH_ErrorChk) for FLASH_ErrorChk
+    flash_main.o(.text.Flash_DoubleSec_Erase) refers to flash_main.o(.text.FLASH_SecErase) for FLASH_SecErase
+    flash_main.o(.text.Flash_DoubleSec_Erase) refers to flash_main.o(.text.FLASH_Lock) for FLASH_Lock
+    flash_main.o(.ARM.exidx.text.Flash_DoubleSec_Erase) refers to flash_main.o(.text.Flash_DoubleSec_Erase) for [Anonymous Symbol]
+    flash_main.o(.text.FLASH_Erase_NoofSectors) refers to flash_main.o(.text.FLASH_Unlock) for FLASH_Unlock
+    flash_main.o(.text.FLASH_Erase_NoofSectors) refers to flash_main.o(.text.FLASH_ErrorChk) for FLASH_ErrorChk
+    flash_main.o(.text.FLASH_Erase_NoofSectors) refers to flash_main.o(.text.FLASH_SecErase) for FLASH_SecErase
+    flash_main.o(.text.FLASH_Erase_NoofSectors) refers to flash_main.o(.text.VerifyFlashErase) for VerifyFlashErase
+    flash_main.o(.text.FLASH_Erase_NoofSectors) refers to flash_main.o(.text.FLASH_Lock) for FLASH_Lock
+    flash_main.o(.ARM.exidx.text.FLASH_Erase_NoofSectors) refers to flash_main.o(.text.FLASH_Erase_NoofSectors) for [Anonymous Symbol]
+    flash_main.o(.ARM.exidx.text.VerifyFlashErase) refers to flash_main.o(.text.VerifyFlashErase) for [Anonymous Symbol]
+    backup_ram.o(.ARM.exidx.text.PWR_EnableBkUpAccess) refers to backup_ram.o(.text.PWR_EnableBkUpAccess) for [Anonymous Symbol]
+    backup_ram.o(.ARM.exidx.text.PWR_DisableBkUpAccess) refers to backup_ram.o(.text.PWR_DisableBkUpAccess) for [Anonymous Symbol]
+    backup_ram.o(.ARM.exidx.text.PWREx_EnableBkupRAM_REG) refers to backup_ram.o(.text.PWREx_EnableBkupRAM_REG) for [Anonymous Symbol]
+    backup_ram.o(.text.bkSRAM_ReadVariable) refers to backup_ram.o(.text.PWR_EnableBkUpAccess) for PWR_EnableBkUpAccess
+    backup_ram.o(.text.bkSRAM_ReadVariable) refers to backup_ram.o(.text.PWR_DisableBkUpAccess) for PWR_DisableBkUpAccess
+    backup_ram.o(.ARM.exidx.text.bkSRAM_ReadVariable) refers to backup_ram.o(.text.bkSRAM_ReadVariable) for [Anonymous Symbol]
+    backup_ram.o(.text.bkSRAM_WriteVariable) refers to backup_ram.o(.text.PWR_EnableBkUpAccess) for PWR_EnableBkUpAccess
+    backup_ram.o(.text.bkSRAM_WriteVariable) refers to backup_ram.o(.text.PWR_DisableBkUpAccess) for PWR_DisableBkUpAccess
+    backup_ram.o(.ARM.exidx.text.bkSRAM_WriteVariable) refers to backup_ram.o(.text.bkSRAM_WriteVariable) for [Anonymous Symbol]
+    backup_ram.o(.text.bkSRAM_Init) refers to flash_main.o(.text.FLASH_Unlock) for FLASH_Unlock
+    backup_ram.o(.text.bkSRAM_Init) refers to backup_ram.o(.text.PWR_EnableBkUpAccess) for PWR_EnableBkUpAccess
+    backup_ram.o(.text.bkSRAM_Init) refers to backup_ram.o(.text.PWREx_EnableBkupRAM_REG) for PWREx_EnableBkupRAM_REG
+    backup_ram.o(.text.bkSRAM_Init) refers to backup_ram.o(.text.PWR_DisableBkUpAccess) for PWR_DisableBkUpAccess
+    backup_ram.o(.text.bkSRAM_Init) refers to flash_main.o(.text.FLASH_Lock) for FLASH_Lock
+    backup_ram.o(.ARM.exidx.text.bkSRAM_Init) refers to backup_ram.o(.text.bkSRAM_Init) for [Anonymous Symbol]
+    boot_transmit_uc_to_tool.o(.text.Boot_Transmit_FUN) refers to uart_driver.o(.bss.UART_Init_bit) for UART_Init_bit
+    boot_transmit_uc_to_tool.o(.text.Boot_Transmit_FUN) refers to boot_transmit_uc_to_tool.o(.bss.UART_BUSY_Flag) for UART_BUSY_Flag
+    boot_transmit_uc_to_tool.o(.text.Boot_Transmit_FUN) refers to uart_driver.o(.text.Uar3t_Tx_Byte) for Uar3t_Tx_Byte
+    boot_transmit_uc_to_tool.o(.text.Boot_Transmit_FUN) refers to comif_transmit.o(.text.ComIf_TxConfirmation) for ComIf_TxConfirmation
+    boot_transmit_uc_to_tool.o(.ARM.exidx.text.Boot_Transmit_FUN) refers to boot_transmit_uc_to_tool.o(.text.Boot_Transmit_FUN) for [Anonymous Symbol]
+    boot_transmit_uc_to_tool.o(.text.Boot_Error_Notification) refers to boot_transmit_uc_to_tool.o(.rodata.str1.1) for .L.str
+    boot_transmit_uc_to_tool.o(.text.Boot_Error_Notification) refers to debug.o(.text.Debug_SendNumberWithDescription) for Debug_SendNumberWithDescription
+    boot_transmit_uc_to_tool.o(.ARM.exidx.text.Boot_Error_Notification) refers to boot_transmit_uc_to_tool.o(.text.Boot_Error_Notification) for [Anonymous Symbol]
+    bootloader_main.o(.text.Boot_Req_Data_RxCbk) refers to bootloader_main.o(.bss.Boot_Rx_Data) for Boot_Rx_Data
+    bootloader_main.o(.text.Boot_Req_Data_RxCbk) refers to bootloader_main.o(.bss.BootCmdReceiveVerifyFlag) for BootCmdReceiveVerifyFlag
+    bootloader_main.o(.ARM.exidx.text.Boot_Req_Data_RxCbk) refers to bootloader_main.o(.text.Boot_Req_Data_RxCbk) for [Anonymous Symbol]
+    bootloader_main.o(.text.Boot_Main) refers to bootloader_main.o(.bss.Boot_Rx_Data) for Boot_Rx_Data
+    bootloader_main.o(.text.Boot_Main) refers to bootloader_main.o(.bss.Boot_Tx_Data) for Boot_Tx_Data
+    bootloader_main.o(.text.Boot_Main) refers to nvm_driver.o(.bss.NvmRxData) for NvmRxData
+    bootloader_main.o(.text.Boot_Main) refers to bootloader_main.o(.bss.Boot_State_Control) for Boot_State_Control
+    bootloader_main.o(.text.Boot_Main) refers to bootloader_main.o(.bss.cnt) for cnt
+    bootloader_main.o(.text.Boot_Main) refers to bootloader_main.o(.bss.BootCmdReceiveVerifyFlag) for BootCmdReceiveVerifyFlag
+    bootloader_main.o(.text.Boot_Main) refers to nvm_driver.o(.bss.NVM_RxFlag) for NVM_RxFlag
+    bootloader_main.o(.text.Boot_Main) refers to bootloader_main.o(.text.Boot_Response_status) for Boot_Response_status
+    bootloader_main.o(.text.Boot_Main) refers to bootloader_main.o(.bss.ChooseIndividualErase_Flg) for ChooseIndividualErase_Flg
+    bootloader_main.o(.text.Boot_Main) refers to nvm_driver.o(.data.NVM_Block) for NVM_Block
+    bootloader_main.o(.text.Boot_Main) refers to bootloader_main.o(.bss.Flash_Erase_Flag) for Flash_Erase_Flag
+    bootloader_main.o(.text.Boot_Main) refers to bootloader_main.o(.bss.IndividualEraseVerifyFlag) for IndividualEraseVerifyFlag
+    bootloader_main.o(.text.Boot_Main) refers to flash_main.o(.text.Flash_SingleSec_Erase) for Flash_SingleSec_Erase
+    bootloader_main.o(.text.Boot_Main) refers to bootloader_main.o(.bss.ChooseNvsFlag) for ChooseNvsFlag
+    bootloader_main.o(.text.Boot_Main) refers to bootloader_main.o(.bss.Flash_Write_Flag) for Flash_Write_Flag
+    bootloader_main.o(.text.Boot_Main) refers to nvm_driver.o(.text.App_Image_Chksum_calculation) for App_Image_Chksum_calculation
+    bootloader_main.o(.text.Boot_Main) refers to nvm_driver.o(.text.ChkAppHeader_ChkSum) for ChkAppHeader_ChkSum
+    bootloader_main.o(.text.Boot_Main) refers to nvm_driver.o(.text.Update_Nvm_Block) for Update_Nvm_Block
+    bootloader_main.o(.text.Boot_Main) refers to stm32h5xx_hal_gpio.o(.text.HAL_GPIO_TogglePin) for HAL_GPIO_TogglePin
+    bootloader_main.o(.text.Boot_Main) refers to flash_main.o(.text.Multi_Word_write) for Multi_Word_write
+    bootloader_main.o(.text.Boot_Main) refers to flash_main.o(.text.VerifyFlashErase) for VerifyFlashErase
+    bootloader_main.o(.text.Boot_Main) refers to flash_main.o(.text.Flash_DoubleSec_Erase) for Flash_DoubleSec_Erase
+    bootloader_main.o(.text.Boot_Main) refers to flash_main.o(.text.FLASH_Erase_NoofSectors) for FLASH_Erase_NoofSectors
+    bootloader_main.o(.text.Boot_Main) refers to nvm_driver.o(.bss.Last_NVMBlock_Add) for Last_NVMBlock_Add
+    bootloader_main.o(.text.Boot_Main) refers to nvm_driver.o(.text.NVMToolClear) for NVMToolClear
+    bootloader_main.o(.text.Boot_Main) refers to nvm_driver.o(.text.NVM_ReOrg) for NVM_ReOrg
+    bootloader_main.o(.ARM.exidx.text.Boot_Main) refers to bootloader_main.o(.text.Boot_Main) for [Anonymous Symbol]
+    bootloader_main.o(.text.Boot_Response_status) refers to comif_config.o(.bss.ComIf_ShadowBuffer_Boot_Boot_Response) for ComIf_ShadowBuffer_Boot_Boot_Response
+    bootloader_main.o(.text.Boot_Response_status) refers to bootloader_main.o(.bss.Boot_Tx_Data) for Boot_Tx_Data
+    bootloader_main.o(.text.Boot_Response_status) refers to comif_transmit.o(.text.ComIf_Transmit) for ComIf_Transmit
+    bootloader_main.o(.ARM.exidx.text.Boot_Response_status) refers to bootloader_main.o(.text.Boot_Response_status) for [Anonymous Symbol]
+    buffer.o(.text.Buffer_Create) refers to buffer.o(.text.Buffer_GetBuffer) for Buffer_GetBuffer
+    buffer.o(.ARM.exidx.text.Buffer_Create) refers to buffer.o(.text.Buffer_Create) for [Anonymous Symbol]
+    buffer.o(.text.Buffer_GetBuffer) refers to buffer.o(.bss.Buffers) for Buffers
+    buffer.o(.ARM.exidx.text.Buffer_GetBuffer) refers to buffer.o(.text.Buffer_GetBuffer) for [Anonymous Symbol]
+    buffer.o(.text.Buffer_EnQueue) refers to buffer.o(.text.Buffer_GetBuffer) for Buffer_GetBuffer
+    buffer.o(.ARM.exidx.text.Buffer_EnQueue) refers to buffer.o(.text.Buffer_EnQueue) for [Anonymous Symbol]
+    buffer.o(.text.Buffer_DeQueue) refers to buffer.o(.text.Buffer_GetBuffer) for Buffer_GetBuffer
+    buffer.o(.ARM.exidx.text.Buffer_DeQueue) refers to buffer.o(.text.Buffer_DeQueue) for [Anonymous Symbol]
+    buffer.o(.text.Buffer_Length) refers to buffer.o(.text.Buffer_GetBuffer) for Buffer_GetBuffer
+    buffer.o(.ARM.exidx.text.Buffer_Length) refers to buffer.o(.text.Buffer_Length) for [Anonymous Symbol]
+    buffer.o(.text.Buffer_Clear) refers to buffer.o(.text.Buffer_GetBuffer) for Buffer_GetBuffer
+    buffer.o(.ARM.exidx.text.Buffer_Clear) refers to buffer.o(.text.Buffer_Clear) for [Anonymous Symbol]
+    comif.o(.text.ComIf_GetTxMsgHandle) refers to comif_config.o(.data.ComIf_ChannelConfig) for ComIf_ChannelConfig
+    comif.o(.ARM.exidx.text.ComIf_GetTxMsgHandle) refers to comif.o(.text.ComIf_GetTxMsgHandle) for [Anonymous Symbol]
+    comif.o(.text.ComIf_GetRxMsgHandle) refers to comif_config.o(.data.ComIf_ChannelConfig) for ComIf_ChannelConfig
+    comif.o(.ARM.exidx.text.ComIf_GetRxMsgHandle) refers to comif.o(.text.ComIf_GetRxMsgHandle) for [Anonymous Symbol]
+    comif.o(.ARM.exidx.text.ComIf_ErrorNotify) refers to comif.o(.text.ComIf_ErrorNotify) for [Anonymous Symbol]
+    comif_calcchecksum.o(.ARM.exidx.text.ComIf_CalcChecksum) refers to comif_calcchecksum.o(.text.ComIf_CalcChecksum) for [Anonymous Symbol]
+    comif_calcchecksum.o(.ARM.exidx.text.ComIf_GetChecksumMaskValue) refers to comif_calcchecksum.o(.text.ComIf_GetChecksumMaskValue) for [Anonymous Symbol]
+    comif_rxindication.o(.text.ComIf_RxIndication) refers to comif_config.o(.data.ComIf_ChannelConfig) for ComIf_ChannelConfig
+    comif_rxindication.o(.text.ComIf_RxIndication) refers to comif.o(.text.ComIf_ErrorNotify) for ComIf_ErrorNotify
+    comif_rxindication.o(.text.ComIf_RxIndication) refers to comif_rxindication.o(.text.ComIf_ResetRxInfo) for ComIf_ResetRxInfo
+    comif_rxindication.o(.text.ComIf_RxIndication) refers to comif_calcchecksum.o(.text.ComIf_GetChecksumMaskValue) for ComIf_GetChecksumMaskValue
+    comif_rxindication.o(.text.ComIf_RxIndication) refers to comif_calcchecksum.o(.text.ComIf_CalcChecksum) for ComIf_CalcChecksum
+    comif_rxindication.o(.text.ComIf_RxIndication) refers to comif_rxindication.o(.text.ComIf_GetHandle) for ComIf_GetHandle
+    comif_rxindication.o(.text.ComIf_RxIndication) refers to comif_rxindication.o(.text.ComIf_StoreDataByte) for ComIf_StoreDataByte
+    comif_rxindication.o(.ARM.exidx.text.ComIf_RxIndication) refers to comif_rxindication.o(.text.ComIf_RxIndication) for [Anonymous Symbol]
+    comif_rxindication.o(.ARM.exidx.text.ComIf_ResetRxInfo) refers to comif_rxindication.o(.text.ComIf_ResetRxInfo) for [Anonymous Symbol]
+    comif_rxindication.o(.ARM.exidx.text.ComIf_GetHandle) refers to comif_rxindication.o(.text.ComIf_GetHandle) for [Anonymous Symbol]
+    comif_rxindication.o(.text.ComIf_StoreDataByte) refers to comif.o(.text.ComIf_ErrorNotify) for ComIf_ErrorNotify
+    comif_rxindication.o(.text.ComIf_StoreDataByte) refers to comif_rxindication.o(.text.ComIf_ResetRxInfo) for ComIf_ResetRxInfo
+    comif_rxindication.o(.ARM.exidx.text.ComIf_StoreDataByte) refers to comif_rxindication.o(.text.ComIf_StoreDataByte) for [Anonymous Symbol]
+    comif_rxindication.o(.text.ComIf_RxIndication_ASCIIString) refers to comif_rxindication.o(.text.ComIf_RxIndication) for ComIf_RxIndication
+    comif_rxindication.o(.ARM.exidx.text.ComIf_RxIndication_ASCIIString) refers to comif_rxindication.o(.text.ComIf_RxIndication_ASCIIString) for [Anonymous Symbol]
+    comif_rxrequest.o(.text.ComIf_Rx_Request) refers to comif_config.o(.data.ComIf_ChannelConfig) for ComIf_ChannelConfig
+    comif_rxrequest.o(.ARM.exidx.text.ComIf_Rx_Request) refers to comif_rxrequest.o(.text.ComIf_Rx_Request) for [Anonymous Symbol]
+    comif_rxrequest.o(.text.ComIf_Rx_CancelRequest) refers to comif_config.o(.data.ComIf_ChannelConfig) for ComIf_ChannelConfig
+    comif_rxrequest.o(.ARM.exidx.text.ComIf_Rx_CancelRequest) refers to comif_rxrequest.o(.text.ComIf_Rx_CancelRequest) for [Anonymous Symbol]
+    comif_rxrequest.o(.ARM.exidx.text.ComIf_RxMainFunction) refers to comif_rxrequest.o(.text.ComIf_RxMainFunction) for [Anonymous Symbol]
+    comif_transmit.o(.text.ComIf_EncodeFromShadowToChannelBuffer) refers to comif_config.o(.data.ComIf_ChannelConfig) for ComIf_ChannelConfig
+    comif_transmit.o(.text.ComIf_EncodeFromShadowToChannelBuffer) refers to comif_transmit.o(.text.ComIf_GetChecksumAndTentativeDataLength) for ComIf_GetChecksumAndTentativeDataLength
+    comif_transmit.o(.text.ComIf_EncodeFromShadowToChannelBuffer) refers to comif_transmit.o(.text.ConvertByteToString) for ConvertByteToString
+    comif_transmit.o(.text.ComIf_EncodeFromShadowToChannelBuffer) refers to comif_transmit.o(.text.ComIf_AppendString) for ComIf_AppendString
+    comif_transmit.o(.text.ComIf_EncodeFromShadowToChannelBuffer) refers to comif.o(.text.ComIf_ErrorNotify) for ComIf_ErrorNotify
+    comif_transmit.o(.text.ComIf_EncodeFromShadowToChannelBuffer) refers to comif_transmit.o(.text.ComIf_AppendByte) for ComIf_AppendByte
+    comif_transmit.o(.ARM.exidx.text.ComIf_EncodeFromShadowToChannelBuffer) refers to comif_transmit.o(.text.ComIf_EncodeFromShadowToChannelBuffer) for [Anonymous Symbol]
+    comif_transmit.o(.text.ComIf_GetChecksumAndTentativeDataLength) refers to comif_config.o(.data.ComIf_ChannelConfig) for ComIf_ChannelConfig
+    comif_transmit.o(.text.ComIf_GetChecksumAndTentativeDataLength) refers to comif_transmit.o(.text.ComIf_IsNeedDelimiter) for ComIf_IsNeedDelimiter
+    comif_transmit.o(.text.ComIf_GetChecksumAndTentativeDataLength) refers to comif_calcchecksum.o(.text.ComIf_GetChecksumMaskValue) for ComIf_GetChecksumMaskValue
+    comif_transmit.o(.ARM.exidx.text.ComIf_GetChecksumAndTentativeDataLength) refers to comif_transmit.o(.text.ComIf_GetChecksumAndTentativeDataLength) for [Anonymous Symbol]
+    comif_transmit.o(.ARM.exidx.text.ConvertByteToString) refers to comif_transmit.o(.text.ConvertByteToString) for [Anonymous Symbol]
+    comif_transmit.o(.text.ComIf_AppendString) refers to comif_transmit.o(.text.ConvertByteToString) for ConvertByteToString
+    comif_transmit.o(.ARM.exidx.text.ComIf_AppendString) refers to comif_transmit.o(.text.ComIf_AppendString) for [Anonymous Symbol]
+    comif_transmit.o(.ARM.exidx.text.ComIf_AppendByte) refers to comif_transmit.o(.text.ComIf_AppendByte) for [Anonymous Symbol]
+    comif_transmit.o(.text.ComIf_Transmit) refers to comif_txshadowbuffer.o(.text.ComIf_UpdateTxShadowBuffer) for ComIf_UpdateTxShadowBuffer
+    comif_transmit.o(.text.ComIf_Transmit) refers to comif_config.o(.data.ComIf_ChannelConfig) for ComIf_ChannelConfig
+    comif_transmit.o(.text.ComIf_Transmit) refers to comif_transmit.o(.text.ComIf_EncodeFromShadowToChannelBuffer) for ComIf_EncodeFromShadowToChannelBuffer
+    comif_transmit.o(.text.ComIf_Transmit) refers to comif.o(.text.ComIf_ErrorNotify) for ComIf_ErrorNotify
+    comif_transmit.o(.ARM.exidx.text.ComIf_Transmit) refers to comif_transmit.o(.text.ComIf_Transmit) for [Anonymous Symbol]
+    comif_transmit.o(.text.ComIf_TxConfirmation) refers to comif_config.o(.data.ComIf_ChannelConfig) for ComIf_ChannelConfig
+    comif_transmit.o(.ARM.exidx.text.ComIf_TxConfirmation) refers to comif_transmit.o(.text.ComIf_TxConfirmation) for [Anonymous Symbol]
+    comif_transmit.o(.text.ComIf_TransmissionAborted) refers to comif_config.o(.data.ComIf_ChannelConfig) for ComIf_ChannelConfig
+    comif_transmit.o(.ARM.exidx.text.ComIf_TransmissionAborted) refers to comif_transmit.o(.text.ComIf_TransmissionAborted) for [Anonymous Symbol]
+    comif_transmit.o(.ARM.exidx.text.ComIf_TxMainFunction) refers to comif_transmit.o(.text.ComIf_TxMainFunction) for [Anonymous Symbol]
+    comif_transmit.o(.ARM.exidx.text.ComIf_IsNeedDelimiter) refers to comif_transmit.o(.text.ComIf_IsNeedDelimiter) for [Anonymous Symbol]
+    comif_txshadowbuffer.o(.text.ComIf_GetTxShadowBuffer) refers to comif_config.o(.data.ComIf_ChannelConfig) for ComIf_ChannelConfig
+    comif_txshadowbuffer.o(.ARM.exidx.text.ComIf_GetTxShadowBuffer) refers to comif_txshadowbuffer.o(.text.ComIf_GetTxShadowBuffer) for [Anonymous Symbol]
+    comif_txshadowbuffer.o(.text.ComIf_UpdateTxShadowBuffer) refers to comif_config.o(.data.ComIf_ChannelConfig) for ComIf_ChannelConfig
+    comif_txshadowbuffer.o(.ARM.exidx.text.ComIf_UpdateTxShadowBuffer) refers to comif_txshadowbuffer.o(.text.ComIf_UpdateTxShadowBuffer) for [Anonymous Symbol]
+    comif_txshadowbuffer.o(.text.ComIf_Transmit_ShadowBuffer) refers to comif_txshadowbuffer.o(.text.ComIf_GetTxShadowBuffer) for ComIf_GetTxShadowBuffer
+    comif_txshadowbuffer.o(.text.ComIf_Transmit_ShadowBuffer) refers to comif_transmit.o(.text.ComIf_Transmit) for ComIf_Transmit
+    comif_txshadowbuffer.o(.ARM.exidx.text.ComIf_Transmit_ShadowBuffer) refers to comif_txshadowbuffer.o(.text.ComIf_Transmit_ShadowBuffer) for [Anonymous Symbol]
+    debug.o(.text.Debug_TX_Byte) refers to buffer.o(.text.Buffer_EnQueue) for Buffer_EnQueue
+    debug.o(.ARM.exidx.text.Debug_TX_Byte) refers to debug.o(.text.Debug_TX_Byte) for [Anonymous Symbol]
+    debug.o(.text.Debug_TX_string) refers to debug.o(.text.Debug_TX_Byte) for Debug_TX_Byte
+    debug.o(.ARM.exidx.text.Debug_TX_string) refers to debug.o(.text.Debug_TX_string) for [Anonymous Symbol]
+    debug.o(.text.DEBUG_UART_SendString) refers to debug.o(.text.Debug_TX_string) for Debug_TX_string
+    debug.o(.ARM.exidx.text.DEBUG_UART_SendString) refers to debug.o(.text.DEBUG_UART_SendString) for [Anonymous Symbol]
+    debug.o(.text.DEBUG_UART_SendByte) refers to debug.o(.text.Debug_TX_Byte) for Debug_TX_Byte
+    debug.o(.ARM.exidx.text.DEBUG_UART_SendByte) refers to debug.o(.text.DEBUG_UART_SendByte) for [Anonymous Symbol]
+    debug.o(.text.Debug_SendByte) refers to debug.o(.text.DEBUG_UART_SendByte) for DEBUG_UART_SendByte
+    debug.o(.ARM.exidx.text.Debug_SendByte) refers to debug.o(.text.Debug_SendByte) for [Anonymous Symbol]
+    debug.o(.text.Debug_SendString) refers to debug.o(.text.DEBUG_UART_SendString) for DEBUG_UART_SendString
+    debug.o(.ARM.exidx.text.Debug_SendString) refers to debug.o(.text.Debug_SendString) for [Anonymous Symbol]
+    debug.o(.text.Debug_SendNumber) refers to debug.o(.text.DEBUG_UART_SendString) for DEBUG_UART_SendString
+    debug.o(.text.Debug_SendNumber) refers to debug.o(.rodata.str1.1) for .L.str
+    debug.o(.ARM.exidx.text.Debug_SendNumber) refers to debug.o(.text.Debug_SendNumber) for [Anonymous Symbol]
+    debug.o(.text.Debug_SendNumberWithDescription) refers to debug.o(.text.Debug_StartAggregation) for Debug_StartAggregation
+    debug.o(.text.Debug_SendNumberWithDescription) refers to debug.o(.text.Debug_AggregateString) for Debug_AggregateString
+    debug.o(.text.Debug_SendNumberWithDescription) refers to debug.o(.text.Debug_AggregateByte) for Debug_AggregateByte
+    debug.o(.text.Debug_SendNumberWithDescription) refers to debug.o(.text.Debug_TransmitAggregatedData) for Debug_TransmitAggregatedData
+    debug.o(.text.Debug_SendNumberWithDescription) refers to debug.o(.text.Debug_SendNumber) for Debug_SendNumber
+    debug.o(.text.Debug_SendNumberWithDescription) refers to debug.o(.rodata.str1.1) for .L.str.1
+    debug.o(.text.Debug_SendNumberWithDescription) refers to debug.o(.text.DEBUG_UART_SendString) for DEBUG_UART_SendString
+    debug.o(.ARM.exidx.text.Debug_SendNumberWithDescription) refers to debug.o(.text.Debug_SendNumberWithDescription) for [Anonymous Symbol]
+    debug.o(.text.Debug_StartAggregation) refers to debug.o(.bss.gs_DebugAggCurIndex) for gs_DebugAggCurIndex
+    debug.o(.ARM.exidx.text.Debug_StartAggregation) refers to debug.o(.text.Debug_StartAggregation) for [Anonymous Symbol]
+    debug.o(.text.Debug_AggregateString) refers to debug.o(.text.Debug_AggregateByte) for Debug_AggregateByte
+    debug.o(.ARM.exidx.text.Debug_AggregateString) refers to debug.o(.text.Debug_AggregateString) for [Anonymous Symbol]
+    debug.o(.text.Debug_AggregateByte) refers to debug.o(.bss.gs_DebugAggCurIndex) for gs_DebugAggCurIndex
+    debug.o(.text.Debug_AggregateByte) refers to debug.o(.bss.gs_DebugAggBuffer) for gs_DebugAggBuffer
+    debug.o(.ARM.exidx.text.Debug_AggregateByte) refers to debug.o(.text.Debug_AggregateByte) for [Anonymous Symbol]
+    debug.o(.text.Debug_TransmitAggregatedData) refers to debug.o(.bss.gs_DebugAggCurIndex) for gs_DebugAggCurIndex
+    debug.o(.text.Debug_TransmitAggregatedData) refers to debug.o(.bss.gs_DebugAggBuffer) for gs_DebugAggBuffer
+    debug.o(.text.Debug_TransmitAggregatedData) refers to debug.o(.text.DEBUG_UART_SendString) for DEBUG_UART_SendString
+    debug.o(.ARM.exidx.text.Debug_TransmitAggregatedData) refers to debug.o(.text.Debug_TransmitAggregatedData) for [Anonymous Symbol]
+    debug.o(.text.Debug_SendTimeStamp) refers to debug.o(.text.Debug_StartAggregation) for Debug_StartAggregation
+    debug.o(.text.Debug_SendTimeStamp) refers to debug.o(.text.Debug_AggregateByte) for Debug_AggregateByte
+    debug.o(.text.Debug_SendTimeStamp) refers to debug.o(.text.Debug_TransmitAggregatedData) for Debug_TransmitAggregatedData
+    debug.o(.ARM.exidx.text.Debug_SendTimeStamp) refers to debug.o(.text.Debug_SendTimeStamp) for [Anonymous Symbol]
+    debug.o(.ARM.exidx.text.Debug_SendMeasurementData) refers to debug.o(.text.Debug_SendMeasurementData) for [Anonymous Symbol]
+    debug.o(.text.Debug_MainFunction) refers to uart_driver.o(.text.debugMain) for debugMain
+    debug.o(.ARM.exidx.text.Debug_MainFunction) refers to debug.o(.text.Debug_MainFunction) for [Anonymous Symbol]
+    buffer_config.o(.text.Buffer_Init) refers to buffer_config.o(.bss.BufferArray_UART3) for BufferArray_UART3
+    buffer_config.o(.text.Buffer_Init) refers to buffer.o(.text.Buffer_Create) for Buffer_Create
+    buffer_config.o(.text.Buffer_Init) refers to buffer_config.o(.bss.BufferArray_Debug) for BufferArray_Debug
+    buffer_config.o(.ARM.exidx.text.Buffer_Init) refers to buffer_config.o(.text.Buffer_Init) for [Anonymous Symbol]
+    comif_config.o(.text.ComIf_RxIndication_Boot) refers to comif_rxindication.o(.text.ComIf_RxIndication) for ComIf_RxIndication
+    comif_config.o(.ARM.exidx.text.ComIf_RxIndication_Boot) refers to comif_config.o(.text.ComIf_RxIndication_Boot) for [Anonymous Symbol]
+    comif_config.o(.data.ComIfTxMsgCfg_Boot) refers to comif_config.o(.bss.ComIf_ShadowBuffer_Boot_Boot_Response) for ComIf_ShadowBuffer_Boot_Boot_Response
+    comif_config.o(.data.ComIfTxMsgCfg_Boot) refers to comif_config.o(.bss.ComIf_ShadowBuffer_Boot_Nvm_Response) for ComIf_ShadowBuffer_Boot_Nvm_Response
+    comif_config.o(.data.ComIfRxMsgCfg_Boot) refers to comif_config.o(.bss.ComIf_RxMessageBuffer_Boot_Boot_Req_Data) for ComIf_RxMessageBuffer_Boot_Boot_Req_Data
+    comif_config.o(.data.ComIfRxMsgCfg_Boot) refers to bootloader_main.o(.text.Boot_Req_Data_RxCbk) for Boot_Req_Data_RxCbk
+    comif_config.o(.data.ComIfRxMsgCfg_Boot) refers to comif_config.o(.bss.ComIf_RxMessageBuffer_Boot_NVM_BlockData) for ComIf_RxMessageBuffer_Boot_NVM_BlockData
+    comif_config.o(.data.ComIfRxMsgCfg_Boot) refers to nvm_driver.o(.text.NVM_BlockData_RxCbk) for NVM_BlockData_RxCbk
+    comif_config.o(.data.ComIf_ChannelConfig) refers to boot_transmit_uc_to_tool.o(.text.Boot_Transmit_FUN) for Boot_Transmit_FUN
+    comif_config.o(.data.ComIf_ChannelConfig) refers to boot_transmit_uc_to_tool.o(.text.Boot_Error_Notification) for Boot_Error_Notification
+    comif_config.o(.data.ComIf_ChannelConfig) refers to comif_config.o(.bss.ComIfChannelTxBuffer_Boot) for ComIfChannelTxBuffer_Boot
+    comif_config.o(.data.ComIf_ChannelConfig) refers to comif_config.o(.data.ComIfTxMsgCfg_Boot) for ComIfTxMsgCfg_Boot
+    comif_config.o(.data.ComIf_ChannelConfig) refers to comif_config.o(.data.ComIfRxMsgCfg_Boot) for ComIfRxMsgCfg_Boot
+    nvm_driver.o(.text.NVM_BlockData_RxCbk) refers to nvm_driver.o(.bss.NvmRxData) for NvmRxData
+    nvm_driver.o(.text.NVM_BlockData_RxCbk) refers to nvm_driver.o(.bss.NVM_RxFlag) for NVM_RxFlag
+    nvm_driver.o(.ARM.exidx.text.NVM_BlockData_RxCbk) refers to nvm_driver.o(.text.NVM_BlockData_RxCbk) for [Anonymous Symbol]
+    nvm_driver.o(.text.NVM_Init) refers to nvm_driver.o(.text.NVM_Scan_Block) for NVM_Scan_Block
+    nvm_driver.o(.ARM.exidx.text.NVM_Init) refers to nvm_driver.o(.text.NVM_Init) for [Anonymous Symbol]
+    nvm_driver.o(.text.NVM_Scan_Block) refers to nvm_driver.o(.data.NVM_Block) for NVM_Block
+    nvm_driver.o(.text.NVM_Scan_Block) refers to nvm_driver.o(.bss.Last_NVMBlock_Add) for Last_NVMBlock_Add
+    nvm_driver.o(.text.NVM_Scan_Block) refers to nvm_driver.o(.text.NVM_Block_Read_FUN) for NVM_Block_Read_FUN
+    nvm_driver.o(.ARM.exidx.text.NVM_Scan_Block) refers to nvm_driver.o(.text.NVM_Scan_Block) for [Anonymous Symbol]
+    nvm_driver.o(.text.NVM_Block_Read_FUN) refers to flash_main.o(.text.FLASH_Read) for FLASH_Read
+    nvm_driver.o(.ARM.exidx.text.NVM_Block_Read_FUN) refers to nvm_driver.o(.text.NVM_Block_Read_FUN) for [Anonymous Symbol]
+    nvm_driver.o(.text.Read_Apps_Header) refers to nvm_driver.o(.data.Ck_Hdr) for Ck_Hdr
+    nvm_driver.o(.text.Read_Apps_Header) refers to flash_main.o(.text.FLASH_Read) for FLASH_Read
+    nvm_driver.o(.ARM.exidx.text.Read_Apps_Header) refers to nvm_driver.o(.text.Read_Apps_Header) for [Anonymous Symbol]
+    nvm_driver.o(.text.ChkAppHeader_ChkSum) refers to nvm_driver.o(.text.Read_Apps_Header) for Read_Apps_Header
+    nvm_driver.o(.text.ChkAppHeader_ChkSum) refers to nvm_driver.o(.data.Ck_Hdr) for Ck_Hdr
+    nvm_driver.o(.ARM.exidx.text.ChkAppHeader_ChkSum) refers to nvm_driver.o(.text.ChkAppHeader_ChkSum) for [Anonymous Symbol]
+    nvm_driver.o(.text.Chk_NVMLast_BlockAdd) refers to nvm_driver.o(.bss.Last_NVMBlock_Add) for Last_NVMBlock_Add
+    nvm_driver.o(.ARM.exidx.text.Chk_NVMLast_BlockAdd) refers to nvm_driver.o(.text.Chk_NVMLast_BlockAdd) for [Anonymous Symbol]
+    nvm_driver.o(.text.NVM_Block_Write) refers to nvm_driver.o(.data.NVM_Block) for NVM_Block
+    nvm_driver.o(.text.NVM_Block_Write) refers to nvm_driver.o(.bss.Last_NVMBlock_Add) for Last_NVMBlock_Add
+    nvm_driver.o(.text.NVM_Block_Write) refers to nvm_driver.o(.text.NVM_Multi_Word_write) for NVM_Multi_Word_write
+    nvm_driver.o(.ARM.exidx.text.NVM_Block_Write) refers to nvm_driver.o(.text.NVM_Block_Write) for [Anonymous Symbol]
+    nvm_driver.o(.text.NVM_Multi_Word_write) refers to flash_main.o(.text.FLASH_Unlock) for FLASH_Unlock
+    nvm_driver.o(.text.NVM_Multi_Word_write) refers to flash_main.o(.text.FLASH_ErrorChk) for FLASH_ErrorChk
+    nvm_driver.o(.text.NVM_Multi_Word_write) refers to flash_main.o(.text.FLASH_Write) for FLASH_Write
+    nvm_driver.o(.text.NVM_Multi_Word_write) refers to flash_main.o(.text.FLASH_Lock) for FLASH_Lock
+    nvm_driver.o(.ARM.exidx.text.NVM_Multi_Word_write) refers to nvm_driver.o(.text.NVM_Multi_Word_write) for [Anonymous Symbol]
+    nvm_driver.o(.text.App_Image_Chksum_calculation) refers to flash_main.o(.text.FLASH_Read) for FLASH_Read
+    nvm_driver.o(.ARM.exidx.text.App_Image_Chksum_calculation) refers to nvm_driver.o(.text.App_Image_Chksum_calculation) for [Anonymous Symbol]
+    nvm_driver.o(.text.Update_Nvm_Block) refers to nvm_driver.o(.data.NVM_Block) for NVM_Block
+    nvm_driver.o(.text.Update_Nvm_Block) refers to nvm_driver.o(.text.NVM_VersionUpdate) for NVM_VersionUpdate
+    nvm_driver.o(.text.Update_Nvm_Block) refers to nvm_driver.o(.text.ChkNVMApplication) for ChkNVMApplication
+    nvm_driver.o(.text.Update_Nvm_Block) refers to nvm_driver.o(.bss.Last_NVMBlock_Add) for Last_NVMBlock_Add
+    nvm_driver.o(.text.Update_Nvm_Block) refers to nvm_driver.o(.text.NVM_AddUpdate) for NVM_AddUpdate
+    nvm_driver.o(.text.Update_Nvm_Block) refers to nvm_driver.o(.text.NVM_Block_Write) for NVM_Block_Write
+    nvm_driver.o(.text.Update_Nvm_Block) refers to nvm_driver.o(.bss.NVM_Sec2_EraseVerify_Flg) for NVM_Sec2_EraseVerify_Flg
+    nvm_driver.o(.text.Update_Nvm_Block) refers to flash_main.o(.text.Flash_SingleSec_Erase) for Flash_SingleSec_Erase
+    nvm_driver.o(.text.Update_Nvm_Block) refers to flash_main.o(.text.VerifyFlashErase) for VerifyFlashErase
+    nvm_driver.o(.ARM.exidx.text.Update_Nvm_Block) refers to nvm_driver.o(.text.Update_Nvm_Block) for [Anonymous Symbol]
+    nvm_driver.o(.text.ChkNVMApplication) refers to nvm_driver.o(.data.NVM_Block) for NVM_Block
+    nvm_driver.o(.ARM.exidx.text.ChkNVMApplication) refers to nvm_driver.o(.text.ChkNVMApplication) for [Anonymous Symbol]
+    nvm_driver.o(.text.NVM_AddUpdate) refers to nvm_driver.o(.data.NVM_Block) for NVM_Block
+    nvm_driver.o(.text.NVM_AddUpdate) refers to nvm_driver.o(.bss.Last_NVMBlock_Add) for Last_NVMBlock_Add
+    nvm_driver.o(.text.NVM_AddUpdate) refers to nvm_driver.o(.text.NVM_ReOrg) for NVM_ReOrg
+    nvm_driver.o(.ARM.exidx.text.NVM_AddUpdate) refers to nvm_driver.o(.text.NVM_AddUpdate) for [Anonymous Symbol]
+    nvm_driver.o(.text.NVM_ReOrg) refers to nvm_driver.o(.data.NVM_Block) for NVM_Block
+    nvm_driver.o(.text.NVM_ReOrg) refers to flash_main.o(.text.Flash_SingleSec_Erase) for Flash_SingleSec_Erase
+    nvm_driver.o(.text.NVM_ReOrg) refers to flash_main.o(.text.VerifyFlashErase) for VerifyFlashErase
+    nvm_driver.o(.text.NVM_ReOrg) refers to nvm_driver.o(.bss.Last_NVMBlock_Add) for Last_NVMBlock_Add
+    nvm_driver.o(.text.NVM_ReOrg) refers to nvm_driver.o(.bss.NVM_Sec2_EraseVerify_Flg) for NVM_Sec2_EraseVerify_Flg
+    nvm_driver.o(.text.NVM_ReOrg) refers to nvm_driver.o(.text.NVM_Block_Write) for NVM_Block_Write
+    nvm_driver.o(.ARM.exidx.text.NVM_ReOrg) refers to nvm_driver.o(.text.NVM_ReOrg) for [Anonymous Symbol]
+    nvm_driver.o(.text.NVMToolClear) refers to nvm_driver.o(.data.NVM_Block) for NVM_Block
+    nvm_driver.o(.text.NVMToolClear) refers to nvm_driver.o(.text.NVM_ReOrg) for NVM_ReOrg
+    nvm_driver.o(.text.NVMToolClear) refers to nvm_driver.o(.text.NVM_VersionUpdate) for NVM_VersionUpdate
+    nvm_driver.o(.text.NVMToolClear) refers to nvm_driver.o(.text.ChkNVMApplication) for ChkNVMApplication
+    nvm_driver.o(.text.NVMToolClear) refers to nvm_driver.o(.text.NVM_Block_Write) for NVM_Block_Write
+    nvm_driver.o(.text.NVMToolClear) refers to nvm_driver.o(.bss.NVM_Sec2_EraseVerify_Flg) for NVM_Sec2_EraseVerify_Flg
+    nvm_driver.o(.text.NVMToolClear) refers to flash_main.o(.text.Flash_SingleSec_Erase) for Flash_SingleSec_Erase
+    nvm_driver.o(.text.NVMToolClear) refers to flash_main.o(.text.VerifyFlashErase) for VerifyFlashErase
+    nvm_driver.o(.ARM.exidx.text.NVMToolClear) refers to nvm_driver.o(.text.NVMToolClear) for [Anonymous Symbol]
+    nvm_driver.o(.text.NVM_VersionUpdate) refers to nvm_driver.o(.data.NVM_Block) for NVM_Block
+    nvm_driver.o(.ARM.exidx.text.NVM_VersionUpdate) refers to nvm_driver.o(.text.NVM_VersionUpdate) for [Anonymous Symbol]
+    nvm_driver.o(.text.NvmTool_Update) refers to nvm_driver.o(.bss.NvmRxData) for NvmRxData
+    nvm_driver.o(.ARM.exidx.text.NvmTool_Update) refers to nvm_driver.o(.text.NvmTool_Update) for [Anonymous Symbol]
+    nvm_driver.o(.text.NVMData_Transmit) refers to comif_config.o(.bss.ComIf_ShadowBuffer_Boot_Nvm_Response) for ComIf_ShadowBuffer_Boot_Nvm_Response
+    nvm_driver.o(.text.NVMData_Transmit) refers to rt_memclr.o(.text) for __aeabi_memclr
+    nvm_driver.o(.text.NVMData_Transmit) refers to nvm_driver.o(.bss.nvmverifyadd) for nvmverifyadd
+    nvm_driver.o(.text.NVMData_Transmit) refers to rt_memcpy_v6.o(.text) for __aeabi_memcpy
+    nvm_driver.o(.text.NVMData_Transmit) refers to comif_transmit.o(.text.ComIf_Transmit) for ComIf_Transmit
+    nvm_driver.o(.ARM.exidx.text.NVMData_Transmit) refers to nvm_driver.o(.text.NVMData_Transmit) for [Anonymous Symbol]
+    nvs_driver.o(.text.NVS_Init) refers to nvs_driver.o(.text.NVS_Scan_Block) for NVS_Scan_Block
+    nvs_driver.o(.ARM.exidx.text.NVS_Init) refers to nvs_driver.o(.text.NVS_Init) for [Anonymous Symbol]
+    nvs_driver.o(.text.NVS_Scan_Block) refers to nvs_driver.o(.data.Nvs_Config_Block) for Nvs_Config_Block
+    nvs_driver.o(.text.NVS_Scan_Block) refers to nvs_driver.o(.text.NVS_Block_Read) for NVS_Block_Read
+    nvs_driver.o(.ARM.exidx.text.NVS_Scan_Block) refers to nvs_driver.o(.text.NVS_Scan_Block) for [Anonymous Symbol]
+    nvs_driver.o(.text.NVS_Block_Read) refers to nvs_driver.o(.data.Nvs_Config_Block) for Nvs_Config_Block
+    nvs_driver.o(.text.NVS_Block_Read) refers to flash_main.o(.text.FLASH_Read) for FLASH_Read
+    nvs_driver.o(.ARM.exidx.text.NVS_Block_Read) refers to nvs_driver.o(.text.NVS_Block_Read) for [Anonymous Symbol]
+    nvs_driver.o(.text.NVSBlock_DataRead) refers to nvs_driver.o(.data.Nvs_Config_Block) for Nvs_Config_Block
+    nvs_driver.o(.text.NVSBlock_DataRead) refers to nvs_driver.o(.text.IS_NVS_BlockValid) for IS_NVS_BlockValid
+    nvs_driver.o(.ARM.exidx.text.NVSBlock_DataRead) refers to nvs_driver.o(.text.NVSBlock_DataRead) for [Anonymous Symbol]
+    nvs_driver.o(.text.IS_NVS_BlockValid) refers to nvs_driver.o(.data.Nvs_Config_Block) for Nvs_Config_Block
+    nvs_driver.o(.text.IS_NVS_BlockValid) refers to nvs_driver.o(.text.FindBlock_DataSum) for FindBlock_DataSum
+    nvs_driver.o(.ARM.exidx.text.IS_NVS_BlockValid) refers to nvs_driver.o(.text.IS_NVS_BlockValid) for [Anonymous Symbol]
+    nvs_driver.o(.text.FindBlock_DataSum) refers to flash_main.o(.text.FLASH_Read) for FLASH_Read
+    nvs_driver.o(.ARM.exidx.text.FindBlock_DataSum) refers to nvs_driver.o(.text.FindBlock_DataSum) for [Anonymous Symbol]
+    startup_stm32h503xx.o(STACK) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup_stm32h503xx.o(HEAP) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup_stm32h503xx.o(RESET) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup_stm32h503xx.o(RESET) refers to startup_stm32h503xx.o(STACK) for __initial_sp
+    startup_stm32h503xx.o(RESET) refers to startup_stm32h503xx.o(.text) for Reset_Handler
+    startup_stm32h503xx.o(RESET) refers to uart_driver.o(.text.USART3_IRQHandler) for USART3_IRQHandler
+    startup_stm32h503xx.o(.text) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup_stm32h503xx.o(.text) refers to system_stm32h5xx.o(.text.SystemInit) for SystemInit
+    startup_stm32h503xx.o(.text) refers to __main.o(!!!main) for __main
+    startup_stm32h503xx.o(.text) refers to startup_stm32h503xx.o(HEAP) for Heap_Mem
+    startup_stm32h503xx.o(.text) refers to startup_stm32h503xx.o(STACK) for Stack_Mem
+    system_stm32h5xx.o(.ARM.exidx.text.SystemInit) refers to system_stm32h5xx.o(.text.SystemInit) for [Anonymous Symbol]
+    system_stm32h5xx.o(.text.SystemCoreClockUpdate) refers to system_stm32h5xx.o(.data.SystemCoreClock) for SystemCoreClock
+    system_stm32h5xx.o(.text.SystemCoreClockUpdate) refers to system_stm32h5xx.o(.rodata.AHBPrescTable) for AHBPrescTable
+    system_stm32h5xx.o(.ARM.exidx.text.SystemCoreClockUpdate) refers to system_stm32h5xx.o(.text.SystemCoreClockUpdate) for [Anonymous Symbol]
+    rt_memcpy_v6.o(.text) refers to rt_memcpy_w.o(.text) for __aeabi_memcpy4
+    rt_memclr.o(.text) refers to rt_memclr_w.o(.text) for _memset_w
+    __main.o(!!!main) refers to __rtentry.o(.ARM.Collect$$rtentry$$00000000) for __rt_entry
+    __rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to __rtentry2.o(.ARM.Collect$$rtentry$$0000000A) for __rt_entry_li
+    __rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to __rtentry2.o(.ARM.Collect$$rtentry$$0000000D) for __rt_entry_main
+    __rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to __rtentry2.o(.ARM.Collect$$rtentry$$0000000C) for __rt_entry_postli_1
+    __rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to __rtentry2.o(.ARM.Collect$$rtentry$$00000009) for __rt_entry_postsh_1
+    __rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to __rtentry2.o(.ARM.Collect$$rtentry$$00000002) for __rt_entry_presh_1
+    __rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to __rtentry4.o(.ARM.Collect$$rtentry$$00000004) for __rt_entry_sh
+    __rtentry2.o(.ARM.Collect$$rtentry$$00000008) refers to boardinit2.o(.text) for _platform_post_stackheap_init
+    __rtentry2.o(.ARM.Collect$$rtentry$$0000000A) refers to libinit.o(.ARM.Collect$$libinit$$00000000) for __rt_lib_init
+    __rtentry2.o(.ARM.Collect$$rtentry$$0000000B) refers to boardinit3.o(.text) for _platform_post_lib_init
+    __rtentry2.o(.ARM.Collect$$rtentry$$0000000D) refers to main.o(.text.main) for main
+    __rtentry2.o(.ARM.Collect$$rtentry$$0000000D) refers to exit.o(.text) for exit
+    __rtentry2.o(.ARM.exidx) refers to __rtentry2.o(.ARM.Collect$$rtentry$$00000001) for .ARM.Collect$$rtentry$$00000001
+    __rtentry2.o(.ARM.exidx) refers to __rtentry2.o(.ARM.Collect$$rtentry$$00000008) for .ARM.Collect$$rtentry$$00000008
+    __rtentry2.o(.ARM.exidx) refers to __rtentry2.o(.ARM.Collect$$rtentry$$0000000A) for .ARM.Collect$$rtentry$$0000000A
+    __rtentry2.o(.ARM.exidx) refers to __rtentry2.o(.ARM.Collect$$rtentry$$0000000B) for .ARM.Collect$$rtentry$$0000000B
+    __rtentry2.o(.ARM.exidx) refers to __rtentry2.o(.ARM.Collect$$rtentry$$0000000D) for .ARM.Collect$$rtentry$$0000000D
+    __rtentry4.o(.ARM.Collect$$rtentry$$00000004) refers to sys_stackheap_outer.o(.text) for __user_setup_stackheap
+    __rtentry4.o(.ARM.exidx) refers to __rtentry4.o(.ARM.Collect$$rtentry$$00000004) for .ARM.Collect$$rtentry$$00000004
+    sys_stackheap_outer.o(.text) refers to libspace.o(.text) for __user_perproc_libspace
+    sys_stackheap_outer.o(.text) refers to startup_stm32h503xx.o(.text) for __user_initial_stackheap
+    exit.o(.text) refers to rtexit.o(.ARM.Collect$$rtexit$$00000000) for __rt_exit
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000030) for __rt_lib_init_alloca_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000002E) for __rt_lib_init_argv_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000001D) for __rt_lib_init_atexit_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000023) for __rt_lib_init_clock_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000034) for __rt_lib_init_cpp_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000032) for __rt_lib_init_exceptions_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000001) for __rt_lib_init_fp_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000021) for __rt_lib_init_fp_trap_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000025) for __rt_lib_init_getenv_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000000C) for __rt_lib_init_heap_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000013) for __rt_lib_init_lc_collate_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000015) for __rt_lib_init_lc_ctype_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000017) for __rt_lib_init_lc_monetary_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000019) for __rt_lib_init_lc_numeric_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000001B) for __rt_lib_init_lc_time_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000006) for __rt_lib_init_preinit_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000010) for __rt_lib_init_rand_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000004) for __rt_lib_init_relocate_pie_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000035) for __rt_lib_init_return
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000001F) for __rt_lib_init_signal_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000027) for __rt_lib_init_stdio_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000000E) for __rt_lib_init_user_alloc_1
+    libspace.o(.text) refers to libspace.o(.bss) for __libspace_start
+    rtexit.o(.ARM.Collect$$rtexit$$00000000) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000004) for __rt_exit_exit
+    rtexit.o(.ARM.Collect$$rtexit$$00000000) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000003) for __rt_exit_ls
+    rtexit.o(.ARM.Collect$$rtexit$$00000000) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000002) for __rt_exit_prels_1
+    rtexit.o(.ARM.exidx) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000004) for __rt_exit_exit
+    rtexit.o(.ARM.exidx) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000003) for __rt_exit_ls
+    rtexit.o(.ARM.exidx) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000002) for __rt_exit_prels_1
+    rtexit.o(.ARM.exidx) refers to rtexit.o(.ARM.Collect$$rtexit$$00000000) for .ARM.Collect$$rtexit$$00000000
+    libinit2.o(.ARM.Collect$$libinit$$00000001) refers to fpinit.o(x$fpl$fpinit) for _fp_init
+    libinit2.o(.ARM.Collect$$libinit$$00000012) refers to libinit2.o(.ARM.Collect$$libinit$$00000011) for .ARM.Collect$$libinit$$00000011
+    libinit2.o(.ARM.Collect$$libinit$$00000014) refers to libinit2.o(.ARM.Collect$$libinit$$00000011) for .ARM.Collect$$libinit$$00000011
+    libinit2.o(.ARM.Collect$$libinit$$00000016) refers to libinit2.o(.ARM.Collect$$libinit$$00000011) for .ARM.Collect$$libinit$$00000011
+    libinit2.o(.ARM.Collect$$libinit$$00000018) refers to libinit2.o(.ARM.Collect$$libinit$$00000011) for .ARM.Collect$$libinit$$00000011
+    libinit2.o(.ARM.Collect$$libinit$$0000001A) refers to libinit2.o(.ARM.Collect$$libinit$$00000011) for .ARM.Collect$$libinit$$00000011
+    libinit2.o(.ARM.Collect$$libinit$$00000028) refers to argv_veneer.o(.emb_text) for __ARM_argv_veneer
+    libinit2.o(.ARM.Collect$$libinit$$00000029) refers to argv_veneer.o(.emb_text) for __ARM_argv_veneer
+    rtexit2.o(.ARM.Collect$$rtexit$$00000003) refers to libshutdown.o(.ARM.Collect$$libshutdown$$00000000) for __rt_lib_shutdown
+    rtexit2.o(.ARM.Collect$$rtexit$$00000004) refers to sys_exit.o(.text) for _sys_exit
+    rtexit2.o(.ARM.exidx) refers to rtexit2.o(.ARM.Collect$$rtexit$$00000001) for .ARM.Collect$$rtexit$$00000001
+    rtexit2.o(.ARM.exidx) refers to rtexit2.o(.ARM.Collect$$rtexit$$00000003) for .ARM.Collect$$rtexit$$00000003
+    rtexit2.o(.ARM.exidx) refers to rtexit2.o(.ARM.Collect$$rtexit$$00000004) for .ARM.Collect$$rtexit$$00000004
+    argv_veneer.o(.emb_text) refers to no_argv.o(.text) for __ARM_get_argv
+    sys_exit.o(.text) refers (Special) to use_no_semi.o(.text) for __I$use$semihosting
+    sys_exit.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
+    sys_exit_hlt.o(.text) refers (Special) to use_no_semi.o(.text) for __I$use$semihosting
+    sys_exit_hlt.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
+    _get_argv_nomalloc.o(.text) refers (Special) to hrguard.o(.text) for __heap_region$guard
+    _get_argv_nomalloc.o(.text) refers to defsig_rtmem_outer.o(.text) for __rt_SIGRTMEM
+    _get_argv_nomalloc.o(.text) refers to sys_command.o(.text) for _sys_command_string
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000002) for __rt_lib_shutdown_cpp_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000007) for __rt_lib_shutdown_fp_trap_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$0000000F) for __rt_lib_shutdown_heap_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000010) for __rt_lib_shutdown_return
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$0000000A) for __rt_lib_shutdown_signal_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000004) for __rt_lib_shutdown_stdio_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$0000000C) for __rt_lib_shutdown_user_alloc_1
+    sys_command.o(.text) refers (Special) to use_no_semi.o(.text) for __I$use$semihosting
+    sys_command.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
+    sys_command_hlt.o(.text) refers (Special) to use_no_semi.o(.text) for __I$use$semihosting
+    sys_command_hlt.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
+    defsig_rtmem_outer.o(.text) refers to defsig_rtmem_inner.o(.text) for __rt_SIGRTMEM_inner
+    defsig_rtmem_outer.o(.text) refers to defsig_exit.o(.text) for __sig_exit
+    defsig_rtmem_formal.o(.text) refers to rt_raise.o(.text) for __rt_raise
+    rt_raise.o(.text) refers to __raise.o(.text) for __raise
+    rt_raise.o(.text) refers to sys_exit.o(.text) for _sys_exit
+    defsig_exit.o(.text) refers to sys_exit.o(.text) for _sys_exit
+    defsig_rtmem_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    __raise.o(.text) refers to defsig.o(CL$$defsig) for __default_signal_handler
+    defsig_general.o(.text) refers to sys_wrch.o(.text) for _ttywrch
+    sys_wrch.o(.text) refers (Special) to use_no_semi.o(.text) for __I$use$semihosting
+    sys_wrch.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
+    sys_wrch_hlt.o(.text) refers (Special) to use_no_semi.o(.text) for __I$use$semihosting
+    sys_wrch_hlt.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
+    defsig.o(CL$$defsig) refers to defsig_rtmem_inner.o(.text) for __rt_SIGRTMEM_inner
+    defsig_abrt_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_fpe_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_rtred_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_stak_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_pvfn_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_cppl_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_segv_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_other.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+
+
+==============================================================================
+
+Removing Unused input sections from the image.
+
+    Removing main.o(.text), (0 bytes).
+    Removing main.o(.ARM.exidx.text.main), (8 bytes).
+    Removing main.o(.ARM.exidx.text.Gpio_init), (8 bytes).
+    Removing main.o(.ARM.use_no_argv), (4 bytes).
+    Removing stm32h5xx_hal_gpio.o(.text), (0 bytes).
+    Removing stm32h5xx_hal_gpio.o(.ARM.exidx.text.HAL_GPIO_Init), (8 bytes).
+    Removing stm32h5xx_hal_gpio.o(.text.HAL_GPIO_DeInit), (334 bytes).
+    Removing stm32h5xx_hal_gpio.o(.ARM.exidx.text.HAL_GPIO_DeInit), (8 bytes).
+    Removing stm32h5xx_hal_gpio.o(.text.HAL_GPIO_ReadPin), (46 bytes).
+    Removing stm32h5xx_hal_gpio.o(.ARM.exidx.text.HAL_GPIO_ReadPin), (8 bytes).
+    Removing stm32h5xx_hal_gpio.o(.ARM.exidx.text.HAL_GPIO_WritePin), (8 bytes).
+    Removing stm32h5xx_hal_gpio.o(.text.HAL_GPIO_WriteMultipleStatePin), (36 bytes).
+    Removing stm32h5xx_hal_gpio.o(.ARM.exidx.text.HAL_GPIO_WriteMultipleStatePin), (8 bytes).
+    Removing stm32h5xx_hal_gpio.o(.ARM.exidx.text.HAL_GPIO_TogglePin), (8 bytes).
+    Removing stm32h5xx_hal_gpio.o(.text.HAL_GPIO_LockPin), (90 bytes).
+    Removing stm32h5xx_hal_gpio.o(.ARM.exidx.text.HAL_GPIO_LockPin), (8 bytes).
+    Removing ports_init.o(.text), (0 bytes).
+    Removing ports_init.o(.ARM.exidx.text.delay), (8 bytes).
+    Removing ports_init.o(.ARM.exidx.text.Init), (8 bytes).
+    Removing ports_init.o(.ARM.exidx.text.GpioclockEnable), (8 bytes).
+    Removing ports_init.o(.ARM.exidx.text.Uart3_IO_init), (8 bytes).
+    Removing uart_driver.o(.text), (0 bytes).
+    Removing uart_driver.o(.ARM.exidx.text.Uart3_Init), (8 bytes).
+    Removing uart_driver.o(.ARM.exidx.text.__NVIC_EnableIRQ), (8 bytes).
+    Removing uart_driver.o(.ARM.exidx.text.Uar3t_Tx_Byte), (8 bytes).
+    Removing uart_driver.o(.text.Uart3_Txstring), (34 bytes).
+    Removing uart_driver.o(.ARM.exidx.text.Uart3_Txstring), (8 bytes).
+    Removing uart_driver.o(.ARM.exidx.text.USART3_IRQHandler), (8 bytes).
+    Removing uart_driver.o(.ARM.exidx.text.USART3_Main), (8 bytes).
+    Removing uart_driver.o(.ARM.exidx.text.debugMain), (8 bytes).
+    Removing pll_driver.o(.text), (0 bytes).
+    Removing pll_driver.o(.text.PLL_Init), (268 bytes).
+    Removing pll_driver.o(.ARM.exidx.text.PLL_Init), (8 bytes).
+    Removing flash_main.o(.text), (0 bytes).
+    Removing flash_main.o(.ARM.exidx.text.FLASH_init), (8 bytes).
+    Removing flash_main.o(.ARM.exidx.text.FLASH_Unlock), (8 bytes).
+    Removing flash_main.o(.ARM.exidx.text.FLASH_Lock), (8 bytes).
+    Removing flash_main.o(.ARM.exidx.text.FLASH_Read), (8 bytes).
+    Removing flash_main.o(.ARM.exidx.text.FLASH_Write), (8 bytes).
+    Removing flash_main.o(.ARM.exidx.text.Multi_Word_write), (8 bytes).
+    Removing flash_main.o(.ARM.exidx.text.FLASH_ErrorChk), (8 bytes).
+    Removing flash_main.o(.ARM.exidx.text.FLASH_SecErase), (8 bytes).
+    Removing flash_main.o(.ARM.exidx.text.Flash_SingleSec_Erase), (8 bytes).
+    Removing flash_main.o(.ARM.exidx.text.Flash_DoubleSec_Erase), (8 bytes).
+    Removing flash_main.o(.ARM.exidx.text.FLASH_Erase_NoofSectors), (8 bytes).
+    Removing flash_main.o(.ARM.exidx.text.VerifyFlashErase), (8 bytes).
+    Removing backup_ram.o(.text), (0 bytes).
+    Removing backup_ram.o(.ARM.exidx.text.PWR_EnableBkUpAccess), (8 bytes).
+    Removing backup_ram.o(.ARM.exidx.text.PWR_DisableBkUpAccess), (8 bytes).
+    Removing backup_ram.o(.ARM.exidx.text.PWREx_EnableBkupRAM_REG), (8 bytes).
+    Removing backup_ram.o(.ARM.exidx.text.bkSRAM_ReadVariable), (8 bytes).
+    Removing backup_ram.o(.ARM.exidx.text.bkSRAM_WriteVariable), (8 bytes).
+    Removing backup_ram.o(.ARM.exidx.text.bkSRAM_Init), (8 bytes).
+    Removing boot_transmit_uc_to_tool.o(.text), (0 bytes).
+    Removing boot_transmit_uc_to_tool.o(.ARM.exidx.text.Boot_Transmit_FUN), (8 bytes).
+    Removing boot_transmit_uc_to_tool.o(.ARM.exidx.text.Boot_Error_Notification), (8 bytes).
+    Removing bootloader_main.o(.text), (0 bytes).
+    Removing bootloader_main.o(.ARM.exidx.text.Boot_Req_Data_RxCbk), (8 bytes).
+    Removing bootloader_main.o(.ARM.exidx.text.Boot_Main), (8 bytes).
+    Removing bootloader_main.o(.ARM.exidx.text.Boot_Response_status), (8 bytes).
+    Removing buffer.o(.text), (0 bytes).
+    Removing buffer.o(.ARM.exidx.text.Buffer_Create), (8 bytes).
+    Removing buffer.o(.ARM.exidx.text.Buffer_GetBuffer), (8 bytes).
+    Removing buffer.o(.ARM.exidx.text.Buffer_EnQueue), (8 bytes).
+    Removing buffer.o(.ARM.exidx.text.Buffer_DeQueue), (8 bytes).
+    Removing buffer.o(.ARM.exidx.text.Buffer_Length), (8 bytes).
+    Removing buffer.o(.text.Buffer_Clear), (110 bytes).
+    Removing buffer.o(.ARM.exidx.text.Buffer_Clear), (8 bytes).
+    Removing comif.o(.text), (0 bytes).
+    Removing comif.o(.text.ComIf_GetTxMsgHandle), (140 bytes).
+    Removing comif.o(.ARM.exidx.text.ComIf_GetTxMsgHandle), (8 bytes).
+    Removing comif.o(.text.ComIf_GetRxMsgHandle), (136 bytes).
+    Removing comif.o(.ARM.exidx.text.ComIf_GetRxMsgHandle), (8 bytes).
+    Removing comif.o(.ARM.exidx.text.ComIf_ErrorNotify), (8 bytes).
+    Removing comif_calcchecksum.o(.text), (0 bytes).
+    Removing comif_calcchecksum.o(.ARM.exidx.text.ComIf_CalcChecksum), (8 bytes).
+    Removing comif_calcchecksum.o(.ARM.exidx.text.ComIf_GetChecksumMaskValue), (8 bytes).
+    Removing comif_rxindication.o(.text), (0 bytes).
+    Removing comif_rxindication.o(.ARM.exidx.text.ComIf_RxIndication), (8 bytes).
+    Removing comif_rxindication.o(.ARM.exidx.text.ComIf_ResetRxInfo), (8 bytes).
+    Removing comif_rxindication.o(.ARM.exidx.text.ComIf_GetHandle), (8 bytes).
+    Removing comif_rxindication.o(.ARM.exidx.text.ComIf_StoreDataByte), (8 bytes).
+    Removing comif_rxindication.o(.text.ComIf_RxIndication_ASCIIString), (170 bytes).
+    Removing comif_rxindication.o(.ARM.exidx.text.ComIf_RxIndication_ASCIIString), (8 bytes).
+    Removing comif_rxrequest.o(.text), (0 bytes).
+    Removing comif_rxrequest.o(.text.ComIf_Rx_Request), (112 bytes).
+    Removing comif_rxrequest.o(.ARM.exidx.text.ComIf_Rx_Request), (8 bytes).
+    Removing comif_rxrequest.o(.text.ComIf_Rx_CancelRequest), (112 bytes).
+    Removing comif_rxrequest.o(.ARM.exidx.text.ComIf_Rx_CancelRequest), (8 bytes).
+    Removing comif_rxrequest.o(.text.ComIf_RxMainFunction), (2 bytes).
+    Removing comif_rxrequest.o(.ARM.exidx.text.ComIf_RxMainFunction), (8 bytes).
+    Removing comif_transmit.o(.text), (0 bytes).
+    Removing comif_transmit.o(.ARM.exidx.text.ComIf_EncodeFromShadowToChannelBuffer), (8 bytes).
+    Removing comif_transmit.o(.ARM.exidx.text.ComIf_GetChecksumAndTentativeDataLength), (8 bytes).
+    Removing comif_transmit.o(.ARM.exidx.text.ConvertByteToString), (8 bytes).
+    Removing comif_transmit.o(.ARM.exidx.text.ComIf_AppendString), (8 bytes).
+    Removing comif_transmit.o(.ARM.exidx.text.ComIf_AppendByte), (8 bytes).
+    Removing comif_transmit.o(.ARM.exidx.text.ComIf_Transmit), (8 bytes).
+    Removing comif_transmit.o(.ARM.exidx.text.ComIf_TxConfirmation), (8 bytes).
+    Removing comif_transmit.o(.text.ComIf_TransmissionAborted), (128 bytes).
+    Removing comif_transmit.o(.ARM.exidx.text.ComIf_TransmissionAborted), (8 bytes).
+    Removing comif_transmit.o(.text.ComIf_TxMainFunction), (2 bytes).
+    Removing comif_transmit.o(.ARM.exidx.text.ComIf_TxMainFunction), (8 bytes).
+    Removing comif_transmit.o(.ARM.exidx.text.ComIf_IsNeedDelimiter), (8 bytes).
+    Removing comif_txshadowbuffer.o(.text), (0 bytes).
+    Removing comif_txshadowbuffer.o(.text.ComIf_GetTxShadowBuffer), (90 bytes).
+    Removing comif_txshadowbuffer.o(.ARM.exidx.text.ComIf_GetTxShadowBuffer), (8 bytes).
+    Removing comif_txshadowbuffer.o(.ARM.exidx.text.ComIf_UpdateTxShadowBuffer), (8 bytes).
+    Removing comif_txshadowbuffer.o(.text.ComIf_Transmit_ShadowBuffer), (76 bytes).
+    Removing comif_txshadowbuffer.o(.ARM.exidx.text.ComIf_Transmit_ShadowBuffer), (8 bytes).
+    Removing debug.o(.text), (0 bytes).
+    Removing debug.o(.ARM.exidx.text.Debug_TX_Byte), (8 bytes).
+    Removing debug.o(.ARM.exidx.text.Debug_TX_string), (8 bytes).
+    Removing debug.o(.ARM.exidx.text.DEBUG_UART_SendString), (8 bytes).
+    Removing debug.o(.text.DEBUG_UART_SendByte), (20 bytes).
+    Removing debug.o(.ARM.exidx.text.DEBUG_UART_SendByte), (8 bytes).
+    Removing debug.o(.text.Debug_SendByte), (20 bytes).
+    Removing debug.o(.ARM.exidx.text.Debug_SendByte), (8 bytes).
+    Removing debug.o(.text.Debug_SendString), (16 bytes).
+    Removing debug.o(.ARM.exidx.text.Debug_SendString), (8 bytes).
+    Removing debug.o(.ARM.exidx.text.Debug_SendNumber), (8 bytes).
+    Removing debug.o(.ARM.exidx.text.Debug_SendNumberWithDescription), (8 bytes).
+    Removing debug.o(.ARM.exidx.text.Debug_StartAggregation), (8 bytes).
+    Removing debug.o(.ARM.exidx.text.Debug_AggregateString), (8 bytes).
+    Removing debug.o(.ARM.exidx.text.Debug_AggregateByte), (8 bytes).
+    Removing debug.o(.ARM.exidx.text.Debug_TransmitAggregatedData), (8 bytes).
+    Removing debug.o(.text.Debug_SendTimeStamp), (208 bytes).
+    Removing debug.o(.ARM.exidx.text.Debug_SendTimeStamp), (8 bytes).
+    Removing debug.o(.text.Debug_SendMeasurementData), (22 bytes).
+    Removing debug.o(.ARM.exidx.text.Debug_SendMeasurementData), (8 bytes).
+    Removing debug.o(.ARM.exidx.text.Debug_MainFunction), (8 bytes).
+    Removing buffer_config.o(.text), (0 bytes).
+    Removing buffer_config.o(.ARM.exidx.text.Buffer_Init), (8 bytes).
+    Removing comif_config.o(.text), (0 bytes).
+    Removing comif_config.o(.ARM.exidx.text.ComIf_RxIndication_Boot), (8 bytes).
+    Removing nvm_driver.o(.text), (0 bytes).
+    Removing nvm_driver.o(.ARM.exidx.text.NVM_BlockData_RxCbk), (8 bytes).
+    Removing nvm_driver.o(.ARM.exidx.text.NVM_Init), (8 bytes).
+    Removing nvm_driver.o(.ARM.exidx.text.NVM_Scan_Block), (8 bytes).
+    Removing nvm_driver.o(.ARM.exidx.text.NVM_Block_Read_FUN), (8 bytes).
+    Removing nvm_driver.o(.ARM.exidx.text.Read_Apps_Header), (8 bytes).
+    Removing nvm_driver.o(.ARM.exidx.text.ChkAppHeader_ChkSum), (8 bytes).
+    Removing nvm_driver.o(.ARM.exidx.text.Chk_NVMLast_BlockAdd), (8 bytes).
+    Removing nvm_driver.o(.ARM.exidx.text.NVM_Block_Write), (8 bytes).
+    Removing nvm_driver.o(.ARM.exidx.text.NVM_Multi_Word_write), (8 bytes).
+    Removing nvm_driver.o(.ARM.exidx.text.App_Image_Chksum_calculation), (8 bytes).
+    Removing nvm_driver.o(.ARM.exidx.text.Update_Nvm_Block), (8 bytes).
+    Removing nvm_driver.o(.ARM.exidx.text.ChkNVMApplication), (8 bytes).
+    Removing nvm_driver.o(.ARM.exidx.text.NVM_AddUpdate), (8 bytes).
+    Removing nvm_driver.o(.ARM.exidx.text.NVM_ReOrg), (8 bytes).
+    Removing nvm_driver.o(.ARM.exidx.text.NVMToolClear), (8 bytes).
+    Removing nvm_driver.o(.ARM.exidx.text.NVM_VersionUpdate), (8 bytes).
+    Removing nvm_driver.o(.text.NvmTool_Update), (26 bytes).
+    Removing nvm_driver.o(.ARM.exidx.text.NvmTool_Update), (8 bytes).
+    Removing nvm_driver.o(.text.NVMData_Transmit), (208 bytes).
+    Removing nvm_driver.o(.ARM.exidx.text.NVMData_Transmit), (8 bytes).
+    Removing nvm_driver.o(.bss.nvmverifyadd), (4 bytes).
+    Removing nvs_driver.o(.text), (0 bytes).
+    Removing nvs_driver.o(.ARM.exidx.text.NVS_Init), (8 bytes).
+    Removing nvs_driver.o(.ARM.exidx.text.NVS_Scan_Block), (8 bytes).
+    Removing nvs_driver.o(.ARM.exidx.text.NVS_Block_Read), (8 bytes).
+    Removing nvs_driver.o(.text.NVSBlock_DataRead), (48 bytes).
+    Removing nvs_driver.o(.ARM.exidx.text.NVSBlock_DataRead), (8 bytes).
+    Removing nvs_driver.o(.text.IS_NVS_BlockValid), (86 bytes).
+    Removing nvs_driver.o(.ARM.exidx.text.IS_NVS_BlockValid), (8 bytes).
+    Removing nvs_driver.o(.text.FindBlock_DataSum), (98 bytes).
+    Removing nvs_driver.o(.ARM.exidx.text.FindBlock_DataSum), (8 bytes).
+    Removing system_stm32h5xx.o(.text), (0 bytes).
+    Removing system_stm32h5xx.o(.ARM.exidx.text.SystemInit), (8 bytes).
+    Removing system_stm32h5xx.o(.text.SystemCoreClockUpdate), (632 bytes).
+    Removing system_stm32h5xx.o(.ARM.exidx.text.SystemCoreClockUpdate), (8 bytes).
+    Removing system_stm32h5xx.o(.data.SystemCoreClock), (4 bytes).
+    Removing system_stm32h5xx.o(.rodata.AHBPrescTable), (16 bytes).
+    Removing system_stm32h5xx.o(.rodata.APBPrescTable), (8 bytes).
+
+174 unused section(s) (total 4258 bytes) removed from the image.
+
+==============================================================================
+
+Image Symbol Table
+
+    Local Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
+    ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_copy.o ABSOLUTE
+    ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry2.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry4.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
+    ../clib/angel/scatter.s                  0x00000000   Number         0  __scatter.o ABSOLUTE
+    ../clib/angel/startup.s                  0x00000000   Number         0  __main.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  use_no_semi.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit_hlt.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command_hlt.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch_hlt.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  no_argv.o ABSOLUTE
+    ../clib/heapalloc.c                      0x00000000   Number         0  hrguard.o ABSOLUTE
+    ../clib/heapaux.c                        0x00000000   Number         0  heapauxi.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
+    ../clib/memcpset.s                       0x00000000   Number         0  rt_memcpy_v6.o ABSOLUTE
+    ../clib/memcpset.s                       0x00000000   Number         0  rt_memclr.o ABSOLUTE
+    ../clib/memcpset.s                       0x00000000   Number         0  rt_memcpy_w.o ABSOLUTE
+    ../clib/memcpset.s                       0x00000000   Number         0  rt_memclr_w.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
+    ../clib/signal.s                         0x00000000   Number         0  defsig.o ABSOLUTE
+    ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
+    ../fplib/fpinit.s                        0x00000000   Number         0  fpinit.o ABSOLUTE
+    Backup_ram.c                             0x00000000   Number         0  backup_ram.o ABSOLUTE
+    Boot_Transmit_uC_To_Tool.c               0x00000000   Number         0  boot_transmit_uc_to_tool.o ABSOLUTE
+    Bootloader_Main.c                        0x00000000   Number         0  bootloader_main.o ABSOLUTE
+    Buffer.c                                 0x00000000   Number         0  buffer.o ABSOLUTE
+    Buffer_Config.c                          0x00000000   Number         0  buffer_config.o ABSOLUTE
+    ComIf.c                                  0x00000000   Number         0  comif.o ABSOLUTE
+    ComIf_CalcChecksum.c                     0x00000000   Number         0  comif_calcchecksum.o ABSOLUTE
+    ComIf_Config.c                           0x00000000   Number         0  comif_config.o ABSOLUTE
+    ComIf_RxIndication.c                     0x00000000   Number         0  comif_rxindication.o ABSOLUTE
+    ComIf_RxRequest.c                        0x00000000   Number         0  comif_rxrequest.o ABSOLUTE
+    ComIf_Transmit.c                         0x00000000   Number         0  comif_transmit.o ABSOLUTE
+    ComIf_TxShadowBuffer.c                   0x00000000   Number         0  comif_txshadowbuffer.o ABSOLUTE
+    Debug.c                                  0x00000000   Number         0  debug.o ABSOLUTE
+    Flash_Main.c                             0x00000000   Number         0  flash_main.o ABSOLUTE
+    NVM_Driver.c                             0x00000000   Number         0  nvm_driver.o ABSOLUTE
+    NVS_Driver.c                             0x00000000   Number         0  nvs_driver.o ABSOLUTE
+    PLL_Driver.c                             0x00000000   Number         0  pll_driver.o ABSOLUTE
+    Ports_init.c                             0x00000000   Number         0  ports_init.o ABSOLUTE
+    RTE/Device/STM32H503RBTx/startup_stm32h503xx.s 0x00000000   Number         0  startup_stm32h503xx.o ABSOLUTE
+    Uart_Driver.c                            0x00000000   Number         0  uart_driver.o ABSOLUTE
+    dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
+    main.c                                   0x00000000   Number         0  main.o ABSOLUTE
+    stm32h5xx_hal_gpio.c                     0x00000000   Number         0  stm32h5xx_hal_gpio.o ABSOLUTE
+    system_stm32h5xx.c                       0x00000000   Number         0  system_stm32h5xx.o ABSOLUTE
+    RESET                                    0x08002000   Section      600  startup_stm32h503xx.o(RESET)
+    !!!main                                  0x08002258   Section        8  __main.o(!!!main)
+    !!!scatter                               0x08002260   Section       52  __scatter.o(!!!scatter)
+    !!handler_copy                           0x08002294   Section       26  __scatter_copy.o(!!handler_copy)
+    !!handler_zi                             0x080022b0   Section       28  __scatter_zi.o(!!handler_zi)
+    .ARM.Collect$$libinit$$00000000          0x080022cc   Section        2  libinit.o(.ARM.Collect$$libinit$$00000000)
+    .ARM.Collect$$libinit$$00000001          0x080022ce   Section        4  libinit2.o(.ARM.Collect$$libinit$$00000001)
+    .ARM.Collect$$libinit$$00000004          0x080022d2   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000004)
+    .ARM.Collect$$libinit$$00000006          0x080022d2   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000006)
+    .ARM.Collect$$libinit$$0000000C          0x080022d2   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000000C)
+    .ARM.Collect$$libinit$$0000000E          0x080022d2   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000000E)
+    .ARM.Collect$$libinit$$00000010          0x080022d2   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000010)
+    .ARM.Collect$$libinit$$00000013          0x080022d2   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000013)
+    .ARM.Collect$$libinit$$00000015          0x080022d2   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000015)
+    .ARM.Collect$$libinit$$00000017          0x080022d2   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000017)
+    .ARM.Collect$$libinit$$00000019          0x080022d2   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000019)
+    .ARM.Collect$$libinit$$0000001B          0x080022d2   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000001B)
+    .ARM.Collect$$libinit$$0000001D          0x080022d2   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000001D)
+    .ARM.Collect$$libinit$$0000001F          0x080022d2   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000001F)
+    .ARM.Collect$$libinit$$00000021          0x080022d2   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000021)
+    .ARM.Collect$$libinit$$00000023          0x080022d2   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000023)
+    .ARM.Collect$$libinit$$00000025          0x080022d2   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000025)
+    .ARM.Collect$$libinit$$00000027          0x080022d2   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000027)
+    .ARM.Collect$$libinit$$0000002E          0x080022d2   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000002E)
+    .ARM.Collect$$libinit$$00000030          0x080022d2   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000030)
+    .ARM.Collect$$libinit$$00000032          0x080022d2   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000032)
+    .ARM.Collect$$libinit$$00000034          0x080022d2   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000034)
+    .ARM.Collect$$libinit$$00000035          0x080022d2   Section        2  libinit2.o(.ARM.Collect$$libinit$$00000035)
+    .ARM.Collect$$libshutdown$$00000000      0x080022d4   Section        2  libshutdown.o(.ARM.Collect$$libshutdown$$00000000)
+    .ARM.Collect$$libshutdown$$00000002      0x080022d6   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000002)
+    .ARM.Collect$$libshutdown$$00000004      0x080022d6   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000004)
+    .ARM.Collect$$libshutdown$$00000007      0x080022d6   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000007)
+    .ARM.Collect$$libshutdown$$0000000A      0x080022d6   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000A)
+    .ARM.Collect$$libshutdown$$0000000C      0x080022d6   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000C)
+    .ARM.Collect$$libshutdown$$0000000F      0x080022d6   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000F)
+    .ARM.Collect$$libshutdown$$00000010      0x080022d6   Section        2  libshutdown2.o(.ARM.Collect$$libshutdown$$00000010)
+    .ARM.Collect$$rtentry$$00000000          0x080022d8   Section        0  __rtentry.o(.ARM.Collect$$rtentry$$00000000)
+    .ARM.Collect$$rtentry$$00000002          0x080022d8   Section        0  __rtentry2.o(.ARM.Collect$$rtentry$$00000002)
+    .ARM.Collect$$rtentry$$00000004          0x080022d8   Section        6  __rtentry4.o(.ARM.Collect$$rtentry$$00000004)
+    .ARM.Collect$$rtentry$$00000009          0x080022de   Section        0  __rtentry2.o(.ARM.Collect$$rtentry$$00000009)
+    .ARM.Collect$$rtentry$$0000000A          0x080022de   Section        4  __rtentry2.o(.ARM.Collect$$rtentry$$0000000A)
+    .ARM.Collect$$rtentry$$0000000C          0x080022e2   Section        0  __rtentry2.o(.ARM.Collect$$rtentry$$0000000C)
+    .ARM.Collect$$rtentry$$0000000D          0x080022e2   Section        8  __rtentry2.o(.ARM.Collect$$rtentry$$0000000D)
+    .ARM.Collect$$rtexit$$00000000           0x080022ea   Section        2  rtexit.o(.ARM.Collect$$rtexit$$00000000)
+    .ARM.Collect$$rtexit$$00000002           0x080022ec   Section        0  rtexit2.o(.ARM.Collect$$rtexit$$00000002)
+    .ARM.Collect$$rtexit$$00000003           0x080022ec   Section        4  rtexit2.o(.ARM.Collect$$rtexit$$00000003)
+    .ARM.Collect$$rtexit$$00000004           0x080022f0   Section        6  rtexit2.o(.ARM.Collect$$rtexit$$00000004)
+    $v0                                      0x080022f8   Number         0  startup_stm32h503xx.o(.text)
+    .text                                    0x080022f8   Section       68  startup_stm32h503xx.o(.text)
+    .text                                    0x0800233c   Section        0  heapauxi.o(.text)
+    .text                                    0x08002342   Section       74  sys_stackheap_outer.o(.text)
+    .text                                    0x0800238c   Section        0  exit.o(.text)
+    .text                                    0x080023a0   Section        8  libspace.o(.text)
+    .text                                    0x080023a8   Section        0  sys_exit.o(.text)
+    .text                                    0x080023b4   Section        2  use_no_semi.o(.text)
+    .text                                    0x080023b6   Section        0  indicate_semi.o(.text)
+    [Anonymous Symbol]                       0x080023b8   Section        0  nvm_driver.o(.text.App_Image_Chksum_calculation)
+    [Anonymous Symbol]                       0x080023f0   Section        0  boot_transmit_uc_to_tool.o(.text.Boot_Error_Notification)
+    [Anonymous Symbol]                       0x0800240c   Section        0  bootloader_main.o(.text.Boot_Main)
+    [Anonymous Symbol]                       0x08002dac   Section        0  bootloader_main.o(.text.Boot_Req_Data_RxCbk)
+    [Anonymous Symbol]                       0x08002e00   Section        0  bootloader_main.o(.text.Boot_Response_status)
+    [Anonymous Symbol]                       0x08002e30   Section        0  boot_transmit_uc_to_tool.o(.text.Boot_Transmit_FUN)
+    [Anonymous Symbol]                       0x08002ee0   Section        0  buffer.o(.text.Buffer_Create)
+    [Anonymous Symbol]                       0x08002f3c   Section        0  buffer.o(.text.Buffer_DeQueue)
+    [Anonymous Symbol]                       0x08002fd8   Section        0  buffer.o(.text.Buffer_EnQueue)
+    [Anonymous Symbol]                       0x08003060   Section        0  buffer.o(.text.Buffer_GetBuffer)
+    [Anonymous Symbol]                       0x08003090   Section        0  buffer_config.o(.text.Buffer_Init)
+    [Anonymous Symbol]                       0x080030bc   Section        0  buffer.o(.text.Buffer_Length)
+    [Anonymous Symbol]                       0x080030f8   Section        0  nvm_driver.o(.text.ChkAppHeader_ChkSum)
+    [Anonymous Symbol]                       0x08003178   Section        0  nvm_driver.o(.text.ChkNVMApplication)
+    [Anonymous Symbol]                       0x08003220   Section        0  nvm_driver.o(.text.Chk_NVMLast_BlockAdd)
+    ComIf_AppendByte                         0x08003265   Thumb Code    90  comif_transmit.o(.text.ComIf_AppendByte)
+    [Anonymous Symbol]                       0x08003264   Section        0  comif_transmit.o(.text.ComIf_AppendByte)
+    ComIf_AppendString                       0x080032c1   Thumb Code   100  comif_transmit.o(.text.ComIf_AppendString)
+    [Anonymous Symbol]                       0x080032c0   Section        0  comif_transmit.o(.text.ComIf_AppendString)
+    [Anonymous Symbol]                       0x08003324   Section        0  comif_calcchecksum.o(.text.ComIf_CalcChecksum)
+    [Anonymous Symbol]                       0x08003370   Section        0  comif_transmit.o(.text.ComIf_EncodeFromShadowToChannelBuffer)
+    [Anonymous Symbol]                       0x08003660   Section        0  comif.o(.text.ComIf_ErrorNotify)
+    ComIf_GetChecksumAndTentativeDataLength  0x08003685   Thumb Code   294  comif_transmit.o(.text.ComIf_GetChecksumAndTentativeDataLength)
+    [Anonymous Symbol]                       0x08003684   Section        0  comif_transmit.o(.text.ComIf_GetChecksumAndTentativeDataLength)
+    [Anonymous Symbol]                       0x080037ac   Section        0  comif_calcchecksum.o(.text.ComIf_GetChecksumMaskValue)
+    ComIf_GetHandle                          0x080037f1   Thumb Code    92  comif_rxindication.o(.text.ComIf_GetHandle)
+    [Anonymous Symbol]                       0x080037f0   Section        0  comif_rxindication.o(.text.ComIf_GetHandle)
+    ComIf_IsNeedDelimiter                    0x0800384d   Thumb Code    60  comif_transmit.o(.text.ComIf_IsNeedDelimiter)
+    [Anonymous Symbol]                       0x0800384c   Section        0  comif_transmit.o(.text.ComIf_IsNeedDelimiter)
+    ComIf_ResetRxInfo                        0x08003889   Thumb Code   130  comif_rxindication.o(.text.ComIf_ResetRxInfo)
+    [Anonymous Symbol]                       0x08003888   Section        0  comif_rxindication.o(.text.ComIf_ResetRxInfo)
+    [Anonymous Symbol]                       0x0800390c   Section        0  comif_rxindication.o(.text.ComIf_RxIndication)
+    [Anonymous Symbol]                       0x08003c28   Section        0  comif_config.o(.text.ComIf_RxIndication_Boot)
+    ComIf_StoreDataByte                      0x08003c41   Thumb Code   114  comif_rxindication.o(.text.ComIf_StoreDataByte)
+    [Anonymous Symbol]                       0x08003c40   Section        0  comif_rxindication.o(.text.ComIf_StoreDataByte)
+    [Anonymous Symbol]                       0x08003cb4   Section        0  comif_transmit.o(.text.ComIf_Transmit)
+    [Anonymous Symbol]                       0x08003e0c   Section        0  comif_transmit.o(.text.ComIf_TxConfirmation)
+    [Anonymous Symbol]                       0x08003ea0   Section        0  comif_txshadowbuffer.o(.text.ComIf_UpdateTxShadowBuffer)
+    ConvertByteToString                      0x08003fa5   Thumb Code    38  comif_transmit.o(.text.ConvertByteToString)
+    [Anonymous Symbol]                       0x08003fa4   Section        0  comif_transmit.o(.text.ConvertByteToString)
+    [Anonymous Symbol]                       0x08003fcc   Section        0  debug.o(.text.DEBUG_UART_SendString)
+    Debug_AggregateByte                      0x08003fdd   Thumb Code    40  debug.o(.text.Debug_AggregateByte)
+    [Anonymous Symbol]                       0x08003fdc   Section        0  debug.o(.text.Debug_AggregateByte)
+    Debug_AggregateString                    0x08004005   Thumb Code    36  debug.o(.text.Debug_AggregateString)
+    [Anonymous Symbol]                       0x08004004   Section        0  debug.o(.text.Debug_AggregateString)
+    [Anonymous Symbol]                       0x08004028   Section        0  debug.o(.text.Debug_MainFunction)
+    [Anonymous Symbol]                       0x08004030   Section        0  debug.o(.text.Debug_SendNumber)
+    [Anonymous Symbol]                       0x080040c0   Section        0  debug.o(.text.Debug_SendNumberWithDescription)
+    Debug_StartAggregation                   0x080040f5   Thumb Code    14  debug.o(.text.Debug_StartAggregation)
+    [Anonymous Symbol]                       0x080040f4   Section        0  debug.o(.text.Debug_StartAggregation)
+    [Anonymous Symbol]                       0x08004104   Section        0  debug.o(.text.Debug_TX_Byte)
+    [Anonymous Symbol]                       0x0800411c   Section        0  debug.o(.text.Debug_TX_string)
+    Debug_TransmitAggregatedData             0x08004141   Thumb Code    44  debug.o(.text.Debug_TransmitAggregatedData)
+    [Anonymous Symbol]                       0x08004140   Section        0  debug.o(.text.Debug_TransmitAggregatedData)
+    [Anonymous Symbol]                       0x0800416c   Section        0  flash_main.o(.text.FLASH_Erase_NoofSectors)
+    [Anonymous Symbol]                       0x08004240   Section        0  flash_main.o(.text.FLASH_ErrorChk)
+    [Anonymous Symbol]                       0x080042b4   Section        0  flash_main.o(.text.FLASH_Lock)
+    [Anonymous Symbol]                       0x080042d0   Section        0  flash_main.o(.text.FLASH_Read)
+    [Anonymous Symbol]                       0x080042dc   Section        0  flash_main.o(.text.FLASH_SecErase)
+    [Anonymous Symbol]                       0x08004384   Section        0  flash_main.o(.text.FLASH_Unlock)
+    [Anonymous Symbol]                       0x080043c8   Section        0  flash_main.o(.text.FLASH_Write)
+    [Anonymous Symbol]                       0x080043f0   Section        0  flash_main.o(.text.FLASH_init)
+    [Anonymous Symbol]                       0x08004430   Section        0  flash_main.o(.text.Flash_DoubleSec_Erase)
+    [Anonymous Symbol]                       0x080044f8   Section        0  flash_main.o(.text.Flash_SingleSec_Erase)
+    [Anonymous Symbol]                       0x0800453c   Section        0  main.o(.text.Gpio_init)
+    [Anonymous Symbol]                       0x08004578   Section        0  ports_init.o(.text.GpioclockEnable)
+    [Anonymous Symbol]                       0x08004590   Section        0  stm32h5xx_hal_gpio.o(.text.HAL_GPIO_Init)
+    [Anonymous Symbol]                       0x08004860   Section        0  stm32h5xx_hal_gpio.o(.text.HAL_GPIO_TogglePin)
+    [Anonymous Symbol]                       0x08004888   Section        0  stm32h5xx_hal_gpio.o(.text.HAL_GPIO_WritePin)
+    [Anonymous Symbol]                       0x080048b4   Section        0  ports_init.o(.text.Init)
+    [Anonymous Symbol]                       0x080048dc   Section        0  flash_main.o(.text.Multi_Word_write)
+    [Anonymous Symbol]                       0x08004940   Section        0  nvm_driver.o(.text.NVMToolClear)
+    [Anonymous Symbol]                       0x080049fc   Section        0  nvm_driver.o(.text.NVM_AddUpdate)
+    [Anonymous Symbol]                       0x08004ae8   Section        0  nvm_driver.o(.text.NVM_BlockData_RxCbk)
+    [Anonymous Symbol]                       0x08004b30   Section        0  nvm_driver.o(.text.NVM_Block_Read_FUN)
+    [Anonymous Symbol]                       0x08004ba8   Section        0  nvm_driver.o(.text.NVM_Block_Write)
+    [Anonymous Symbol]                       0x08004be8   Section        0  nvm_driver.o(.text.NVM_Init)
+    [Anonymous Symbol]                       0x08004bf0   Section        0  nvm_driver.o(.text.NVM_Multi_Word_write)
+    [Anonymous Symbol]                       0x08004c3c   Section        0  nvm_driver.o(.text.NVM_ReOrg)
+    [Anonymous Symbol]                       0x08004d30   Section        0  nvm_driver.o(.text.NVM_Scan_Block)
+    [Anonymous Symbol]                       0x08004d64   Section        0  nvm_driver.o(.text.NVM_VersionUpdate)
+    [Anonymous Symbol]                       0x08004dc8   Section        0  nvs_driver.o(.text.NVS_Block_Read)
+    [Anonymous Symbol]                       0x08004e08   Section        0  nvs_driver.o(.text.NVS_Init)
+    [Anonymous Symbol]                       0x08004e10   Section        0  nvs_driver.o(.text.NVS_Scan_Block)
+    [Anonymous Symbol]                       0x08004e68   Section        0  backup_ram.o(.text.PWREx_EnableBkupRAM_REG)
+    [Anonymous Symbol]                       0x08004e7c   Section        0  backup_ram.o(.text.PWR_DisableBkUpAccess)
+    [Anonymous Symbol]                       0x08004e90   Section        0  backup_ram.o(.text.PWR_EnableBkUpAccess)
+    [Anonymous Symbol]                       0x08004ea4   Section        0  nvm_driver.o(.text.Read_Apps_Header)
+    [Anonymous Symbol]                       0x08004f50   Section        0  system_stm32h5xx.o(.text.SystemInit)
+    [Anonymous Symbol]                       0x0800506c   Section        0  uart_driver.o(.text.USART3_IRQHandler)
+    [Anonymous Symbol]                       0x080050a4   Section        0  uart_driver.o(.text.USART3_Main)
+    [Anonymous Symbol]                       0x080050d8   Section        0  uart_driver.o(.text.Uar3t_Tx_Byte)
+    [Anonymous Symbol]                       0x0800513c   Section        0  ports_init.o(.text.Uart3_IO_init)
+    [Anonymous Symbol]                       0x0800517c   Section        0  uart_driver.o(.text.Uart3_Init)
+    [Anonymous Symbol]                       0x080051f0   Section        0  nvm_driver.o(.text.Update_Nvm_Block)
+    [Anonymous Symbol]                       0x080052a8   Section        0  flash_main.o(.text.VerifyFlashErase)
+    __NVIC_EnableIRQ                         0x080052e9   Thumb Code    48  uart_driver.o(.text.__NVIC_EnableIRQ)
+    [Anonymous Symbol]                       0x080052e8   Section        0  uart_driver.o(.text.__NVIC_EnableIRQ)
+    [Anonymous Symbol]                       0x08005318   Section        0  backup_ram.o(.text.bkSRAM_Init)
+    [Anonymous Symbol]                       0x08005350   Section        0  backup_ram.o(.text.bkSRAM_ReadVariable)
+    [Anonymous Symbol]                       0x08005384   Section        0  backup_ram.o(.text.bkSRAM_WriteVariable)
+    [Anonymous Symbol]                       0x080053b8   Section        0  uart_driver.o(.text.debugMain)
+    [Anonymous Symbol]                       0x080053ec   Section        0  ports_init.o(.text.delay)
+    [Anonymous Symbol]                       0x08005414   Section        0  main.o(.text.main)
+    $v0                                      0x0800548e   Number         0  fpinit.o(x$fpl$fpinit)
+    x$fpl$fpinit                             0x0800548e   Section       26  fpinit.o(x$fpl$fpinit)
+    .L.str                                   0x080054a8   Data          10  boot_transmit_uc_to_tool.o(.rodata.str1.1)
+    [Anonymous Symbol]                       0x080054a8   Section        0  boot_transmit_uc_to_tool.o(.rodata.str1.1)
+    .L.str.1                                 0x080054b2   Data           2  debug.o(.rodata.str1.1)
+    [Anonymous Symbol]                       0x080054b2   Section        0  debug.o(.rodata.str1.1)
+    .L.str                                   0x080054b4   Data           2  debug.o(.rodata.str1.1)
+    .bss                                     0x200000f8   Section       96  libspace.o(.bss)
+    BootCmdReceiveVerifyFlag                 0x20000158   Data           1  bootloader_main.o(.bss.BootCmdReceiveVerifyFlag)
+    [Anonymous Symbol]                       0x20000158   Section        0  bootloader_main.o(.bss.BootCmdReceiveVerifyFlag)
+    Boot_or_App                              0x20000170   Data           4  main.o(.bss.Boot_or_App)
+    [Anonymous Symbol]                       0x20000170   Section        0  main.o(.bss.Boot_or_App)
+    ChooseIndividualErase_Flg                0x2000024c   Data           1  bootloader_main.o(.bss.ChooseIndividualErase_Flg)
+    [Anonymous Symbol]                       0x2000024c   Section        0  bootloader_main.o(.bss.ChooseIndividualErase_Flg)
+    ChooseNvsFlag                            0x2000024d   Data           1  bootloader_main.o(.bss.ChooseNvsFlag)
+    [Anonymous Symbol]                       0x2000024d   Section        0  bootloader_main.o(.bss.ChooseNvsFlag)
+    Flash_Erase_Flag                         0x20000553   Data           1  bootloader_main.o(.bss.Flash_Erase_Flag)
+    [Anonymous Symbol]                       0x20000553   Section        0  bootloader_main.o(.bss.Flash_Erase_Flag)
+    Flash_Write_Flag                         0x20000554   Data           1  bootloader_main.o(.bss.Flash_Write_Flag)
+    [Anonymous Symbol]                       0x20000554   Section        0  bootloader_main.o(.bss.Flash_Write_Flag)
+    IndividualEraseVerifyFlag                0x20000555   Data           1  bootloader_main.o(.bss.IndividualEraseVerifyFlag)
+    [Anonymous Symbol]                       0x20000555   Section        0  bootloader_main.o(.bss.IndividualEraseVerifyFlag)
+    UART_BUSY_Flag                           0x20000565   Data           1  boot_transmit_uc_to_tool.o(.bss.UART_BUSY_Flag)
+    [Anonymous Symbol]                       0x20000565   Section        0  boot_transmit_uc_to_tool.o(.bss.UART_BUSY_Flag)
+    cnt                                      0x20000567   Data           1  bootloader_main.o(.bss.cnt)
+    [Anonymous Symbol]                       0x20000567   Section        0  bootloader_main.o(.bss.cnt)
+    gs_DebugAggBuffer                        0x20000568   Data          50  debug.o(.bss.gs_DebugAggBuffer)
+    [Anonymous Symbol]                       0x20000568   Section        0  debug.o(.bss.gs_DebugAggBuffer)
+    gs_DebugAggCurIndex                      0x2000059a   Data           1  debug.o(.bss.gs_DebugAggCurIndex)
+    [Anonymous Symbol]                       0x2000059a   Section        0  debug.o(.bss.gs_DebugAggCurIndex)
+    Heap_Mem                                 0x200005a0   Data         512  startup_stm32h503xx.o(HEAP)
+    HEAP                                     0x200005a0   Section      512  startup_stm32h503xx.o(HEAP)
+    Stack_Mem                                0x200007a0   Data        1024  startup_stm32h503xx.o(STACK)
+    STACK                                    0x200007a0   Section     1024  startup_stm32h503xx.o(STACK)
+    __initial_sp                             0x20000ba0   Data           0  startup_stm32h503xx.o(STACK)
+
+    Global Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    BuildAttributes$$THM_ISAv4$E$P$D$K$B$S$7EM$8M$VFPi5$EXTD16$VFPS$VFMA$PE$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$~IW$USESV6$~STKCKD$USESV7$~SHL$OSPACE$ROPI$EBA8$UX$STANDARDLIB$REQ8$PRES8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
+    __ARM_exceptions_init                     - Undefined Weak Reference
+    __alloca_initialize                       - Undefined Weak Reference
+    __arm_preinit_                            - Undefined Weak Reference
+    __arm_relocate_pie_                       - Undefined Weak Reference
+    __cpp_initialize__aeabi_                  - Undefined Weak Reference
+    __cxa_finalize                            - Undefined Weak Reference
+    __rt_locale                               - Undefined Weak Reference
+    __sigvec_lookup                           - Undefined Weak Reference
+    _atexit_init                              - Undefined Weak Reference
+    _call_atexit_fns                          - Undefined Weak Reference
+    _clock_init                               - Undefined Weak Reference
+    _fp_trap_init                             - Undefined Weak Reference
+    _fp_trap_shutdown                         - Undefined Weak Reference
+    _get_lc_collate                           - Undefined Weak Reference
+    _get_lc_ctype                             - Undefined Weak Reference
+    _get_lc_monetary                          - Undefined Weak Reference
+    _get_lc_numeric                           - Undefined Weak Reference
+    _get_lc_time                              - Undefined Weak Reference
+    _getenv_init                              - Undefined Weak Reference
+    _handle_redirection                       - Undefined Weak Reference
+    _init_alloc                               - Undefined Weak Reference
+    _init_user_alloc                          - Undefined Weak Reference
+    _initio                                   - Undefined Weak Reference
+    _rand_init                                - Undefined Weak Reference
+    _signal_finish                            - Undefined Weak Reference
+    _signal_init                              - Undefined Weak Reference
+    _terminate_alloc                          - Undefined Weak Reference
+    _terminate_user_alloc                     - Undefined Weak Reference
+    _terminateio                              - Undefined Weak Reference
+    __Vectors_Size                           0x00000258   Number         0  startup_stm32h503xx.o ABSOLUTE
+    __Vectors                                0x08002000   Data           4  startup_stm32h503xx.o(RESET)
+    __Vectors_End                            0x08002258   Data           0  startup_stm32h503xx.o(RESET)
+    __main                                   0x08002259   Thumb Code     8  __main.o(!!!main)
+    __scatterload                            0x08002261   Thumb Code     0  __scatter.o(!!!scatter)
+    __scatterload_rt2                        0x08002261   Thumb Code    44  __scatter.o(!!!scatter)
+    __scatterload_rt2_thumb_only             0x08002261   Thumb Code     0  __scatter.o(!!!scatter)
+    __scatterload_null                       0x0800226f   Thumb Code     0  __scatter.o(!!!scatter)
+    __scatterload_copy                       0x08002295   Thumb Code    26  __scatter_copy.o(!!handler_copy)
+    __scatterload_zeroinit                   0x080022b1   Thumb Code    28  __scatter_zi.o(!!handler_zi)
+    __rt_lib_init                            0x080022cd   Thumb Code     0  libinit.o(.ARM.Collect$$libinit$$00000000)
+    __rt_lib_init_fp_1                       0x080022cf   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000001)
+    __rt_lib_init_alloca_1                   0x080022d3   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000030)
+    __rt_lib_init_argv_1                     0x080022d3   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000002E)
+    __rt_lib_init_atexit_1                   0x080022d3   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000001D)
+    __rt_lib_init_clock_1                    0x080022d3   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000023)
+    __rt_lib_init_cpp_1                      0x080022d3   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000034)
+    __rt_lib_init_exceptions_1               0x080022d3   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000032)
+    __rt_lib_init_fp_trap_1                  0x080022d3   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000021)
+    __rt_lib_init_getenv_1                   0x080022d3   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000025)
+    __rt_lib_init_heap_1                     0x080022d3   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000000C)
+    __rt_lib_init_lc_collate_1               0x080022d3   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000013)
+    __rt_lib_init_lc_ctype_1                 0x080022d3   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000015)
+    __rt_lib_init_lc_monetary_1              0x080022d3   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000017)
+    __rt_lib_init_lc_numeric_1               0x080022d3   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000019)
+    __rt_lib_init_lc_time_1                  0x080022d3   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000001B)
+    __rt_lib_init_preinit_1                  0x080022d3   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000006)
+    __rt_lib_init_rand_1                     0x080022d3   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000010)
+    __rt_lib_init_relocate_pie_1             0x080022d3   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000004)
+    __rt_lib_init_return                     0x080022d3   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000035)
+    __rt_lib_init_signal_1                   0x080022d3   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000001F)
+    __rt_lib_init_stdio_1                    0x080022d3   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000027)
+    __rt_lib_init_user_alloc_1               0x080022d3   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000000E)
+    __rt_lib_shutdown                        0x080022d5   Thumb Code     0  libshutdown.o(.ARM.Collect$$libshutdown$$00000000)
+    __rt_lib_shutdown_cpp_1                  0x080022d7   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000002)
+    __rt_lib_shutdown_fp_trap_1              0x080022d7   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000007)
+    __rt_lib_shutdown_heap_1                 0x080022d7   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000F)
+    __rt_lib_shutdown_return                 0x080022d7   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000010)
+    __rt_lib_shutdown_signal_1               0x080022d7   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000A)
+    __rt_lib_shutdown_stdio_1                0x080022d7   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000004)
+    __rt_lib_shutdown_user_alloc_1           0x080022d7   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000C)
+    __rt_entry                               0x080022d9   Thumb Code     0  __rtentry.o(.ARM.Collect$$rtentry$$00000000)
+    __rt_entry_presh_1                       0x080022d9   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$00000002)
+    __rt_entry_sh                            0x080022d9   Thumb Code     0  __rtentry4.o(.ARM.Collect$$rtentry$$00000004)
+    __rt_entry_li                            0x080022df   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$0000000A)
+    __rt_entry_postsh_1                      0x080022df   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$00000009)
+    __rt_entry_main                          0x080022e3   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$0000000D)
+    __rt_entry_postli_1                      0x080022e3   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$0000000C)
+    __rt_exit                                0x080022eb   Thumb Code     0  rtexit.o(.ARM.Collect$$rtexit$$00000000)
+    __rt_exit_ls                             0x080022ed   Thumb Code     0  rtexit2.o(.ARM.Collect$$rtexit$$00000003)
+    __rt_exit_prels_1                        0x080022ed   Thumb Code     0  rtexit2.o(.ARM.Collect$$rtexit$$00000002)
+    __rt_exit_exit                           0x080022f1   Thumb Code     0  rtexit2.o(.ARM.Collect$$rtexit$$00000004)
+    Reset_Handler                            0x080022f9   Thumb Code     8  startup_stm32h503xx.o(.text)
+    NMI_Handler                              0x08002301   Thumb Code     2  startup_stm32h503xx.o(.text)
+    HardFault_Handler                        0x08002303   Thumb Code     2  startup_stm32h503xx.o(.text)
+    MemManage_Handler                        0x08002305   Thumb Code     2  startup_stm32h503xx.o(.text)
+    BusFault_Handler                         0x08002307   Thumb Code     2  startup_stm32h503xx.o(.text)
+    UsageFault_Handler                       0x08002309   Thumb Code     2  startup_stm32h503xx.o(.text)
+    SecureFault_Handler                      0x0800230b   Thumb Code     2  startup_stm32h503xx.o(.text)
+    SVC_Handler                              0x0800230d   Thumb Code     2  startup_stm32h503xx.o(.text)
+    DebugMon_Handler                         0x0800230f   Thumb Code     2  startup_stm32h503xx.o(.text)
+    PendSV_Handler                           0x08002311   Thumb Code     2  startup_stm32h503xx.o(.text)
+    SysTick_Handler                          0x08002313   Thumb Code     2  startup_stm32h503xx.o(.text)
+    ADC1_IRQHandler                          0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    COMP1_IRQHandler                         0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    CRS_IRQHandler                           0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    DAC1_IRQHandler                          0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    DTS_IRQHandler                           0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    EXTI0_IRQHandler                         0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    EXTI10_IRQHandler                        0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    EXTI11_IRQHandler                        0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    EXTI12_IRQHandler                        0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    EXTI13_IRQHandler                        0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    EXTI14_IRQHandler                        0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    EXTI15_IRQHandler                        0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    EXTI1_IRQHandler                         0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    EXTI2_IRQHandler                         0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    EXTI3_IRQHandler                         0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    EXTI4_IRQHandler                         0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    EXTI5_IRQHandler                         0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    EXTI6_IRQHandler                         0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    EXTI7_IRQHandler                         0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    EXTI8_IRQHandler                         0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    EXTI9_IRQHandler                         0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    FDCAN1_IT0_IRQHandler                    0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    FDCAN1_IT1_IRQHandler                    0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    FLASH_IRQHandler                         0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    FPU_IRQHandler                           0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    GPDMA1_Channel0_IRQHandler               0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    GPDMA1_Channel1_IRQHandler               0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    GPDMA1_Channel2_IRQHandler               0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    GPDMA1_Channel3_IRQHandler               0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    GPDMA1_Channel4_IRQHandler               0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    GPDMA1_Channel5_IRQHandler               0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    GPDMA1_Channel6_IRQHandler               0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    GPDMA1_Channel7_IRQHandler               0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    GPDMA2_Channel0_IRQHandler               0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    GPDMA2_Channel1_IRQHandler               0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    GPDMA2_Channel2_IRQHandler               0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    GPDMA2_Channel3_IRQHandler               0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    GPDMA2_Channel4_IRQHandler               0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    GPDMA2_Channel5_IRQHandler               0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    GPDMA2_Channel6_IRQHandler               0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    GPDMA2_Channel7_IRQHandler               0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    GTZC_IRQHandler                          0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    HASH_IRQHandler                          0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    I2C1_ER_IRQHandler                       0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    I2C1_EV_IRQHandler                       0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    I2C2_ER_IRQHandler                       0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    I2C2_EV_IRQHandler                       0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    I3C1_ER_IRQHandler                       0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    I3C1_EV_IRQHandler                       0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    I3C2_ER_IRQHandler                       0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    I3C2_EV_IRQHandler                       0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    ICACHE_IRQHandler                        0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    IWDG_IRQHandler                          0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    LPTIM1_IRQHandler                        0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    LPTIM2_IRQHandler                        0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    LPUART1_IRQHandler                       0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    PVD_AVD_IRQHandler                       0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    RAMCFG_IRQHandler                        0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    RCC_IRQHandler                           0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    RNG_IRQHandler                           0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    RTC_IRQHandler                           0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    SPI1_IRQHandler                          0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    SPI2_IRQHandler                          0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    SPI3_IRQHandler                          0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    TAMP_IRQHandler                          0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    TIM1_BRK_IRQHandler                      0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    TIM1_CC_IRQHandler                       0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    TIM1_TRG_COM_IRQHandler                  0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    TIM1_UP_IRQHandler                       0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    TIM2_IRQHandler                          0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    TIM3_IRQHandler                          0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    TIM6_IRQHandler                          0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    TIM7_IRQHandler                          0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    USART1_IRQHandler                        0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    USART2_IRQHandler                        0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    USB_DRD_FS_IRQHandler                    0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    WWDG_IRQHandler                          0x08002315   Thumb Code     0  startup_stm32h503xx.o(.text)
+    __user_initial_stackheap                 0x08002319   Thumb Code    10  startup_stm32h503xx.o(.text)
+    __use_two_region_memory                  0x0800233d   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_escrow$2region                 0x0800233f   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_expand$2region                 0x08002341   Thumb Code     2  heapauxi.o(.text)
+    __user_setup_stackheap                   0x08002343   Thumb Code    74  sys_stackheap_outer.o(.text)
+    exit                                     0x0800238d   Thumb Code    18  exit.o(.text)
+    __user_libspace                          0x080023a1   Thumb Code     8  libspace.o(.text)
+    __user_perproc_libspace                  0x080023a1   Thumb Code     0  libspace.o(.text)
+    __user_perthread_libspace                0x080023a1   Thumb Code     0  libspace.o(.text)
+    _sys_exit                                0x080023a9   Thumb Code     8  sys_exit.o(.text)
+    __I$use$semihosting                      0x080023b5   Thumb Code     0  use_no_semi.o(.text)
+    __use_no_semihosting_swi                 0x080023b5   Thumb Code     2  use_no_semi.o(.text)
+    __semihosting_library_function           0x080023b7   Thumb Code     0  indicate_semi.o(.text)
+    App_Image_Chksum_calculation             0x080023b9   Thumb Code    54  nvm_driver.o(.text.App_Image_Chksum_calculation)
+    Boot_Error_Notification                  0x080023f1   Thumb Code    26  boot_transmit_uc_to_tool.o(.text.Boot_Error_Notification)
+    Boot_Main                                0x0800240d   Thumb Code  2462  bootloader_main.o(.text.Boot_Main)
+    Boot_Req_Data_RxCbk                      0x08002dad   Thumb Code    82  bootloader_main.o(.text.Boot_Req_Data_RxCbk)
+    Boot_Response_status                     0x08002e01   Thumb Code    46  bootloader_main.o(.text.Boot_Response_status)
+    Boot_Transmit_FUN                        0x08002e31   Thumb Code   176  boot_transmit_uc_to_tool.o(.text.Boot_Transmit_FUN)
+    Buffer_Create                            0x08002ee1   Thumb Code    90  buffer.o(.text.Buffer_Create)
+    Buffer_DeQueue                           0x08002f3d   Thumb Code   154  buffer.o(.text.Buffer_DeQueue)
+    Buffer_EnQueue                           0x08002fd9   Thumb Code   134  buffer.o(.text.Buffer_EnQueue)
+    Buffer_GetBuffer                         0x08003061   Thumb Code    48  buffer.o(.text.Buffer_GetBuffer)
+    Buffer_Init                              0x08003091   Thumb Code    42  buffer_config.o(.text.Buffer_Init)
+    Buffer_Length                            0x080030bd   Thumb Code    58  buffer.o(.text.Buffer_Length)
+    ChkAppHeader_ChkSum                      0x080030f9   Thumb Code   126  nvm_driver.o(.text.ChkAppHeader_ChkSum)
+    ChkNVMApplication                        0x08003179   Thumb Code   168  nvm_driver.o(.text.ChkNVMApplication)
+    Chk_NVMLast_BlockAdd                     0x08003221   Thumb Code    68  nvm_driver.o(.text.Chk_NVMLast_BlockAdd)
+    ComIf_CalcChecksum                       0x08003325   Thumb Code    76  comif_calcchecksum.o(.text.ComIf_CalcChecksum)
+    ComIf_EncodeFromShadowToChannelBuffer    0x08003371   Thumb Code   750  comif_transmit.o(.text.ComIf_EncodeFromShadowToChannelBuffer)
+    ComIf_ErrorNotify                        0x08003661   Thumb Code    34  comif.o(.text.ComIf_ErrorNotify)
+    ComIf_GetChecksumMaskValue               0x080037ad   Thumb Code    68  comif_calcchecksum.o(.text.ComIf_GetChecksumMaskValue)
+    ComIf_RxIndication                       0x0800390d   Thumb Code   794  comif_rxindication.o(.text.ComIf_RxIndication)
+    ComIf_RxIndication_Boot                  0x08003c29   Thumb Code    22  comif_config.o(.text.ComIf_RxIndication_Boot)
+    ComIf_Transmit                           0x08003cb5   Thumb Code   342  comif_transmit.o(.text.ComIf_Transmit)
+    ComIf_TxConfirmation                     0x08003e0d   Thumb Code   146  comif_transmit.o(.text.ComIf_TxConfirmation)
+    ComIf_UpdateTxShadowBuffer               0x08003ea1   Thumb Code   260  comif_txshadowbuffer.o(.text.ComIf_UpdateTxShadowBuffer)
+    DEBUG_UART_SendString                    0x08003fcd   Thumb Code    16  debug.o(.text.DEBUG_UART_SendString)
+    Debug_MainFunction                       0x08004029   Thumb Code     8  debug.o(.text.Debug_MainFunction)
+    Debug_SendNumber                         0x08004031   Thumb Code   144  debug.o(.text.Debug_SendNumber)
+    Debug_SendNumberWithDescription          0x080040c1   Thumb Code    50  debug.o(.text.Debug_SendNumberWithDescription)
+    Debug_TX_Byte                            0x08004105   Thumb Code    22  debug.o(.text.Debug_TX_Byte)
+    Debug_TX_string                          0x0800411d   Thumb Code    34  debug.o(.text.Debug_TX_string)
+    FLASH_Erase_NoofSectors                  0x0800416d   Thumb Code   210  flash_main.o(.text.FLASH_Erase_NoofSectors)
+    FLASH_ErrorChk                           0x08004241   Thumb Code   114  flash_main.o(.text.FLASH_ErrorChk)
+    FLASH_Lock                               0x080042b5   Thumb Code    28  flash_main.o(.text.FLASH_Lock)
+    FLASH_Read                               0x080042d1   Thumb Code    12  flash_main.o(.text.FLASH_Read)
+    FLASH_SecErase                           0x080042dd   Thumb Code   168  flash_main.o(.text.FLASH_SecErase)
+    FLASH_Unlock                             0x08004385   Thumb Code    66  flash_main.o(.text.FLASH_Unlock)
+    FLASH_Write                              0x080043c9   Thumb Code    40  flash_main.o(.text.FLASH_Write)
+    FLASH_init                               0x080043f1   Thumb Code    64  flash_main.o(.text.FLASH_init)
+    Flash_DoubleSec_Erase                    0x08004431   Thumb Code   198  flash_main.o(.text.Flash_DoubleSec_Erase)
+    Flash_SingleSec_Erase                    0x080044f9   Thumb Code    66  flash_main.o(.text.Flash_SingleSec_Erase)
+    Gpio_init                                0x0800453d   Thumb Code    60  main.o(.text.Gpio_init)
+    GpioclockEnable                          0x08004579   Thumb Code    24  ports_init.o(.text.GpioclockEnable)
+    HAL_GPIO_Init                            0x08004591   Thumb Code   718  stm32h5xx_hal_gpio.o(.text.HAL_GPIO_Init)
+    HAL_GPIO_TogglePin                       0x08004861   Thumb Code    38  stm32h5xx_hal_gpio.o(.text.HAL_GPIO_TogglePin)
+    HAL_GPIO_WritePin                        0x08004889   Thumb Code    44  stm32h5xx_hal_gpio.o(.text.HAL_GPIO_WritePin)
+    Init                                     0x080048b5   Thumb Code    40  ports_init.o(.text.Init)
+    Multi_Word_write                         0x080048dd   Thumb Code   100  flash_main.o(.text.Multi_Word_write)
+    NVMToolClear                             0x08004941   Thumb Code   186  nvm_driver.o(.text.NVMToolClear)
+    NVM_AddUpdate                            0x080049fd   Thumb Code   236  nvm_driver.o(.text.NVM_AddUpdate)
+    NVM_BlockData_RxCbk                      0x08004ae9   Thumb Code    72  nvm_driver.o(.text.NVM_BlockData_RxCbk)
+    NVM_Block_Read_FUN                       0x08004b31   Thumb Code   120  nvm_driver.o(.text.NVM_Block_Read_FUN)
+    NVM_Block_Write                          0x08004ba9   Thumb Code    62  nvm_driver.o(.text.NVM_Block_Write)
+    NVM_Init                                 0x08004be9   Thumb Code     8  nvm_driver.o(.text.NVM_Init)
+    NVM_Multi_Word_write                     0x08004bf1   Thumb Code    74  nvm_driver.o(.text.NVM_Multi_Word_write)
+    NVM_ReOrg                                0x08004c3d   Thumb Code   244  nvm_driver.o(.text.NVM_ReOrg)
+    NVM_Scan_Block                           0x08004d31   Thumb Code    52  nvm_driver.o(.text.NVM_Scan_Block)
+    NVM_VersionUpdate                        0x08004d65   Thumb Code    98  nvm_driver.o(.text.NVM_VersionUpdate)
+    NVS_Block_Read                           0x08004dc9   Thumb Code    64  nvs_driver.o(.text.NVS_Block_Read)
+    NVS_Init                                 0x08004e09   Thumb Code     8  nvs_driver.o(.text.NVS_Init)
+    NVS_Scan_Block                           0x08004e11   Thumb Code    86  nvs_driver.o(.text.NVS_Scan_Block)
+    PWREx_EnableBkupRAM_REG                  0x08004e69   Thumb Code    18  backup_ram.o(.text.PWREx_EnableBkupRAM_REG)
+    PWR_DisableBkUpAccess                    0x08004e7d   Thumb Code    18  backup_ram.o(.text.PWR_DisableBkUpAccess)
+    PWR_EnableBkUpAccess                     0x08004e91   Thumb Code    18  backup_ram.o(.text.PWR_EnableBkUpAccess)
+    Read_Apps_Header                         0x08004ea5   Thumb Code   172  nvm_driver.o(.text.Read_Apps_Header)
+    SystemInit                               0x08004f51   Thumb Code   282  system_stm32h5xx.o(.text.SystemInit)
+    USART3_IRQHandler                        0x0800506d   Thumb Code    56  uart_driver.o(.text.USART3_IRQHandler)
+    USART3_Main                              0x080050a5   Thumb Code    50  uart_driver.o(.text.USART3_Main)
+    Uar3t_Tx_Byte                            0x080050d9   Thumb Code    98  uart_driver.o(.text.Uar3t_Tx_Byte)
+    Uart3_IO_init                            0x0800513d   Thumb Code    62  ports_init.o(.text.Uart3_IO_init)
+    Uart3_Init                               0x0800517d   Thumb Code   116  uart_driver.o(.text.Uart3_Init)
+    Update_Nvm_Block                         0x080051f1   Thumb Code   184  nvm_driver.o(.text.Update_Nvm_Block)
+    VerifyFlashErase                         0x080052a9   Thumb Code    64  flash_main.o(.text.VerifyFlashErase)
+    bkSRAM_Init                              0x08005319   Thumb Code    56  backup_ram.o(.text.bkSRAM_Init)
+    bkSRAM_ReadVariable                      0x08005351   Thumb Code    52  backup_ram.o(.text.bkSRAM_ReadVariable)
+    bkSRAM_WriteVariable                     0x08005385   Thumb Code    50  backup_ram.o(.text.bkSRAM_WriteVariable)
+    debugMain                                0x080053b9   Thumb Code    52  uart_driver.o(.text.debugMain)
+    delay                                    0x080053ed   Thumb Code    38  ports_init.o(.text.delay)
+    main                                     0x08005415   Thumb Code   122  main.o(.text.main)
+    _fp_init                                 0x0800548f   Thumb Code    26  fpinit.o(x$fpl$fpinit)
+    __fplib_config_fpu_vfp                   0x080054a7   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    __fplib_config_pureend_doubles           0x080054a7   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    Region$$Table$$Base                      0x080054b8   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x080054d8   Number         0  anon$$obj.o(Region$$Table)
+    Ck_Hdr                                   0x20000000   Data          72  nvm_driver.o(.data.Ck_Hdr)
+    ComIfRxMsgCfg_Boot                       0x20000048   Data          32  comif_config.o(.data.ComIfRxMsgCfg_Boot)
+    ComIfTxMsgCfg_Boot                       0x20000068   Data          40  comif_config.o(.data.ComIfTxMsgCfg_Boot)
+    ComIf_ChannelConfig                      0x20000090   Data          32  comif_config.o(.data.ComIf_ChannelConfig)
+    NVM_Block                                0x200000b0   Data          44  nvm_driver.o(.data.NVM_Block)
+    Nvs_Config_Block                         0x200000dc   Data          24  nvs_driver.o(.data.Nvs_Config_Block)
+    __libspace_start                         0x200000f8   Data          96  libspace.o(.bss)
+    __temporary_stack_top$libspace           0x20000158   Data           0  libspace.o(.bss)
+    Boot_Rx_Data                             0x20000159   Data          21  bootloader_main.o(.bss.Boot_Rx_Data)
+    Boot_State_Control                       0x2000016e   Data           1  bootloader_main.o(.bss.Boot_State_Control)
+    Boot_Tx_Data                             0x2000016f   Data           1  bootloader_main.o(.bss.Boot_Tx_Data)
+    BufferArray_Debug                        0x20000174   Data         100  buffer_config.o(.bss.BufferArray_Debug)
+    BufferArray_UART3                        0x200001d8   Data         100  buffer_config.o(.bss.BufferArray_UART3)
+    Buffers                                  0x2000023c   Data          16  buffer.o(.bss.Buffers)
+    ComIfChannelTxBuffer_Boot                0x2000024e   Data         255  comif_config.o(.bss.ComIfChannelTxBuffer_Boot)
+    ComIf_RxMessageBuffer_Boot_Boot_Req_Data 0x2000034d   Data          22  comif_config.o(.bss.ComIf_RxMessageBuffer_Boot_Boot_Req_Data)
+    ComIf_RxMessageBuffer_Boot_NVM_BlockData 0x20000363   Data         248  comif_config.o(.bss.ComIf_RxMessageBuffer_Boot_NVM_BlockData)
+    ComIf_ShadowBuffer_Boot_Boot_Response    0x2000045b   Data           1  comif_config.o(.bss.ComIf_ShadowBuffer_Boot_Boot_Response)
+    ComIf_ShadowBuffer_Boot_Nvm_Response     0x2000045c   Data         247  comif_config.o(.bss.ComIf_ShadowBuffer_Boot_Nvm_Response)
+    Last_NVMBlock_Add                        0x20000558   Data           4  nvm_driver.o(.bss.Last_NVMBlock_Add)
+    NVM_RxFlag                               0x2000055c   Data           1  nvm_driver.o(.bss.NVM_RxFlag)
+    NVM_Sec2_EraseVerify_Flg                 0x2000055d   Data           1  nvm_driver.o(.bss.NVM_Sec2_EraseVerify_Flg)
+    NvmRxData                                0x2000055e   Data           7  nvm_driver.o(.bss.NvmRxData)
+    UART_Init_bit                            0x20000566   Data           1  uart_driver.o(.bss.UART_Init_bit)
+
+
+
+==============================================================================
+
+Memory Map of the image
+
+  Image Entry point : 0x08002259
+
+  Load Region LR_IROM1 (Base: 0x08002000, Size: 0x000035d0, Max: 0x00004000, ABSOLUTE)
+
+    Execution Region ER_IROM1 (Exec base: 0x08002000, Load base: 0x08002000, Size: 0x000034d8, Max: 0x00004000, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x08002000   0x08002000   0x00000258   Data   RO          418    RESET               startup_stm32h503xx.o
+    0x08002258   0x08002258   0x00000008   Code   RO          447  * !!!main             c_w.l(__main.o)
+    0x08002260   0x08002260   0x00000034   Code   RO          616    !!!scatter          c_w.l(__scatter.o)
+    0x08002294   0x08002294   0x0000001a   Code   RO          618    !!handler_copy      c_w.l(__scatter_copy.o)
+    0x080022ae   0x080022ae   0x00000002   PAD
+    0x080022b0   0x080022b0   0x0000001c   Code   RO          620    !!handler_zi        c_w.l(__scatter_zi.o)
+    0x080022cc   0x080022cc   0x00000002   Code   RO          478    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
+    0x080022ce   0x080022ce   0x00000004   Code   RO          484    .ARM.Collect$$libinit$$00000001  c_w.l(libinit2.o)
+    0x080022d2   0x080022d2   0x00000000   Code   RO          487    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
+    0x080022d2   0x080022d2   0x00000000   Code   RO          489    .ARM.Collect$$libinit$$00000006  c_w.l(libinit2.o)
+    0x080022d2   0x080022d2   0x00000000   Code   RO          492    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
+    0x080022d2   0x080022d2   0x00000000   Code   RO          494    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
+    0x080022d2   0x080022d2   0x00000000   Code   RO          496    .ARM.Collect$$libinit$$00000010  c_w.l(libinit2.o)
+    0x080022d2   0x080022d2   0x00000000   Code   RO          499    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
+    0x080022d2   0x080022d2   0x00000000   Code   RO          501    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
+    0x080022d2   0x080022d2   0x00000000   Code   RO          503    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
+    0x080022d2   0x080022d2   0x00000000   Code   RO          505    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
+    0x080022d2   0x080022d2   0x00000000   Code   RO          507    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
+    0x080022d2   0x080022d2   0x00000000   Code   RO          509    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
+    0x080022d2   0x080022d2   0x00000000   Code   RO          511    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
+    0x080022d2   0x080022d2   0x00000000   Code   RO          513    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
+    0x080022d2   0x080022d2   0x00000000   Code   RO          515    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
+    0x080022d2   0x080022d2   0x00000000   Code   RO          517    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
+    0x080022d2   0x080022d2   0x00000000   Code   RO          519    .ARM.Collect$$libinit$$00000027  c_w.l(libinit2.o)
+    0x080022d2   0x080022d2   0x00000000   Code   RO          523    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
+    0x080022d2   0x080022d2   0x00000000   Code   RO          525    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
+    0x080022d2   0x080022d2   0x00000000   Code   RO          527    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
+    0x080022d2   0x080022d2   0x00000000   Code   RO          529    .ARM.Collect$$libinit$$00000034  c_w.l(libinit2.o)
+    0x080022d2   0x080022d2   0x00000002   Code   RO          530    .ARM.Collect$$libinit$$00000035  c_w.l(libinit2.o)
+    0x080022d4   0x080022d4   0x00000002   Code   RO          552    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
+    0x080022d6   0x080022d6   0x00000000   Code   RO          567    .ARM.Collect$$libshutdown$$00000002  c_w.l(libshutdown2.o)
+    0x080022d6   0x080022d6   0x00000000   Code   RO          569    .ARM.Collect$$libshutdown$$00000004  c_w.l(libshutdown2.o)
+    0x080022d6   0x080022d6   0x00000000   Code   RO          572    .ARM.Collect$$libshutdown$$00000007  c_w.l(libshutdown2.o)
+    0x080022d6   0x080022d6   0x00000000   Code   RO          575    .ARM.Collect$$libshutdown$$0000000A  c_w.l(libshutdown2.o)
+    0x080022d6   0x080022d6   0x00000000   Code   RO          577    .ARM.Collect$$libshutdown$$0000000C  c_w.l(libshutdown2.o)
+    0x080022d6   0x080022d6   0x00000000   Code   RO          580    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
+    0x080022d6   0x080022d6   0x00000002   Code   RO          581    .ARM.Collect$$libshutdown$$00000010  c_w.l(libshutdown2.o)
+    0x080022d8   0x080022d8   0x00000000   Code   RO          449    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
+    0x080022d8   0x080022d8   0x00000000   Code   RO          455    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
+    0x080022d8   0x080022d8   0x00000006   Code   RO          467    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
+    0x080022de   0x080022de   0x00000000   Code   RO          457    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
+    0x080022de   0x080022de   0x00000004   Code   RO          458    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
+    0x080022e2   0x080022e2   0x00000000   Code   RO          460    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
+    0x080022e2   0x080022e2   0x00000008   Code   RO          461    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
+    0x080022ea   0x080022ea   0x00000002   Code   RO          482    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
+    0x080022ec   0x080022ec   0x00000000   Code   RO          532    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
+    0x080022ec   0x080022ec   0x00000004   Code   RO          533    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
+    0x080022f0   0x080022f0   0x00000006   Code   RO          534    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
+    0x080022f6   0x080022f6   0x00000002   PAD
+    0x080022f8   0x080022f8   0x00000044   Code   RO          419    .text               startup_stm32h503xx.o
+    0x0800233c   0x0800233c   0x00000006   Code   RO          445    .text               c_w.l(heapauxi.o)
+    0x08002342   0x08002342   0x0000004a   Code   RO          469    .text               c_w.l(sys_stackheap_outer.o)
+    0x0800238c   0x0800238c   0x00000012   Code   RO          471    .text               c_w.l(exit.o)
+    0x0800239e   0x0800239e   0x00000002   PAD
+    0x080023a0   0x080023a0   0x00000008   Code   RO          479    .text               c_w.l(libspace.o)
+    0x080023a8   0x080023a8   0x0000000c   Code   RO          542    .text               c_w.l(sys_exit.o)
+    0x080023b4   0x080023b4   0x00000002   Code   RO          557    .text               c_w.l(use_no_semi.o)
+    0x080023b6   0x080023b6   0x00000000   Code   RO          559    .text               c_w.l(indicate_semi.o)
+    0x080023b6   0x080023b6   0x00000002   PAD
+    0x080023b8   0x080023b8   0x00000036   Code   RO          365    .text.App_Image_Chksum_calculation  nvm_driver.o
+    0x080023ee   0x080023ee   0x00000002   PAD
+    0x080023f0   0x080023f0   0x0000001a   Code   RO          133    .text.Boot_Error_Notification  boot_transmit_uc_to_tool.o
+    0x0800240a   0x0800240a   0x00000002   PAD
+    0x0800240c   0x0800240c   0x0000099e   Code   RO          146    .text.Boot_Main     bootloader_main.o
+    0x08002daa   0x08002daa   0x00000002   PAD
+    0x08002dac   0x08002dac   0x00000052   Code   RO          144    .text.Boot_Req_Data_RxCbk  bootloader_main.o
+    0x08002dfe   0x08002dfe   0x00000002   PAD
+    0x08002e00   0x08002e00   0x0000002e   Code   RO          148    .text.Boot_Response_status  bootloader_main.o
+    0x08002e2e   0x08002e2e   0x00000002   PAD
+    0x08002e30   0x08002e30   0x000000b0   Code   RO          131    .text.Boot_Transmit_FUN  boot_transmit_uc_to_tool.o
+    0x08002ee0   0x08002ee0   0x0000005a   Code   RO          167    .text.Buffer_Create  buffer.o
+    0x08002f3a   0x08002f3a   0x00000002   PAD
+    0x08002f3c   0x08002f3c   0x0000009a   Code   RO          173    .text.Buffer_DeQueue  buffer.o
+    0x08002fd6   0x08002fd6   0x00000002   PAD
+    0x08002fd8   0x08002fd8   0x00000086   Code   RO          171    .text.Buffer_EnQueue  buffer.o
+    0x0800305e   0x0800305e   0x00000002   PAD
+    0x08003060   0x08003060   0x00000030   Code   RO          169    .text.Buffer_GetBuffer  buffer.o
+    0x08003090   0x08003090   0x0000002a   Code   RO          321    .text.Buffer_Init   buffer_config.o
+    0x080030ba   0x080030ba   0x00000002   PAD
+    0x080030bc   0x080030bc   0x0000003a   Code   RO          175    .text.Buffer_Length  buffer.o
+    0x080030f6   0x080030f6   0x00000002   PAD
+    0x080030f8   0x080030f8   0x0000007e   Code   RO          357    .text.ChkAppHeader_ChkSum  nvm_driver.o
+    0x08003176   0x08003176   0x00000002   PAD
+    0x08003178   0x08003178   0x000000a8   Code   RO          369    .text.ChkNVMApplication  nvm_driver.o
+    0x08003220   0x08003220   0x00000044   Code   RO          359    .text.Chk_NVMLast_BlockAdd  nvm_driver.o
+    0x08003264   0x08003264   0x0000005a   Code   RO          249    .text.ComIf_AppendByte  comif_transmit.o
+    0x080032be   0x080032be   0x00000002   PAD
+    0x080032c0   0x080032c0   0x00000064   Code   RO          247    .text.ComIf_AppendString  comif_transmit.o
+    0x08003324   0x08003324   0x0000004c   Code   RO          200    .text.ComIf_CalcChecksum  comif_calcchecksum.o
+    0x08003370   0x08003370   0x000002ee   Code   RO          241    .text.ComIf_EncodeFromShadowToChannelBuffer  comif_transmit.o
+    0x0800365e   0x0800365e   0x00000002   PAD
+    0x08003660   0x08003660   0x00000022   Code   RO          191    .text.ComIf_ErrorNotify  comif.o
+    0x08003682   0x08003682   0x00000002   PAD
+    0x08003684   0x08003684   0x00000126   Code   RO          243    .text.ComIf_GetChecksumAndTentativeDataLength  comif_transmit.o
+    0x080037aa   0x080037aa   0x00000002   PAD
+    0x080037ac   0x080037ac   0x00000044   Code   RO          202    .text.ComIf_GetChecksumMaskValue  comif_calcchecksum.o
+    0x080037f0   0x080037f0   0x0000005c   Code   RO          215    .text.ComIf_GetHandle  comif_rxindication.o
+    0x0800384c   0x0800384c   0x0000003c   Code   RO          259    .text.ComIf_IsNeedDelimiter  comif_transmit.o
+    0x08003888   0x08003888   0x00000082   Code   RO          213    .text.ComIf_ResetRxInfo  comif_rxindication.o
+    0x0800390a   0x0800390a   0x00000002   PAD
+    0x0800390c   0x0800390c   0x0000031a   Code   RO          211    .text.ComIf_RxIndication  comif_rxindication.o
+    0x08003c26   0x08003c26   0x00000002   PAD
+    0x08003c28   0x08003c28   0x00000016   Code   RO          331    .text.ComIf_RxIndication_Boot  comif_config.o
+    0x08003c3e   0x08003c3e   0x00000002   PAD
+    0x08003c40   0x08003c40   0x00000072   Code   RO          217    .text.ComIf_StoreDataByte  comif_rxindication.o
+    0x08003cb2   0x08003cb2   0x00000002   PAD
+    0x08003cb4   0x08003cb4   0x00000156   Code   RO          251    .text.ComIf_Transmit  comif_transmit.o
+    0x08003e0a   0x08003e0a   0x00000002   PAD
+    0x08003e0c   0x08003e0c   0x00000092   Code   RO          253    .text.ComIf_TxConfirmation  comif_transmit.o
+    0x08003e9e   0x08003e9e   0x00000002   PAD
+    0x08003ea0   0x08003ea0   0x00000104   Code   RO          270    .text.ComIf_UpdateTxShadowBuffer  comif_txshadowbuffer.o
+    0x08003fa4   0x08003fa4   0x00000026   Code   RO          245    .text.ConvertByteToString  comif_transmit.o
+    0x08003fca   0x08003fca   0x00000002   PAD
+    0x08003fcc   0x08003fcc   0x00000010   Code   RO          285    .text.DEBUG_UART_SendString  debug.o
+    0x08003fdc   0x08003fdc   0x00000028   Code   RO          301    .text.Debug_AggregateByte  debug.o
+    0x08004004   0x08004004   0x00000024   Code   RO          299    .text.Debug_AggregateString  debug.o
+    0x08004028   0x08004028   0x00000008   Code   RO          309    .text.Debug_MainFunction  debug.o
+    0x08004030   0x08004030   0x00000090   Code   RO          293    .text.Debug_SendNumber  debug.o
+    0x080040c0   0x080040c0   0x00000032   Code   RO          295    .text.Debug_SendNumberWithDescription  debug.o
+    0x080040f2   0x080040f2   0x00000002   PAD
+    0x080040f4   0x080040f4   0x0000000e   Code   RO          297    .text.Debug_StartAggregation  debug.o
+    0x08004102   0x08004102   0x00000002   PAD
+    0x08004104   0x08004104   0x00000016   Code   RO          281    .text.Debug_TX_Byte  debug.o
+    0x0800411a   0x0800411a   0x00000002   PAD
+    0x0800411c   0x0800411c   0x00000022   Code   RO          283    .text.Debug_TX_string  debug.o
+    0x0800413e   0x0800413e   0x00000002   PAD
+    0x08004140   0x08004140   0x0000002c   Code   RO          303    .text.Debug_TransmitAggregatedData  debug.o
+    0x0800416c   0x0800416c   0x000000d2   Code   RO          101    .text.FLASH_Erase_NoofSectors  flash_main.o
+    0x0800423e   0x0800423e   0x00000002   PAD
+    0x08004240   0x08004240   0x00000072   Code   RO           93    .text.FLASH_ErrorChk  flash_main.o
+    0x080042b2   0x080042b2   0x00000002   PAD
+    0x080042b4   0x080042b4   0x0000001c   Code   RO           85    .text.FLASH_Lock    flash_main.o
+    0x080042d0   0x080042d0   0x0000000c   Code   RO           87    .text.FLASH_Read    flash_main.o
+    0x080042dc   0x080042dc   0x000000a8   Code   RO           95    .text.FLASH_SecErase  flash_main.o
+    0x08004384   0x08004384   0x00000042   Code   RO           83    .text.FLASH_Unlock  flash_main.o
+    0x080043c6   0x080043c6   0x00000002   PAD
+    0x080043c8   0x080043c8   0x00000028   Code   RO           89    .text.FLASH_Write   flash_main.o
+    0x080043f0   0x080043f0   0x00000040   Code   RO           81    .text.FLASH_init    flash_main.o
+    0x08004430   0x08004430   0x000000c6   Code   RO           99    .text.Flash_DoubleSec_Erase  flash_main.o
+    0x080044f6   0x080044f6   0x00000002   PAD
+    0x080044f8   0x080044f8   0x00000042   Code   RO           97    .text.Flash_SingleSec_Erase  flash_main.o
+    0x0800453a   0x0800453a   0x00000002   PAD
+    0x0800453c   0x0800453c   0x0000003c   Code   RO            4    .text.Gpio_init     main.o
+    0x08004578   0x08004578   0x00000018   Code   RO           40    .text.GpioclockEnable  ports_init.o
+    0x08004590   0x08004590   0x000002ce   Code   RO           15    .text.HAL_GPIO_Init  stm32h5xx_hal_gpio.o
+    0x0800485e   0x0800485e   0x00000002   PAD
+    0x08004860   0x08004860   0x00000026   Code   RO           25    .text.HAL_GPIO_TogglePin  stm32h5xx_hal_gpio.o
+    0x08004886   0x08004886   0x00000002   PAD
+    0x08004888   0x08004888   0x0000002c   Code   RO           21    .text.HAL_GPIO_WritePin  stm32h5xx_hal_gpio.o
+    0x080048b4   0x080048b4   0x00000028   Code   RO           38    .text.Init          ports_init.o
+    0x080048dc   0x080048dc   0x00000064   Code   RO           91    .text.Multi_Word_write  flash_main.o
+    0x08004940   0x08004940   0x000000ba   Code   RO          375    .text.NVMToolClear  nvm_driver.o
+    0x080049fa   0x080049fa   0x00000002   PAD
+    0x080049fc   0x080049fc   0x000000ec   Code   RO          371    .text.NVM_AddUpdate  nvm_driver.o
+    0x08004ae8   0x08004ae8   0x00000048   Code   RO          347    .text.NVM_BlockData_RxCbk  nvm_driver.o
+    0x08004b30   0x08004b30   0x00000078   Code   RO          353    .text.NVM_Block_Read_FUN  nvm_driver.o
+    0x08004ba8   0x08004ba8   0x0000003e   Code   RO          361    .text.NVM_Block_Write  nvm_driver.o
+    0x08004be6   0x08004be6   0x00000002   PAD
+    0x08004be8   0x08004be8   0x00000008   Code   RO          349    .text.NVM_Init      nvm_driver.o
+    0x08004bf0   0x08004bf0   0x0000004a   Code   RO          363    .text.NVM_Multi_Word_write  nvm_driver.o
+    0x08004c3a   0x08004c3a   0x00000002   PAD
+    0x08004c3c   0x08004c3c   0x000000f4   Code   RO          373    .text.NVM_ReOrg     nvm_driver.o
+    0x08004d30   0x08004d30   0x00000034   Code   RO          351    .text.NVM_Scan_Block  nvm_driver.o
+    0x08004d64   0x08004d64   0x00000062   Code   RO          377    .text.NVM_VersionUpdate  nvm_driver.o
+    0x08004dc6   0x08004dc6   0x00000002   PAD
+    0x08004dc8   0x08004dc8   0x00000040   Code   RO          401    .text.NVS_Block_Read  nvs_driver.o
+    0x08004e08   0x08004e08   0x00000008   Code   RO          397    .text.NVS_Init      nvs_driver.o
+    0x08004e10   0x08004e10   0x00000056   Code   RO          399    .text.NVS_Scan_Block  nvs_driver.o
+    0x08004e66   0x08004e66   0x00000002   PAD
+    0x08004e68   0x08004e68   0x00000012   Code   RO          116    .text.PWREx_EnableBkupRAM_REG  backup_ram.o
+    0x08004e7a   0x08004e7a   0x00000002   PAD
+    0x08004e7c   0x08004e7c   0x00000012   Code   RO          114    .text.PWR_DisableBkUpAccess  backup_ram.o
+    0x08004e8e   0x08004e8e   0x00000002   PAD
+    0x08004e90   0x08004e90   0x00000012   Code   RO          112    .text.PWR_EnableBkUpAccess  backup_ram.o
+    0x08004ea2   0x08004ea2   0x00000002   PAD
+    0x08004ea4   0x08004ea4   0x000000ac   Code   RO          355    .text.Read_Apps_Header  nvm_driver.o
+    0x08004f50   0x08004f50   0x0000011a   Code   RO          426    .text.SystemInit    system_stm32h5xx.o
+    0x0800506a   0x0800506a   0x00000002   PAD
+    0x0800506c   0x0800506c   0x00000038   Code   RO           59    .text.USART3_IRQHandler  uart_driver.o
+    0x080050a4   0x080050a4   0x00000032   Code   RO           61    .text.USART3_Main   uart_driver.o
+    0x080050d6   0x080050d6   0x00000002   PAD
+    0x080050d8   0x080050d8   0x00000062   Code   RO           55    .text.Uar3t_Tx_Byte  uart_driver.o
+    0x0800513a   0x0800513a   0x00000002   PAD
+    0x0800513c   0x0800513c   0x0000003e   Code   RO           42    .text.Uart3_IO_init  ports_init.o
+    0x0800517a   0x0800517a   0x00000002   PAD
+    0x0800517c   0x0800517c   0x00000074   Code   RO           51    .text.Uart3_Init    uart_driver.o
+    0x080051f0   0x080051f0   0x000000b8   Code   RO          367    .text.Update_Nvm_Block  nvm_driver.o
+    0x080052a8   0x080052a8   0x00000040   Code   RO          103    .text.VerifyFlashErase  flash_main.o
+    0x080052e8   0x080052e8   0x00000030   Code   RO           53    .text.__NVIC_EnableIRQ  uart_driver.o
+    0x08005318   0x08005318   0x00000038   Code   RO          122    .text.bkSRAM_Init   backup_ram.o
+    0x08005350   0x08005350   0x00000034   Code   RO          118    .text.bkSRAM_ReadVariable  backup_ram.o
+    0x08005384   0x08005384   0x00000032   Code   RO          120    .text.bkSRAM_WriteVariable  backup_ram.o
+    0x080053b6   0x080053b6   0x00000002   PAD
+    0x080053b8   0x080053b8   0x00000034   Code   RO           63    .text.debugMain     uart_driver.o
+    0x080053ec   0x080053ec   0x00000026   Code   RO           36    .text.delay         ports_init.o
+    0x08005412   0x08005412   0x00000002   PAD
+    0x08005414   0x08005414   0x0000007a   Code   RO            2    .text.main          main.o
+    0x0800548e   0x0800548e   0x0000001a   Code   RO          540    x$fpl$fpinit        fz_wm.l(fpinit.o)
+    0x080054a8   0x080054a8   0x0000000a   Data   RO          136    .rodata.str1.1      boot_transmit_uc_to_tool.o
+    0x080054b2   0x080054b2   0x00000004   Data   RO          311    .rodata.str1.1      debug.o
+    0x080054b6   0x080054b6   0x00000002   PAD
+    0x080054b8   0x080054b8   0x00000020   Data   RO          615    Region$$Table       anon$$obj.o
+
+
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x080054d8, Size: 0x00000ba0, Max: 0x00004000, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x20000000   0x080054d8   0x00000048   Data   RW          386    .data.Ck_Hdr        nvm_driver.o
+    0x20000048   0x08005520   0x00000020   Data   RW          338    .data.ComIfRxMsgCfg_Boot  comif_config.o
+    0x20000068   0x08005540   0x00000028   Data   RW          335    .data.ComIfTxMsgCfg_Boot  comif_config.o
+    0x20000090   0x08005568   0x00000020   Data   RW          340    .data.ComIf_ChannelConfig  comif_config.o
+    0x200000b0   0x08005588   0x0000002c   Data   RW          385    .data.NVM_Block     nvm_driver.o
+    0x200000dc   0x080055b4   0x00000018   Data   RW          409    .data.Nvs_Config_Block  nvs_driver.o
+    0x200000f4   0x080055cc   0x00000004   PAD
+    0x200000f8        -       0x00000060   Zero   RW          480    .bss                c_w.l(libspace.o)
+    0x20000158        -       0x00000001   Zero   RW          152    .bss.BootCmdReceiveVerifyFlag  bootloader_main.o
+    0x20000159        -       0x00000015   Zero   RW          151    .bss.Boot_Rx_Data   bootloader_main.o
+    0x2000016e        -       0x00000001   Zero   RW          150    .bss.Boot_State_Control  bootloader_main.o
+    0x2000016f        -       0x00000001   Zero   RW          153    .bss.Boot_Tx_Data   bootloader_main.o
+    0x20000170        -       0x00000004   Zero   RW            6    .bss.Boot_or_App    main.o
+    0x20000174        -       0x00000064   Zero   RW          324    .bss.BufferArray_Debug  buffer_config.o
+    0x200001d8        -       0x00000064   Zero   RW          323    .bss.BufferArray_UART3  buffer_config.o
+    0x2000023c        -       0x00000010   Zero   RW          179    .bss.Buffers        buffer.o
+    0x2000024c        -       0x00000001   Zero   RW          155    .bss.ChooseIndividualErase_Flg  bootloader_main.o
+    0x2000024d        -       0x00000001   Zero   RW          158    .bss.ChooseNvsFlag  bootloader_main.o
+    0x2000024e        -       0x000000ff   Zero   RW          339    .bss.ComIfChannelTxBuffer_Boot  comif_config.o
+    0x2000034d        -       0x00000016   Zero   RW          336    .bss.ComIf_RxMessageBuffer_Boot_Boot_Req_Data  comif_config.o
+    0x20000363        -       0x000000f8   Zero   RW          337    .bss.ComIf_RxMessageBuffer_Boot_NVM_BlockData  comif_config.o
+    0x2000045b        -       0x00000001   Zero   RW          333    .bss.ComIf_ShadowBuffer_Boot_Boot_Response  comif_config.o
+    0x2000045c        -       0x000000f7   Zero   RW          334    .bss.ComIf_ShadowBuffer_Boot_Nvm_Response  comif_config.o
+    0x20000553        -       0x00000001   Zero   RW          156    .bss.Flash_Erase_Flag  bootloader_main.o
+    0x20000554        -       0x00000001   Zero   RW          159    .bss.Flash_Write_Flag  bootloader_main.o
+    0x20000555        -       0x00000001   Zero   RW          157    .bss.IndividualEraseVerifyFlag  bootloader_main.o
+    0x20000556   0x080055cc   0x00000002   PAD
+    0x20000558        -       0x00000004   Zero   RW          388    .bss.Last_NVMBlock_Add  nvm_driver.o
+    0x2000055c        -       0x00000001   Zero   RW          384    .bss.NVM_RxFlag     nvm_driver.o
+    0x2000055d        -       0x00000001   Zero   RW          383    .bss.NVM_Sec2_EraseVerify_Flg  nvm_driver.o
+    0x2000055e        -       0x00000007   Zero   RW          387    .bss.NvmRxData      nvm_driver.o
+    0x20000565        -       0x00000001   Zero   RW          135    .bss.UART_BUSY_Flag  boot_transmit_uc_to_tool.o
+    0x20000566        -       0x00000001   Zero   RW           65    .bss.UART_Init_bit  uart_driver.o
+    0x20000567        -       0x00000001   Zero   RW          154    .bss.cnt            bootloader_main.o
+    0x20000568        -       0x00000032   Zero   RW          313    .bss.gs_DebugAggBuffer  debug.o
+    0x2000059a        -       0x00000001   Zero   RW          312    .bss.gs_DebugAggCurIndex  debug.o
+    0x2000059b   0x080055cc   0x00000005   PAD
+    0x200005a0        -       0x00000200   Zero   RW          417    HEAP                startup_stm32h503xx.o
+    0x200007a0        -       0x00000400   Zero   RW          416    STACK               startup_stm32h503xx.o
+
+
+==============================================================================
+
+Image component sizes
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
+
+       212          0          0          0          0       3284   backup_ram.o
+       202          0         10          0          1       1302   boot_transmit_uc_to_tool.o
+      2590         12          0          0         30       5369   bootloader_main.o
+       484          0          0          0         16       2443   buffer.o
+        42          0          0          0        200        675   buffer_config.o
+        34          0          0          0          0       3406   comif.o
+       144          0          0          0          0        966   comif_calcchecksum.o
+        22          0          0        104        773       3150   comif_config.o
+      1130          0          0          0          0       4962   comif_rxindication.o
+      1820          0          0          0          0       6576   comif_transmit.o
+       260          0          0          0          0       3627   comif_txshadowbuffer.o
+       408          0          4          0         51       3016   debug.o
+      1130          0          0          0          0       5057   flash_main.o
+       182          0          0          0          4       2246   main.o
+      1924          0          0        116         13       7172   nvm_driver.o
+       158          0          0         24          0       2387   nvs_driver.o
+       164          0          0          0          0       3165   ports_init.o
+        68         28        600          0       1536       1048   startup_stm32h503xx.o
+       800          0          0          0          0       4400   stm32h5xx_hal_gpio.o
+       282          0          0          0          0       5435   system_stm32h5xx.o
+       420          0          0          0          1       4848   uart_driver.o
+
+    ----------------------------------------------------------------------
+     12570         40        648        244       2636      74534   Object Totals
+         0          0         32          0          0          0   (incl. Generated)
+        94          0          2          0         11          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Member Name
+
+         8          0          0          0          0         68   __main.o
+         0          0          0          0          0          0   __rtentry.o
+        12          0          0          0          0          0   __rtentry2.o
+         6          0          0          0          0          0   __rtentry4.o
+        52          8          0          0          0          0   __scatter.o
+        26          0          0          0          0          0   __scatter_copy.o
+        28          0          0          0          0          0   __scatter_zi.o
+        18          0          0          0          0         80   exit.o
+         6          0          0          0          0        152   heapauxi.o
+         0          0          0          0          0          0   indicate_semi.o
+         2          0          0          0          0          0   libinit.o
+         6          0          0          0          0          0   libinit2.o
+         2          0          0          0          0          0   libshutdown.o
+         2          0          0          0          0          0   libshutdown2.o
+         8          4          0          0         96         68   libspace.o
+         2          0          0          0          0          0   rtexit.o
+        10          0          0          0          0          0   rtexit2.o
+        12          4          0          0          0         68   sys_exit.o
+        74          0          0          0          0         80   sys_stackheap_outer.o
+         2          0          0          0          0         68   use_no_semi.o
+        26          0          0          0          0        116   fpinit.o
+
+    ----------------------------------------------------------------------
+       310         16          0          0         96        700   Library Totals
+         8          0          0          0          0          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Name
+
+       276         16          0          0         96        584   c_w.l
+        26          0          0          0          0        116   fz_wm.l
+
+    ----------------------------------------------------------------------
+       310         16          0          0         96        700   Library Totals
+
+    ----------------------------------------------------------------------
+
+==============================================================================
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
+
+     12880         56        648        244       2732      74698   Grand Totals
+     12880         56        648        244       2732      74698   ELF Image Totals
+     12880         56        648        244          0          0   ROM Totals
+
+==============================================================================
+
+    Total RO  Size (Code + RO Data)                13528 (  13.21kB)
+    Total RW  Size (RW Data + ZI Data)              2976 (   2.91kB)
+    Total ROM Size (Code + RO Data + RW Data)      13772 (  13.45kB)
+
+==============================================================================
+

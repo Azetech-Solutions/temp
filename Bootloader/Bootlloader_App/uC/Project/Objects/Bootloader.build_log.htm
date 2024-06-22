@@ -1,0 +1,96 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.37.0.0
+Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: azetech solution, azetech, LIC=UJWP0-BJ05K-63YMB-24A8M-34TUS-5CSYV
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.37.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.18
+Assembler:       Armasm.exe V6.18
+Linker/Locator:  ArmLink.exe V6.18
+Library Manager: ArmAr.exe V6.18
+Hex Converter:   FromElf.exe V6.18
+CPU DLL:         
+Dialog DLL:      
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.9.0
+Dialog DLL:      TCM.DLL V1.56.1.0
+ 
+<h2>Project:</h2>
+D:\Mohan\Class\Bootlodaer\STM32H5\Boot_Git\03-06-24\temp\Bootloader\Bootlloader_App\uC\Project\Bootloader.uvprojx
+Project File Date:  06/11/2024
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.18', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
+Rebuild target 'Target 1'
+compiling main.c...
+compiling stm32h5xx_hal_gpio.c...
+compiling Ports_init.c...
+compiling PLL_Driver.c...
+compiling Uart_Driver.c...
+compiling Flash_Main.c...
+compiling Boot_Transmit_uC_To_Tool.c...
+compiling Backup_ram.c...
+compiling Buffer.c...
+../Application/Bootloader_Main.c(233): warning: incompatible pointer types passing 'ULONG[4]' (aka 'unsigned long[4]') to parameter of type 'uint32_t *' (aka 'unsigned int *') [-Wincompatible-pointer-types]
+                                                if(Multi_Word_write(Flash_Add,Flash_data) != Flash_Add)
+                                                                              ^~~~~~~~~~
+../Drivers\Flash_Main.h(28): note: passing argument to parameter 'Data' here
+extern uint32_t Multi_Word_write(uint32_t Address,uint32_t *Data);  /* To use 4 word data write */
+                                                            ^
+1 warning generated.
+compiling Bootloader_Main.c...
+compiling ComIf.c...
+compiling ComIf_CalcChecksum.c...
+compiling ComIf_RxRequest.c...
+compiling ComIf_RxIndication.c...
+compiling ComIf_TxShadowBuffer.c...
+compiling ComIf_Transmit.c...
+compiling Debug.c...
+compiling Buffer_Config.c...
+compiling ComIf_Config.c...
+assembling startup_stm32h503xx.s...
+compiling NVM_Driver.c...
+compiling NVS_Driver.c...
+compiling system_stm32h5xx.c...
+linking...
+Program Size: Code=12880 RO-data=648 RW-data=244 ZI-data=2732  
+FromELF: creating hex file...
+".\Objects\Bootloader.axf" - 0 Error(s), 1 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                https://www.keil.com/pack/ARM.CMSIS.6.0.0.pack
+                ARM.CMSIS.6.0.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 6.0.0
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32H5xx_DFP.1.2.0.pack
+                Keil.STM32H5xx_DFP.1.2.0
+                STMicroelectronics STM32H5 Series Device Support
+   * Component: Startup Version: 1.1.0
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/_Target_1
+  C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include
+  C:/Users/Admin/AppData/Local/Arm/Packs/Keil/STM32H5xx_DFP/1.2.0/Drivers/CMSIS/Device/ST/STM32H5xx/Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:6.0.0
+
+   * Component: Keil::Device:Startup:1.1.0
+      Source file:   Drivers/CMSIS/Device/ST/STM32H5xx/Source/Templates/arm/startup_stm32h503xx.s
+      Include file:  Drivers/CMSIS/Device/ST/STM32H5xx/Include/stm32h5xx.h
+      Include file:  Drivers/CMSIS/Device/ST/STM32H5xx/Include/partition_stm32h5xx.h
+      Source file:   Drivers/CMSIS/Device/ST/STM32H5xx/Source/Templates/system_stm32h5xx.c
+Build Time Elapsed:  00:00:05
+</pre>
+</body>
+</html>

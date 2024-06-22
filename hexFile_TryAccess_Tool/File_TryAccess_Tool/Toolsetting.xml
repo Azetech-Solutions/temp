@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<settings>
+	<hexblocks>
+		<hexblock>
+			<type>1</type>
+			<sector>0</sector>
+			<sectorlength>8192</sectorlength>
+			<bank>0</bank>
+			<startaddress>134217728</startaddress>
+			<endaddress>134225920</endaddress>
+			<!-- datablock  0-> false, 1-> true -->
+			<datablock>0</datablock>
+			<!-- version info in not allocate memory in bootmanager -->
+			<versioninfo>
+				<majoroffset>134217728</majoroffset>
+				<minoroffset>134217728</minoroffset>
+				<buildoffset>134217728</buildoffset>
+				<releaseoffset>134217728</releaseoffset>
+			</versioninfo>
+		</hexblock>
+		<hexblock>
+			<type>2</type>
+			<sector>1</sector>
+			<sectorlength>16384</sectorlength>
+			<bank>0</bank>
+			<startaddress>134225920</startaddress>
+			<endaddress>134242304</endaddress>
+			<!-- datablock  0-> false, 1-> true -->
+			<datablock>0</datablock>
+			<!-- version info in not allocate memory in bootloader -->
+			<versioninfo>
+				<majoroffset>134225920</majoroffset>
+				<minoroffset>134225920</minoroffset>
+				<buildoffset>134225920</buildoffset>
+				<releaseoffset>134225920</releaseoffset>
+			</versioninfo>
+		</hexblock>
+		<hexblock>
+			<type>3</type>
+			<sector>3</sector>
+			<sectorlength>40960</sectorlength>
+			<bank>0</bank>
+			<startaddress>134242304</startaddress>
+			<endaddress>134283264</endaddress>
+			<!-- datablock  0-> false, 1-> true -->
+			<datablock>0</datablock>
+			<versioninfo>
+				<majoroffset>134242336</majoroffset>
+				<minoroffset>134242340</minoroffset>
+				<buildoffset>134242344</buildoffset>
+				<releaseoffset>134242348</releaseoffset>
+			</versioninfo>
+		</hexblock>
+		<hexblock>
+			<type>4</type>
+			<sector>3</sector>
+			<sectorlength>40960</sectorlength>
+			<bank>1</bank>
+			<startaddress>134307840</startaddress>
+			<endaddress>134348800</endaddress>
+			<!-- datablock  0-> false, 1-> true code block-->
+			<datablock>0</datablock>
+			<versioninfo>
+				<majoroffset>134307872</majoroffset>
+				<minoroffset>134307876</minoroffset>
+				<buildoffset>134307880</buildoffset>
+				<releaseoffset>134307884</releaseoffset>
+			</versioninfo>
+		</hexblock>
+		<hexblock>
+			<type>5</type>
+			<sector>0</sector>
+			<sectorlength>8192</sectorlength>
+			<bank>1</bank>
+			<startaddress>134283264</startaddress>
+			<endaddress>134291456</endaddress>
+			<!-- datablock  0-> false, 1-> true Datablock-->
+			<datablock>1</datablock>
+			<versioninfo>
+				<majoroffset>134283264</majoroffset>
+				<minoroffset>134283264</minoroffset>
+				<buildoffset>134283264</buildoffset>
+				<releaseoffset>134283264</releaseoffset>
+			</versioninfo>
+		</hexblock>
+		<hexblock>
+			<type>6</type>
+			<sector>1</sector>
+			<sectorlength>16384</sectorlength>
+			<bank>1</bank>
+			<startaddress>134291456</startaddress>
+			<endaddress>134307840</endaddress>
+			<!-- datablock  0-> false, 1-> true -->
+			<datablock>1</datablock>
+			<versioninfo>
+				<majoroffset>134291456</majoroffset>
+				<minoroffset>134291456</minoroffset>
+				<buildoffset>134291456</buildoffset>
+				<releaseoffset>134291456</releaseoffset>
+			</versioninfo>
+		</hexblock>
+</hexblocks>
+
+	<comport>
+		<baudrate>9600</baudrate>
+		<databit>8</databit>
+		<stopbit>1</stopbit>
+		<paritybit>None</paritybit>
+	</comport>
+
+	<comif>
+		<tx>
+			<id>179</id>
+			<datalength>21</datalength>
+			<id>211</id>
+			<datalength>247</datalength>
+		</tx>	
+		<rx>
+			<id>181</id>
+			<datalength>1</datalength>
+			<id>213</id>
+			<datalength>256</datalength>
+		</rx>
+		<!-- channel type 0-> number, 1-> string type -->
+		<channeltype>0</channeltype>
+	</comif>
+</settings>
