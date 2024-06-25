@@ -86,36 +86,36 @@
 /* DEBUG_MEASUREMENT]] */
 
 
-/* Constants for the Tx message Nvm_Response on Boot channel */
+/* Constants for the Tx message FC_Response on Boot channel */
 
-#define ComIf_GetIndex_Boot_Nvm_Response()                   (1u)
-#define ComIf_GetLength_Boot_Nvm_Response()                  (247u)
-#define ComIf_GetShadowBuffer_Boot_Nvm_Response()            ((UBYTE *)ComIf_ShadowBuffer_Boot_Nvm_Response)
-#define ComIf_Transmit_Boot_Nvm_Response(x, y)               ComIf_Transmit(C_ComIfChannel_Boot, 1, ((void *)x), y)
-#define ComIf_ForceTransmit_Boot_Nvm_Response(x, y)          do{ComIfTxMsgCfg_Boot[1].TxFlags.ForceTransmit = TRUE; ComIf_Transmit(C_ComIfChannel_Boot, 1, ((void *)x), y); } while(0)
-#define ComIf_UpdateTxShadowBuffer_Boot_Nvm_Response(x, y)   ComIf_UpdateTxShadowBuffer(C_ComIfChannel_Boot, 1, ((void *)x), y)
-#define ComIf_TransmitFromBuffer_Boot_Nvm_Response()         ComIf_Transmit_Boot_Nvm_Response(ComIf_ShadowBuffer_Boot_Nvm_Response, 247)
-#define ComIf_ForceTransmitFromBuffer_Boot_Nvm_Response()    ComIf_ForceTransmit_Boot_Nvm_Response(ComIf_ShadowBuffer_Boot_Nvm_Response, 247)
+#define ComIf_GetIndex_Boot_FC_Response()                   (1u)
+#define ComIf_GetLength_Boot_FC_Response()                  (247u)
+#define ComIf_GetShadowBuffer_Boot_FC_Response()            ((UBYTE *)ComIf_ShadowBuffer_Boot_FC_Response)
+#define ComIf_Transmit_Boot_FC_Response(x, y)               ComIf_Transmit(C_ComIfChannel_Boot, 1, ((void *)x), y)
+#define ComIf_ForceTransmit_Boot_FC_Response(x, y)          do{ComIfTxMsgCfg_Boot[1].TxFlags.ForceTransmit = TRUE; ComIf_Transmit(C_ComIfChannel_Boot, 1, ((void *)x), y); } while(0)
+#define ComIf_UpdateTxShadowBuffer_Boot_FC_Response(x, y)   ComIf_UpdateTxShadowBuffer(C_ComIfChannel_Boot, 1, ((void *)x), y)
+#define ComIf_TransmitFromBuffer_Boot_FC_Response()         ComIf_Transmit_Boot_FC_Response(ComIf_ShadowBuffer_Boot_FC_Response, 247)
+#define ComIf_ForceTransmitFromBuffer_Boot_FC_Response()    ComIf_ForceTransmit_Boot_FC_Response(ComIf_ShadowBuffer_Boot_FC_Response, 247)
 
-/* Debug Measurement Variables for Nvm_Response on Boot */
+/* Debug Measurement Variables for FC_Response on Boot */
 
 /* [[DEBUG_MEASUREMENT */
 /* NAME=ComIfTxMsgCfg_Boot[1].TxFlags.PendingForTransmission */
-/* MODELNAME=ComIfTxMsgCfg_Boot_Nvm_Response_PendingForTransmission */
+/* MODELNAME=ComIfTxMsgCfg_Boot_FC_Response_PendingForTransmission */
 /* SIZE=1 */
 /* HEADER=ComIf_Config.h */
 /* DEBUG_MEASUREMENT]] */
 
 /* [[DEBUG_MEASUREMENT */
 /* NAME=ComIfTxMsgCfg_Boot[1].TxFlags.PendingForConfirmation */
-/* MODELNAME=ComIfTxMsgCfg_Boot_Nvm_Response_PendingForConfirmation */
+/* MODELNAME=ComIfTxMsgCfg_Boot_FC_Response_PendingForConfirmation */
 /* SIZE=1 */
 /* HEADER=ComIf_Config.h */
 /* DEBUG_MEASUREMENT]] */
 
 /* [[DEBUG_MEASUREMENT */
 /* NAME=ComIfTxMsgCfg_Boot[1].TxFlags.AggregatedInBuffer */
-/* MODELNAME=ComIfTxMsgCfg_Boot_Nvm_Response_AggregatedInBuffer */
+/* MODELNAME=ComIfTxMsgCfg_Boot_FC_Response_AggregatedInBuffer */
 /* SIZE=1 */
 /* HEADER=ComIf_Config.h */
 /* DEBUG_MEASUREMENT]] */
@@ -133,15 +133,15 @@
 #define ComIf_IsMessageReceptionHasError_Boot_Boot_Req_Data() (ComIfRxMsgCfg_Boot[0].RxFlags.ErrorInReception)
 #define ComIf_SetMessageProcessesed_Boot_Boot_Req_Data()      ComIf_SetMessageProcessed(&(ComIfRxMsgCfg_Boot[0].RxFlags))
 
-/* Constants for the Rx message NVM_BlockData on Boot channel */
+/* Constants for the Rx message FC_RxData on Boot channel */
 
-#define ComIf_GetIndex_Boot_NVM_BlockData()                   (1u)
-#define ComIf_GetLength_Boot_NVM_BlockData()                  (247u)
-#define ComIf_GetBuffer_Boot_NVM_BlockData()                  ((UBYTE *)ComIf_RxMessageBuffer_Boot_NVM_BlockData)
-#define ComIf_GetRxFlags_Boot_NVM_BlockData()                 (ComIfRxMsgCfg_Boot[1].RxFlags)
-#define ComIf_IsNewMessageReceived_Boot_NVM_BlockData()       ((ComIfRxMsgCfg_Boot[1].RxFlags.NewMessageReceived == TRUE) && (ComIfRxMsgCfg_Boot[1].RxFlags.ReceptionStarted == FALSE))
-#define ComIf_IsMessageReceptionHasError_Boot_NVM_BlockData() (ComIfRxMsgCfg_Boot[1].RxFlags.ErrorInReception)
-#define ComIf_SetMessageProcessesed_Boot_NVM_BlockData()      ComIf_SetMessageProcessed(&(ComIfRxMsgCfg_Boot[1].RxFlags))
+#define ComIf_GetIndex_Boot_FC_RxData()                   (1u)
+#define ComIf_GetLength_Boot_FC_RxData()                  (247u)
+#define ComIf_GetBuffer_Boot_FC_RxData()                  ((UBYTE *)ComIf_RxMessageBuffer_Boot_FC_RxData)
+#define ComIf_GetRxFlags_Boot_FC_RxData()                 (ComIfRxMsgCfg_Boot[1].RxFlags)
+#define ComIf_IsNewMessageReceived_Boot_FC_RxData()       ((ComIfRxMsgCfg_Boot[1].RxFlags.NewMessageReceived == TRUE) && (ComIfRxMsgCfg_Boot[1].RxFlags.ReceptionStarted == FALSE))
+#define ComIf_IsMessageReceptionHasError_Boot_FC_RxData() (ComIfRxMsgCfg_Boot[1].RxFlags.ErrorInReception)
+#define ComIf_SetMessageProcessesed_Boot_FC_RxData()      ComIf_SetMessageProcessed(&(ComIfRxMsgCfg_Boot[1].RxFlags))
 
 
 
@@ -290,10 +290,10 @@ extern ComIf_ChannelConfigType ComIf_ChannelConfig[];
 extern ComIfTxMessageConfig ComIfTxMsgCfg_Boot[];
 extern UBYTE ComIfChannelTxBuffer_Boot[];
 extern UBYTE ComIf_ShadowBuffer_Boot_Boot_Response[];
-extern UBYTE ComIf_ShadowBuffer_Boot_Nvm_Response[];
+extern UBYTE ComIf_ShadowBuffer_Boot_FC_Response[];
 extern ComIfRxMessageConfig ComIfRxMsgCfg_Boot[];
 extern UBYTE ComIf_RxMessageBuffer_Boot_Boot_Req_Data[];
-extern UBYTE ComIf_RxMessageBuffer_Boot_NVM_BlockData[];
+extern UBYTE ComIf_RxMessageBuffer_Boot_FC_RxData[];
 
 /**********************************************************/
 /* Inline Function Definitions                            */

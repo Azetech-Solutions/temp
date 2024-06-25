@@ -8,6 +8,7 @@
 ".\objects\backup_ram.o"
 ".\objects\boot_transmit_uc_to_tool.o"
 ".\objects\bootloader_main.o"
+".\objects\flowcontrol.o"
 ".\objects\buffer.o"
 ".\objects\comif.o"
 ".\objects\comif_calcchecksum.o"

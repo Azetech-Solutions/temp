@@ -57,14 +57,14 @@ namespace File_TryAccess_Tool
             {
                 if (startcommandflag)
                 {
-                    TooldataBytemsgUpdate(dataUpdate);
-                    mcuTransmit.Transmit(mcuTransmitmessage);
+                    FlashDatabytesupdate(dataUpdate);
+                    MCUTransmitFunction.Transmit(FlashDataTransmit);
                     startcommandflag = false;
                 }
 
-                if (mcuRxData[0] == Commands.Responce_OK) 
+                if (MCUStatusRxData[0] == Commands.Responce_OK) 
                 {
-                    mcuRxData[0] = 0xFF; // reset
+                    MCUStatusRxData[0] = 0xFF; // reset
 
                     if (dataUpdate[0] == Commands.Flashstart)
                     {
@@ -80,9 +80,9 @@ namespace File_TryAccess_Tool
                         }
                     }
                 }
-                else if (mcuRxData[0] == Commands.Responce_NOTOK)
+                else if (MCUStatusRxData[0] == Commands.Responce_NOTOK)
                 {
-                    mcuRxData[0] = 0xFF; // reset
+                    MCUStatusRxData[0] = 0xFF; // reset
                     startcommandflag = true;
                 }
 
@@ -201,23 +201,23 @@ namespace File_TryAccess_Tool
                 if(nvsflg == true)
                 {
                     for (int i = 0; i < data.Length; i++)
-                    {  mcuTransmitmessage.Data[i] = data[i]; }
+                    {  FlashDataTransmit.Data[i] = data[i]; }
 
-                    mcuTransmit.Transmit(mcuTransmitmessage);
+                    MCUTransmitFunction.Transmit(FlashDataTransmit);
                     nvsDataCksum += CalculateCKsum_NVS(data);
                     nvsflg = false;
                 }
 
 
-                if (mcuRxData[0] == Commands.Responce_OK)
+                if (MCUStatusRxData[0] == Commands.Responce_OK)
                 {
-                    mcuRxData[0] = 0xFF; // reset
+                    MCUStatusRxData[0] = 0xFF; // reset
                     retval = true;
                     break;
                 }
-                else if (mcuRxData[0] == Commands.Responce_NOTOK)
+                else if (MCUStatusRxData[0] == Commands.Responce_NOTOK)
                 {
-                    mcuRxData[0] = 0xFF; // reset
+                    MCUStatusRxData[0] = 0xFF; // reset
                     nvsflg = true;
                 }
             } // while end
@@ -234,20 +234,20 @@ namespace File_TryAccess_Tool
             {
                 if (cntflg == true)
                 {
-                    TooldataBytemsgUpdate(cmd);
-                    mcuTransmit.Transmit(mcuTransmitmessage);
+                    FlashDatabytesupdate(cmd);
+                    MCUTransmitFunction.Transmit(FlashDataTransmit);
                     cntflg = false;
                 }
 
-                if (mcuRxData[0] == Commands.Responce_OK)
+                if (MCUStatusRxData[0] == Commands.Responce_OK)
                 {
-                    mcuRxData[0] = 0xFF;
+                    MCUStatusRxData[0] = 0xFF;
                     retval = true;
                     break;
                 }
-                else if (mcuRxData[0] == Commands.Responce_NOTOK)
+                else if (MCUStatusRxData[0] == Commands.Responce_NOTOK)
                 {
-                    mcuRxData[0] = 0xFF;
+                    MCUStatusRxData[0] = 0xFF;
                     cntflg = true;
                 }
             } // while end

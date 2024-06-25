@@ -16,23 +16,23 @@ namespace File_TryAccess_Tool
 
             list.Add(Commands.NVMClear);
 
-            NVMDataByteUpdate(list.ToArray());
+            FCDatabytesupdate(list.ToArray());
 
-            mcuTransmit.Transmit(mcuNvmTransmitmessage);
+            MCUTransmitFunction.Transmit(FCTransmit);
 
             Log.Message("NvmClear start");
             while(true)
             {
-                if (mcuRxData[0] == 0x00)
+                if (MCUStatusRxData[0] == 0x00)
                 {
-                    mcuRxData[0] = 0xFF;
+                    MCUStatusRxData[0] = 0xFF;
                     break;
                 }
-                else if (mcuRxData[0] == 0x01)
+                else if (MCUStatusRxData[0] == 0x01)
                 {
-                    mcuRxData[0] = 0xFF;
+                    MCUStatusRxData[0] = 0xFF;
 
-                    mcuTransmit.Transmit(mcuNvmTransmitmessage);
+                    MCUTransmitFunction.Transmit(FCTransmit);
                 }
             }
 
@@ -45,23 +45,23 @@ namespace File_TryAccess_Tool
 
             list.Add(Commands.NVMReOrg);
 
-            NVMDataByteUpdate(list.ToArray());
+            FCDatabytesupdate(list.ToArray());
 
-            mcuTransmit.Transmit(mcuNvmTransmitmessage);
+            MCUTransmitFunction.Transmit(FCTransmit);
 
             Log.Message("NvmReOrg start");
             while (true)
             {
-                if (mcuRxData[0] == 0x00)
+                if (MCUStatusRxData[0] == 0x00)
                 {
-                    mcuRxData[0] = 0xFF;
+                    MCUStatusRxData[0] = 0xFF;
                     break;
                 }
-                else if (mcuRxData[0] == 0x01)
+                else if (MCUStatusRxData[0] == 0x01)
                 {
-                    mcuRxData[0] = 0xFF;
+                    MCUStatusRxData[0] = 0xFF;
 
-                    mcuTransmit.Transmit(mcuNvmTransmitmessage);
+                    MCUTransmitFunction.Transmit(FCTransmit);
                 }
             }
 
@@ -85,9 +85,9 @@ namespace File_TryAccess_Tool
             list.Add(((byte)Add)); // 7th
 
 
-            NVMDataByteUpdate(list.ToArray());
+            FCDatabytesupdate(list.ToArray());
 
-            mcuTransmit.Transmit(mcuNvmTransmitmessage);
+            MCUTransmitFunction.Transmit(FCTransmit);
         }
     }
 }

@@ -34,7 +34,7 @@ extern void Boot_Error_Notification(ULONG Debug0, ULONG Debug1);
 UBYTE ComIfChannelTxBuffer_Boot[255];
 
 UBYTE ComIf_ShadowBuffer_Boot_Boot_Response[1];
-UBYTE ComIf_ShadowBuffer_Boot_Nvm_Response[247];
+UBYTE ComIf_ShadowBuffer_Boot_FC_Response[247];
 
 ComIfTxMessageConfig ComIfTxMsgCfg_Boot[2] = {
 	{
@@ -57,7 +57,7 @@ ComIfTxMessageConfig ComIfTxMsgCfg_Boot[2] = {
 		/* TxCbk */     NULL
 	},
 	{
-		/* Nvm_Response */
+		/* FC_Response */
 		/* ID */        0xD5,
 		/* Length */    247,
 	#ifdef COMIF_DYNAMIC_DATA_LENGTH_ENABLED
@@ -71,7 +71,7 @@ ComIfTxMessageConfig ComIfTxMsgCfg_Boot[2] = {
 							0, // AggregatedInBuffer
 							0  // PendingForConfirmation
 						},
-		/* Buffer */    ComIf_ShadowBuffer_Boot_Nvm_Response,
+		/* Buffer */    ComIf_ShadowBuffer_Boot_FC_Response,
 		/* TxConfCbk */ NULL,
 		/* TxCbk */     NULL
 	},
@@ -79,8 +79,8 @@ ComIfTxMessageConfig ComIfTxMsgCfg_Boot[2] = {
 
 extern void Boot_Req_Data_RxCbk(UBYTE Length, UBYTE *Data);
 UBYTE ComIf_RxMessageBuffer_Boot_Boot_Req_Data[22];
-extern void NVM_BlockData_RxCbk(UBYTE Length, UBYTE *Data);
-UBYTE ComIf_RxMessageBuffer_Boot_NVM_BlockData[248];
+extern void FC_RxCbk(UBYTE Length, UBYTE *Data);
+UBYTE ComIf_RxMessageBuffer_Boot_FC_RxData[248];
 
 ComIfRxMessageConfig ComIfRxMsgCfg_Boot[2] = {
 	{
@@ -100,7 +100,7 @@ ComIfRxMessageConfig ComIfRxMsgCfg_Boot[2] = {
 		/* RxCbk */   &Boot_Req_Data_RxCbk
 	},
 	{
-		/* NVM_BlockData */
+		/* FC_RxData */
 		/* ID */      0xD3,
 		/* Length */  247,
 		/* CHKLEN */  1,
@@ -112,8 +112,8 @@ ComIfRxMessageConfig ComIfRxMsgCfg_Boot[2] = {
 						0  // RxRequestPlaced
 					  },
 		/* RxngIdx */ 0,
-		/* Buffer */  ComIf_RxMessageBuffer_Boot_NVM_BlockData,
-		/* RxCbk */   &NVM_BlockData_RxCbk
+		/* Buffer */  ComIf_RxMessageBuffer_Boot_FC_RxData,
+		/* RxCbk */   &FC_RxCbk
 	},
 };
 

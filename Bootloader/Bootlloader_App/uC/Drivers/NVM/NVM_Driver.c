@@ -1,9 +1,9 @@
 #include "NVM_Driver.h"
+#include "stm32h5xx_hal_gpio.h"
+#include "Flowcontrol.h"
 
-
-NVMRxData_ST NvmRxData;
+//Flg
 uint8_t NVM_Sec2_EraseVerify_Flg = FALSE;
-uint8_t NVM_RxFlag = FALSE;
 
 volatile uint32_t Last_NVMBlock_Add;  //this variable is used to find the last valid NVM address
 
@@ -75,17 +75,7 @@ Check_App_Header_ST Ck_Hdr[TOTAL_VERSION_HEADER]={
 	},
 };
 
-/***************************************************************************************/
 
-void NVM_BlockData_RxCbk(UBYTE Length, UBYTE *Data)
-{
-	for(int i=0;i<Length;i++)
-	{
-		NvmRxData.Bytes[i] = *(Data++);
-	}
-	NVM_RxFlag = TRUE;
-	//Debug_SendString("nvmOK\n");
-}
 /***************************************************************************************/
 
 void NVM_Init(void)
@@ -447,10 +437,8 @@ void ChkNVMApplication(uint32_t Add)
 uint8_t NvmTool_Update()
 {
 	uint8_t retval = 0;
-	NVM_Data_Config_ST RxUpt;
-	NVMRxData_ST *rx = &NvmRxData;
 	
-//	if(NVM_RxFlag == TRUE)
+//	if(FcRxFlag == TRUE)
 //	{
 //		RxUpt.NVM_S_address  = ((rx->StAdd1<<24) |(rx->StAdd2 << 16) |(rx->StAdd3 << 8)|(rx->StAdd4));
 //		
@@ -474,49 +462,12 @@ uint8_t NvmTool_Update()
 //		
 //		if ( NVM_Multi_Word_write(RxUpt.NVM_S_address,&RxUpt.NVM_Header,NVM_ONE_BLOCK_SIZE) )
 //		{
-//			retval = 1; NVM_RxFlag = FALSE;
+//			retval = 1; FcRxFlag = FALSE;
 //		}
-//		else { retval =0; NVM_RxFlag = FALSE; }
+//		else { retval =0; FcRxFlag = FALSE; }
 //	}
 	
 	return retval;
 }
 
 /***************************************************************************************/
-uint32_t nvmverifyadd = 0;
-uint8_t NVMData_Transmit()
-{
-	uint8_t retval=0;
-	
-	uint32_t SAdd = 0x08016300; //NVM_SECTOR_ONE_START_ADDRESS;
-	uint8_t *Dta = ComIf_GetShadowBuffer_Boot_Nvm_Response();
-	
-	NVM_Data_Config_ST Nvm_Tx;
-	
-	uint8_t buff[247]={0};
-	
-	buff[0] = 0;
-	buff[1] = 0;
-	buff[2] = 0;
-	
-	uint8_t i=3,cnt=0;
-	
-			while(cnt < 61)
-			{				
-					buff[i]   = (uint8_t) ((*(uint32_t*)(SAdd)) >> 24);
-					buff[i+1] = (uint8_t) ((*(uint32_t*)(SAdd)) >> 16);
-					buff[i+2] = (uint8_t) ((*(uint32_t*)(SAdd)) >> 8);
-					buff[i+3] = (uint8_t) ((*(uint32_t*)(SAdd)));
-					
-					i +=4;					
-					SAdd +=4U;
-					nvmverifyadd = SAdd;
-					cnt++;
-			}
-			
-			memcpy(Dta,buff,251);
-			
-			ComIf_TransmitFromBuffer_Boot_Nvm_Response();
-
-	return retval;
-}

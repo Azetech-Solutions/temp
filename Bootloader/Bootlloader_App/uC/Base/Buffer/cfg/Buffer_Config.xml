@@ -5,7 +5,7 @@
     <RingBuffers>
       <RingBuffer>
         <Name>UART3</Name>
-        <Length>100</Length>
+        <Length>255</Length>
         <Enabled>True</Enabled>
       </RingBuffer>
       <RingBuffer>

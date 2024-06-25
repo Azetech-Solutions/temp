@@ -30,12 +30,12 @@
 #define BUFFER_MAX_COUNT                  2
 
 /* Maximum Size of each configured Buffer */
-#define BUFFER_MAX_SIZE                   100
+#define BUFFER_MAX_SIZE                   255
 
 
 /* Buffer for UART3 */
 #define P_BUFFER_ID_UART3            0
-#define P_BUFFER_LENGTH_UART3        100
+#define P_BUFFER_LENGTH_UART3        255
 
 /* Buffer for Debug */
 #define P_BUFFER_ID_Debug            1

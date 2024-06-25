@@ -61,15 +61,15 @@ namespace File_TryAccess_Tool
             {
                 if (startcommandflag == true)
                 {
-                    TooldataBytemsgUpdate(dataUpdate);
+                    FlashDatabytesupdate(dataUpdate);
 
-                    mcuTransmit.Transmit(mcuTransmitmessage);
+                    MCUTransmitFunction.Transmit(FlashDataTransmit);
                     startcommandflag = false;
                 }
 
-                if (mcuRxData[0] == Commands.Responce_OK)
+                if (MCUStatusRxData[0] == Commands.Responce_OK)
                 {
-                    mcuRxData[0] = 0xFF; // Reset
+                    MCUStatusRxData[0] = 0xFF; // Reset
 
                     if (dataUpdate[0] == Commands.Flashstart)
                     {
@@ -95,9 +95,9 @@ namespace File_TryAccess_Tool
                         }
                     }
                 }
-                else if (mcuRxData[0] == Commands.Responce_NOTOK)
+                else if (MCUStatusRxData[0] == Commands.Responce_NOTOK)
                 {
-                    mcuRxData[0] = 0xFF; // Reset
+                    MCUStatusRxData[0] = 0xFF; // Reset
                     startcommandflag = true;
                 }
 
@@ -143,22 +143,22 @@ namespace File_TryAccess_Tool
                                             {
                                                 if (flashBaseAddress != 0)
                                                 {
-                                                    TooldataBytemsgUpdate(Hexval.Changeformat_HexDatas(Commands.FlashData, (flashBaseAddress << 16 | hexOffset), HexData));
-                                                    mcuTransmit.Transmit(mcuTransmitmessage);
+                                                    FlashDatabytesupdate(Hexval.Changeformat_HexDatas(Commands.FlashData, (flashBaseAddress << 16 | hexOffset), HexData));
+                                                    MCUTransmitFunction.Transmit(FlashDataTransmit);
 
                                                     hexCKsum += Hexval.CalculateCKsum_Hexfile(HexData);  // to calculate the total image checksum
                                                 }
                                                 change = false;
                                             }
 
-                                            if (mcuRxData[0] == Commands.Responce_OK)
+                                            if (MCUStatusRxData[0] == Commands.Responce_OK)
                                             {
-                                                mcuRxData[0] = 0xFF; //RxMessageDataIN = null;
+                                                MCUStatusRxData[0] = 0xFF; //RxMessageDataIN = null;
                                                 break;
                                             }
-                                            else if (mcuRxData[0] == Commands.Responce_NOTOK)
+                                            else if (MCUStatusRxData[0] == Commands.Responce_NOTOK)
                                             {
-                                                mcuRxData[0] = 0xFF; //RxMessageDataIN = null;
+                                                MCUStatusRxData[0] = 0xFF; //RxMessageDataIN = null;
                                                 change = true;
                                             }
                                         } // while end 
@@ -222,22 +222,22 @@ namespace File_TryAccess_Tool
             {
                 if (chg_status == true)
                 {
-                    TooldataBytemsgUpdate(flhcmpt.ToArray());
-                    mcuTransmit.Transmit(mcuTransmitmessage);
+                    FlashDatabytesupdate(flhcmpt.ToArray());
+                    MCUTransmitFunction.Transmit(FlashDataTransmit);
                     chg_status = false;
                 }
 
-                if (mcuRxData[0] == Commands.Responce_OK)
+                if (MCUStatusRxData[0] == Commands.Responce_OK)
                 {   
                     hexCKsum = 0;
-                    mcuRxData[0] = 0xFF;
+                    MCUStatusRxData[0] = 0xFF;
                     retval = true;
                     Log.Message("Flash Complete");
                     break;
                 }
-                else if (mcuRxData[0] == Commands.Responce_NOTOK)
+                else if (MCUStatusRxData[0] == Commands.Responce_NOTOK)
                 {
-                    mcuRxData[0] = 0xFF;
+                    MCUStatusRxData[0] = 0xFF;
                     chg_status = true;
                 }
             } // while end
@@ -274,12 +274,12 @@ namespace File_TryAccess_Tool
             {
                 if (headerflg == true)
                 {
-                    TooldataBytemsgUpdate( Tohelpupdateheader(memloc, AppPatrn, StAdd, EnAdd, cksum) );
-                    mcuTransmit.Transmit(mcuTransmitmessage);
+                    FlashDatabytesupdate( Tohelpupdateheader(memloc, AppPatrn, StAdd, EnAdd, cksum) );
+                    MCUTransmitFunction.Transmit(FlashDataTransmit);
                     headerflg = false;
                 }
 
-                if (mcuRxData[0] == Commands.Responce_OK)
+                if (MCUStatusRxData[0] == Commands.Responce_OK)
                 {
                     if (headerStatus == true)
                     { 
@@ -291,19 +291,19 @@ namespace File_TryAccess_Tool
                     {
                         memloc += 0x10; // to store next block in uC
 
-                        StAdd = Commands.majorVer;
-                        EnAdd = Commands.minorVer;
-                        AppPatrn = Commands.BuildVer;
-                        cksum = Commands.ReleaseVer;
+                        StAdd = Commands.AppmajorVer;
+                        EnAdd = Commands.AppminorVer;
+                        AppPatrn = Commands.AppBuildVer;
+                        cksum = Commands.AppReleaseVer;
 
-                        mcuRxData[0] = 0xFF; //RxMessageDataIN = null;
+                        MCUStatusRxData[0] = 0xFF; //RxMessageDataIN = null;
                         headerflg = true;
                         headerStatus = true;
                     }
                 }
-                else if (mcuRxData[0] == Commands.Responce_NOTOK)
+                else if (MCUStatusRxData[0] == Commands.Responce_NOTOK)
                 {
-                    mcuRxData[0] = 0xFF; //RxMessageDataIN = null;
+                    MCUStatusRxData[0] = 0xFF; //RxMessageDataIN = null;
                     headerflg = true;
                 }
 

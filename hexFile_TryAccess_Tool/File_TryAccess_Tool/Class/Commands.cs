@@ -9,10 +9,10 @@ namespace File_TryAccess_Tool
 {
     public static class Commands
     {
-        public static UInt32 majorVer = 0;
-        public static UInt32 minorVer = 0;
-        public static UInt32 BuildVer = 0;
-        public static UInt32 ReleaseVer = 0;
+        public static UInt32 AppmajorVer = 0;
+        public static UInt32 AppminorVer = 0;
+        public static UInt32 AppBuildVer = 0;
+        public static UInt32 AppReleaseVer = 0;
 
         public static byte Flashstart = 0xF5;
         public static byte Flasherase = 0xFE;

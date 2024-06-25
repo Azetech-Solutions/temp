@@ -31,7 +31,7 @@
 void delay()
 {
 	unsigned int i;
-	for(i=0;i<1000000;i++);
+	for(i=0;i<800000;i++);
 }
 
 void Init(void)

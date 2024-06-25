@@ -6,9 +6,11 @@ using System.Data;
 using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static File_TryAccess_Tool.Tooltransmit;
 
 namespace File_TryAccess_Tool
 {
@@ -17,6 +19,7 @@ namespace File_TryAccess_Tool
         private NvmDataHandling nvm;
         public NVM_Form()
         {
+
             InitializeComponent();
             nvm = new NvmDataHandling();
         }
@@ -32,8 +35,27 @@ namespace File_TryAccess_Tool
         }
 
         private void btnNVMupdate_Click(object sender, EventArgs e)
-        {
+        { 
             nvm.NvmUpdateCMD();
+        }
+
+        private void btnGetAllNvmData_Click(object sender, EventArgs e)
+        {
+            List<byte> get = new List<byte>();
+            FCRxData[2] = 0xF0;
+            byte cmd = Commands.NVMGetAlldata;
+            uint address = 0x08010000;
+            get.Add(cmd);
+            get.Add(0x00);
+            get.Add(0x00);
+            get.Add((byte)(address >> 24));
+            get.Add((byte)(address >> 16));
+            get.Add((byte)(address >> 8));
+            get.Add((byte)(address));
+
+            FCDatabytesupdate(get.ToArray());
+
+            MCUTransmitFunction.Transmit(FCTransmit);
         }
     }
 }

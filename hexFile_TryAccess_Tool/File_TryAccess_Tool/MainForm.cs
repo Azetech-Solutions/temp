@@ -75,12 +75,11 @@ namespace File_TryAccess_Tool
 
             //string data = serialPort1.ReadExisting();
 
-            //mcuTransmit.RxIndication(data);
-
+            //MCUTransmitFunction.RxIndication(data);
 
             for (int i = 0; i < data.Length; i++)
             {
-                mcuTransmit.RxIndication(data[i]);
+                MCUTransmitFunction.RxIndication(data[i]);
             }
         } // serial data rx part end
 

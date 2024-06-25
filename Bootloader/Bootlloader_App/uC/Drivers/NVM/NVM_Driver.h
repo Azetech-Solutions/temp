@@ -75,30 +75,10 @@ typedef struct _CHECK_HEADER
 	
 }Check_App_Header_ST;
 
-/************************************************************/
-typedef union _NVMRxData
-{
-	struct
-	{
-		uint8_t FrameType :4;
-		uint8_t LengthMSB1 :4;
-		uint8_t Length :8;
-		uint8_t FCAck :4;
-		uint8_t FCTiming :4;
-		uint8_t AddMSB1 :8;
-		uint8_t AddMSB2 :8;
-		uint8_t AddLSB2 :8;
-		uint8_t AddLSB1 :8;
-//		uint8_t NvmData[240];
-	};
-	uint8_t Bytes[3];
-	
-}NVMRxData_ST;
 
+/************************************************************/
 extern NVM_Data_Config_ST NVM_Block;
 extern Check_App_Header_ST Ck_Hdr[];
-
-extern NVMRxData_ST NvmRxData;
 
 /* use to find the last NVM block Address */
 extern volatile uint32_t Last_NVMBlock_Add;
@@ -122,22 +102,17 @@ extern uint32_t NVM_Multi_Word_write(uint32_t Address,uint32_t *Data,uint32_t Si
 
 /* New NVM Data's are Updating */
 extern uint8_t Update_Nvm_Block(uint32_t Add);
-extern uint32_t ChkAppHeader_ChkSum();
 extern void NVM_VersionUpdate();
 extern void ChkNVMApplication(uint32_t Add);
 extern uint32_t NVM_AddUpdate(uint32_t Blk_add);
-extern uint8_t NVM_ReOrg();
-
 
 /* This function is read the Headers of the APP1 & APP2 */
 extern void Read_Apps_Header(void);
+extern uint32_t ChkAppHeader_ChkSum();
 
-extern void NVM_BlockData_RxCbk(UBYTE Length, UBYTE *Data);
-
-extern uint8_t NVMData_Transmit();
+extern uint8_t NVM_ReOrg();
 extern uint8_t NvmTool_Update();
 extern uint8_t NVMToolClear();
-extern uint8_t NVM_RxFlag;
 
 extern uint32_t App_Image_Chksum_calculation(uint32_t Add);  // this api not used anywhere
 

@@ -13,6 +13,7 @@
 #define ADDRESSES_HANDLING_H   "..\Application\Addresses_Handling.h"
 #define BOOTLOADER_MAIN_H   "..\Application\Bootloader_Main.h"
 #define BOOT_TRANSMIT_UC_TO_TOOL_H   "..\Application\Boot_Transmit_uC_To_Tool.h"
+#define FLOWCONTROL_H   "..\Application\Flowcontrol.h"
 #define PLATFORM_TYPES_H   "..\Base\Platform_Types.h"
 #define BUFFER_H   "..\Base\Buffer\api\Buffer.h"
 #define COMIF_H   "..\Base\ComIf\api\ComIf.h"

@@ -21,7 +21,7 @@
             <EnableAggregation>False</EnableAggregation>
           </TxMessage>
           <TxMessage>
-            <Name>Nvm_Response</Name>
+            <Name>FC_Response</Name>
             <ID>213</ID>
             <Length>247</Length>
             <ChecksumLength>1</ChecksumLength>
@@ -37,10 +37,10 @@
             <ChecksumLength>1</ChecksumLength>
           </RxMessage>
           <RxMessage>
-            <Name>NVM_BlockData</Name>
+            <Name>FC_RxData</Name>
             <ID>211</ID>
             <Length>247</Length>
-            <RxCallback>NVM_BlockData_RxCbk</RxCallback>
+            <RxCallback>FC_RxCbk</RxCallback>
             <ChecksumLength>1</ChecksumLength>
           </RxMessage>
         </RxMessages>

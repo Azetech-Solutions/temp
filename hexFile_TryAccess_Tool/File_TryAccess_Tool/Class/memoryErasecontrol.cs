@@ -18,20 +18,20 @@ namespace File_TryAccess_Tool
             {
                 if (eraseFlag == true)
                 {
-                    TooldataBytemsgUpdate(data);
-                    mcuTransmit.Transmit(mcuTransmitmessage);
+                    FlashDatabytesupdate(data);
+                    MCUTransmitFunction.Transmit(FlashDataTransmit);
                     eraseFlag = false;
                 }
                 
-                if (mcuRxData[0] == Commands.Responce_OK)
+                if (MCUStatusRxData[0] == Commands.Responce_OK)
                 {
                     retval = true;
-                    mcuRxData[0] = 0xFF;
+                    MCUStatusRxData[0] = 0xFF;
                     break;
                 }
-                else if (mcuRxData[0] == Commands.Responce_NOTOK)
+                else if (MCUStatusRxData[0] == Commands.Responce_NOTOK)
                 {
-                    mcuRxData[0] = 0xFF;
+                    MCUStatusRxData[0] = 0xFF;
                     eraseFlag = true;
                 }
 

@@ -20,4 +20,6 @@
   ..\Drivers\Backup_ram.h ..\Drivers\Flash_Main.h \
   ..\Application\Addresses_Handling.h ..\Drivers\NVS\NVS_Driver.h \
   ..\Drivers\NVM\NVM_Driver.h \
-  ..\Drivers\Gpio_Driver\stm32h5xx_hal_gpio.h
+  ..\Drivers\Gpio_Driver\stm32h5xx_hal_gpio.h \
+  ..\Application\Flowcontrol.h ..\Drivers\Ports_init.h \
+  ..\Drivers\PLL_Driver.h

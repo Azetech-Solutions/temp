@@ -19,4 +19,5 @@
   ..\Base\Debug\api\Debug.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h \
   ..\Drivers\NVS\NVS_Driver.h ..\Drivers\NVM\NVM_Driver.h \
-  ..\Application\Addresses_Handling.h ..\Drivers\PLL_Driver.h
+  ..\Application\Addresses_Handling.h ..\Drivers\PLL_Driver.h \
+  ..\Application\Flowcontrol.h

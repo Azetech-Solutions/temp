@@ -2,6 +2,7 @@
 /****HEADER FILE INCLUTION****/
 #include "Bootloader_Main.h"
 #include "stm32h5xx_hal_gpio.h"
+#include "Flowcontrol.h"
 
 /***************************************************************************************/
 
@@ -47,16 +48,15 @@ void Boot_Main()
 {
 	Boot_RxByte_ST *Rx = &Boot_Rx_Data;
 	Boot_TxByte_ST *Tx = &Boot_Tx_Data;
-	NVMRxData_ST *NvmRx = &NvmRxData;
+	FC_RxData_ST *FcRx = &FC_RxData;
 	
-	uint8_t NVM_CMD = ((NvmRx->LengthMSB1 << 4) | NvmRx->FrameType );
-	
+	uint8_t FC_CMD = ((FcRx->LengthMSB1 << 4) | FcRx->FrameType );
 	switch(Boot_State_Control)
 	{
 		case Boot_Idle :
 		{cnt++;
 			//Debug_SendString("Idle\n");
-			if(BootCmdReceiveVerifyFlag == TRUE || NVM_RxFlag == TRUE)
+			if(BootCmdReceiveVerifyFlag == TRUE || FcRxFlag == TRUE)
 			{
 				if(Rx->Boot_command == 0xF5)
 				{
@@ -69,7 +69,7 @@ void Boot_Main()
 					ChooseIndividualErase_Flg = TRUE;
 					Boot_State_Control = Boot_Erase_Flash;
 				}
-				else if( NVM_CMD >= 0xE1 && NVM_CMD <=  0xE5)
+				else if( FC_CMD >= 0xE1 && FC_CMD <=  0xE5)
 				{
 					NVM_Block.NVM_CtrlFlg.IsNVMTrg = TRUE;  // main block handled
 					Boot_State_Control = Boot_NVM_State;
@@ -78,7 +78,7 @@ void Boot_Main()
 				{ Tx->Byte = BOOT_STATUS_NOT_OK; 
 					Boot_Res_Status(); }
 				
-				BootCmdReceiveVerifyFlag = FALSE; NVM_RxFlag = FALSE;				
+				BootCmdReceiveVerifyFlag = FALSE; FcRxFlag = FALSE;				
 			}
 //			if(cnt==10)
 //			{
@@ -380,12 +380,13 @@ void Boot_Main()
 		break;
 		case Boot_NVM_State:
 		{
-				if(NVM_CMD == 0xE1)
+				if(FC_CMD == 0xE1)
 				{
-					NVM_Block.NVM_CtrlFlg.IsGetAllData = TRUE;
+					NVM_Block.NVM_CtrlFlg.IsGetAllData = TRUE;					
 					
+					Boot_State_Control = Boot_Idle;
 				}
-				else if(NVM_CMD == 0xE2)
+				else if(FC_CMD == 0xE2)
 				{
 					NVM_Block.NVM_CtrlFlg.IsUpdateTrg = TRUE;
 //					if( NvmTool_Update())
@@ -394,7 +395,7 @@ void Boot_Main()
 //					}
 //					else { Boot_State_Control = Boot_Idle; Tx->Byte = BOOT_STATUS_NOT_OK; }
 				}
-				else if(NVM_CMD == 0xE3)
+				else if(FC_CMD == 0xE3)
 				{
 					NVM_Block.NVM_CtrlFlg.IsClearTrg = TRUE;
 					if( NVMToolClear() )
@@ -407,12 +408,12 @@ void Boot_Main()
 								 Tx->Byte = BOOT_STATUS_NOT_OK; 
 								 Boot_Res_Status(); }
 				}
-				else if(NVM_CMD == 0xE4)
+				else if(FC_CMD == 0xE4)
 				{
 					NVM_Block.NVM_CtrlFlg.IsUpdateAllTrg = TRUE;
 					
 				}
-				else if(NVM_CMD == 0xE5)
+				else if(FC_CMD == 0xE5)
 				{
 					NVM_Block.NVM_CtrlFlg.IsReorgTrg = TRUE;
 					if( NVM_ReOrg() )
