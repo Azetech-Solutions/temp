@@ -59,7 +59,7 @@ EndBSPDependencies */
 #include "usbd_cdc.h"
 #include "usbd_ctlreq.h"
 
-//#define USE_USBD_COMPOSITE
+extern uint8_t CDC_InstID;
 /** @addtogroup STM32_USB_DEVICE_LIBRARY
   * @{
   */
@@ -877,6 +877,8 @@ uint8_t USBD_CDC_ReceivePacket(USBD_HandleTypeDef *pdev)
                                  CDC_DATA_FS_OUT_PACKET_SIZE);
   }
 
+  USBD_CDC_SetTxBuffer(pdev, hcdc->RxBuffer, sizeof(hcdc->RxBuffer), CDC_InstID);
+  USBD_CDC_TransmitPacket(pdev,CDC_InstID);
   return (uint8_t)USBD_OK;
 }
 /**

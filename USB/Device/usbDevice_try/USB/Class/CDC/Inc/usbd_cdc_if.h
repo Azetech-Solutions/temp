@@ -29,7 +29,6 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-
 extern USBD_CDC_ItfTypeDef  USBD_CDC_Template_fops;
 
 /* Exported macro ------------------------------------------------------------*/

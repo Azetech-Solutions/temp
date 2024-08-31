@@ -10,6 +10,8 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include USB/Core/Src/subdir.mk
+-include USB/Class/HID/Src/subdir.mk
+-include USB/Class/CompositeBuilder/Src/subdir.mk
 -include USB/Class/CDC/Src/subdir.mk
 -include Drivers/STM32H5xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
@@ -62,8 +64,8 @@ all: main-build
 main-build: usbDevice_try.elf secondary-outputs
 
 # Tool invocations
-usbDevice_try.elf usbDevice_try.map: $(OBJS) $(USER_OBJS) D:\Mohan\Class\STM_32\CUBE_IDE\usbDevice_try\STM32H503RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "usbDevice_try.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m33 -T"D:\Mohan\Class\STM_32\CUBE_IDE\usbDevice_try\STM32H503RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="usbDevice_try.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+usbDevice_try.elf usbDevice_try.map: $(OBJS) $(USER_OBJS) D:\Mohan\Class\Bootlodaer\STM32H5\Boot_Git\29-08-24\temp\USB\Device\usbDevice_try\STM32H503RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "usbDevice_try.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m33 -T"D:\Mohan\Class\Bootlodaer\STM32H5\Boot_Git\29-08-24\temp\USB\Device\usbDevice_try\STM32H503RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="usbDevice_try.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

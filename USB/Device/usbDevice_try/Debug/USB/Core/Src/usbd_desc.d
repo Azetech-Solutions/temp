@@ -1,10 +1,6 @@
-USB/Class/CDC/Src/usbd_cdc_if_template.o: \
- ../USB/Class/CDC/Src/usbd_cdc_if_template.c \
- D:/Mohan/Class/STM_32/CUBE_IDE/usbDevice_try/USB/Class/CDC/Inc/usbd_cdc_if_template.h \
- D:/Mohan/Class/STM_32/CUBE_IDE/usbDevice_try/USB/Class/CDC/Inc/usbd_cdc.h \
- D:/Mohan/Class/STM_32/CUBE_IDE/usbDevice_try/USB/Core/Inc/usbd_ioreq.h \
- D:/Mohan/Class/STM_32/CUBE_IDE/usbDevice_try/USB/Core/Inc/usbd_def.h \
- D:/Mohan/Class/STM_32/CUBE_IDE/usbDevice_try/USB/Core/Inc/usbd_conf_template.h \
+USB/Core/Src/usbd_desc.o: ../USB/Core/Src/usbd_desc.c \
+ D:/Mohan/Class/Bootlodaer/STM32H5/Boot_Git/29-08-24/temp/USB/Device/usbDevice_try/USB/Core/Inc/usbd_core.h \
+ D:/Mohan/Class/Bootlodaer/STM32H5/Boot_Git/29-08-24/temp/USB/Device/usbDevice_try/USB/Core/Inc/usbd_conf.h \
  ../Drivers/CMSIS/Device/ST/STM32H5xx/Include/stm32h5xx.h \
  ../Drivers/CMSIS/Device/ST/STM32H5xx/Include/stm32h503xx.h \
  ../Drivers/CMSIS/Include/core_cm33.h \
@@ -32,14 +28,14 @@ USB/Class/CDC/Src/usbd_cdc_if_template.o: \
  ../Drivers/STM32H5xx_HAL_Driver/Inc/stm32h5xx_ll_usb.h \
  ../Drivers/STM32H5xx_HAL_Driver/Inc/stm32h5xx_hal_pcd_ex.h \
  ../Drivers/STM32H5xx_HAL_Driver/Inc/stm32h5xx_hal_exti.h \
- D:/Mohan/Class/STM_32/CUBE_IDE/usbDevice_try/USB/Core/Inc/usbd_core.h \
- D:/Mohan/Class/STM_32/CUBE_IDE/usbDevice_try/USB/Core/Inc/usbd_ioreq.h \
- D:/Mohan/Class/STM_32/CUBE_IDE/usbDevice_try/USB/Core/Inc/usbd_ctlreq.h
-D:/Mohan/Class/STM_32/CUBE_IDE/usbDevice_try/USB/Class/CDC/Inc/usbd_cdc_if_template.h:
-D:/Mohan/Class/STM_32/CUBE_IDE/usbDevice_try/USB/Class/CDC/Inc/usbd_cdc.h:
-D:/Mohan/Class/STM_32/CUBE_IDE/usbDevice_try/USB/Core/Inc/usbd_ioreq.h:
-D:/Mohan/Class/STM_32/CUBE_IDE/usbDevice_try/USB/Core/Inc/usbd_def.h:
-D:/Mohan/Class/STM_32/CUBE_IDE/usbDevice_try/USB/Core/Inc/usbd_conf_template.h:
+ D:/Mohan/Class/Bootlodaer/STM32H5/Boot_Git/29-08-24/temp/USB/Device/usbDevice_try/USB/Core/Inc/usbd_def.h \
+ D:/Mohan/Class/Bootlodaer/STM32H5/Boot_Git/29-08-24/temp/USB/Device/usbDevice_try/USB/Core/Inc/usbd_ioreq.h \
+ D:/Mohan/Class/Bootlodaer/STM32H5/Boot_Git/29-08-24/temp/USB/Device/usbDevice_try/USB/Core/Inc/usbd_core.h \
+ D:/Mohan/Class/Bootlodaer/STM32H5/Boot_Git/29-08-24/temp/USB/Device/usbDevice_try/USB/Core/Inc/usbd_ctlreq.h \
+ D:/Mohan/Class/Bootlodaer/STM32H5/Boot_Git/29-08-24/temp/USB/Device/usbDevice_try/USB/Core/Inc/usbd_desc.h \
+ D:/Mohan/Class/Bootlodaer/STM32H5/Boot_Git/29-08-24/temp/USB/Device/usbDevice_try/USB/Core/Inc/usbd_conf.h
+D:/Mohan/Class/Bootlodaer/STM32H5/Boot_Git/29-08-24/temp/USB/Device/usbDevice_try/USB/Core/Inc/usbd_core.h:
+D:/Mohan/Class/Bootlodaer/STM32H5/Boot_Git/29-08-24/temp/USB/Device/usbDevice_try/USB/Core/Inc/usbd_conf.h:
 ../Drivers/CMSIS/Device/ST/STM32H5xx/Include/stm32h5xx.h:
 ../Drivers/CMSIS/Device/ST/STM32H5xx/Include/stm32h503xx.h:
 ../Drivers/CMSIS/Include/core_cm33.h:
@@ -67,6 +63,9 @@ D:/Mohan/Class/STM_32/CUBE_IDE/usbDevice_try/USB/Core/Inc/usbd_conf_template.h:
 ../Drivers/STM32H5xx_HAL_Driver/Inc/stm32h5xx_ll_usb.h:
 ../Drivers/STM32H5xx_HAL_Driver/Inc/stm32h5xx_hal_pcd_ex.h:
 ../Drivers/STM32H5xx_HAL_Driver/Inc/stm32h5xx_hal_exti.h:
-D:/Mohan/Class/STM_32/CUBE_IDE/usbDevice_try/USB/Core/Inc/usbd_core.h:
-D:/Mohan/Class/STM_32/CUBE_IDE/usbDevice_try/USB/Core/Inc/usbd_ioreq.h:
-D:/Mohan/Class/STM_32/CUBE_IDE/usbDevice_try/USB/Core/Inc/usbd_ctlreq.h:
+D:/Mohan/Class/Bootlodaer/STM32H5/Boot_Git/29-08-24/temp/USB/Device/usbDevice_try/USB/Core/Inc/usbd_def.h:
+D:/Mohan/Class/Bootlodaer/STM32H5/Boot_Git/29-08-24/temp/USB/Device/usbDevice_try/USB/Core/Inc/usbd_ioreq.h:
+D:/Mohan/Class/Bootlodaer/STM32H5/Boot_Git/29-08-24/temp/USB/Device/usbDevice_try/USB/Core/Inc/usbd_core.h:
+D:/Mohan/Class/Bootlodaer/STM32H5/Boot_Git/29-08-24/temp/USB/Device/usbDevice_try/USB/Core/Inc/usbd_ctlreq.h:
+D:/Mohan/Class/Bootlodaer/STM32H5/Boot_Git/29-08-24/temp/USB/Device/usbDevice_try/USB/Core/Inc/usbd_desc.h:
+D:/Mohan/Class/Bootlodaer/STM32H5/Boot_Git/29-08-24/temp/USB/Device/usbDevice_try/USB/Core/Inc/usbd_conf.h:

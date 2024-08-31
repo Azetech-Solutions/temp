@@ -20,22 +20,21 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_core.h"
-#include "usbd_desc_template.h"
-#include "usbd_conf_template.h"
+#include "usbd_desc.h"
+#include "usbd_conf.h"
 
-extern USBD_DescriptorsTypeDef Class_Desc;
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 #define USBD_VID                      0x0483
-#define USBD_PID                      0x5750  /* Replace '0xaaaa' with your device product ID */
-#define USBD_LANGID_STRING            0x409   /* Replace '0xbbb' with your device language ID */
-#define USBD_MANUFACTURER_STRING      "STMicroelectronics" /* Add your manufacturer string */
-#define USBD_PRODUCT_HS_STRING        "Composite_HID_CDC_CDC in HS Mode" /* Add your product High Speed string */
-#define USBD_PRODUCT_FS_STRING        "Composite_HID_CDC_CDC in FS Mode" /* Add your product Full Speed string */
-#define USBD_CONFIGURATION_HS_STRING  "Composite_HID_CDC_CDC Config" /* Add your configuration High Speed string */
-#define USBD_INTERFACE_HS_STRING      "Composite_HID_CDC_CDC Interface" /* Add your Interface High Speed string */
-#define USBD_CONFIGURATION_FS_STRING  "Composite_HID_CDC_CDC Config" /* Add your configuration Full Speed string */
-#define USBD_INTERFACE_FS_STRING      "Composite_HID_CDC_CDC Interface" /* Add your Interface Full Speed string */
+#define USBD_PID                      0x5750
+#define USBD_LANGID_STRING            0x409
+#define USBD_MANUFACTURER_STRING      "STMicroelectronics"
+#define USBD_PRODUCT_HS_STRING        "Composite_HID_CDC_CDC in HS Mode"
+#define USBD_PRODUCT_FS_STRING        "Composite_HID_CDC_CDC in FS Mode"
+#define USBD_CONFIGURATION_HS_STRING  "Composite_HID_CDC_CDC Config"
+#define USBD_INTERFACE_HS_STRING      "Composite_HID_CDC_CDC Interface"
+#define USBD_CONFIGURATION_FS_STRING  "Composite_HID_CDC_CDC Config"
+#define USBD_INTERFACE_FS_STRING      "Composite_HID_CDC_CDC Interface"
 
 /* Private macro -------------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
@@ -66,7 +65,7 @@ USBD_DescriptorsTypeDef Class_Desc =
   USBD_Class_ConfigStrDescriptor,
   USBD_Class_InterfaceStrDescriptor,
 #if (USBD_CLASS_USER_STRING_DESC == 1)
-  USBD_Class_UserStrDescriptor, // USBD_Class_UserStrDescriptor
+  USBD_CLASS_UserStrDescriptor,
 #endif /* USB_CLASS_USER_STRING_DESC */
 
 #if ((USBD_LPM_ENABLED == 1) || (USBD_CLASS_BOS_ENABLED == 1))

@@ -26,5 +26,7 @@ Core/Src \
 Core/Startup \
 Drivers/STM32H5xx_HAL_Driver/Src \
 USB/Class/CDC/Src \
+USB/Class/CompositeBuilder/Src \
+USB/Class/HID/Src \
 USB/Core/Src \
 
