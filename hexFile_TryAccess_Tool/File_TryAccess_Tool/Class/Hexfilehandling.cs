@@ -347,5 +347,24 @@ namespace File_TryAccess_Tool
         }
 
 
+        public byte[] GetAppVersion(byte[] data)
+        {
+            FCDatabytesupdate(data);
+            FCTransmit.Length = (byte)data.Length;
+            MCUTransmitFunction.Transmit(FCTransmit);
+            
+            while (true)
+            {
+                if (Commands.FCrxCbkFlag == true)
+                {
+                    if (FCRxData[0] == 0xD0)
+                    {
+                        return FCRxData.ToArray();
+                    }
+                }
+               
+            }
+        }
+
     }
 }

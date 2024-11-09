@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,7 @@ namespace File_TryAccess_Tool
             setVerinfo = x.GetElementsByTagName("versioninfo");
             setComport = x.GetElementsByTagName("comport");
             setComiflist = x.GetElementsByTagName("comif");
+            //string path = Directory.GetCurrentDirectory() + @"Toolsetting.xml";
         }
         
     }

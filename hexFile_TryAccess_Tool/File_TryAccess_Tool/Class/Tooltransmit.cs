@@ -3,6 +3,7 @@ using System;
 using System.IO.Ports;
 using static File_TryAccess_Tool.Xmlfilehandling;
 using static File_TryAccess_Tool.Log;
+using System.Collections.Generic;
 
 namespace File_TryAccess_Tool
 {
@@ -17,12 +18,19 @@ namespace File_TryAccess_Tool
 
         public static byte[] MCUStatusRxData = new byte[1] {0xFF};
 
-        public static byte[] FCRxData = new byte[247] ;    
+        public static List<byte> FCRxData = new List<byte>();
         public static void TooltransmitRegister(SerialPort s)
+        {
+            ComifConfig();
+            serialPort1 = s;            
+        } // end
+
+
+        private static void ComifConfig()
         {
             //channel  //
             MCUTransmitFunction = new Channel("MCUTransmitFunction", (ChannelType)Enum.Parse(typeof(ChannelType), setComiflist[0].ChildNodes[3].InnerText), // channelType is set based on xml file
-                                        FlashDataTransmitTriggerfunction, MCUDataTransmitErrornotify);
+                                        MCUDataTransmitfunction, MCUDataTransmitErrornotify);
             // Flash tx 
             FlashDataTransmit = new TxMessage((byte)Convert.ToInt16(setComiflist[0].ChildNodes[0].ChildNodes[0].InnerText),  //set the TX id based on Xml file
                                                 (byte)Convert.ToInt16(setComiflist[0].ChildNodes[0].ChildNodes[1].InnerText)); //Set the Tx Length based on Xml file
@@ -30,25 +38,44 @@ namespace File_TryAccess_Tool
             MCUStatus = new RxMessage((byte)Convert.ToInt16(setComiflist[0].ChildNodes[1].ChildNodes[0].InnerText),   //set the RX id based on Xml file
                                             (byte)Convert.ToInt16(setComiflist[0].ChildNodes[1].ChildNodes[1].InnerText), MCUStatus_Rxcbk);  //Set the Rx Length based on Xml file
             // FC tx
-            FCTransmit = new TxMessage(0xD3,247);
+            FCTransmit = new TxMessage(0xD3, 247);
             // FC rx
-            FCReceive = new RxMessage(0xD5, 247, FCDataRx);
+            FCReceive = new RxMessage(0xD5, 255, FCData_Rxcbk);
+            FCReceive.EnableDynamicLength = true;
+
+            // rx message register
             MCUTransmitFunction.RegisterRxMessage(MCUStatus);
             MCUTransmitFunction.RegisterRxMessage(FCReceive);
-            //serialport 
-            serialPort1 = s;
-        } // end
+            //serialport            
+        }
 
-        private static void FCDataRx(byte Length, byte[] Data)
+        #region Serial receive Part 
+        //private static void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        //{
+        //    ushort len = (ushort)serialPort1.BytesToRead;
+        //    byte[] data = new byte[len];
+
+        //    serialPort1.Read(data, 0, data.Length);
+
+        //    for (ushort i = 0; i < data.Length; i++)
+        //    {
+        //        MCUTransmitFunction.RxIndication(data[i]);
+        //    }
+
+        //    //string data = serialPort1.ReadExisting();
+        //    //MCUTransmitFunction.RxIndication(data);
+        //} // serial data rx part end
+
+        #endregion
+
+        private static void FCData_Rxcbk(byte Length, byte[] Data)
         {
-            //FCRxData[2] = 0xF0;
-            //byte cnt = 0;
+            FCRxData.Clear();
             for (int i = 0; i < Length; i++)
             {
-                FCRxData[i] = Data[i];
-                //Log.Message( " byte "+cnt.ToString()+"  " +Data[i].ToString()); // to check this data properly received or not
-                //cnt++;
+                FCRxData.Add(Data[i]);    
             }
+            Commands.FCrxCbkFlag = true;
         } // end
 
         public static void MCUStatus_Rxcbk(byte Length, byte[] Data)
@@ -61,10 +88,10 @@ namespace File_TryAccess_Tool
 
         public static void MCUDataTransmitErrornotify(uint Debug0, uint Debug1)
         {
-            Log.Error($"Debug0 -{Debug0}, Debug1 -{Debug1}");
+            Log.Error($"Debug0 -{Debug0.ToString("X2")}, Debug1 -{Debug1.ToString("X2")}");
         } // end
 
-        public static void FlashDataTransmitTriggerfunction(ushort Length, byte[] Data)
+        public static void MCUDataTransmitfunction(ushort Length, byte[] Data)
         {
             serialPort1.Write(Data, 0, Length);
         } // end

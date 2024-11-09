@@ -14,26 +14,40 @@ namespace File_TryAccess_Tool
         public static UInt32 AppBuildVer = 0;
         public static UInt32 AppReleaseVer = 0;
 
-        public static byte Flashstart = 0xF5;
-        public static byte Flasherase = 0xFE;
-        public static byte FlashData = 0xFD;
-        public static byte Flashcomplete = 0xFC;
-        public static byte ChooseFlashMode = 0xFB;
-        public static byte ChooseNVSMode = 0xFA;
+        public const byte Flashstart = 0xF5;
+        public const byte Flasherase = 0xFE;
+        public const byte FlashData = 0xFD;
+        public const byte Flashcomplete = 0xFC;
+        public const byte ChooseFlashMode = 0xFB;
 
-        public static byte Responce_OK = 0x00;
-        public static byte Responce_NOTOK = 0x01;
+        public const byte Responce_OK = 0x00;
+        public const byte Responce_NOTOK = 0x01;
 
-        public static UInt32 APP1_Pattern = 0xA1A1A1A1;
-        public static UInt32 APP2_Pattern = 0xA2A2A2A2;
+        public const UInt32 APP1_Pattern = 0xA1A1A1A1;
+        public const UInt32 APP2_Pattern = 0xA2A2A2A2;
 
-        public static byte NVMGetAlldata = 0xE1;
-        public static byte NVMUpdate = 0xE2;
-        public static byte NVMClear = 0xE3;
-        public static byte NVMUpdateAlldata = 0xE4;
-        public static byte NVMReOrg = 0xE5;
+        public const byte NVMGetAlldata = 0xE1;
+        public const byte NVMUpdate = 0xE2;
+        public const byte NVMClear = 0xE3;
+        public const byte NVMUpdateAlldata = 0xE4;
+        public const byte NVMReOrg = 0xE5;
 
+        public const byte NVSstartCMD = 0xFA;
+        public static uint NVS_Pattern = 0xC1C1C1C1;
 
+        public const byte FCSingleFrame = 0;
+        public const byte FCFirstFrame = 1;
+        public const byte FCConsecutiveFrame = 2;
+        public const byte FCFlowcontrolFrame = 3;
+
+        public static bool FCrxCbkFlag = false;
+
+        public const byte FCSendstatus = 0;
+        public const byte FCWaitstatus = 1;
+        public const byte FCAbortstatus = 2;
+        public const byte FCRepeatstatus = 3;
+
+        public const byte MAXTransmitSize = 240;
 
     }
 }

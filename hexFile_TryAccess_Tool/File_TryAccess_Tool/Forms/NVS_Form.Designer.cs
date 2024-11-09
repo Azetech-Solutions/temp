@@ -48,13 +48,12 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Silver;
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Location = new System.Drawing.Point(8, 21);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Location = new System.Drawing.Point(12, 8);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox1.Size = new System.Drawing.Size(892, 430);
+            this.groupBox1.Size = new System.Drawing.Size(1382, 656);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -67,11 +66,9 @@
             this.groupBox3.Controls.Add(this.btnUpdate);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Location = new System.Drawing.Point(228, 13);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Location = new System.Drawing.Point(350, 11);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox3.Size = new System.Drawing.Size(657, 410);
+            this.groupBox3.Size = new System.Drawing.Size(1026, 639);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             // 
@@ -79,10 +76,9 @@
             // 
             this.lblID.AutoSize = true;
             this.lblID.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblID.Location = new System.Drawing.Point(555, 18);
-            this.lblID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblID.Location = new System.Drawing.Point(832, 28);
             this.lblID.Name = "lblID";
-            this.lblID.Size = new System.Drawing.Size(14, 16);
+            this.lblID.Size = new System.Drawing.Size(20, 23);
             this.lblID.TabIndex = 6;
             this.lblID.Text = "1";
             // 
@@ -90,19 +86,17 @@
             // 
             this.lblLength.AutoSize = true;
             this.lblLength.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLength.Location = new System.Drawing.Point(555, 43);
-            this.lblLength.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblLength.Location = new System.Drawing.Point(832, 66);
             this.lblLength.Name = "lblLength";
-            this.lblLength.Size = new System.Drawing.Size(12, 16);
+            this.lblLength.Size = new System.Drawing.Size(17, 23);
             this.lblLength.TabIndex = 5;
             this.lblLength.Text = "-";
             // 
             // rtbxDataOut
             // 
-            this.rtbxDataOut.Location = new System.Drawing.Point(4, 67);
-            this.rtbxDataOut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rtbxDataOut.Location = new System.Drawing.Point(11, 103);
             this.rtbxDataOut.Name = "rtbxDataOut";
-            this.rtbxDataOut.Size = new System.Drawing.Size(648, 293);
+            this.rtbxDataOut.Size = new System.Drawing.Size(1001, 449);
             this.rtbxDataOut.TabIndex = 4;
             this.rtbxDataOut.Text = "";
             this.rtbxDataOut.TextChanged += new System.EventHandler(this.rtbxDataOut_TextChanged);
@@ -111,21 +105,19 @@
             // lblUpdateBlkName
             // 
             this.lblUpdateBlkName.AutoSize = true;
-            this.lblUpdateBlkName.Location = new System.Drawing.Point(16, 39);
-            this.lblUpdateBlkName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblUpdateBlkName.Location = new System.Drawing.Point(24, 60);
             this.lblUpdateBlkName.Name = "lblUpdateBlkName";
-            this.lblUpdateBlkName.Size = new System.Drawing.Size(0, 13);
+            this.lblUpdateBlkName.Size = new System.Drawing.Size(0, 20);
             this.lblUpdateBlkName.TabIndex = 1;
             // 
             // btnUpdate
             // 
             this.btnUpdate.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.Location = new System.Drawing.Point(556, 375);
-            this.btnUpdate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold);
+            this.btnUpdate.Location = new System.Drawing.Point(899, 565);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(67, 24);
+            this.btnUpdate.Size = new System.Drawing.Size(108, 45);
             this.btnUpdate.TabIndex = 3;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = false;
@@ -135,10 +127,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(499, 41);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(748, 63);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 16);
+            this.label2.Size = new System.Drawing.Size(79, 23);
             this.label2.TabIndex = 1;
             this.label2.Text = "Length :";
             // 
@@ -146,10 +137,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(500, 18);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(750, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(26, 16);
+            this.label1.Size = new System.Drawing.Size(39, 23);
             this.label1.TabIndex = 0;
             this.label1.Text = "ID :";
             // 
@@ -159,11 +149,9 @@
             this.groupBox2.Controls.Add(this.flpBlockAdded);
             this.groupBox2.Controls.Add(this.btnRemove);
             this.groupBox2.Controls.Add(this.btnAdd);
-            this.groupBox2.Location = new System.Drawing.Point(4, 13);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Location = new System.Drawing.Point(6, 11);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox2.Size = new System.Drawing.Size(220, 410);
+            this.groupBox2.Size = new System.Drawing.Size(330, 640);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             // 
@@ -171,10 +159,9 @@
             // 
             this.flpBlockAdded.AutoScroll = true;
             this.flpBlockAdded.Cursor = System.Windows.Forms.Cursors.Default;
-            this.flpBlockAdded.Location = new System.Drawing.Point(6, 64);
-            this.flpBlockAdded.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.flpBlockAdded.Location = new System.Drawing.Point(9, 98);
             this.flpBlockAdded.Name = "flpBlockAdded";
-            this.flpBlockAdded.Size = new System.Drawing.Size(203, 325);
+            this.flpBlockAdded.Size = new System.Drawing.Size(304, 500);
             this.flpBlockAdded.TabIndex = 4;
             // 
             // btnRemove
@@ -182,10 +169,9 @@
             this.btnRemove.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.btnRemove.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRemove.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemove.Location = new System.Drawing.Point(133, 26);
-            this.btnRemove.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnRemove.Location = new System.Drawing.Point(200, 40);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(67, 24);
+            this.btnRemove.Size = new System.Drawing.Size(100, 37);
             this.btnRemove.TabIndex = 2;
             this.btnRemove.Text = "Remove";
             this.btnRemove.UseVisualStyleBackColor = false;
@@ -196,10 +182,9 @@
             this.btnAdd.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(24, 25);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAdd.Location = new System.Drawing.Point(36, 38);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(67, 24);
+            this.btnAdd.Size = new System.Drawing.Size(100, 37);
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = false;
@@ -207,12 +192,11 @@
             // 
             // NVS_Form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(904, 461);
+            this.ClientSize = new System.Drawing.Size(1406, 670);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "NVS_Form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NVS_Form";

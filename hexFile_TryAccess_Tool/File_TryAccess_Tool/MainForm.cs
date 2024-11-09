@@ -6,8 +6,10 @@ using System.Xml;
 using static File_TryAccess_Tool.Log;
 using static File_TryAccess_Tool.Xmlfilehandling;
 using static File_TryAccess_Tool.Tooltransmit;
-using static File_TryAccess_Tool.BackgroundworkerFile;
 using System.Linq;
+using System.IO;
+using System.Collections.Generic;
+using System.Threading;
 
 
 namespace File_TryAccess_Tool
@@ -28,6 +30,10 @@ namespace File_TryAccess_Tool
         public XmlDocument xmldoc = new XmlDocument();
         public memoryErasecontrol erasetype;
         public Hexfilehandling hexfilehandling;
+        private Thread flashThread;
+        private bool isFlashRunning = false;
+        private bool application_1_choose = false;
+        private bool application_2_choose = false;
 
         // flag creations
         bool IsFileVaild = false;
@@ -36,26 +42,24 @@ namespace File_TryAccess_Tool
         {
             InitializeComponent();
 
-            // log register
-            logRegister(rtbxDataOut);
-
             //xml register
-            xmldoc.Load(@"D:\Mohan\Class\Bootlodaer\STM32H5\Boot_Git\03-06-24\temp\hexFile_TryAccess_Tool\File_TryAccess_Tool\Toolsetting.xml");
+            xmldoc.Load(Directory.GetCurrentDirectory() + @"\Toolsetting.xml"); //(@"D:\Mohan\Class\Bootlodaer\STM32H5\Boot_Git\03-06-24\temp\hexFile_TryAccess_Tool\File_TryAccess_Tool\Toolsetting.xml");
             XMLRegister(xmldoc);
 
             // channel register
             TooltransmitRegister(serialPort1);
-            // backround worker 
-            RegisterBackgroundworkerFile();
-        }
+
+            // log register
+            logRegister(rtbxDataOut);
+        } // end
         private void loadDefaultValues()
         {
             CBoxComPort.Text = ConfigurationManager.AppSettings["COMPort"];
-            tbxBaudRate.Text = setComport[0].ChildNodes[0].InnerText;
-            tbxDataBit.Text = setComport[0].ChildNodes[1].InnerText;
-            tbxStopBit.Text = setComport[0].ChildNodes[2].InnerText;
-            tbxParityBit.Text = setComport[0].ChildNodes[3].InnerText;            
-        }
+            //tbxBaudRate.Text = setComport[0].ChildNodes[0].InnerText;
+            //tbxDataBit.Text = setComport[0].ChildNodes[1].InnerText;
+            //tbxStopBit.Text = setComport[0].ChildNodes[2].InnerText;
+            //tbxParityBit.Text = setComport[0].ChildNodes[3].InnerText;            
+        } // default value end
         private void Form1_Load(object sender, EventArgs e)
         {
             string[] Ports = SerialPort.GetPortNames();
@@ -63,26 +67,25 @@ namespace File_TryAccess_Tool
             loadDefaultValues();
             erasetype = new memoryErasecontrol();
             hexfilehandling = new Hexfilehandling();
-        }     
+        } // end
 
         private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            int ByteSize = serialPort1.BytesToRead;
-
-            byte[] data = new byte[ByteSize];
+            ushort len = (ushort) serialPort1.BytesToRead;
+            byte[] data = new byte[len];
 
             serialPort1.Read(data, 0, data.Length);
 
-            //string data = serialPort1.ReadExisting();
-
-            //MCUTransmitFunction.RxIndication(data);
-
-            for (int i = 0; i < data.Length; i++)
+            for (ushort i = 0; i < data.Length; i++)
             {
                 MCUTransmitFunction.RxIndication(data[i]);
             }
+
+            //string data = serialPort1.ReadExisting();
+            //MCUTransmitFunction.RxIndication(data);
         } // serial data rx part end
 
+        #region Memory Erase region
         private void bootmanagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             byte[] erase = new byte[3];
@@ -98,7 +101,14 @@ namespace File_TryAccess_Tool
                         erase[2] = (byte)(Convert.ToInt16(setBank[0].InnerText));
                         erasetype.eraseFlag = true;
                     }
-                    if (erasetype.eraseFlag == true) { if (erasetype.Memoryerasecommand(erase.ToArray())) { Log.Message("Bootmanager Memory Erase Complete"); } }
+                    if (erasetype.eraseFlag == true) 
+                    {
+                        flashThread = new Thread(() => {
+                            if (erasetype.Memoryerasecommand(erase.ToArray())) { Log.Message("Bootmanager Memory Erase Complete");}
+                        });
+
+                        flashThread.Start();
+                    }
                 }
                 else { MessageBox.Show("Please Connect Serial port", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             }
@@ -121,7 +131,14 @@ namespace File_TryAccess_Tool
                         erase[2] = (byte)(Convert.ToInt16(setBank[1].InnerText));
                         erasetype.eraseFlag = true;
                     }
-                    if (erasetype.eraseFlag == true) { if (erasetype.Memoryerasecommand(erase.ToArray())) { Log.Message("Bootloader Memory Erase complete"); } }
+                    if (erasetype.eraseFlag == true) 
+                    {
+                        flashThread = new Thread(() => {
+                            if (erasetype.Memoryerasecommand(erase.ToArray())) { Log.Message("Bootloader Memory Erase complete"); }
+                        });
+
+                        flashThread.Start();
+                    }
                 }
                 else { MessageBox.Show("Please Connect Serial port", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             }
@@ -142,7 +159,18 @@ namespace File_TryAccess_Tool
                         erase[2] = (byte)(Convert.ToInt16(setBank[2].InnerText));
                         erasetype.eraseFlag = true;
                     }
-                    if (erasetype.eraseFlag == true) { if (erasetype.Memoryerasecommand(erase.ToArray())) { Log.Message("Application 1 Memory Erase complete"); } }
+                    if (erasetype.eraseFlag == true) 
+                    {
+                        flashThread = new Thread(() => {
+
+                            if (erasetype.Memoryerasecommand(erase.ToArray()))
+                            {
+                                Log.Message("Application 1 Memory Erase complete");
+                            }
+                        });
+
+                        flashThread.Start();
+                    }
                 }
                 else { MessageBox.Show("Please Connect Serial port", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             }
@@ -165,7 +193,14 @@ namespace File_TryAccess_Tool
                         erase[2] = (byte)(Convert.ToInt16(setBank[3].InnerText));
                         erasetype.eraseFlag = true;
                     }
-                    if (erasetype.eraseFlag == true) { if(erasetype.Memoryerasecommand(erase.ToArray())){ Log.Message("Application 2 Memory Erase complete"); } }
+                    if (erasetype.eraseFlag == true) 
+                    {
+                        flashThread = new Thread(() => {
+                            if (erasetype.Memoryerasecommand(erase.ToArray())){ Log.Message("Application 2 Memory Erase complete"); }
+                        });
+
+                        flashThread.Start();
+                    }
                 }
                 else { MessageBox.Show("Please Connect Serial port", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             }
@@ -188,7 +223,14 @@ namespace File_TryAccess_Tool
                         erase[2] = (byte)(Convert.ToInt16(setBank[4].InnerText));
                         erasetype.eraseFlag = true;
                     }
-                    if (erasetype.eraseFlag == true) { if (erasetype.Memoryerasecommand(erase.ToArray())) { Log.Message("NVS block Memory Erase complete"); } }
+                    if (erasetype.eraseFlag == true) 
+                    {
+                        flashThread = new Thread(() => {
+                            if (erasetype.Memoryerasecommand(erase.ToArray())) { Log.Message("NVS block Memory Erase complete"); }
+                        });
+
+                        flashThread.Start();
+                    }
                 }
                 else { MessageBox.Show("Please Connect Serial port", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             }
@@ -210,12 +252,20 @@ namespace File_TryAccess_Tool
                         erase[2] = (byte)(Convert.ToInt16(setBank[5].InnerText));
                         erasetype.eraseFlag = true;
                     }
-                    if (erasetype.eraseFlag == true) { if (erasetype.Memoryerasecommand(erase.ToArray())) { Log.Message("NVM block Memory Erase complete"); } }
+                    if (erasetype.eraseFlag == true) 
+                    {
+                        flashThread = new Thread(() => {
+                            if (erasetype.Memoryerasecommand(erase.ToArray())) { Log.Message("NVM block Memory Erase complete"); }
+                        });
+
+                        flashThread.Start();
+                    }
                 }
                 else { MessageBox.Show("Please Connect Serial port", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }  // nvm Erase block end
+        #endregion
 
         private void nVSSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -252,6 +302,22 @@ namespace File_TryAccess_Tool
                                 IsFileVaild = true;
                                 tBoxView.Text = ofd.FileName;
                                 Log.Info("Filepath :"+ofd.FileName);
+                                
+                                if(cBoxAppAddressSelect.Text ==  null)
+                                {
+                                    MessageBox.Show("Please choose the Application", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                }
+                                else if (cBoxAppAddressSelect.Text == "App1")
+                                {
+                                    application_1_choose = true;
+                                    application_2_choose = false;
+                                }
+                                else if(cBoxAppAddressSelect.Text == "App2")
+                                {
+                                    application_1_choose = false;
+                                    application_2_choose = true;
+                                }
+
                             }
                         }
                     }
@@ -277,10 +343,10 @@ namespace File_TryAccess_Tool
             try
             {
                 serialPort1.PortName = CBoxComPort.Text;
-                serialPort1.BaudRate = Convert.ToInt32(tbxBaudRate.Text);
-                serialPort1.DataBits = Convert.ToInt32(tbxDataBit.Text);
-                serialPort1.StopBits = (StopBits)Enum.Parse(typeof(StopBits), tbxStopBit.Text);
-                serialPort1.Parity = (Parity)Enum.Parse(typeof(Parity), tbxParityBit.Text);
+                serialPort1.BaudRate = Convert.ToInt32(setComport[0].ChildNodes[0].InnerText); //Convert.ToInt32(tbxBaudRate.Text);
+                serialPort1.DataBits = Convert.ToInt32(setComport[0].ChildNodes[1].InnerText);  //Convert.ToInt32(tbxDataBit.Text);
+                serialPort1.StopBits = (StopBits)Enum.Parse(typeof(StopBits), setComport[0].ChildNodes[2].InnerText);   //(StopBits)Enum.Parse(typeof(StopBits), tbxStopBit.Text);
+                serialPort1.Parity = (Parity)Enum.Parse(typeof(Parity), setComport[0].ChildNodes[3].InnerText);  // (Parity)Enum.Parse(typeof(Parity), tbxParityBit.Text);
 
                 serialPort1.Open();
                 progressBar1.Value = 100;
@@ -301,69 +367,175 @@ namespace File_TryAccess_Tool
 
         private void BtnTransmit_Click(object sender, EventArgs e)
         {
-            bool Modestatus = false;
-          
-            if(IsFileVaild == true)
+            flashThread = new Thread( () =>
             {
-                if (cBoxAppAddressSelect.Text == "App1" || cBoxAppAddressSelect.Text == "App2")
+                bool Modestatus = false;
+
+                if (IsFileVaild == true)
                 {
-                    if (cBoxAppAddressSelect.Text == "App1")
+                    if (application_1_choose == true || application_2_choose == true )
                     {
-                        if (hexfilehandling.Flashstartcommands(Convert.ToUInt32(setStartAddress[2].InnerText)))  // based on xml app1 start address
+                        if (application_1_choose == true)
                         {
-                            Modestatus = true;
-                        }
-                    }
-                    else
-                    {
-                        if (hexfilehandling.Flashstartcommands(Convert.ToUInt32(setStartAddress[3].InnerText)))   // based on xml app2 start address
-                        {
-                            Modestatus = true;
-                        }
-                    }
-
-
-                    if (Modestatus == true)
-                    {
-                        bool Flh_CompleteStatus = false;
-
-                        Log.Message("Flash transmit start");
-                        if (hexfilehandling.FlashDatatransmit())
-                        {
-                            Log.Message("Flash transmit start end");
-                            Flh_CompleteStatus = true; // to confirm all data's are transmit to uC
-                        }
-
-                        if (Flh_CompleteStatus == true)
-                        {
-                            if (cBoxAppAddressSelect.Text == "App1")
+                            if (hexfilehandling.Flashstartcommands(Convert.ToUInt32(setStartAddress[2].InnerText)))  // based on xml app1 start address
                             {
-                                Log.Message("Flash update start");
-                                if (hexfilehandling.UpdateflashappHeader(Convert.ToUInt32(setStartAddress[2].InnerText)))   // based on xml app1 start address
-                                {
-                                    Log.Message("Flash update start end");
-                                    Log.Message("Flash Complete start");
-                                    hexfilehandling.flashcompletecommand(Convert.ToUInt32(setStartAddress[2].InnerText));   // based on xml app1 start address
-                                    Log.Message("Flash Complete start end");
-                                }
+                                Modestatus = true;
                             }
-                            else
+                        }
+                        else
+                        {
+                            if (hexfilehandling.Flashstartcommands(Convert.ToUInt32(setStartAddress[3].InnerText)))   // based on xml app2 start address
                             {
-                                if(hexfilehandling.UpdateflashappHeader(Convert.ToUInt32(setStartAddress[3].InnerText)))   // based on xml app2 start address
-                                {
-                                    hexfilehandling.flashcompletecommand(Convert.ToUInt32(setStartAddress[3].InnerText));    // based on xml app2 start address
-                                }
+                                Modestatus = true;
                             }
-                        }// end 
-                    }
+                        }
 
+
+                        if (Modestatus == true)
+                        {
+                            bool Flh_CompleteStatus = false;
+
+                            Log.Message("Flash transmit start");
+                            if (hexfilehandling.FlashDatatransmit())
+                            {
+                                Log.Message("Flash transmit start end");
+                                Flh_CompleteStatus = true; // to confirm all data's are transmit to uC
+                            }
+
+                            if (Flh_CompleteStatus == true)
+                            {
+                                if (application_1_choose == true)
+                                {
+                                    Log.Message("Flash update start");
+                                    if (hexfilehandling.UpdateflashappHeader(Convert.ToUInt32(setStartAddress[2].InnerText)))   // based on xml app1 start address
+                                    {
+                                        Log.Message("Flash update start end");
+                                        Log.Message("Flash Complete start");
+                                        hexfilehandling.flashcompletecommand(Convert.ToUInt32(setStartAddress[2].InnerText));   // based on xml app1 start address
+                                        Log.Message("Flash Complete start end");
+
+                                        application_1_choose = false;
+                                        application_2_choose = false;
+                                    }
+                                }
+                                else
+                                {
+                                    Log.Message("Flash update start");
+                                    if (hexfilehandling.UpdateflashappHeader(Convert.ToUInt32(setStartAddress[3].InnerText)))   // based on xml app2 start address
+                                    {
+                                        Log.Message("Flash update start end");
+                                        Log.Message("Flash Complete start");                                        
+                                        hexfilehandling.flashcompletecommand(Convert.ToUInt32(setStartAddress[3].InnerText));    // based on xml app2 start address
+                                        Log.Message("Flash Complete start end");
+
+                                        application_1_choose = false;
+                                        application_2_choose = false;
+                                    }
+                                }
+                            }// end 
+                        }
+
+                    }
+                    else { MessageBox.Show("Please Select Flash Memory Address to flash ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
                 }
-                else { MessageBox.Show("Please Select Flash Memory Address to flash ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-            }
-            else { MessageBox.Show("Please select the Correct \"Hex file\"", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                else { MessageBox.Show("Please select the Correct \"Hex file\"", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            });
+
+            flashThread.Start();           
 
         }// btn transmit end
 
+        #region "Application Version"
+        private void btnVerApp1_Click(object sender, EventArgs e)
+        {
+            
+            flashThread = new Thread(() =>
+            {
+                List<byte> ver1 = new List<byte>();
+                uint add = Convert.ToUInt32(setStartAddress[2].InnerText);
+                
+                lblMajorVer.Text = "none";
+                lblMinorVer.Text = "none";
+                lblBulidVer.Text = "none";
+                lblReleseVer.Text = "none";
+
+                ver1.Add(0xD0);
+                ver1.Add(0x00);
+                ver1.Add(0x00);
+                ver1.Add((byte)(add >> 24));
+                ver1.Add((byte)(add >> 16));
+                ver1.Add((byte)(add >> 8));
+                ver1.Add((byte)(add));
+
+
+                byte[] verval = hexfilehandling.GetAppVersion(ver1.ToArray());
+
+                byte len = (byte)(verval.Length - 3);
+
+                lblMajorVer.Text = ((verval[3] << 24) | (verval[4] << 16) | (verval[5] << 8) | (verval[6])).ToString("X2");
+                lblMinorVer.Text = ((verval[7] << 24) | (verval[8] << 16) | (verval[9] << 8) | (verval[10])).ToString("X2");
+                lblBulidVer.Text = ((verval[11] << 24) | (verval[12] << 16) | (verval[13] << 8) | (verval[14])).ToString("X2");
+                lblReleseVer.Text = ((verval[15] << 24) | (verval[16] << 16) | (verval[17] << 8) | (verval[18])).ToString("X2");
+
+            });
+            flashThread.Start();
+
+        }
+
+        private void btnVerApp2_Click(object sender, EventArgs e)
+        {
+            flashThread = new Thread(() =>
+            {
+                List<byte> ver1 = new List<byte>();
+                uint add = Convert.ToUInt32(setStartAddress[3].InnerText);
+
+                lblMajorVer.Text = "none";
+                lblMinorVer.Text = "none";
+                lblBulidVer.Text = "none";
+                lblReleseVer.Text = "none";
+
+                ver1.Add(0xD0);
+                ver1.Add(0x00);
+                ver1.Add(0x00);
+                ver1.Add((byte)(add >> 24));
+                ver1.Add((byte)(add >> 16));
+                ver1.Add((byte)(add >> 8));
+                ver1.Add((byte)(add));
+
+                byte[] verval = hexfilehandling.GetAppVersion(ver1.ToArray());
+
+                byte len = (byte)(verval.Length - 3);
+
+                lblMajorVer.Text = ((verval[3] << 24) | (verval[4] << 16) | (verval[5] << 8) | (verval[6])).ToString("X2");
+                lblMinorVer.Text = ((verval[7] << 24) | (verval[8] << 16) | (verval[9] << 8) | (verval[10])).ToString("X2") ;
+                lblBulidVer.Text = ((verval[11] << 24) | (verval[12] << 16) | (verval[13] << 8) | (verval[14])).ToString("X2");
+                lblReleseVer.Text = ((verval[15] << 24) | (verval[16] << 16) | (verval[17] << 8) | (verval[18])).ToString("X2");
+
+            });
+            flashThread.Start();
+        }
+        #endregion
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            var close = MessageBox.Show("Do you want Close Application", "Alret", MessageBoxButtons.YesNo, 
+                                           MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (flashThread != null && flashThread.IsAlive)
+            {
+                flashThread.Abort(); // Caution: Thread.Abort is not recommended due to abrupt termination
+                isFlashRunning = false;
+                Log.Message("Flash operation stopped.");
+            }
+            if (close == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
     }// end form1 class
 
 }

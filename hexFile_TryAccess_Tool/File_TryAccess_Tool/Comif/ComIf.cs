@@ -105,7 +105,7 @@ namespace ComIf
         public bool ReceptionStarted = false; // If set, then the message has been started receiving
         public bool NewMessageReceived = false; // If set, then the message has been received completely and waiting for the RxCbk to be called
         public bool ErrorInReception = false; // If set, then the message has been received, but there is an error in reception
-        public byte CurRxngIdx = 0;
+        public ushort CurRxngIdx = 0;
 
         /* Callbacks */
         public delegate void RxCallback(byte Length, byte[] Data);
@@ -272,7 +272,7 @@ namespace ComIf
                 retval = ReturnValue.NOK;
 
                 /* Report Error */
-                NotifyError((uint)ErrorCodes.COMIF_EC_INVALID_MSG, CommonAPIs.GetDebugWords(RxMsg.CurRxngIdx, DataByte));
+                NotifyError((uint)ErrorCodes.COMIF_EC_INVALID_MSG, CommonAPIs.GetDebugWords((byte)RxMsg.CurRxngIdx, DataByte));
 
                 // Reset the Reception information
                 ResetRxInfo(true);
@@ -365,7 +365,7 @@ namespace ComIf
                             /* If the received information is less than the configured one, then possibly the data might be lost */
 
                             /* Report Error */
-                            NotifyError((byte)ErrorCodes.COMIF_EC_INVALID_MSG, CommonAPIs.GetDebugBytes((byte)Delimiters.ETX, RxMsg.CurRxngIdx, (byte)DataLength, (byte)ChecksumLength));
+                            NotifyError((byte)ErrorCodes.COMIF_EC_INVALID_MSG, CommonAPIs.GetDebugBytes((byte)Delimiters.ETX, (byte)RxMsg.CurRxngIdx, (byte)DataLength, (byte)ChecksumLength));
 
                             /* Reset the Rx Info as Error */
                             ResetRxInfo(true);

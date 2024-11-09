@@ -7,6 +7,7 @@ using System.Threading;
 using System.Windows.Forms;
 using static File_TryAccess_Tool.Tooltransmit;
 using static File_TryAccess_Tool.Log;
+using System.IO;
 
 namespace File_TryAccess_Tool
 {
@@ -14,26 +15,31 @@ namespace File_TryAccess_Tool
     {
         private NVSDataHandling nvsDataHandling;
         private List<Button> buttons;
-        private List<string> userhexData;
+        private List<string> NVShexData;
 
         private int Btop = 87, Bleft = 36, cnt = 0, blkcnt = 1, pressedbtn = 0,reftag=0;
         private bool btnclkchk = false;
         public NVS_Form()
         {
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+            string filePath = Path.Combine(basePath, "Nvsblockdata.xml");
+
             InitializeComponent();
-            nvsDataHandling = new NVSDataHandling();
+            nvsDataHandling = new NVSDataHandling(filePath);
             buttons = new List<Button>();
-            userhexData = new List<string>();
+            NVShexData = new List<string>();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             string userinput = rtbxDataOut.Text;
 
-            if (nvsDataHandling.NVSflashstartcommands())
+            if (userinput != null)
             {
-                nvsDataHandling.NVSDataTransmit(nvsDataHandling.NextblockAdd,nvsDataHandling.StringTobyte(userinput));
+                nvsDataHandling.NVSUpdate(userinput.Replace(" ", ""));
             }
+            else { MessageBox.Show("Enter a Valid Data","Alert",MessageBoxButtons.OK,MessageBoxIcon.Warning); }
+            
         }
 
         private void rtbxDataOut_TextChanged(object sender, EventArgs e)
@@ -54,34 +60,15 @@ namespace File_TryAccess_Tool
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
-        {
-            const string BlkName = "Block-";
-            
+        {                        
             if (((cnt >= 0) && (cnt <10)))
             {
-                userhexData.Add(rtbxDataOut.Text);
+                NVShexData.Add(rtbxDataOut.Text);
 
-                Button UserInput = new Button();
+                DynamicButtonAdd();
 
-                UserInput.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, 
-                                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                UserInput.Location = new System.Drawing.Point(Bleft, Btop);
-                UserInput.Size = new System.Drawing.Size(140, 25);
-                UserInput.TabIndex = 3;
-                UserInput.Text = BlkName + blkcnt.ToString();
 
-                UserInput.Tag = reftag; // user reference
-
-                UserInput.Name = "btn"+UserInput.Text;
-                UserInput.UseVisualStyleBackColor = false;
-                UserInput.Cursor = System.Windows.Forms.Cursors.Hand;
-                UserInput.Click += new System.EventHandler(this.NVSDataBlock_Click);
-                this.Controls.Add(UserInput);
-                UserInput.BringToFront();
-
-                buttons.Add(UserInput); // dynamic button was added the buttons list
-                flpBlockAdded.Controls.Add(UserInput);                
-                Btop += 35;
+                 Btop += 35;
                 cnt++;
                 blkcnt++;
                 reftag++;
@@ -90,8 +77,35 @@ namespace File_TryAccess_Tool
             else { }
           
         }
+
+        private void DynamicButtonAdd()
+        {
+            const string BlkName = "Block-";
+
+            Button UserInput = new Button();
+
+            UserInput.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold,
+                                                            System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            UserInput.Location = new System.Drawing.Point(Bleft, Btop);
+            UserInput.Size = new System.Drawing.Size(140, 25);
+            UserInput.TabIndex = 3;
+            UserInput.Text = BlkName + blkcnt.ToString();
+
+            UserInput.Tag = reftag; // user reference
+
+            UserInput.Name = "btn" + UserInput.Text;
+            UserInput.UseVisualStyleBackColor = false;
+            UserInput.Cursor = System.Windows.Forms.Cursors.Hand;
+            UserInput.Click += new System.EventHandler(this.NVSDataBlock_Click);
+            this.Controls.Add(UserInput);
+            UserInput.BringToFront();
+
+            buttons.Add(UserInput); // dynamic button was added the buttons list
+            flpBlockAdded.Controls.Add(UserInput);
+        }
         private void btnRemove_Click(object sender, EventArgs e)
         {
+            Control buttonToRemove = this.Controls.Find("dynamicButton", true).FirstOrDefault();
             if (btnclkchk == true)
             {
                 rtbxDataOut.Clear();
@@ -100,7 +114,7 @@ namespace File_TryAccess_Tool
                     Controls.Remove(buttons[pressedbtn]);  // Removed in form control collection
                     buttons.RemoveAt(pressedbtn);  // button was removed in list
                                                    //rtbxDataOut.Text = userhexData[pressedbtn];
-                    userhexData.RemoveAt(pressedbtn);  // hex data was removed in list
+                    NVShexData.RemoveAt(pressedbtn);  // hex data was removed in list
                     flpBlockAdded.Controls.RemoveAt(pressedbtn);  // removed in flow layout panal
                     lblUpdateBlkName.Text = "";
                     blkcnt = cnt;
@@ -119,7 +133,7 @@ namespace File_TryAccess_Tool
             pressedbtn =(int)b.Tag;
             lblUpdateBlkName.Text = b.Text;
 
-            rtbxDataOut.Text = userhexData[pressedbtn]; 
+            rtbxDataOut.Text = NVShexData[pressedbtn]; 
 
             btnclkchk = true; // to check the added button is pressed
         }

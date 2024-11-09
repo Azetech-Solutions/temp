@@ -1,8 +1,10 @@
 ﻿using static File_TryAccess_Tool.Tooltransmit;
 using static File_TryAccess_Tool.Log;
+using System;
+using System.Threading;
 
 namespace File_TryAccess_Tool
-{
+{    
     public class memoryErasecontrol
     {
         //Tooltransmit toolTransmit;

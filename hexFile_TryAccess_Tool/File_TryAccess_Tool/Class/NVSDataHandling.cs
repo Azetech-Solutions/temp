@@ -1,260 +1,198 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static File_TryAccess_Tool.Xmlfilehandling;
 using static File_TryAccess_Tool.Tooltransmit;
-using System.Collections;
-using System.Net;
-using Microsoft.SqlServer.Server;
+using File_TryAccess_Tool.Class;
+using System.Xml;
+using System.IO;
+
 
 namespace File_TryAccess_Tool
 {
     public class NVSDataHandling
     {
-        uint nvsDataCksum = 0;
+        private static uint nvsDataCksum = 0;
+        private static UInt16 NVSID = 0;
+        private static UInt16 NVSLength = 0;
+        private static string nvsXMlPath;
         UInt16 totalnvsbytes = 0;
-        public UInt32 NextblockAdd = Convert.ToUInt32(Xmlfilehandling.setStartAddress[4].InnerText);
-        public NVSDataHandling() {  }
+        private FlowControlHandling fctxhandle = new FlowControlHandling();
+        public UInt32 NVSblockAdd = Convert.ToUInt32(Xmlfilehandling.setStartAddress[4].InnerText);
+        public NVSDataHandling(string p) { InitializeXmlFile(p); nvsXMlPath = p; }
 
-        public char[] removeSpace(string input)
+        public static void InitializeXmlFile(string filePath)
         {
-            char[] arr = input.ToCharArray();
-
-            for (int i = 0; i < arr.Length; i++)
+            if (!File.Exists(filePath))
             {
-                if (arr[i] != ' ')
+                using (XmlWriter writer = XmlWriter.Create(filePath))
                 {
-                    arr[i] = arr[i];
+                    writer.WriteStartDocument();
+                    writer.WriteStartElement("Nvsblocks");
+                    writer.WriteEndElement();
+                    writer.WriteEndDocument();
                 }
             }
+            else
+            {
+                File.Delete(filePath);
 
-            return arr;
+                using (XmlWriter writer = XmlWriter.Create(filePath))
+                {
+                    writer.WriteStartDocument();
+                    writer.WriteStartElement("Nvsblocks");
+                    writer.WriteEndElement();
+                    writer.WriteEndDocument();
+                }
+            }
         }
 
-        public byte[] StringTobyte(string inputString)
+        public static bool nvsXMLAppendDataBlock(string filePath, string genname, string blockName, string blockId, string blockLen)
         {
-            string[] split = inputString.Split(' ');
+            XmlDocument doc = new XmlDocument();
+            doc.Load(filePath);
 
-            byte[] byteArray = new byte[split.Length];
+            XmlNode newBlock = doc.CreateElement(genname);
 
-            for (int i = 0; i < split.Length; i++)
-            {
-                byteArray[i] = Convert.ToByte(split[i], 16);
-            }
-            return byteArray;
+            doc.DocumentElement.AppendChild(newBlock);
+
+            XmlNode newBlock1 = doc.CreateElement("name");
+            newBlock1.InnerText = blockName;
+            newBlock.AppendChild(newBlock1);
+
+            XmlNode newBlock2 = doc.CreateElement("id");
+            newBlock2.InnerText = blockId;
+            newBlock.AppendChild(newBlock2);
+
+            XmlNode newBlock3 = doc.CreateElement("len");
+            newBlock3.InnerText = blockLen;
+            newBlock.AppendChild(newBlock3);
+
+            doc.Save(filePath);
+
+            return true;
         }
-
-        public bool NVSflashstartcommands()
+        public void NVSUpdate(string inputdata)
         {
-            byte[] dataUpdate = new byte[5];
-            bool retval = false, startcommandflag = true;
-            dataUpdate[0] = Commands.Flashstart;
+            List<byte> NVSStart = new List<byte>();
 
-            Log.Message("Nvs Flash Start");
-            while (true)
-            {
-                if (startcommandflag)
-                {
-                    FlashDatabytesupdate(dataUpdate);
-                    MCUTransmitFunction.Transmit(FlashDataTransmit);
-                    startcommandflag = false;
-                }
+            byte[] Nvstx = fctxhandle.ConvertHexStringToByteArray(inputdata);
 
-                if (MCUStatusRxData[0] == Commands.Responce_OK) 
-                {
-                    MCUStatusRxData[0] = 0xFF; // reset
+            NVSStart.Add(Commands.NVSstartCMD);
+            NVSStart.Add(0x00);
+            NVSStart.Add(0x00);
+            NVSStart.Add((byte)(NVSblockAdd >> 24));
+            NVSStart.Add((byte)(NVSblockAdd >> 16));
+            NVSStart.Add((byte)(NVSblockAdd >> 8));
+            NVSStart.Add((byte)(NVSblockAdd));
 
-                    if (dataUpdate[0] == Commands.Flashstart)
-                    {
-                        dataUpdate[0] = Commands.ChooseNVSMode;
-                        startcommandflag = true;
-                    }
-                    else
-                    {
-                        if (dataUpdate[0] == Commands.ChooseNVSMode)
-                        {
-                            retval = true;
-                            break;
-                        }
-                    }
-                }
-                else if (MCUStatusRxData[0] == Commands.Responce_NOTOK)
-                {
-                    MCUStatusRxData[0] = 0xFF; // reset
-                    startcommandflag = true;
-                }
-
-            } //"while" end of the flashstart , nvs mode, erase mode 
-
-            return retval;
-        }
-
-        public uint CalculateCKsum_NVS(byte[] hex)
-        {
-            uint[] hexval = new uint[hex.Length];
-
-            if ((hex.Length / 4) == 1)
-            {
-                hexval[0] = (uint)(hex[3] << 24 | hex[2] << 16 | hex[1] << 8 | hex[0]);
-            }
-            else if ((hex.Length / 4) == 2)
-            {
-                hexval[0] = (uint)(hex[3] << 24 | hex[2] << 16 | hex[1] << 8 | hex[0]);
-                hexval[1] = (uint)(hex[7] << 24 | hex[6] << 16 | hex[5] << 8 | hex[4]);
-            }
-            else if ((hex.Length / 4) == 3)
-            {
-                hexval[0] = (uint)(hex[3] << 24 | hex[2] << 16 | hex[1] << 8 | hex[0]);
-                hexval[1] = (uint)(hex[7] << 24 | hex[6] << 16 | hex[5] << 8 | hex[4]);
-                hexval[2] = (uint)(hex[11] << 24 | hex[10] << 16 | hex[9] << 8 | hex[8]);
-            }
-            else if ((hex.Length / 4) == 4)
-            {
-                hexval[0] = (uint)(hex[3] << 24 | hex[2] << 16 | hex[1] << 8 | hex[0]);
-                hexval[1] = (uint)(hex[7] << 24 | hex[6] << 16 | hex[5] << 8 | hex[4]);
-                hexval[2] = (uint)(hex[11] << 24 | hex[10] << 16 | hex[9] << 8 | hex[8]);
-                hexval[3] = (uint)(hex[15] << 24 | hex[14] << 16 | hex[13] << 8 | hex[12]);
-            }
-
-            return (uint)(hexval[0] + hexval[1] + hexval[2] + hexval[3]);
-        }
-        public bool NVSDataTransmit(UInt32 add,byte[] Databytes)
-        {
-            bool retval = false;
-
-            int loopstr = 0, loopend = 16;
-            totalnvsbytes = (UInt16)Databytes.Length;
-
-            UInt32 baseadd = add; //08010000
-            baseadd += 0x10;
-
-            for(ushort i=0;i< totalnvsbytes / 16;i++)
-            {
-                List<byte> data = new List<byte>();
-
-                data.Add(Commands.FlashData);
-                data.Add((byte)(baseadd >> 24));
-                data.Add((byte)(baseadd >> 16));
-                data.Add((byte)(baseadd >> 8));
-                data.Add((byte)(baseadd));
-
-                for (loopstr = loopstr; loopstr < loopend; loopstr++)
-                {
-                    data.Add(Databytes[loopstr]);
-                }
-                loopend = loopstr + 16;
-
-                NvsDataUpdateinComif(data.ToArray());
-                baseadd += 0x10;
-            }
-
-            UInt16 ballen = (UInt16)((loopstr - 1) + totalnvsbytes % 16);
-
-            if ((totalnvsbytes % 16  != 0) && (totalnvsbytes % 16 < 16))
-            {
-                List<byte> baldata = new List<byte>();
-
-                baldata.Add(Commands.FlashData);
-                baldata.Add((byte)(baseadd >> 24));
-                baldata.Add((byte)(baseadd >> 16));
-                baldata.Add((byte)(baseadd >> 8));
-                baldata.Add((byte)(baseadd));
-
-                for (loopstr = loopstr; loopstr <= ballen; loopstr++)
-                {
-                    baldata.Add(Databytes[loopstr]);
-                }
-                baseadd += 0x10;
-                if(NvsDataUpdateinComif(baldata.ToArray()))
-                {
-                    if(UpdateNvsHeader(add))
-                    {
-                        NextblockAdd = baseadd;
-                        Log.Message("Nvs Flash complete"); retval = true;
-                    }
-
-                }
-            }
-            else 
-            {
-                if (UpdateNvsHeader(add))
-                {
-                    NextblockAdd = baseadd;
-                    Log.Message("Nvs Flash complete"); retval = true;
-                }
-            }
-
-            return retval;
-        }
-
-        // data updated in comif channel
-        public bool NvsDataUpdateinComif(byte[] data) 
-        {
-            bool retval = false,nvsflg = true;
-           
-
-            while(true)
-            {
-
-                if(nvsflg == true)
-                {
-                    for (int i = 0; i < data.Length; i++)
-                    {  FlashDataTransmit.Data[i] = data[i]; }
-
-                    MCUTransmitFunction.Transmit(FlashDataTransmit);
-                    nvsDataCksum += CalculateCKsum_NVS(data);
-                    nvsflg = false;
-                }
-
-
-                if (MCUStatusRxData[0] == Commands.Responce_OK)
-                {
-                    MCUStatusRxData[0] = 0xFF; // reset
-                    retval = true;
-                    break;
-                }
-                else if (MCUStatusRxData[0] == Commands.Responce_NOTOK)
-                {
-                    MCUStatusRxData[0] = 0xFF; // reset
-                    nvsflg = true;
-                }
-            } // while end
-            return retval;
-        } // end
-
-        public bool NvsflashComplete()
-        {
-            bool retval = false,cntflg = true;
-            byte[] cmd = new byte[1];
-            cmd[0] = Commands.Flashcomplete;
+            FCDatabytesupdate(NVSStart.ToArray());
+            FCTransmit.Length = (byte)NVSStart.Count;
+            MCUTransmitFunction.Transmit(FCTransmit);
 
             while (true)
             {
-                if (cntflg == true)
-                {
-                    FlashDatabytesupdate(cmd);
-                    MCUTransmitFunction.Transmit(FlashDataTransmit);
-                    cntflg = false;
-                }
-
-                if (MCUStatusRxData[0] == Commands.Responce_OK)
+                if (MCUStatusRxData[0] == 0x00)
                 {
                     MCUStatusRxData[0] = 0xFF;
-                    retval = true;
                     break;
                 }
-                else if (MCUStatusRxData[0] == Commands.Responce_NOTOK)
+                //Thread.Sleep(3);
+            }
+
+            BytetoCksumCalculate(Nvstx);
+
+            fctxhandle.FCDataTransmit(MeragethetotalNvsdata(Nvstx));
+
+
+            if( nvsXMLAppendDataBlock(nvsXMlPath, "nvsblock", ("block"+NVSID.ToString()), NVSID.ToString(), NVSLength.ToString()) ) { NVSID++; }
+        }
+
+
+        private void BytetoCksumCalculate(byte[] inputdata)
+        {
+            UInt16 len = (UInt16) inputdata.Length;
+            
+            byte pos = 0,cnt=0;
+            nvsDataCksum = 0;
+            NVSLength = len;
+            while (len > 0)
+            {
+                List<byte> store16bytedata = new List<byte>();
+               
+                while((cnt < 4) && len > 0)
                 {
-                    MCUStatusRxData[0] = 0xFF;
-                    cntflg = true;
+                    store16bytedata.Add(inputdata[pos]);
+                    pos++;
+                    len--;
+                    cnt++;
                 }
-            } // while end
+                cnt = 0;
+                nvsDataCksum += CalculateCKsum_NVS(store16bytedata.ToArray());
+            }
+
+            //NVSID++;
+
+        }
+        private uint CalculateCKsum_NVS(byte[] hex)
+        {
+            uint[] hexval = new uint[1];
+            uint retval = 0;
+
+            if ( hex.Length <=4 )
+            {
+                hexval[0] = (uint)((hex[3] << 24) | (hex[2] << 16) | (hex[1] << 8) | (hex[0]));
+                NVSblockAdd += 4;
+                retval = (uint)hexval[0];
+            }   
 
             return retval;
         }
 
+        private byte[] MeragethetotalNvsdata(byte[] dta)
+        {
+            List<byte> Tomerge = new List<byte>();
+
+            // pattern
+            Tomerge.Add((byte)(Commands.NVS_Pattern >> 24));
+            Tomerge.Add((byte)(Commands.NVS_Pattern >> 16));
+            Tomerge.Add((byte)(Commands.NVS_Pattern >> 8));
+            Tomerge.Add((byte)(Commands.NVS_Pattern));
+            //data len
+            Tomerge.Add((byte)(NVSLength >> 8));
+            Tomerge.Add((byte)(NVSLength));
+            // nvs block id
+            Tomerge.Add((byte)(NVSID >> 8));
+            Tomerge.Add((byte)(NVSID));
+            //nvs block data checksum
+            Tomerge.Add((byte)(nvsDataCksum >> 24));
+            Tomerge.Add((byte)(nvsDataCksum >> 16));
+            Tomerge.Add((byte)(nvsDataCksum >> 8));
+            Tomerge.Add((byte)(nvsDataCksum));
+
+            NVSblockAdd += 12; // data byte + pattern +id/len + cksum (12bytes)
+            
+            for (int i= 0; i < dta.Length; i++)
+            {
+                Tomerge.Add(dta[i]);
+            }
+
+            ushort quotient = (ushort)(Tomerge.Count % 16);
+
+            for(int i= 0; i < (16 - quotient); i++)
+            {
+                Tomerge.Add(0);
+                NVSLength++;
+            }
+
+            return Tomerge.ToArray();
+        }
+
+        private void NVSXMLUpdatation()
+        {
+
+
+        }
+
+        #region Update NVS Not used
         public bool UpdateNvsHeader(UInt32 add)
         {
             bool retval = false;
@@ -296,15 +234,9 @@ namespace File_TryAccess_Tool
             headerdata.Add(0xFF);
             headerdata.Add(0xFF);
 
-            if (NvsDataUpdateinComif(headerdata.ToArray()))
-            {   
-                if(NvsflashComplete())
-                {
-                    retval = true;
-                }             
-            }
 
             return retval;
         }
+        #endregion
     }
 }

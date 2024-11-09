@@ -57,7 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class\BackgroundworkerFile.cs" />
+    <Compile Include="Class\FlowControlHandling.cs" />
     <Compile Include="Class\NvmDataHandling.cs" />
     <Compile Include="Comif\ComIf.cs" />
     <Compile Include="Class\Commands.cs" />
