@@ -16,7 +16,7 @@
  */
 #define CMSIS_device_header "stm32h5xx.h"
 
-/* Keil::Device:Startup:1.1.0 */
+/* Keil::Device:Startup:1.2.0 */
 #define RTE_DEVICE_STARTUP_STM32H5XX    /* Device Startup for STM32H5 */
 
 

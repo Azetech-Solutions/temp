@@ -90,21 +90,20 @@ extern void Chk_NVMLast_BlockAdd();
 extern void NVM_Init(void);
 
 /* Scan the last NVM Block & Read it and store the RAM Memory */
-extern void NVM_Scan_Block(void);
+static void NVM_Scan_Block(void);
 
 /* Read the data from the last NVM Block */
-extern void NVM_Block_Read_FUN(NVM_Data_Config_ST *Rblk,uint32_t Current_Address);
+static void NVM_Block_Read_FUN(NVM_Data_Config_ST *Rblk,uint32_t Current_Address);
 
 
 /* TO Write the New NVM Block Data  */
-extern uint8_t NVM_Block_Write(void);
-extern uint32_t NVM_Multi_Word_write(uint32_t Address,uint32_t *Data,uint32_t Size);
+static uint8_t NVM_Block_Write(void);
 
 /* New NVM Data's are Updating */
 extern uint8_t Update_Nvm_Block(uint32_t Add);
-extern void NVM_VersionUpdate();
-extern void ChkNVMApplication(uint32_t Add);
-extern uint32_t NVM_AddUpdate(uint32_t Blk_add);
+static void NVM_VersionUpdate();
+static void ChkNVMApplication(uint32_t Add);
+static uint32_t NVM_AddUpdate(uint32_t Blk_add);
 
 /* This function is read the Headers of the APP1 & APP2 */
 extern void Read_Apps_Header(void);

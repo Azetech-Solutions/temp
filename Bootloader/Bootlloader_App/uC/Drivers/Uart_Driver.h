@@ -5,8 +5,8 @@
 #include "Buffer.h"
 #include "ComIf.h"
 #include "Debug.h"
-#include <string.h>
 
+#define UART_INIT
 /***************************************************************************************/
 extern UBYTE UART_Init_bit;
 
@@ -14,7 +14,7 @@ extern void Uart3_Init(void);
 
 extern uint8_t Uar3t_Tx_Byte(uint8_t Data);
 
-extern void Uart3_Txstring(char *data);
+static void Uart3_Txstring(char *data);
 
 extern void USART3_Main(void);
 

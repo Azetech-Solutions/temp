@@ -1,11 +1,10 @@
 #include "NVM_Driver.h"
-#include "stm32h5xx_hal_gpio.h"
 #include "Flowcontrol.h"
 
 //Flg
 uint8_t NVM_Sec2_EraseVerify_Flg = FALSE;
 
-volatile uint32_t Last_NVMBlock_Add;  //this variable is used to find the last valid NVM address
+volatile uint32_t Last_NVMBlock_Add = 0x08011FE0;  //this variable is used to find the last valid NVM address
 
 /***************************************************************************************/
 NVM_Data_Config_ST NVM_Block = {
@@ -22,7 +21,7 @@ NVM_Data_Config_ST NVM_Block = {
 			/* IsUpdateAllTrg Flag */ 0,
 			/* Res */ 0,
 		},
-		/* NVM Header */	0xA1A1A1A1,
+		/* NVM Header */	0xC2C2C2C2,
 		{
 			/* NVM ID */	0,
 			/* NVM Length */	0,
@@ -83,7 +82,7 @@ void NVM_Init(void)
 	NVM_Scan_Block();
 }
 /***************************************************************************************/
-void NVM_Scan_Block(void)
+static void NVM_Scan_Block(void)
 {	
 		NVM_Data_Config_ST *NVMBlkRead = &NVM_Block;
 		
@@ -138,7 +137,7 @@ uint32_t ChkAppHeader_ChkSum(uint32_t Add)
 }
 /***************************************************************************************/
 
-void NVM_Block_Read_FUN(NVM_Data_Config_ST *Rblk,uint32_t Current_Address)
+static void NVM_Block_Read_FUN(NVM_Data_Config_ST *Rblk,uint32_t Current_Address)
 {
 		Rblk->NVM_Header = FLASH_Read(Current_Address);	// to read the last block  nvm Header/ Pattern
 		
@@ -166,7 +165,7 @@ void Chk_NVMLast_BlockAdd(void)
 	
 	while(SAdd < NVM_END_ADDRESS)
 	{
-		if(*(uint32_t*)(SAdd) == 0xA1A1A1A1)
+		if(*(uint32_t*)(SAdd) == 0xC2C2C2C2)
 		{	
 			Last_NVMBlock_Add = SAdd;  // to get the last valid nvm block 
 		}
@@ -175,40 +174,19 @@ void Chk_NVMLast_BlockAdd(void)
 	}
 }
 /***************************************************************************************/
-uint8_t NVM_Block_Write(void)
+static uint8_t NVM_Block_Write(void)
 {
 	uint8_t retval=0;
 	/* Header->len->Id->Flag->chksum->data*/
 		NVM_Data_Config_ST *upDtBlk = &NVM_Block;	
 	
 		/* This function is used to Update new NVM block  Data's */
-		if( NVM_Multi_Word_write((Last_NVMBlock_Add + (NVM_ONE_BLOCK_SIZE*sizeof(uint32_t))),&NVM_Block.NVM_Header,upDtBlk->NVM_Block_Size) )
+		if( FLASH_Multi_Word_write((Last_NVMBlock_Add + (NVM_ONE_BLOCK_SIZE*sizeof(uint32_t))),&NVM_Block.NVM_Header,upDtBlk->NVM_Block_Size) )
 		{
 			retval = 1;
 		}
 	return retval;
 }
-/***************************************************************************************/
-uint32_t NVM_Multi_Word_write(uint32_t Address,uint32_t *Data,uint32_t Size)
-{	
-	__disable_irq();
-	FLASH_Unlock();
-	FLASH_ErrorChk();
-	
-	do
-	{
-		FLASH_Write(Address,(*Data++));
-		Address +=4U;
-		Size--;
-	}while(Size!=0);
-	
-	FLASH_ErrorChk();
-	FLASH_Lock();
-	__enable_irq();
-	
-	return Address;
-}
-
 /***************************************************************************************/
 
 uint32_t App_Image_Chksum_calculation(uint32_t Add)  // this api not used anywhere
@@ -246,7 +224,7 @@ uint8_t Update_Nvm_Block(uint32_t Add)
 			if(NVM_Sec2_EraseVerify_Flg == TRUE)
 			{
 				/* Erase the Sec2 */
-				if(Flash_SingleSec_Erase(NVM_SECTOR_TWO,BANK_2)) 
+				if(FLASH_Erase_NoofSectors(NVM_SECTOR_TWO, BANK_2, 1)) 
 				{ 
 					if( VerifyFlashErase(NVM_SECTOR_TWO_START_ADDRESS,NVM_SECTOR_TWO_END_ADDRESS) ) 
 					{ 
@@ -270,7 +248,7 @@ uint8_t NVM_ReOrg()
 	NVM_Data_Config_ST *Reorg = &NVM_Block;
 	uint8_t retval =0;
 	// erase nvm sec 1
-	if(Flash_SingleSec_Erase(NVM_SECTOR_ONE,BANK_2))
+	if(FLASH_Erase_NoofSectors(NVM_SECTOR_ONE, BANK_2, 1))
 	{	
 		if( VerifyFlashErase(NVM_SECTOR_ONE_START_ADDRESS,NVM_SECTOR_ONE_END_ADDRESS) )
 		{
@@ -290,7 +268,7 @@ uint8_t NVM_ReOrg()
 				if(NVM_Sec2_EraseVerify_Flg == TRUE)
 				{
 					/* Erase the nvm Sec2 */
-					if(Flash_SingleSec_Erase(NVM_SECTOR_TWO,BANK_2)) 
+					if(FLASH_Erase_NoofSectors(NVM_SECTOR_TWO, BANK_2, 1)) 
 					{ 
 						if( VerifyFlashErase(NVM_SECTOR_TWO_START_ADDRESS,NVM_SECTOR_TWO_END_ADDRESS) ) 
 						{
@@ -329,7 +307,7 @@ uint8_t NVMToolClear()  // set the deafault nvm values
 					if(NVM_Sec2_EraseVerify_Flg == TRUE)
 					{
 						/* Erase the Sec2 */
-						if(Flash_SingleSec_Erase(NVM_SECTOR_TWO,BANK_2)) 
+						if(FLASH_Erase_NoofSectors(NVM_SECTOR_TWO, BANK_2 ,1)) 
 						{
 							if( VerifyFlashErase(NVM_SECTOR_TWO_START_ADDRESS,NVM_SECTOR_TWO_END_ADDRESS) ) { retval = 1; } 
 						}
@@ -345,7 +323,7 @@ uint8_t NVMToolClear()  // set the deafault nvm values
 }
 /***************************************************************************************/
 
-uint32_t NVM_AddUpdate(uint32_t Blk_add)
+static uint32_t NVM_AddUpdate(uint32_t Blk_add)
 {
 	NVM_Data_Config_ST *updt_nvm = &NVM_Block;
 
@@ -363,7 +341,7 @@ uint32_t NVM_AddUpdate(uint32_t Blk_add)
 			Blk_add = Last_NVMBlock_Add;
 		}
 		else if((Blk_add >= (APP_2_BASE_ADDRESS - 0x70U)) && (Blk_add <= APP_2_BASE_ADDRESS) ) //end NVM address
-		{				
+		{
 				if(NVM_ReOrg()) { Blk_add = Last_NVMBlock_Add = 0x08011FE0; }								
 		}
 			
@@ -371,7 +349,7 @@ uint32_t NVM_AddUpdate(uint32_t Blk_add)
 }
 /***************************************************************************************/
 
-void NVM_VersionUpdate()
+static void NVM_VersionUpdate()
 {
 	 NVM_Data_Config_ST *VerUpt = &NVM_Block;
 	
@@ -398,7 +376,7 @@ void NVM_VersionUpdate()
 }
 
 /***************************************************************************************/
-void ChkNVMApplication(uint32_t Add)
+static void ChkNVMApplication(uint32_t Add)
 {
 		NVM_Data_Config_ST *UptApp = &NVM_Block;
 		
@@ -432,42 +410,5 @@ void ChkNVMApplication(uint32_t Add)
 		}
 }
 
-
-/***************************************************************************************/
-uint8_t NvmTool_Update()
-{
-	uint8_t retval = 0;
-	
-//	if(FcRxFlag == TRUE)
-//	{
-//		RxUpt.NVM_S_address  = ((rx->StAdd1<<24) |(rx->StAdd2 << 16) |(rx->StAdd3 << 8)|(rx->StAdd4));
-//		
-//		RxUpt.NVM_Header = ((rx->Patrn1 << 24) | (rx->Patrn2 << 16) | (rx->Patrn3 << 8) | (rx->Patrn4));
-//		
-//		RxUpt.NVM_IdLen.NVM_Length = ((rx->Len1 << 8) | (rx->Len2));
-//		RxUpt.NVM_IdLen.NVM_ID = ((rx->ID1 << 8) | (rx->ID2));
-//		
-//		RxUpt.NVM_Flag.NVM_Version = (rx->NVMVer4);
-//		RxUpt.NVM_Flag.Res2 = (rx->NVMVer3);
-//		RxUpt.NVM_Flag.Res3 = (rx->NVMVer2);
-//		RxUpt.NVM_Flag.Res4 = (rx->NVMVer1);
-//		
-//		RxUpt.NVM_ChkSum = ((rx->NVMCkSum1 << 24) | (rx->NVMCkSum2 << 16) | (rx->NVMCkSum3 << 8) | (rx->NVMCkSum4));
-//		
-//		RxUpt.NVM_Data.NVMData0 = ((rx->NVMData1 << 24) | (rx->NVMData2 << 16) | (rx->NVMData3 << 8) | (rx->NVMData4));
-//		RxUpt.NVM_Data.NVMData1 = ((rx->NVMData5 << 24) | (rx->NVMData6 << 16) | (rx->NVMData7 << 8) | (rx->NVMData8));
-//		RxUpt.NVM_Data.NVMData2 = ((rx->NVMData9 << 24) | (rx->NVMData10 << 16) | (rx->NVMData11 << 8) | (rx->NVMData12));
-//		RxUpt.NVM_Data.NVMData3 = ((rx->NVMData13 << 24) | (rx->NVMData14 << 16) | (rx->NVMData15 << 8) | (rx->NVMData16));
-//		
-//		
-//		if ( NVM_Multi_Word_write(RxUpt.NVM_S_address,&RxUpt.NVM_Header,NVM_ONE_BLOCK_SIZE) )
-//		{
-//			retval = 1; FcRxFlag = FALSE;
-//		}
-//		else { retval =0; FcRxFlag = FALSE; }
-//	}
-	
-	return retval;
-}
 
 /***************************************************************************************/

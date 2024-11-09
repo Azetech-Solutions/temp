@@ -1,9 +1,9 @@
 
 #include "Uart_Driver.h"
-#include "stm32h5xx_hal_gpio.h"
 
 UBYTE UART_Init_bit = FALSE;
 /***************************************************************************************/
+//#ifdef UART_INIT
 void Uart3_Init(void)
 {
 	USART3->CR1 = USART_CR1_FIFOEN;
@@ -38,6 +38,7 @@ void Uart3_Init(void)
 	
 	UART_Init_bit =TRUE;
 }
+//#endif
 /***************************************************************************************/
 
 uint8_t Uar3t_Tx_Byte(uint8_t Data)
@@ -58,7 +59,7 @@ uint8_t Uar3t_Tx_Byte(uint8_t Data)
 }
 /***************************************************************************************/
 
-void Uart3_Txstring(char *data)
+static void Uart3_Txstring(char *data)
 {
 	while(*data)
 	{
@@ -74,9 +75,7 @@ void USART3_IRQHandler(void)
 	if(USART3->ISR & USART_ISR_RXNE_RXFNE)
 	{
 		uint8_t data = USART3->RDR;
-		UART3_Buffer_EnQueue(data);
-		//Uar3t_Tx_Byte(data);
-		//HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_1);
+		UART3_Buffer_EnQueue(data);	
 	}
 	__enable_irq();
 }
@@ -99,8 +98,7 @@ void debugMain(void)
 {
 	while(!Debug_IsBufferEmpty())
 	{
-		UBYTE data =0 ;
-		
+		UBYTE data =0 ;		
 		if(Debug_Buffer_DeQueue(&data))
 		{
 			Uar3t_Tx_Byte(data);

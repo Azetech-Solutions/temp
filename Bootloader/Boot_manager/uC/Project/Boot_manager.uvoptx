@@ -158,7 +158,7 @@
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>\\Boot_manager\../Drivers/NVM/NVM_Driver.c\Last_NVMBlock_Add</ItemText>
+          <ItemText>NVM_Block</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
@@ -331,7 +331,7 @@
 
   <Group>
     <GroupName>NVS</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

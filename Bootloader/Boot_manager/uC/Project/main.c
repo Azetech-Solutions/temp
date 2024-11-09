@@ -99,6 +99,14 @@ int main()
 //				}
 			}
 		}
+		else 
+		{
+//				if(IsBoot_valid() != 0U)
+//				{
+					bkSRAM_WriteVariable(BKRAM_JUMP_UpdateApp_ADD,ISJUMP_BOOT_WRITE_VALUE);
+					Jump_BOOTLOADER();
+//				}
+		}
 			
 	}
 	
@@ -109,7 +117,7 @@ void Init(void)
 {
 	bkSRAM_Init();
 	Chk_NVMTotal_Block();
-	NVS_Init();
+	//NVS_Init();
 	NVM_Init();
 	Read_Apps_Header();
 //	Gpio_init();

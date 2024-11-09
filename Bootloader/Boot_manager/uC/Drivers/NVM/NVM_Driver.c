@@ -2,7 +2,7 @@
 
 uint8_t NVM_Sec2_EraseVerify_Flg = FALSE;
 
-volatile uint32_t Last_NVMBlock_Add;  //this variable is used to find the last valid NVM address
+volatile uint32_t Last_NVMBlock_Add = 0x08011FE0;  //this variable is used to find the last valid NVM address initially it has the nvm (start address - 0x20)
 volatile uint32_t FindNVMApplicationAdd;
 
 /***************************************************************************************/
@@ -15,7 +15,7 @@ NVM_Data_Config_ST NVM_Block = {
 			/* ReOrgTrigger Flag */ 0,
 			/* Res */ 0,
 		},
-		/* NVM Header */	0xA1A1A1A1,
+		/* NVM Header */	0xC2C2C2C2,
 		{
 			/* NVM ID */	0,
 			/* NVM Length */	0,
@@ -40,8 +40,8 @@ void NVM_Scan_Block(void)
 {	
 		NVM_Data_Config_ST *NVMBlkRead = &NVM_Block;
 		
-		if(NVMBlkRead->NVM_CtrlFlg.StartupFlg == TRUE)
-		{				
+		if(NVMBlkRead->NVM_CtrlFlg.StartupFlg == TRUE) // not set false
+		{
 			NVM_Block_Read_FUN();  // NVM Block data Read function
 		}	
 }	
@@ -51,25 +51,29 @@ void NVM_Block_Read_FUN()
 {
 		NVM_Data_Config_ST *nmread = &NVM_Block;
 		uint32_t Current_Address=0;
-	
-		Current_Address = Last_NVMBlock_Add; // last block of NVM data is Read
-	
-		nmread->NVM_Header = FLASH_Read(Current_Address);	// to read the last block  nvm Header/ Pattern
 		
-		nmread->NVM_IdLen.NVM_ID = (uint16_t)(FLASH_Read(Current_Address+4U)); // to read the last block  nvm Id
-		nmread->NVM_IdLen.NVM_Length = (uint16_t)((FLASH_Read(Current_Address+4U)) >> 16); // to read the last block  nvm length
+		if(Last_NVMBlock_Add == 0x08011FE0)
+		{ Current_Address = NVM_BASE_ADDRESS; }
+		else { Current_Address = Last_NVMBlock_Add; } // last block of NVM data is Read 
 		
-		nmread->NVM_Flag.NVM_Version = (uint8_t)(FLASH_Read(Current_Address+8U)); // to read the last block  nvm verison
-		
-		nmread->NVM_ChkSum = FLASH_Read(Current_Address+12U); // to read the last block  nvm checksum
-		
-		Current_Address +=16U;  // to read the last block  nvm data's
-		for(uint8_t i=0;i<NVM_DATA_BLOCK_SIZE;i++)
+		if(Current_Address != 0U)
 		{
-			nmread->NVM_Data[i] = FLASH_Read(Current_Address);
-			Current_Address+=4U;
+			nmread->NVM_Header = FLASH_Read(Current_Address);	// to read the last block  nvm Header/ Pattern
+			
+			nmread->NVM_IdLen.NVM_ID = (uint16_t)(FLASH_Read(Current_Address+4U)); // to read the last block  nvm Id
+			nmread->NVM_IdLen.NVM_Length = (uint16_t)((FLASH_Read(Current_Address+4U)) >> 16); // to read the last block  nvm length
+			
+			nmread->NVM_Flag.NVM_Version = (uint8_t)(FLASH_Read(Current_Address+8U)); // to read the last block  nvm verison
+			
+			nmread->NVM_ChkSum = FLASH_Read(Current_Address+12U); // to read the last block  nvm checksum
+			
+			Current_Address +=16U;  // to read the last block  nvm data's
+			for(uint8_t i=0;i<NVM_DATA_BLOCK_SIZE;i++)
+			{
+				nmread->NVM_Data[i] = FLASH_Read(Current_Address);
+				Current_Address+=4U;
+			}	
 		}	
-	
 }
 /***************************************************************************************/
 //This Function to Find the Last block Address
@@ -79,7 +83,7 @@ void Chk_NVMTotal_Block()
 	
 	while(SAdd < NVM_END_ADDRESS)
 	{
-		if(*(uint32_t*)(SAdd) == 0xA1A1A1A1)
+		if(*(uint32_t*)(SAdd) == 0xC2C2C2C2)
 		{	
 			Last_NVMBlock_Add = SAdd;  // to get the last valid nvm block 
 		}

@@ -7,7 +7,7 @@
         <Name>Boot</Name>
         <TransmitFunction>Boot_Transmit_FUN</TransmitFunction>
         <DataTransferMethod>Bytes</DataTransferMethod>
-        <TransmitBufferSize>255</TransmitBufferSize>
+        <TransmitBufferSize>800</TransmitBufferSize>
         <ErrorNotification>Boot_Error_Notification</ErrorNotification>
         <EnableDynamicDataLength>True</EnableDynamicDataLength>
         <MaxDynamicDataLength>255</MaxDynamicDataLength>
@@ -23,7 +23,7 @@
           <TxMessage>
             <Name>FC_Response</Name>
             <ID>213</ID>
-            <Length>247</Length>
+            <Length>0</Length>
             <ChecksumLength>1</ChecksumLength>
             <EnableAggregation>False</EnableAggregation>
           </TxMessage>
@@ -39,7 +39,7 @@
           <RxMessage>
             <Name>FC_RxData</Name>
             <ID>211</ID>
-            <Length>247</Length>
+            <Length>0</Length>
             <RxCallback>FC_RxCbk</RxCallback>
             <ChecksumLength>1</ChecksumLength>
           </RxMessage>

@@ -57,5 +57,14 @@
 #define NVS_BLOCK_SECTOR												 0U
 /************************************************************/
 
+#define TOGET_CMD(x,y) 											((x << 4) | y )
+#define TOGET_MEMORYADDRESS(a,b,c,d) 				(((ULONG)a << 24)| ((ULONG)b << 16)| ((ULONG)c << 8) | ((ULONG)d))
+#define TOGET_DATA(a,b,c,d) 								(((ULONG)a << 24)| ((ULONG)b << 16)| ((ULONG)c << 8) | ((ULONG)d))
+#define TOGET_LSBBITS(x) 										(x & 0x0F)
+#define TOGET_MSBBITS(x) 										((x & 0xF0) >> 4)
+#define TOGET_12_BITLENGTH(x,y) 						(((x) << 8| y) & 0x0FFF)
+
+#define TOASSIGN_MSBBITS(x) 								((x & 0x0F00) >> 8)
+#define TOASSIGN_BYTE(x)										(x & 0xFF)
 
 #endif

@@ -4,7 +4,7 @@
 
 /****GLOBAL VARIABLE INCLUTION****/
 
-static UBYTE UART_BUSY_Flag = FALSE;
+static UartFlag_ST Uart;
 
 /***************************************************************************************/
 
@@ -14,9 +14,9 @@ UBYTE Boot_Transmit_FUN(UWORD Length, void * Data)
 	
 	if(UART_Init_bit == TRUE)
 	{
-		if(UART_BUSY_Flag == FALSE)
+		if(Uart.UART_BUSY_Flag == FALSE)
 		{
-			for(UBYTE i=0;i<Length;i++)
+			for(UWORD i=0;i<Length;i++)
 			{
 				if(Uar3t_Tx_Byte(*((UB*)(Data++))))
 				{
@@ -27,13 +27,13 @@ UBYTE Boot_Transmit_FUN(UWORD Length, void * Data)
 					retval = COMIF_EC_TRANSMISSION_ABORTED;
 					break;
 				}
-				UART_BUSY_Flag = TRUE;
+				Uart.UART_BUSY_Flag = TRUE;
 			}
 			
 			if(retval == COMIF_EC_NO_ERROR)
 			{
 				ComIf_TxConfirmation(C_ComIfChannel_Boot);
-				UART_BUSY_Flag = FALSE;
+				Uart.UART_BUSY_Flag = FALSE;
 			}		
 		}
 		else
@@ -49,6 +49,7 @@ UBYTE Boot_Transmit_FUN(UWORD Length, void * Data)
 
 void Boot_Error_Notification(ULONG Debug0, ULONG Debug1)
 {
-	Debug_SendNumberWithDescription("Error_not",Debug0);
+	Debug_SendNumberWithDescription("Debug 0",Debug0);
+	Debug_SendNumberWithDescription("Debug 1",Debug1);
 }
 /***************************************************************************************/

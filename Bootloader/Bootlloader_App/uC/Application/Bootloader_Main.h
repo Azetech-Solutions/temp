@@ -23,13 +23,16 @@
 #define	NVM_SECTOR							1U
 #define	APP2_SECTOR							3U
 
+/************* Flash CMDs *************/
+#define FLASH_STARTCMD			  0xF5
+#define FLASH_ERASECMD			  0xFE
+#define FLASH_NVSCMD				  0xFA
+#define FLASH_FLASHCMD			  0xFB
+#define FLASH_DATACMD				  0xFD
+#define FLASH_COMPLETECMD		  0xFC
 
-#define Boot_Res_Status()  Boot_Response_status()
 
-typedef struct __Flash_data
-{
-	UBYTE Data[16];
-}Flash_data_ST;
+#define BOOT_RES_STATUS()  Boot_Response_status()
 
 typedef union _Boot_RxByte_ST
 {
@@ -78,11 +81,17 @@ typedef enum
 	Boot_Wating_for_next_command,
 	Boot_Flash_Write,
 	Boot_Erase_Flash,
-	Boot_NVM_State,
 }Boot_state_EN;
 
-extern Boot_RxByte_ST Boot_Rx_Data;
-extern Boot_TxByte_ST Boot_Tx_Data;
+typedef struct _BOOT_Control
+{
+	 UBYTE BootCmdReceiveVerifyFlag : 1;
+	 UBYTE Flash_Write_Flag : 1;
+	 UBYTE ChooseNvsFlag : 1;
+	 UBYTE IndividualEraseVerifyFlag : 1;   // verify the individual erase is done or not
+	 UBYTE ChooseIndividualErase_Flg : 1;  // in idle state handle
+	 UBYTE ChooseFlash_Erase_Flag : 1;   // this is used to cyclic method
+}BOOT_Control_ST;
 
 extern void Boot_Req_Data_RxCbk(UBYTE Length, UBYTE *Data);
 
@@ -90,5 +99,8 @@ extern void Boot_Main();
 
 extern void Boot_Response_status();
 
-extern ULONG calculateChecksum(ULONG *data, ULONG length);
+static Boot_RxByte_ST Boot_Rx_Data; // Boot Rx ST
+
+extern Boot_TxByte_ST Boot_Tx_Data;	// Boot Tx ST
+
 #endif

@@ -31,10 +31,10 @@
 extern UBYTE Boot_Transmit_FUN(UWORD Length, void * Data);
 extern void Boot_Error_Notification(ULONG Debug0, ULONG Debug1);
 
-UBYTE ComIfChannelTxBuffer_Boot[255];
+UBYTE ComIfChannelTxBuffer_Boot[800];
 
 UBYTE ComIf_ShadowBuffer_Boot_Boot_Response[1];
-UBYTE ComIf_ShadowBuffer_Boot_FC_Response[247];
+UBYTE ComIf_ShadowBuffer_Boot_FC_Response[255];
 
 ComIfTxMessageConfig ComIfTxMsgCfg_Boot[2] = {
 	{
@@ -59,7 +59,7 @@ ComIfTxMessageConfig ComIfTxMsgCfg_Boot[2] = {
 	{
 		/* FC_Response */
 		/* ID */        0xD5,
-		/* Length */    247,
+		/* Length */    0,
 	#ifdef COMIF_DYNAMIC_DATA_LENGTH_ENABLED
 		/* DynLength */ 0,
 	#endif
@@ -80,7 +80,7 @@ ComIfTxMessageConfig ComIfTxMsgCfg_Boot[2] = {
 extern void Boot_Req_Data_RxCbk(UBYTE Length, UBYTE *Data);
 UBYTE ComIf_RxMessageBuffer_Boot_Boot_Req_Data[22];
 extern void FC_RxCbk(UBYTE Length, UBYTE *Data);
-UBYTE ComIf_RxMessageBuffer_Boot_FC_RxData[248];
+UBYTE ComIf_RxMessageBuffer_Boot_FC_RxData[256];
 
 ComIfRxMessageConfig ComIfRxMsgCfg_Boot[2] = {
 	{
@@ -102,7 +102,7 @@ ComIfRxMessageConfig ComIfRxMsgCfg_Boot[2] = {
 	{
 		/* FC_RxData */
 		/* ID */      0xD3,
-		/* Length */  247,
+		/* Length */  0,
 		/* CHKLEN */  1,
 		/* RxFlags */ {
 						0, // ReceptionStarted
@@ -129,7 +129,7 @@ ComIf_ChannelConfigType ComIf_ChannelConfig[C_ComIfChannel_TOTAL] =
 		/* Rx Timeout Time Counter */       0,
 #endif
     	/* Transmit Buffer */               ComIfChannelTxBuffer_Boot,
-    	/* Transmit Buffer Length */        255,
+    	/* Transmit Buffer Length */        800,
 #ifdef COMIF_DYNAMIC_DATA_LENGTH_ENABLED
 		/* Dynamic Max Data Length */       255,
 #endif

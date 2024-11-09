@@ -8,26 +8,6 @@
 
 #include "Ports_init.h"
 
-/**********************************************************/
-/* Macro Definitions                                      */
-/**********************************************************/
-
-/**********************************************************/
-/* Type Definitions                                       */
-/**********************************************************/
-
-/**********************************************************/
-/* Global Variable Declarations                           */
-/**********************************************************/
-
-/**********************************************************/
-/* Inline Function Definitions                            */
-/**********************************************************/
-
-/**********************************************************/
-/* Function Declaration                                   */
-/**********************************************************/
-
 void delay()
 {
 	unsigned int i;
@@ -42,11 +22,11 @@ void Init(void)
 	bkSRAM_Init();	
 	GpioclockEnable();
 	Uart3_Init();
-	NVS_Init();
+	//NVS_Init();
 	NVM_Init();
 	Read_Apps_Header();
 }
-void GpioclockEnable(void)
+static void GpioclockEnable(void)
 {
 	/* GPIO Ports Clock Enable */
 	PORTA_CLOCK_ENABLE();
@@ -58,7 +38,7 @@ void GpioclockEnable(void)
 }
 /***************************************************************************************/
 
-void Uart3_IO_init(void)
+static void Uart3_IO_init(void)
 {
 	GPIO_InitTypeDef PA3_PA4 ={0};
 	

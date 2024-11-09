@@ -22,10 +22,10 @@
 
 extern void bkSRAM_Init(void);
 
-extern void PWREx_EnableBkupRAM_REG(void);
+static void PWREx_EnableBkupRAM_REG(void);
 
-extern void PWR_EnableBkUpAccess(void);
-extern void PWR_DisableBkUpAccess(void);
+static void PWR_EnableBkUpAccess(void);
+static void PWR_DisableBkUpAccess(void);
 
 
 extern void bkSRAM_WriteVariable(uint32_t write_adress,uint32_t vall);

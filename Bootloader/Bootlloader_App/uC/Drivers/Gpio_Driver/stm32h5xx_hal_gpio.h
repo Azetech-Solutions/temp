@@ -27,17 +27,14 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h5xx.h"
 
-/** @addtogroup STM32H5xx_HAL_Driver
-  * @{
-  */
-
-/** @defgroup GPIO GPIO
-  * @brief GPIO HAL module driver
-  * @{
-  */
-/** @defgroup GPIOEx_Alternate_function_selection GPIOEx Alternate function selection
-  * @{
-  */
+#define GPIO_MODE             (0x00000003U)
+#define EXTI_MODE             (0x10000000U)
+#define GPIO_MODE_IT          (0x00010000U)
+#define GPIO_MODE_EVT         (0x00020000U)
+#define RISING_EDGE           (0x00100000U)
+#define FALLING_EDGE          (0x00200000U)
+#define GPIO_OUTPUT_TYPE      (0x00000010U)
+#define GPIO_NUMBER           (16U)
 
 #define PORTA_CLOCK_ENABLE()   	RCC->AHB2ENR |= (1<<0)
 #define PORTB_CLOCK_ENABLE()   	RCC->AHB2ENR |= (1<<1)
@@ -761,19 +758,6 @@ HAL_StatusTypeDef HAL_GPIO_GetConfigPinAttributes(const GPIO_TypeDef *GPIOx, uin
   */
 
 #endif /* __ARM_FEATURE_CMSE */
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
-
 #ifdef __cplusplus
 }
 #endif

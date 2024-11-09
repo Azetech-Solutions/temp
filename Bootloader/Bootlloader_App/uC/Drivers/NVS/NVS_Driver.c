@@ -2,7 +2,7 @@
 #include "NVS_Driver.h"
 
 /***************************************************************************************/
-NVS_Dataconfig_ST Nvs_Config_Block = {
+static NVS_Dataconfig_ST Nvs_Config_Block = {
 	
 		/*Start Add*/ 0x00,
 		/*Block Size*/ 16,
@@ -27,7 +27,7 @@ void NVS_Init(void)
 }
 /***************************************************************************************/
 
-void NVS_Scan_Block(void)
+static void NVS_Scan_Block(void)
 {
 	uint8_t Blk_No;
 	
@@ -43,7 +43,7 @@ void NVS_Scan_Block(void)
 }
 /***************************************************************************************/
 
-void NVS_Block_Read(uint32_t Address,uint32_t Blk_no)
+static void NVS_Block_Read(uint32_t Address,uint32_t Blk_no)
 {
 		NVS_Dataconfig_ST *NSRead = &Nvs_Config_Block;
 		
@@ -66,7 +66,7 @@ void NVSBlock_DataRead(uint8_t Block_Inx, uint32_t **Data)
 	}
 }	
 /***************************************************************************************/
-uint8_t IS_NVS_BlockValid(uint8_t Block_Inx)
+static uint8_t IS_NVS_BlockValid(uint8_t Block_Inx)
 {
 	uint8_t retval = 0;
 	uint32_t Blk_add =0;
@@ -94,7 +94,7 @@ uint32_t FindBlock_DataSum(uint32_t Add,uint8_t Size)
 		uint32_t checkadd = FLASH_Read(Add);
 		if( checkadd!= 0xFFFFFFFFU && checkadd != 0x00000000U)
 		{
-			sum+= FLASH_Read(Add);
+			sum+= checkadd; //FLASH_Read(Add);
 		}
 		Add+=4U;
 		i++;

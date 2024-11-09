@@ -1,19 +1,19 @@
 #include "Backup_ram.h"
 
 /***************************************************************************************/
-void PWR_EnableBkUpAccess(void)
+static void PWR_EnableBkUpAccess(void)
 {
   SET_BIT(PWR->DBPCR, PWR_DBPCR_DBP);
 }
 /***************************************************************************************/
 
-void PWR_DisableBkUpAccess(void)
+static void PWR_DisableBkUpAccess(void)
 {
   CLEAR_BIT(PWR->DBPCR, PWR_DBPCR_DBP);
 }
 /***************************************************************************************/
 
-void PWREx_EnableBkupRAM_REG(void)
+static void PWREx_EnableBkupRAM_REG(void)
 {
   SET_BIT(PWR->BDCR, PWR_BDCR_BREN);
 }
