@@ -10,6 +10,8 @@ using System.Linq;
 using System.IO;
 using System.Collections.Generic;
 using System.Threading;
+using File_TryAccess_Tool.Forms;
+using File_TryAccess_Tool.Class;
 
 
 namespace File_TryAccess_Tool
@@ -31,9 +33,10 @@ namespace File_TryAccess_Tool
         public memoryErasecontrol erasetype;
         public Hexfilehandling hexfilehandling;
         private Thread flashThread;
-        private bool isFlashRunning = false;
         private bool application_1_choose = false;
         private bool application_2_choose = false;
+
+        private preloadHandling waitprocess;
 
         // flag creations
         bool IsFileVaild = false;
@@ -65,10 +68,18 @@ namespace File_TryAccess_Tool
             string[] Ports = SerialPort.GetPortNames();
             CBoxComPort.Items.AddRange(Ports);
             loadDefaultValues();
+
             erasetype = new memoryErasecontrol();
             hexfilehandling = new Hexfilehandling();
         } // end
 
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            string[] Ports = SerialPort.GetPortNames();
+            CBoxComPort.Items.Clear();
+            loadDefaultValues();
+            CBoxComPort.Items.AddRange(Ports);
+        }
         private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             ushort len = (ushort) serialPort1.BytesToRead;
@@ -101,6 +112,7 @@ namespace File_TryAccess_Tool
                         erase[2] = (byte)(Convert.ToInt16(setBank[0].InnerText));
                         erasetype.eraseFlag = true;
                     }
+                    
                     if (erasetype.eraseFlag == true) 
                     {
                         flashThread = new Thread(() => {
@@ -282,7 +294,7 @@ namespace File_TryAccess_Tool
         private void MStripExitApplication_Click(object sender, EventArgs e)
         {
             var ext = MessageBox.Show("Do you want to \"Exit\"","Exit",MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (ext == DialogResult.Yes) { Application.Exit(); }            
+            if (ext == DialogResult.Yes) { Application.Exit(); }
         } // application exit end
 
         private void BtnSearch_Click(object sender, EventArgs e)
@@ -301,23 +313,7 @@ namespace File_TryAccess_Tool
                             {
                                 IsFileVaild = true;
                                 tBoxView.Text = ofd.FileName;
-                                Log.Info("Filepath :"+ofd.FileName);
-                                
-                                if(cBoxAppAddressSelect.Text ==  null)
-                                {
-                                    MessageBox.Show("Please choose the Application", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                }
-                                else if (cBoxAppAddressSelect.Text == "App1")
-                                {
-                                    application_1_choose = true;
-                                    application_2_choose = false;
-                                }
-                                else if(cBoxAppAddressSelect.Text == "App2")
-                                {
-                                    application_1_choose = false;
-                                    application_2_choose = true;
-                                }
-
+                                Log.Info("Filepath :"+ofd.FileName);                                                              
                             }
                         }
                     }
@@ -361,14 +357,14 @@ namespace File_TryAccess_Tool
             {
                 if (rtbxDataOut.Text != "") { rtbxDataOut.Clear(); }
             }
-
-
         }   // clear log end
 
         private void BtnTransmit_Click(object sender, EventArgs e)
         {
+            waitprocess = new preloadHandling();
+
             flashThread = new Thread( () =>
-            {
+            {                
                 bool Modestatus = false;
 
                 if (IsFileVaild == true)
@@ -377,8 +373,10 @@ namespace File_TryAccess_Tool
                     {
                         if (application_1_choose == true)
                         {
+                            waitprocess.showWaitState(this);
+                            
                             if (hexfilehandling.Flashstartcommands(Convert.ToUInt32(setStartAddress[2].InnerText)))  // based on xml app1 start address
-                            {
+                            {                                
                                 Modestatus = true;
                             }
                         }
@@ -398,7 +396,7 @@ namespace File_TryAccess_Tool
                             Log.Message("Flash transmit start");
                             if (hexfilehandling.FlashDatatransmit())
                             {
-                                Log.Message("Flash transmit start end");
+                                //Log.Message("Flash transmit start end");
                                 Flh_CompleteStatus = true; // to confirm all data's are transmit to uC
                             }
 
@@ -406,13 +404,13 @@ namespace File_TryAccess_Tool
                             {
                                 if (application_1_choose == true)
                                 {
-                                    Log.Message("Flash update start");
+                                    //Log.Message("Flash update start");
                                     if (hexfilehandling.UpdateflashappHeader(Convert.ToUInt32(setStartAddress[2].InnerText)))   // based on xml app1 start address
                                     {
-                                        Log.Message("Flash update start end");
-                                        Log.Message("Flash Complete start");
+                                        //Log.Message("Flash update start end");
+                                        //Log.Message("Flash Complete start");
                                         hexfilehandling.flashcompletecommand(Convert.ToUInt32(setStartAddress[2].InnerText));   // based on xml app1 start address
-                                        Log.Message("Flash Complete start end");
+                                        Log.Message("Flash Complete");
 
                                         application_1_choose = false;
                                         application_2_choose = false;
@@ -420,18 +418,19 @@ namespace File_TryAccess_Tool
                                 }
                                 else
                                 {
-                                    Log.Message("Flash update start");
+                                    //Log.Message("Flash update start");
                                     if (hexfilehandling.UpdateflashappHeader(Convert.ToUInt32(setStartAddress[3].InnerText)))   // based on xml app2 start address
                                     {
-                                        Log.Message("Flash update start end");
-                                        Log.Message("Flash Complete start");                                        
+                                        //Log.Message("Flash update start end");
+                                        //Log.Message("Flash Complete start");                                        
                                         hexfilehandling.flashcompletecommand(Convert.ToUInt32(setStartAddress[3].InnerText));    // based on xml app2 start address
-                                        Log.Message("Flash Complete start end");
+                                        Log.Message("Flash Complete");
 
                                         application_1_choose = false;
                                         application_2_choose = false;
                                     }
                                 }
+                            waitprocess.closeWaitState();
                             }// end 
                         }
 
@@ -452,14 +451,14 @@ namespace File_TryAccess_Tool
             flashThread = new Thread(() =>
             {
                 List<byte> ver1 = new List<byte>();
-                uint add = Convert.ToUInt32(setStartAddress[2].InnerText);
+                uint add = Convert.ToUInt32(setStartAddress[2].InnerText); // application 1 header address
                 
-                lblMajorVer.Text = "none";
-                lblMinorVer.Text = "none";
-                lblBulidVer.Text = "none";
-                lblReleseVer.Text = "none";
+                lblMajorVer.Text = "-";
+                lblMinorVer.Text = "-";
+                lblBulidVer.Text = "-";
+                lblReleseVer.Text = "-";
 
-                ver1.Add(0xD0);
+                ver1.Add(Commands.GETAPPVERSION);
                 ver1.Add(0x00);
                 ver1.Add(0x00);
                 ver1.Add((byte)(add >> 24));
@@ -487,14 +486,14 @@ namespace File_TryAccess_Tool
             flashThread = new Thread(() =>
             {
                 List<byte> ver1 = new List<byte>();
-                uint add = Convert.ToUInt32(setStartAddress[3].InnerText);
+                uint add = Convert.ToUInt32(setStartAddress[3].InnerText); // application 2 header address
 
-                lblMajorVer.Text = "none";
-                lblMinorVer.Text = "none";
-                lblBulidVer.Text = "none";
-                lblReleseVer.Text = "none";
+                lblMajorVer.Text = "-";
+                lblMinorVer.Text = "-";
+                lblBulidVer.Text = "-";
+                lblReleseVer.Text = "-";
 
-                ver1.Add(0xD0);
+                ver1.Add(Commands.GETAPPVERSION);
                 ver1.Add(0x00);
                 ver1.Add(0x00);
                 ver1.Add((byte)(add >> 24));
@@ -516,25 +515,40 @@ namespace File_TryAccess_Tool
         }
         #endregion
 
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+
+        private void cBoxAppAddressSelect_SelectedValueChanged(object sender, EventArgs e)
         {
-            var close = MessageBox.Show("Do you want Close Application", "Alret", MessageBoxButtons.YesNo, 
-                                           MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
-            if (flashThread != null && flashThread.IsAlive)
+            if (cBoxAppAddressSelect.Text == "App1")
             {
-                flashThread.Abort(); // Caution: Thread.Abort is not recommended due to abrupt termination
-                isFlashRunning = false;
-                Log.Message("Flash operation stopped.");
+                application_1_choose = true;
+                application_2_choose = false;
             }
-            if (close == DialogResult.Yes)
+            else if (cBoxAppAddressSelect.Text == "App2")
             {
-                Application.Exit();
+                application_1_choose = false;
+                application_2_choose = true;
             }
         }
 
-        private void label6_Click(object sender, EventArgs e)
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            var close = MessageBox.Show("Do you want Close Application", "Alret", MessageBoxButtons.YesNo,
+                                          MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
 
+            if (close == DialogResult.Yes)
+            {
+                if (flashThread != null && flashThread.IsAlive)
+                {
+                    flashThread.Abort(); // Caution: Thread.Abort is not recommended due to abrupt termination
+                    Log.Message("Flash operation stopped.");
+                }
+
+                Application.Exit();
+            }
+            else
+            {
+                e.Cancel = true;
+            }
         }
     }// end form1 class
 

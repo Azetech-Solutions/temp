@@ -113,6 +113,7 @@ namespace File_TryAccess_Tool
 
             StreamReader sr = new StreamReader(Filepath);
             hexCKsum = 0; // reset the cksum
+
             while ((Fileline = sr.ReadLine()) != null)
             {
                 if (Fileline.Count() < 11)
@@ -139,7 +140,7 @@ namespace File_TryAccess_Tool
                                         while (true)
                                         {
 
-                                            if (change)
+                                            if (change == true)
                                             {
                                                 if (flashBaseAddress != 0)
                                                 {

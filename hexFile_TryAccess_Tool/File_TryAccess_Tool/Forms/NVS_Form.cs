@@ -8,16 +8,18 @@ using System.Windows.Forms;
 using static File_TryAccess_Tool.Tooltransmit;
 using static File_TryAccess_Tool.Log;
 using System.IO;
+using System.Net.Http.Headers;
 
 namespace File_TryAccess_Tool
 {
     public partial class NVS_Form : Form
     {
         private NVSDataHandling nvsDataHandling;
-        private List<Button> buttons;
-        private List<string> NVShexData;
+        private List<Button> Addbuttons;
+        private List<string> StringNVShexData;
+        private Thread flashThread;
 
-        private int Btop = 87, Bleft = 36, cnt = 0, blkcnt = 1, pressedbtn = 0,reftag=0;
+        private int Btop = 87, Bleft = 56, cnt = 0,reftag=0, pressedbtn = 0;
         private bool btnclkchk = false;
         public NVS_Form()
         {
@@ -26,27 +28,39 @@ namespace File_TryAccess_Tool
 
             InitializeComponent();
             nvsDataHandling = new NVSDataHandling(filePath);
-            buttons = new List<Button>();
-            NVShexData = new List<string>();
+            Addbuttons = new List<Button>();
+            StringNVShexData = new List<string>();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             string userinput = rtbxDataOut.Text;
 
-            if (userinput != null)
-            {
-                nvsDataHandling.NVSUpdate(userinput.Replace(" ", ""));
-            }
-            else { MessageBox.Show("Enter a Valid Data","Alert",MessageBoxButtons.OK,MessageBoxIcon.Warning); }
-            
+            flashThread = new Thread(() => {
+                
+                if (userinput != null)
+                {
+                    Log.Message("NVS data update start");
+                    nvsDataHandling.NVSUpdate(userinput.Replace(" ", ""));
+
+                    Log.Message("NVS data update End");
+                }
+                else { MessageBox.Show("Enter a Valid Data", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
+            });
+
+            flashThread.Start();   
         }
 
         private void rtbxDataOut_TextChanged(object sender, EventArgs e)
         {
-            int i = rtbxDataOut.TextLength;
-            if (rtbxDataOut.TextLength == 0) { lblLength.Text = "-"; }
-            else { lblLength.Text = Convert.ToString(i); }
+            if (rtbxDataOut.TextLength == 0)
+            { 
+                lblLength.Text = "-";
+            }
+            else 
+            { 
+                lblLength.Text = Convert.ToString(rtbxDataOut.Text.Replace(" ", "").Length/ 2); 
+            }
         }
 
         private void rtbxDataOut_KeyPress(object sender, KeyPressEventArgs e)
@@ -59,83 +73,90 @@ namespace File_TryAccess_Tool
             else { e.Handled = true; }
         }
 
+        private void NVS_Form_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (flashThread != null && flashThread.IsAlive)
+            {
+                flashThread.Abort(); // Caution: Thread.Abort is not recommended due to abrupt termination                
+            }
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
-        {                        
+        {
             if (((cnt >= 0) && (cnt <10)))
             {
-                NVShexData.Add(rtbxDataOut.Text);
-
                 DynamicButtonAdd();
 
-
-                 Btop += 35;
-                cnt++;
-                blkcnt++;
-                reftag++;
+                Btop += 35;
+                cnt = ++reftag;
+                
                 rtbxDataOut.Clear();
             }
-            else { }
           
         }
 
         private void DynamicButtonAdd()
         {
-            const string BlkName = "Block-";
+            // Nvs Hexdata added to string list
+            StringNVShexData.Add(rtbxDataOut.Text);
 
-            Button UserInput = new Button();
+            Button UserInputBtn = new Button();
 
-            UserInput.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold,
+            UserInputBtn.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold,
                                                             System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            UserInput.Location = new System.Drawing.Point(Bleft, Btop);
-            UserInput.Size = new System.Drawing.Size(140, 25);
-            UserInput.TabIndex = 3;
-            UserInput.Text = BlkName + blkcnt.ToString();
+            
+            UserInputBtn.Location = new System.Drawing.Point(Bleft, Btop);
+            UserInputBtn.Size = new System.Drawing.Size(90, 25);
 
-            UserInput.Tag = reftag; // user reference
+            UserInputBtn.Text = "+"+ reftag.ToString();
+            UserInputBtn.TabIndex = 3;
 
-            UserInput.Name = "btn" + UserInput.Text;
-            UserInput.UseVisualStyleBackColor = false;
-            UserInput.Cursor = System.Windows.Forms.Cursors.Hand;
-            UserInput.Click += new System.EventHandler(this.NVSDataBlock_Click);
-            this.Controls.Add(UserInput);
-            UserInput.BringToFront();
+            UserInputBtn.Tag = reftag; // user reference
 
-            buttons.Add(UserInput); // dynamic button was added the buttons list
-            flpBlockAdded.Controls.Add(UserInput);
+            UserInputBtn.UseVisualStyleBackColor = false;
+
+            UserInputBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            UserInputBtn.Click += new System.EventHandler(this.NVSDataBlock_Click);
+
+            //this.Controls.Add(UserInputBtn);
+            UserInputBtn.BringToFront();
+
+            Addbuttons.Add(UserInputBtn); // dynamic button was added the buttons list
+            
+            flowLayoutPanelBtnAdd.Controls.Add(UserInputBtn);
+            
+
+            
         }
+
         private void btnRemove_Click(object sender, EventArgs e)
         {
             Control buttonToRemove = this.Controls.Find("dynamicButton", true).FirstOrDefault();
-            if (btnclkchk == true)
-            {
-                rtbxDataOut.Clear();
-                if (pressedbtn == 0 && (pressedbtn) < 10) // change check
+            
+            rtbxDataOut.Clear();
+            try {
+
+                if (Addbuttons.Count != 0U ) // change check
                 {
-                    Controls.Remove(buttons[pressedbtn]);  // Removed in form control collection
-                    buttons.RemoveAt(pressedbtn);  // button was removed in list
-                                                   //rtbxDataOut.Text = userhexData[pressedbtn];
-                    NVShexData.RemoveAt(pressedbtn);  // hex data was removed in list
-                    flpBlockAdded.Controls.RemoveAt(pressedbtn);  // removed in flow layout panal
+                    Controls.Remove(Addbuttons[Addbuttons.Count - 1]);  // Removed in form control collection
+                    flowLayoutPanelBtnAdd.Controls.RemoveAt(flowLayoutPanelBtnAdd.Controls.Count - 1);  // removed in flow layout panal
+
+                    StringNVShexData.RemoveAt(StringNVShexData.Count - 1);  // hex data was removed in list
+                    Addbuttons.RemoveAt(Addbuttons.Count - 1);  // button was removed in list
+                                                                //rtbxDataOut.Text = userhexData[pressedbtn];                
                     lblUpdateBlkName.Text = "";
-                    blkcnt = cnt;
-                    reftag--;
-                    cnt--;
+                    cnt = --reftag;
+
                     pressedbtn = 0; // for error check (reset)
                 }
-                btnclkchk = false;
             }
-           
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void NVSDataBlock_Click(object sender, EventArgs e)
         {
             Button b = (Button)sender;
-            pressedbtn =(int)b.Tag;
-            lblUpdateBlkName.Text = b.Text;
-
-            rtbxDataOut.Text = NVShexData[pressedbtn]; 
-
-            btnclkchk = true; // to check the added button is pressed
+            rtbxDataOut.Text = StringNVShexData[ ((int)b.Tag) ];
         }
 
     }

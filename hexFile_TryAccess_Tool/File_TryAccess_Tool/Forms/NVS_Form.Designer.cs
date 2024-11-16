@@ -38,7 +38,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.flpBlockAdded = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanelBtnAdd = new System.Windows.Forms.FlowLayoutPanel();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -66,9 +66,9 @@
             this.groupBox3.Controls.Add(this.btnUpdate);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Location = new System.Drawing.Point(350, 11);
+            this.groupBox3.Location = new System.Drawing.Point(292, 11);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1026, 639);
+            this.groupBox3.Size = new System.Drawing.Size(1084, 639);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             // 
@@ -76,7 +76,7 @@
             // 
             this.lblID.AutoSize = true;
             this.lblID.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblID.Location = new System.Drawing.Point(832, 28);
+            this.lblID.Location = new System.Drawing.Point(952, 31);
             this.lblID.Name = "lblID";
             this.lblID.Size = new System.Drawing.Size(20, 23);
             this.lblID.TabIndex = 6;
@@ -86,7 +86,7 @@
             // 
             this.lblLength.AutoSize = true;
             this.lblLength.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLength.Location = new System.Drawing.Point(832, 66);
+            this.lblLength.Location = new System.Drawing.Point(953, 69);
             this.lblLength.Name = "lblLength";
             this.lblLength.Size = new System.Drawing.Size(17, 23);
             this.lblLength.TabIndex = 5;
@@ -94,9 +94,9 @@
             // 
             // rtbxDataOut
             // 
-            this.rtbxDataOut.Location = new System.Drawing.Point(11, 103);
+            this.rtbxDataOut.Location = new System.Drawing.Point(17, 103);
             this.rtbxDataOut.Name = "rtbxDataOut";
-            this.rtbxDataOut.Size = new System.Drawing.Size(1001, 449);
+            this.rtbxDataOut.Size = new System.Drawing.Size(1050, 430);
             this.rtbxDataOut.TabIndex = 4;
             this.rtbxDataOut.Text = "";
             this.rtbxDataOut.TextChanged += new System.EventHandler(this.rtbxDataOut_TextChanged);
@@ -112,10 +112,10 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnUpdate.BackColor = System.Drawing.SystemColors.ControlDark;
             this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUpdate.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold);
-            this.btnUpdate.Location = new System.Drawing.Point(899, 565);
+            this.btnUpdate.Location = new System.Drawing.Point(945, 565);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(108, 45);
             this.btnUpdate.TabIndex = 3;
@@ -127,7 +127,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(748, 63);
+            this.label2.Location = new System.Drawing.Point(857, 66);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(79, 23);
             this.label2.TabIndex = 1;
@@ -137,39 +137,38 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(750, 28);
+            this.label1.Location = new System.Drawing.Point(858, 31);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 23);
+            this.label1.Size = new System.Drawing.Size(79, 23);
             this.label1.TabIndex = 0;
-            this.label1.Text = "ID :";
+            this.label1.Text = "ID         :";
             // 
             // groupBox2
             // 
             this.groupBox2.AutoSize = true;
-            this.groupBox2.Controls.Add(this.flpBlockAdded);
+            this.groupBox2.Controls.Add(this.flowLayoutPanelBtnAdd);
             this.groupBox2.Controls.Add(this.btnRemove);
             this.groupBox2.Controls.Add(this.btnAdd);
             this.groupBox2.Location = new System.Drawing.Point(6, 11);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(330, 640);
+            this.groupBox2.Size = new System.Drawing.Size(280, 664);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             // 
-            // flpBlockAdded
+            // flowLayoutPanelBtnAdd
             // 
-            this.flpBlockAdded.AutoScroll = true;
-            this.flpBlockAdded.Cursor = System.Windows.Forms.Cursors.Default;
-            this.flpBlockAdded.Location = new System.Drawing.Point(9, 98);
-            this.flpBlockAdded.Name = "flpBlockAdded";
-            this.flpBlockAdded.Size = new System.Drawing.Size(304, 500);
-            this.flpBlockAdded.TabIndex = 4;
+            this.flowLayoutPanelBtnAdd.AutoScroll = true;
+            this.flowLayoutPanelBtnAdd.Location = new System.Drawing.Point(7, 86);
+            this.flowLayoutPanelBtnAdd.Name = "flowLayoutPanelBtnAdd";
+            this.flowLayoutPanelBtnAdd.Size = new System.Drawing.Size(264, 553);
+            this.flowLayoutPanelBtnAdd.TabIndex = 3;
             // 
             // btnRemove
             // 
-            this.btnRemove.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnRemove.BackColor = System.Drawing.SystemColors.ControlDark;
             this.btnRemove.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRemove.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemove.Location = new System.Drawing.Point(200, 40);
+            this.btnRemove.Location = new System.Drawing.Point(155, 31);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(100, 37);
             this.btnRemove.TabIndex = 2;
@@ -179,10 +178,10 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnAdd.BackColor = System.Drawing.SystemColors.ControlDark;
             this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(36, 38);
+            this.btnAdd.Location = new System.Drawing.Point(21, 31);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(100, 37);
             this.btnAdd.TabIndex = 1;
@@ -200,6 +199,7 @@
             this.Name = "NVS_Form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NVS_Form";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.NVS_Form_FormClosed);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -219,10 +219,10 @@
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.FlowLayoutPanel flpBlockAdded;
         private System.Windows.Forms.Label lblUpdateBlkName;
         private System.Windows.Forms.RichTextBox rtbxDataOut;
         private System.Windows.Forms.Label lblID;
         private System.Windows.Forms.Label lblLength;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelBtnAdd;
     }
 }

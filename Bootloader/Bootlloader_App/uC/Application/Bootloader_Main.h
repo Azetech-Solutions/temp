@@ -25,11 +25,12 @@
 
 /************* Flash CMDs *************/
 #define FLASH_STARTCMD			  0xF5
-#define FLASH_ERASECMD			  0xFE
-#define FLASH_NVSCMD				  0xFA
+#define FLASH_NVSCMD				  0xFA // not used
 #define FLASH_FLASHCMD			  0xFB
-#define FLASH_DATACMD				  0xFD
 #define FLASH_COMPLETECMD		  0xFC
+#define FLASH_DATACMD				  0xFD
+#define FLASH_ERASECMD			  0xFE
+
 
 
 #define BOOT_RES_STATUS()  Boot_Response_status()

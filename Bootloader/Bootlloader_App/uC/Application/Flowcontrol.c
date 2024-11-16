@@ -36,8 +36,8 @@ uint8_t Read_AppVersion(uint32_t Add)
 	FlowControl_ST *fcmge = &FCManage;
 	FC_TxData_ST *tx = &FC_TxData;
 	
-	tx->FrameType = TOGET_LSBBITS(READVERSIONCMD);
-	tx->LengthMSB1 = TOGET_MSBBITS(READVERSIONCMD);
+	tx->FrameType = TOGET_LSBBITS(GETAPPVERSIONCMD);
+	tx->LengthMSB1 = TOGET_MSBBITS(GETAPPVERSIONCMD);
 		
 	FC_DataCopy(&FC_TxData,(Add + 0x10),16);
 	
@@ -137,7 +137,7 @@ static uint16_t FC_DataCopy(FC_TxData_ST *Tx ,uint32_t SAdd,uint16_t Len)
 		else { cnt++; }
 	}	
 	fcmge->FCUpdateComifLength *= sizeof(uint32_t);
-	fcmge->FCUpdateComifLength += 3;  // Actual data's + 3 bytes of (frame type|lengthMSB1 + Length + Status|Timing)
+	fcmge->FCUpdateComifLength += 3;  /* Actual data's + 3 bytes of (frame type|lengthMSB1 + Length + Status|Timing) */
 	fcmge->FCFlag.FC_TxDataUpdateFlag = TRUE;
 	
 	return Len;

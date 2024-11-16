@@ -35,6 +35,7 @@
             this.cBoxAppAddressSelect = new System.Windows.Forms.ComboBox();
             this.LMryAddress = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
@@ -123,6 +124,7 @@
             this.cBoxAppAddressSelect.Name = "cBoxAppAddressSelect";
             this.cBoxAppAddressSelect.Size = new System.Drawing.Size(127, 29);
             this.cBoxAppAddressSelect.TabIndex = 5;
+            this.cBoxAppAddressSelect.SelectedValueChanged += new System.EventHandler(this.cBoxAppAddressSelect_SelectedValueChanged);
             // 
             // LMryAddress
             // 
@@ -136,7 +138,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.groupBox1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.groupBox1.Controls.Add(this.btnRefresh);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.progressBar1);
             this.groupBox1.Controls.Add(this.label1);
@@ -144,24 +147,39 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(13, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(357, 143);
+            this.groupBox1.Size = new System.Drawing.Size(357, 184);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnRefresh.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRefresh.Font = new System.Drawing.Font("Microsoft Tai Le", 8F);
+            this.btnRefresh.Image = global::File_TryAccess_Tool.Properties.Resources.icons8_refresh_30;
+            this.btnRefresh.Location = new System.Drawing.Point(270, 49);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(57, 22);
+            this.btnRefresh.TabIndex = 22;
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Imprint MT Shadow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(79, 26);
+            this.label6.Location = new System.Drawing.Point(26, 37);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(194, 21);
             this.label6.TabIndex = 10;
             this.label6.Text = "COM PORT Control";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(59, 114);
+            this.progressBar1.Location = new System.Drawing.Point(59, 154);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(243, 10);
             this.progressBar1.TabIndex = 2;
@@ -170,7 +188,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(26, 68);
+            this.label1.Location = new System.Drawing.Point(26, 108);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(115, 23);
             this.label1.TabIndex = 5;
@@ -180,7 +198,7 @@
             // 
             this.CBoxComPort.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.CBoxComPort.FormattingEnabled = true;
-            this.CBoxComPort.Location = new System.Drawing.Point(206, 65);
+            this.CBoxComPort.Location = new System.Drawing.Point(206, 105);
             this.CBoxComPort.Name = "CBoxComPort";
             this.CBoxComPort.Size = new System.Drawing.Size(121, 31);
             this.CBoxComPort.TabIndex = 0;
@@ -211,7 +229,7 @@
             this.groupBox4.Controls.Add(this.label11);
             this.groupBox4.Controls.Add(this.label7);
             this.groupBox4.Controls.Add(this.label10);
-            this.groupBox4.Location = new System.Drawing.Point(13, 155);
+            this.groupBox4.Location = new System.Drawing.Point(13, 196);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(357, 240);
             this.groupBox4.TabIndex = 15;
@@ -516,7 +534,7 @@
             // 
             // rtbxDataOut
             // 
-            this.rtbxDataOut.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.rtbxDataOut.BackColor = System.Drawing.SystemColors.ControlLight;
             this.rtbxDataOut.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbxDataOut.Location = new System.Drawing.Point(14, 177);
             this.rtbxDataOut.Name = "rtbxDataOut";
@@ -539,7 +557,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.groupBox4);
             this.panel1.Location = new System.Drawing.Point(995, 25);
@@ -559,7 +577,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -623,6 +641,7 @@
         private System.Windows.Forms.Label lblMajorVer;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }
 
