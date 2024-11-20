@@ -23,9 +23,53 @@ void FC_RxCbk(UBYTE Length, UBYTE *Data)
 	{
 		FC_RxData.Bytes[i] = *(Data++);
 	}
-	//HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_1);
+	HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_1);
 	fc->FCFlag.FcRxFlag = TRUE;
 	fcrxLen = (Length - 3);
+}
+
+/***************************************************************************************/
+
+uint8_t find_NvsNextblockAddress(void)
+{
+	uint8_t retval = FALSE;
+	uint32_t baseadd = NVS_BASE_ADDRESS;
+	
+	FlowControl_ST *fcmge = &FCManage;
+	FC_TxData_ST *tx = &FC_TxData;
+	
+	/* To get the next block nvs start address*/
+	while( baseadd < NVS_END_ADDRESS)
+	{
+		if( (*(uint32_t*)baseadd) == 0xFFFFFFFF)
+		{
+			break;
+		}
+		baseadd += 4U;
+	}
+	
+	// one byte of data
+	tx->FrameType = TOGET_LSBBITS(NVS_LASTADDRESSCMD);
+	tx->LengthMSB1 = TOGET_MSBBITS(NVS_LASTADDRESSCMD);
+	
+	// four byte of data
+	tx->FCData[0]   = (uint8_t)((baseadd) >> 24);
+	tx->FCData[1] = (uint8_t)((baseadd) >> 16);
+	tx->FCData[2] = (uint8_t)((baseadd) >> 8);
+	tx->FCData[3] = (uint8_t)(baseadd);
+	
+	fcmge->FCUpdateComifLength = 7; /* Actual data's + 3 bytes of 
+																	(frame type|lengthMSB1 + Length + Status|Timing) + 4 bytes Data  */
+	
+	fcmge->FCFlag.FC_TxDataUpdateFlag = TRUE;
+	
+	if(FCTxDataUpdateComif(&FC_TxData,fcmge->FCUpdateComifLength))
+	{
+		retval = TRUE;
+		FlowControl_STReset();
+	}
+	
+	return retval;
 }
 
 /***************************************************************************************/

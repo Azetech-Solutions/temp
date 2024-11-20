@@ -43,7 +43,7 @@ void FLASH_Lock(void)
 /* Flash Read Function */
 uint32_t FLASH_Read(const uint32_t Address)
 {
-	return  *(uint32_t*)Address;;
+	return  *(uint32_t*)Address;
 }
 /************************************************************/
 /* Program Write Function */

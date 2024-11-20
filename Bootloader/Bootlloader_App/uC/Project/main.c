@@ -15,7 +15,7 @@ int main()
 	Gpio_init();
 	bkSRAM_ReadVariable(BkUpRam_Verify_App_ADD,&Boot_or_App);
 	
-	
+//	uint32_t NVSadd = find_NvsLastAddress();
 //	if(Boot_or_App == 0x0B0B0B0B)
 //	{
 //		//Debug_SendString("vfy_bkp");
@@ -25,7 +25,7 @@ int main()
 //		bkSRAM_WriteVariable(BkUpRam_Verify_App_ADD,BkupRam_ADD_Clear);
 //	}
 		
-//	comif(d);
+//	comif(c);
 	while(1)
 	{
 		delay();

@@ -61,6 +61,10 @@ void NVM_NVS_Main(void)
 						Tx->Boot_Status = BOOT_STATUS_OK;
 						BOOT_RES_STATUS();
 					}
+					else if (FC_CMD == NVS_LASTADDRESSCMD)
+					{
+						NVMStateControl = NVS_LastAddressState;
+					}
 					FlowControlFlags->FCFlag.FcRxFlag =  FALSE;
 				}			
 			}
@@ -128,8 +132,16 @@ void NVM_NVS_Main(void)
 			break;
 			case NVS_UpdateState:
 			{
-				FlowControlFlags->FCPreviousAddress = 0x08010000;
+				//FlowControlFlags->FCPreviousAddress = 0x08010000;
 				if(FCData_Receive())
+				{
+					NVMStateControl = NVM_IdleState;
+				}
+			}
+			break;
+			case NVS_LastAddressState:
+			{
+				if(find_NvsNextblockAddress())
 				{
 					NVMStateControl = NVM_IdleState;
 				}

@@ -248,12 +248,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1512, 670);
+            this.ClientSize = new System.Drawing.Size(1512, 671);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.MaximumSize = new System.Drawing.Size(1534, 727);
             this.Name = "NVM_Form";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "NVM_Form";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.NVM_Form_FormClosed);
             this.groupBox1.ResumeLayout(false);

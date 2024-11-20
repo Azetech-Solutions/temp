@@ -32,8 +32,9 @@ namespace File_TryAccess_Tool
         public const byte NVMUpdateAlldata = 0xE4;
         public const byte NVMReOrg = 0xE5;
 
-        public const byte GETAPPVERSION = 0xD0;
-        public const byte NVSstartCMD = 0xFA; // not used 
+        public const byte GETAPPVERSIONCMD = 0xD0;
+        public const byte GETNVSLASTADDRESSCMD = 0xD1;
+        public const byte NVSstartCMD = 0xFA; // used to update the NVS Data
         public static uint NVS_Pattern = 0xC1C1C1C1;
 
         public const byte FCSingleFrame = 0;

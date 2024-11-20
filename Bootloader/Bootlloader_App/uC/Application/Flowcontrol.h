@@ -101,4 +101,7 @@ extern uint8_t FCData_Receive();
 
 extern uint8_t received_DataCopy(uint8_t pos, FC_RxData_ST *rx);
 extern uint8_t Read_AppVersion(uint32_t Add);
+
+/* To find the Nvs Block Next start address */
+extern uint8_t find_NvsNextblockAddress(void);
 #endif

@@ -16,7 +16,8 @@ namespace File_TryAccess_Tool
         private static string nvsXMlPath;
         UInt16 totalnvsbytes = 0;
         private FlowControlHandling fctxhandle = new FlowControlHandling();
-        public UInt32 NVSblockAdd = Convert.ToUInt32(Xmlfilehandling.setStartAddress[4].InnerText);
+        private UInt32 NVSblockAdd = 0;
+        private UInt32 PreviousNVSblockAdd = 0;
         public NVSDataHandling(string p) { InitializeXmlFile(p); nvsXMlPath = p; }
 
         public static void InitializeXmlFile(string filePath)
@@ -76,34 +77,43 @@ namespace File_TryAccess_Tool
 
             byte[] Nvstx = fctxhandle.ConvertHexStringToByteArray(inputdata);
 
-            NVSStart.Add(Commands.NVSstartCMD);
-            NVSStart.Add(0x00);
-            NVSStart.Add(0x00);
-            NVSStart.Add((byte)(NVSblockAdd >> 24));
-            NVSStart.Add((byte)(NVSblockAdd >> 16));
-            NVSStart.Add((byte)(NVSblockAdd >> 8));
-            NVSStart.Add((byte)(NVSblockAdd));
+            NVSblockAdd = getNvsNextblockstartaddress();
 
-            FCDatabytesupdate(NVSStart.ToArray());
-            FCTransmit.Length = (byte)NVSStart.Count;
-            MCUTransmitFunction.Transmit(FCTransmit);
-
-            while (true)
+            if (NVSblockAdd > PreviousNVSblockAdd)
             {
-                if (MCUStatusRxData[0] == 0x00)
+                PreviousNVSblockAdd = NVSblockAdd;
+
+                NVSStart.Add(Commands.NVSstartCMD);
+                NVSStart.Add(0x00);
+                NVSStart.Add(0x00);
+                NVSStart.Add((byte)(NVSblockAdd >> 24));
+                NVSStart.Add((byte)(NVSblockAdd >> 16));
+                NVSStart.Add((byte)(NVSblockAdd >> 8));
+                NVSStart.Add((byte)(NVSblockAdd));
+
+                FCDatabytesupdate(NVSStart.ToArray());
+                FCTransmit.Length = (byte)NVSStart.Count;
+                MCUTransmitFunction.Transmit(FCTransmit);
+
+                while (true)
                 {
-                    MCUStatusRxData[0] = 0xFF;
-                    break;
+                    if (MCUStatusRxData[0] == 0x00)
+                    {
+                        MCUStatusRxData[0] = 0xFF;
+                        break;
+                    }
+                    //Thread.Sleep(3);
                 }
-                //Thread.Sleep(3);
+
+                BytetoCksumCalculate(Nvstx);
+
+                fctxhandle.FCDataTransmit(MeragethetotalNvsdata(Nvstx));
+
+
+                if (nvsXMLAppendDataBlock(nvsXMlPath, "nvsblock", ("block" + NVSID.ToString()), NVSID.ToString(), NVSLength.ToString())) { NVSID++; }
+
+                NVSblockAdd = 0; // reset it
             }
-
-            BytetoCksumCalculate(Nvstx);
-
-            fctxhandle.FCDataTransmit(MeragethetotalNvsdata(Nvstx));
-
-
-            if( nvsXMLAppendDataBlock(nvsXMlPath, "nvsblock", ("block"+NVSID.ToString()), NVSID.ToString(), NVSLength.ToString()) ) { NVSID++; }
         }
 
 
@@ -137,12 +147,30 @@ namespace File_TryAccess_Tool
             uint[] hexval = new uint[1];
             uint retval = 0;
 
-            if ( hex.Length <=4 )
+            if (hex.Length == 4)
             {
                 hexval[0] = (uint)((hex[3] << 24) | (hex[2] << 16) | (hex[1] << 8) | (hex[0]));
-                NVSblockAdd += 4;
+                //NVSblockAdd += 4;
                 retval = (uint)hexval[0];
-            }   
+            }
+            else if (hex.Length == 3)
+            {
+                hexval[0] = (uint)((hex[2] << 16) | (hex[1] << 8) | (hex[0]));
+                //NVSblockAdd += 4;
+                retval = (uint)hexval[0];
+            }
+            else if (hex.Length == 2)
+            {
+                hexval[0] = (uint)((hex[1] << 8) | (hex[0]));
+                //NVSblockAdd += 4;
+                retval = (uint)hexval[0];
+            }
+            else if (hex.Length == 1)
+            {
+                hexval[0] = (uint)((hex[0]));
+                //NVSblockAdd += 4;
+                retval = (uint)hexval[0];
+            }
 
             return retval;
         }
@@ -168,7 +196,7 @@ namespace File_TryAccess_Tool
             Tomerge.Add((byte)(nvsDataCksum >> 8));
             Tomerge.Add((byte)(nvsDataCksum));
 
-            NVSblockAdd += 12; // data byte + pattern +id/len + cksum (12bytes)
+            //NVSblockAdd += 12; // data byte + pattern +id/len + cksum (12bytes)
             
             for (int i= 0; i < dta.Length; i++)
             {
@@ -186,10 +214,34 @@ namespace File_TryAccess_Tool
             return Tomerge.ToArray();
         }
 
-        private void NVSXMLUpdatation()
+        private UInt32 getNvsNextblockstartaddress()
         {
+            UInt32 nvsNextblockstartaddress;
 
+            List<byte> NVSStart = new List<byte>();
 
+            NVSStart.Add(Commands.GETNVSLASTADDRESSCMD);            
+
+            FCDatabytesupdate(NVSStart.ToArray());
+            FCTransmit.Length = (byte)NVSStart.Count;
+            MCUTransmitFunction.Transmit(FCTransmit);
+
+            while (true)
+            {
+                if (Commands.FCrxCbkFlag == true)
+                {
+                    if (FCRxData[0] == Commands.GETNVSLASTADDRESSCMD)
+                    {
+                        nvsNextblockstartaddress = (UInt32)(FCRxData[3] << 24 | FCRxData[4] << 16 | FCRxData[5] << 8 | FCRxData[6]);
+                        
+                        break;
+                    }
+
+                    Commands.FCrxCbkFlag = false;
+                }
+            }
+
+            return nvsNextblockstartaddress;
         }
 
         #region Update NVS Not used

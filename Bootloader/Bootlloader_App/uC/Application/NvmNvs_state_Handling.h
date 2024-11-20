@@ -12,7 +12,8 @@ typedef enum
 	NVM_ReorgState,
 	NVM_UpdateAllState,
 	READ_VersionState,
-	NVS_UpdateState
+	NVS_UpdateState,
+	NVS_LastAddressState
 }NVM_State_EN;
 
 /************* NVM CMDs *************/
@@ -23,7 +24,8 @@ typedef enum
 #define NVM_REORGCMD					0xE5
 
 #define GETAPPVERSIONCMD      0xD0
-#define NVS_GETNEXTADDCMD			0xFA
+#define NVS_UPDATECMD					0xFA
+#define NVS_LASTADDRESSCMD    0xD1
 
 extern void NVM_NVS_Main(void);
 #endif

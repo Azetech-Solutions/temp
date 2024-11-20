@@ -9,6 +9,7 @@ using static File_TryAccess_Tool.Tooltransmit;
 using static File_TryAccess_Tool.Log;
 using System.IO;
 using System.Net.Http.Headers;
+using File_TryAccess_Tool.Class;
 
 namespace File_TryAccess_Tool
 {
@@ -18,6 +19,7 @@ namespace File_TryAccess_Tool
         private List<Button> Addbuttons;
         private List<string> StringNVShexData;
         private Thread flashThread;
+        preloadHandling  waitprocess;
 
         private int Btop = 87, Bleft = 56, cnt = 0,reftag=0, pressedbtn = 0;
         private bool btnclkchk = false;
@@ -34,6 +36,7 @@ namespace File_TryAccess_Tool
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            waitprocess = new preloadHandling();
             string userinput = rtbxDataOut.Text;
 
             flashThread = new Thread(() => {
@@ -41,8 +44,10 @@ namespace File_TryAccess_Tool
                 if (userinput != null)
                 {
                     Log.Message("NVS data update start");
+                    waitprocess.showWaitState();
                     nvsDataHandling.NVSUpdate(userinput.Replace(" ", ""));
 
+                    waitprocess.closeWaitState();
                     Log.Message("NVS data update End");
                 }
                 else { MessageBox.Show("Enter a Valid Data", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning); }

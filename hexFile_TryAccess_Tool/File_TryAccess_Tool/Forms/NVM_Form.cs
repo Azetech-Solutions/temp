@@ -15,6 +15,7 @@ namespace File_TryAccess_Tool
         private FlowControlHandling flowhandle = new FlowControlHandling();
         private Thread flashThread;
         private string OpenedXMLfilepath = null;
+        preloadHandling waitprocess;
         public NVM_Form()
         {
             InitializeComponent();
@@ -23,11 +24,15 @@ namespace File_TryAccess_Tool
 
         private void btnNVMclear_Click(object sender, EventArgs e)
         {
+            waitprocess = new preloadHandling();
             var clear = MessageBox.Show("Do you want Clear Nvm Memory", "Alert", MessageBoxButtons.YesNo, MessageBoxIcon.Question,MessageBoxDefaultButton.Button2);
             if (clear == DialogResult.Yes)
             {
                 flashThread = new Thread(() => {
+
+                    waitprocess.showWaitState();
                     nvm.NvmClearCmD();
+                    waitprocess.closeWaitState();
                 });
                 flashThread.Start();               
             }
@@ -35,12 +40,16 @@ namespace File_TryAccess_Tool
 
         private void btnNVMreOrg_Click(object sender, EventArgs e)
         {
+            waitprocess = new preloadHandling();
             var reorg = MessageBox.Show("Do you want Reorg Nvm Memory", "Alert", MessageBoxButtons.YesNo, MessageBoxIcon.Question,MessageBoxDefaultButton.Button2);
             if (reorg == DialogResult.Yes)
             {
                 flashThread = new Thread(() =>
                 {
+                    waitprocess.showWaitState();
                     nvm.NvmReOrgCMD();
+                    waitprocess.closeWaitState();
+
                 });
                 flashThread.Start();
             }            
@@ -48,17 +57,20 @@ namespace File_TryAccess_Tool
 
         private void btnNVMupdate_Click(object sender, EventArgs e)
         {
+            waitprocess = new preloadHandling();
             flashThread = new Thread(() => {
                 string SingleNVMBlockData = rtbxNVMDataOut.Text.Replace(" ","");
-          
+
+                waitprocess.showWaitState();
                 nvm.NvmUpdateCMD(SingleNVMBlockData);
+                waitprocess.closeWaitState();
             });
             flashThread.Start();
         } //update end
 
         private void btnGetAllNvmData_Click(object sender, EventArgs e)
         {
-
+            waitprocess = new preloadHandling();
             flashThread = new Thread(() => {
                 if (FlowControlHandling.FcRxtype == FlowControlHandling.FCFrameType.frameUnkown)
                 {
@@ -75,9 +87,11 @@ namespace File_TryAccess_Tool
 
                     try
                     {
+                        waitprocess.showWaitState();
                         flowhandle.FCDataReceive(get.ToArray());
                         if (FlowControlHandling.FCReceivedData.Count == FlowControlHandling.FCTotalDataLength)
                         {
+                            waitprocess.closeWaitState();
                             for (int i = 0; i < FlowControlHandling.FCReceivedData.Count; i++)
                             {
                                 rtbxNVMDataOut.Text += FlowControlHandling.FCReceivedData[i].ToString("X2") + " ";
@@ -167,6 +181,7 @@ namespace File_TryAccess_Tool
 
         private void btnNVMupdateAll_Click(object sender, EventArgs e)
         {
+            waitprocess = new preloadHandling();
             flashThread = new Thread(() => {
                 UInt32 address = Convert.ToUInt32(Xmlfilehandling.setStartAddress[5].InnerText);
                 List<byte> FCtxdata = new List<byte>();
@@ -179,7 +194,9 @@ namespace File_TryAccess_Tool
                 FCtxdata.Add((byte)(address >> 8));
                 FCtxdata.Add((byte)(address));
 
+                waitprocess.showWaitState();
                 nvm.UpdateAllCMD(OpenedXMLfilepath, FCtxdata.ToArray());
+                waitprocess.closeWaitState();
             });
             flashThread.Start();
 

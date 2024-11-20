@@ -458,7 +458,7 @@ namespace File_TryAccess_Tool
                 lblBulidVer.Text = "-";
                 lblReleseVer.Text = "-";
 
-                ver1.Add(Commands.GETAPPVERSION);
+                ver1.Add(Commands.GETAPPVERSIONCMD);
                 ver1.Add(0x00);
                 ver1.Add(0x00);
                 ver1.Add((byte)(add >> 24));
@@ -472,10 +472,16 @@ namespace File_TryAccess_Tool
                 byte len = (byte)(verval.Length - 3);
 
                 lblMajorVer.Text = ((verval[3] << 24) | (verval[4] << 16) | (verval[5] << 8) | (verval[6])).ToString("X2");
+                lblMajorVer.Refresh();
+               
                 lblMinorVer.Text = ((verval[7] << 24) | (verval[8] << 16) | (verval[9] << 8) | (verval[10])).ToString("X2");
+                lblMinorVer.Refresh();
+                
                 lblBulidVer.Text = ((verval[11] << 24) | (verval[12] << 16) | (verval[13] << 8) | (verval[14])).ToString("X2");
+                lblBulidVer.Refresh();
+                
                 lblReleseVer.Text = ((verval[15] << 24) | (verval[16] << 16) | (verval[17] << 8) | (verval[18])).ToString("X2");
-
+                lblReleseVer.Refresh();
             });
             flashThread.Start();
 
@@ -493,7 +499,7 @@ namespace File_TryAccess_Tool
                 lblBulidVer.Text = "-";
                 lblReleseVer.Text = "-";
 
-                ver1.Add(Commands.GETAPPVERSION);
+                ver1.Add(Commands.GETAPPVERSIONCMD);
                 ver1.Add(0x00);
                 ver1.Add(0x00);
                 ver1.Add((byte)(add >> 24));
@@ -506,9 +512,16 @@ namespace File_TryAccess_Tool
                 byte len = (byte)(verval.Length - 3);
 
                 lblMajorVer.Text = ((verval[3] << 24) | (verval[4] << 16) | (verval[5] << 8) | (verval[6])).ToString("X2");
+                lblMajorVer.Refresh();
+
                 lblMinorVer.Text = ((verval[7] << 24) | (verval[8] << 16) | (verval[9] << 8) | (verval[10])).ToString("X2") ;
+                lblMinorVer.Refresh();
+
                 lblBulidVer.Text = ((verval[11] << 24) | (verval[12] << 16) | (verval[13] << 8) | (verval[14])).ToString("X2");
+                lblBulidVer.Refresh();
+
                 lblReleseVer.Text = ((verval[15] << 24) | (verval[16] << 16) | (verval[17] << 8) | (verval[18])).ToString("X2");
+                lblReleseVer.Refresh();
 
             });
             flashThread.Start();

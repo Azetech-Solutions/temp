@@ -160,7 +160,7 @@
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnRefresh.Font = new System.Drawing.Font("Microsoft Tai Le", 8F);
             this.btnRefresh.Image = global::File_TryAccess_Tool.Properties.Resources.icons8_refresh_30;
-            this.btnRefresh.Location = new System.Drawing.Point(270, 49);
+            this.btnRefresh.Location = new System.Drawing.Point(282, 60);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(57, 22);
             this.btnRefresh.TabIndex = 22;
@@ -574,6 +574,7 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximumSize = new System.Drawing.Size(1432, 730);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
